@@ -6,7 +6,7 @@ internal class Program
     static void Main(string[] args)
     {
         Welcome0148();
-        Console.ReadKey(); 
+        Console.ReadKey();
     }
 
     private static void Welcome0148()
@@ -15,4 +15,8 @@ internal class Program
         string? username = Console.ReadLine();
         Console.WriteLine("{0}, welcome to my first console application", username);
     }
+
+    
+
+
 }
