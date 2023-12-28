@@ -1,11 +1,12 @@
 ﻿using System;
 
 namespace Stage0;
-internal class Program
+partial class Program
 {
     static void Main(string[] args)
     {
         Welcome0148();
+        Welcome6086();
         Console.ReadKey();
     }
 
@@ -16,7 +17,10 @@ internal class Program
         Console.WriteLine("{0}, welcome to my first console application", username);
     }
 
-    
+    static partial void Welcome6086();
 
 
 }
+
+
+
