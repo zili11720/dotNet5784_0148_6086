@@ -10,15 +10,14 @@ partial class Program
         Console.ReadKey(); 
     }
 
-    private static void Welcome0148()
+    private static void Welcome0148()//welcome function
     {
         Console.Write("Enter your name: ");
-        string? username = Console.ReadLine();
+        string username = Console.ReadLine();
         Console.WriteLine("{0}, welcome to my first console application", username);
     }
 
     static partial void Welcome6086();
-
 
 }
 
