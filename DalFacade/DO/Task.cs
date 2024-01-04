@@ -1,22 +1,22 @@
 ﻿
 namespace DO;
 /// <summary>
-/// 
+/// The entity Task represents a task given to secret agent
 /// </summary>
-/// <param name="Id"></param>
-/// <param name="Alias"></param>
-/// <param name="Description"></param>
-/// <param name="CreatedAtData"></param>
-/// <param name="RequiredEffortTime"></param>
-/// <param name="IsMilestone"></param>
-/// <param name="Copmlexity"></param>
-/// <param name="StartData"></param>
-/// <param name="SchedualedData"></param>
-/// <param name="DeadlineDate"></param>
-/// <param name="CompleteData"></param>
-/// <param name="Deliverables"></param>
-/// <param name="Remarks"></param>
-/// <param name="Agentld"></param>
+/// <param name="Id">Personal unique Id of a task</param>
+/// <param name="Alias">A nickname for the task</param>
+/// <param name="Description">A description of the task</param>
+/// <param name="CreatedAtData">The creation date of the task</param>
+/// <param name="RequiredEffortTime">The amount of time (in days) required in order to complete the task</param>
+/// <param name="IsMilestone">Milestones of the task</param>
+/// <param name="Copmlexity">The minimum agent level required in ordet to complete the task</param>
+/// <param name="StartDate">Actual start date of a task</param>
+/// <param name="SchedualedDate">Planned start date for a task</param>
+/// <param name="DeadlineDate">Planned deadline for a task</param>
+/// <param name="CompleteDate">The actual date the task was completed</param>
+/// <param name="Deliverables">Deliverables of the task</param>
+/// <param name="Remarks">Special remarks about the task</param>
+/// <param name="Agentld">The Id of the agent assigned to the task</param>
 public record Task
 (
     int Id,
@@ -26,26 +26,26 @@ public record Task
     TimeSpan? RequiredEffortTime = null,
     bool IsMilestone = false,
     Do.AgentExperience? Copmlexity = null,
-    DateTime? StartData = null,
-    DateTime? SchedualedData = null,
+    DateTime? StartDate = null,
+    DateTime? SchedualedDate = null,
     DateTime? DeadlineDate = null,
-    DateTime? CompleteData = null,
+    DateTime? CompleteDate = null,
     string? Deliverables = null,
     string? Remarks = null,
     int? Agentld = 0
     )
 {
-    public Task() : this(0, "", "") { }
-    public Task(DateTime _CreatedAtData, TimeSpan _RequiredEffortTime, bool _IsMilestone, Do.AgentExperience _Copmlexity, DateTime _StartData, DateTime _SchedualedData, DateTime _DeadlineDate, DateTime _CompleteData, string _Deliverables, string _Remarks, int _Agentld) : this() 
+    public Task() : this(0, "", "") { }//empty ctr
+    public Task(DateTime _CreatedAtDate, TimeSpan _RequiredEffortTime, bool _IsMilestone, Do.AgentExperience _Copmlexity, DateTime _StartDate, DateTime _SchedualedDate, DateTime _DeadlineDate, DateTime _CompleteDate, string _Deliverables, string _Remarks, int _Agentld) : this() 
     { 
-      CreatedAtData = _CreatedAtData;
+      CreatedAtData = _CreatedAtDate;
       RequiredEffortTime = _RequiredEffortTime;
       IsMilestone = _IsMilestone;
       Copmlexity = _Copmlexity; 
-      StartData=_StartData;
-      SchedualedData = _SchedualedData;
+      StartDate=_StartDate;
+      SchedualedDate = _SchedualedDate;
       DeadlineDate = _DeadlineDate;
-      CompleteData = _CompleteData;
+      CompleteDate = _CompleteDate;
       Deliverables = _Deliverables;
       Remarks = _Remarks;
       Agentld = _Agentld;

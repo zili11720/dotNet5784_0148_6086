@@ -16,4 +16,3 @@ public record Dependency
     public Dependency() : this(0, 0, 0) { }//empty ctr
    
 };
-//public Dependecy(int _Id, int _DependentTask,int _DependsOnTask) : this() { Id = _Id; DependentTask = _DependentTask;  DependsOnTask=_DependsOnTask }

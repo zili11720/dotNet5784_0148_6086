@@ -1,13 +1,16 @@
 ﻿
 namespace DalApi;
 using DO;
-
+/// <summary>
+///Represents an interface for managing an Agent entity
+///the interface contains the CRUD methods
+/// </summary>
 public interface IAgent
 {
-    int Create(Agent item); //Creates a new Agent
-    Agent? Read(int id); //Reads an agent by its ID 
-    List<Agent> ReadAll(); //Reads all Agents
-    void Update(Agent item); //Updates an Agent
-    void Delete(int id); //Deletes an Agent by its Id
+    int Create(Agent item); //Create a new Agent
+    Agent? Read(int id); //Read an agent by its ID 
+    List<Agent> ReadAll(); //Read all Agents
+    void Update(Agent item); //Update an Agent
+    void Delete(int id); //Delete an Agent by its Id
 
 }
