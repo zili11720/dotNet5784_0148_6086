@@ -6,7 +6,7 @@ namespace DO;
 /// <param name="Id">Personal unique Id of a task</param>
 /// <param name="Alias">A nickname for the task</param>
 /// <param name="Description">A description of the task</param>
-/// <param name="CreatedAtData">The creation date of the task</param>
+/// <param name="CreatedAtDate">The creation date of the task</param>
 /// <param name="RequiredEffortTime">The amount of time (in days) required in order to complete the task</param>
 /// <param name="IsMilestone">Milestones of the task</param>
 /// <param name="Copmlexity">The minimum agent level required in ordet to complete the task</param>
@@ -22,10 +22,10 @@ public record Task
     int Id,
     string Alias,
     string Description,
-    DateTime? CreatedAtData = null,
+    DateTime? CreatedAtDate=null,
     TimeSpan? RequiredEffortTime = null,
-    bool IsMilestone = false,
-    Do.AgentExperience? Copmlexity = null,
+    bool IsMilestone=false,
+    DO.AgentExperience? Copmlexity = null,
     DateTime? StartDate = null,
     DateTime? SchedualedDate = null,
     DateTime? DeadlineDate = null,
@@ -35,19 +35,21 @@ public record Task
     int? Agentld = 0
     )
 {
-    public Task() : this(0, "", "") { }//empty ctr
-    public Task(DateTime _CreatedAtDate, TimeSpan _RequiredEffortTime, bool _IsMilestone, Do.AgentExperience _Copmlexity, DateTime _StartDate, DateTime _SchedualedDate, DateTime _DeadlineDate, DateTime _CompleteDate, string _Deliverables, string _Remarks, int _Agentld) : this() 
-    { 
-      CreatedAtData = _CreatedAtDate;
-      RequiredEffortTime = _RequiredEffortTime;
-      IsMilestone = _IsMilestone;
-      Copmlexity = _Copmlexity; 
-      StartDate=_StartDate;
-      SchedualedDate = _SchedualedDate;
-      DeadlineDate = _DeadlineDate;
-      CompleteDate = _CompleteDate;
-      Deliverables = _Deliverables;
-      Remarks = _Remarks;
-      Agentld = _Agentld;
+    public Task() : this(1, "", "") { }//empty ctr
+    public Task(string _Alias , string _Description,DateTime _CreatedAtDate, TimeSpan _RequiredEffortTime, bool _IsMilestone, DO.AgentExperience _Copmlexity, DateTime _StartDate, DateTime _SchedualedDate, DateTime _DeadlineDate, DateTime _CompleteDate, string _Deliverables, string _Remarks, int _Agentld) : this() 
+    {
+     Alias = _Alias;
+     Description = _Description;
+     CreatedAtDate = _CreatedAtDate;
+     RequiredEffortTime = _RequiredEffortTime;
+     IsMilestone = _IsMilestone;
+     Copmlexity = _Copmlexity; 
+     StartDate=_StartDate;
+     SchedualedDate = _SchedualedDate;
+     DeadlineDate = _DeadlineDate;
+     CompleteDate = _CompleteDate;
+     Deliverables = _Deliverables;
+     Remarks = _Remarks;
+     Agentld = _Agentld;
      }
 };

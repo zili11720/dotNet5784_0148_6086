@@ -7,7 +7,7 @@ partial class Program
     {
         Welcome0148();
         Welcome6086();
-        Console.ReadKey(); 
+        Console.ReadKey();
     }
 
     private static void Welcome0148()//welcome function

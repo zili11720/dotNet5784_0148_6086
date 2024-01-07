@@ -1,9 +1,8 @@
-﻿
-namespace Dal;
+﻿namespace Dal;
 using DalApi;
 using DO;
-
 using System.Collections.Generic;
+using System.Data.Common;
 /// <summary>
 ///Implementation of the interface that manages a dependency betweem two tasks
 ///the interface contains the CRUD methods

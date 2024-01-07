@@ -1,4 +1,5 @@
 ﻿namespace Dal;
+using System.Collections.Generic;
 /// <summary>
 /// Lists of the entities Agent,task and dependency
 /// </summary>

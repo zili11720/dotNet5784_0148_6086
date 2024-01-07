@@ -12,16 +12,16 @@ namespace DO;
 public record Agent
 (
     int Id,
-    string? Specialty=null,
+    //string? Specialty=null,
     string? Email = null,
     double? Cost = null,
     string? Name = null,
-    Do.AgentExperience? Level = null
+    DO.AgentExperience? Specialty = null
 )
 {
     public Agent() : this(0) { }//empty ctr
-    public Agent(int _Id, string _Specialty, string _Email, string _Name, Do.AgentExperience _Level) : this() 
-    { Id = _Id; Specialty = _Specialty; Email = _Email;  Name = _Name; Level = _Level; }//parameters ctr
+    ////public Agent(int _Id,string _Email, string _Name, DO.AgentExperience _Specialty) : this() 
+    ////{ Id = _Id; Email = _Email;  Name = _Name; Specialty = _Specialty; }//parameters ctr
     
 
 }
