@@ -33,23 +33,8 @@ public record Task
     string? Deliverables = null,
     string? Remarks = null,
     int? Agentld = 0
-    )
+)
 {
-    public Task() : this(1, "", "") { }//empty ctr
-    public Task(string _Alias , string _Description,DateTime _CreatedAtDate, TimeSpan _RequiredEffortTime, bool _IsMilestone, DO.AgentExperience _Copmlexity, DateTime _StartDate, DateTime _SchedualedDate, DateTime _DeadlineDate, DateTime _CompleteDate, string _Deliverables, string _Remarks, int _Agentld) : this() 
-    {
-     Alias = _Alias;
-     Description = _Description;
-     CreatedAtDate = _CreatedAtDate;
-     RequiredEffortTime = _RequiredEffortTime;
-     IsMilestone = _IsMilestone;
-     Copmlexity = _Copmlexity; 
-     StartDate=_StartDate;
-     SchedualedDate = _SchedualedDate;
-     DeadlineDate = _DeadlineDate;
-     CompleteDate = _CompleteDate;
-     Deliverables = _Deliverables;
-     Remarks = _Remarks;
-     Agentld = _Agentld;
-     }
+    public Task() : this(1, "", "") { }//empty constructor
+
 };

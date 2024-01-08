@@ -1,11 +1,15 @@
 ﻿namespace DalTest;
 
 using Dal;
-//using System.Diagnostics;
 using DalApi;
 using DO;
+using System;
 using System.Xml.Linq;
-
+/// <summary>
+/// Main program
+/// the program allows to create/delete/update/read the 3 entities:
+/// agent,task and dependency
+/// </summary>
 internal class Program
 {
     private static IAgent? s_dalAgent = new AgentImplementation();
@@ -14,11 +18,16 @@ internal class Program
 
     private static readonly Random s_rand = new();
 
+    /// <summary>
+    /// The main function presents a main menu with the options:
+    /// agent,task,dependency and exit, and sends the user to the matching sub menu.
+    /// </summary>
+    
     static void Main(string[] args)
     {
         try
         {
-            Initialization.Do(s_dalAgent, s_dalTask, s_dalDependency);
+            Initialization.Do(s_dalAgent, s_dalTask, s_dalDependency);//First initialization of the database
             do
             {
                 Console.WriteLine(@"Choose one of the following:
@@ -26,8 +35,8 @@ internal class Program
         prees 2 for a task
         press 3 for a dependency
         press 0 to exit");
-                string tmp = Console.ReadLine(); ;
-                int choise = int.Parse(tmp);
+                if (!int.TryParse(Console.ReadLine(), out int choise))
+                    throw new Exception("Wrong input");
                 switch (choise)
                 {
                     case 1:
@@ -37,7 +46,7 @@ internal class Program
                         CaseTask();
                         break;
                     case 3:
-                        CaseDepedency();
+                        CaseDependency();
                         break;
                     case 0:
                         Environment.Exit(0);
@@ -50,14 +59,16 @@ internal class Program
             }
             while(true);
         }
-        catch (Exception e)
+        catch (Exception e)//Catch all exeptions and print them
         {
             Console.WriteLine(e);
         }
 
     }
-
-    void CaseAgent()
+    /// <summary>
+    /// The function represents a sub menu of an agent's 'SCRUB' functions
+    /// </summary>
+    static void CaseAgent()
     {
         do
         {
@@ -69,12 +80,12 @@ internal class Program
         press 5 to delete an agent
         press 0 to return to the main menu
         ");
-            string tmp = Console.ReadLine(); ;
-            int choise = int.Parse(tmp);
+            if (!int.TryParse(Console.ReadLine(), out int choise))
+                throw new Exception("Wrong input");
             switch (choise)
             {
                 case 1:
-                    CreateA(s_dalAgent);
+                    CreateA();
                     break;
                 case 2:
                     ReadA();
@@ -99,74 +110,87 @@ internal class Program
 
 
     }
-    ////////////////////////////////////////////////////// Agent ///////////////////////////////////////////////////
     /// <summary>
-    /// create an agent and call to create function
+    /// create an agent according to the user input and print the agent(ToString)
     /// </summary>
-    void CreateA(IAgent s_dalA) 
+    /// <exception cref="Exception">wrong input</exception>
+    static void CreateA() 
     {
-        Console.WriteLine("Enter:Id,email,cost, and specialty:");
-        string d = Console.ReadLine();
-        int _id = int.Parse(d);
-        string _name = Console.ReadLine();
-        string _email = Console.ReadLine();
-        string c = Console.ReadLine();
-        int _cost = int.Parse(c);
-        string s = Console.ReadLine();
-        DO.AgentExperience? _specialty = (DO.AgentExperience)int.Parse(s);
-        Agent newA = new Agent(_id, _email, _cost, _name, _specialty);
-        int? a = s_dalA.Create(newA);
-        if(a!=null)
-            Console.WriteLine(a);
+        Console.WriteLine("Enter:Id,email,cost per hour,name and specialty(1- for field agent,2- for hacker, 3- for invetgator):");
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new Exception("Wrong input");
+        string _email = Console.ReadLine()!;
+        if (!int.TryParse(Console.ReadLine(), out int _cost))
+            throw new Exception("Wrong input");
+        string _name = Console.ReadLine()!;
+        if (!int.TryParse(Console.ReadLine(), out int _specialty))
+            throw new Exception("Wrong input");
+
+        Agent newA = new Agent(_id, _email, _cost, _name, (AgentExperience)_specialty);
+        Console.WriteLine(s_dalAgent!.Create(newA));
+        
     }
-    void ReadA()
+    /// <summary>
+    /// Read the agent with the given id and print the agent(ToString)
+    /// </summary>
+    /// <exception cref="Exception">wrong input</exception>
+
+    static void ReadA()
     {
         Console.WriteLine(@"Enter id:");
-        string? d = Console.ReadLine();
-        int _id = int.Parse(d);
-        Agent? a = new Agent();
-        a = s_dalAgent.Read(_id);
-        if (a != null)
-            Console.WriteLine(a);
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new Exception("Wrong input");
+        Console.WriteLine(s_dalAgent!.Read(_id));
     }
-    void ReadAllA()
+    /// <summary>
+    /// Create a list with all the agents that exist
+    /// </summary>
+    static void ReadAllA()
     {
         List<Agent> _listA;
-        _listA = s_dalAgent.ReadAll();
-        foreach (Agent a in _listA)
+        _listA = s_dalAgent!.ReadAll();
+        foreach (Agent a in _listA)//print all the agents in the list
             Console.WriteLine(a);
-    }
-    void UpdateA()
-    {
-        Console.WriteLine(@"Enter id:");
-        string? d = Console.ReadLine();
-        int _id = int.Parse(d);
-        Agent? a = new Agent();
-        a = s_dalAgent.Read(_id);
-        if (a != null)
-        {
-            Console.WriteLine(a);
-            Console.WriteLine("Enter:email,cost, and specialty:");
-            string _name = Console.ReadLine();
-            string _email = Console.ReadLine();
-            string c = Console.ReadLine();
-            int _cost = int.Parse(c);
-            string s = Console.ReadLine();
-            DO.AgentExperience? _specialty = (DO.AgentExperience)int.Parse(s);
-            Agent newA = new Agent(_id, _email, _cost, _name, _specialty);
-            s_dalAgent.Update(newA);
-        }
     }
 
-    void DeleteA()
+    /// <summary>
+    /// Enter id of an agent, print this agent and then update it.
+    /// </summary>
+    /// <exception cref="Exception">wrong input</exception>
+    static void UpdateA()
     {
         Console.WriteLine(@"Enter id:");
-        string d = Console.ReadLine();
-        int _id = int.Parse(d);
-        s_dalAgent.Delete(_id);
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new Exception("Wrong input");
+  
+        Console.WriteLine(s_dalAgent!.Read(_id));//If the agent with this id exists print the agent,else don't print anything
+        Console.WriteLine("Enter:name,email,cost, and specialty(1- for field agent,2- for hacker, 3- for invetgator):");//Enter new data for this agent
+        string _name = Console.ReadLine()!;
+        string _email = Console.ReadLine()!;
+        if (!int.TryParse(Console.ReadLine(), out int _cost))
+            throw new Exception("Wrong input");
+        if (!int.TryParse(Console.ReadLine(), out int _specialty))
+            throw new Exception("Wrong input");
+
+          Agent newA = new Agent(_id, _email, _cost, _name, (AgentExperience)_specialty);
+           s_dalAgent.Update(newA);
+    }
+    /// <summary>
+    /// Delete the agent with the given id
+    /// </summary>
+    /// <exception cref="Exception">wrong input</exception>
+    static void DeleteA()
+    {
+        Console.WriteLine(@"Enter id:");
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+             throw new Exception("Wrong input");
+         s_dalAgent!.Delete(_id);
     }
     ////////////////////////////// Task ////////////////////////////////////
-    void CaseTask()
+    ////// <summary>
+    /// The function represents a sub menu of an agent's 'SCRUB' functions
+    /// </summary>
+    static void CaseTask()
     {
         do
         {
@@ -178,8 +202,8 @@ internal class Program
         press 5 to delete a Task
         press 0 to return to the main menu
         ");
-            string tmp = Console.ReadLine(); ;
-            int choise = int.Parse(tmp);
+            if (!int.TryParse(Console.ReadLine(), out int choise))
+                throw new Exception("Wrong input");
             switch (choise)
             {
                 case 1:
@@ -195,7 +219,7 @@ internal class Program
                     UpdateT();
                     break;
                 case 5:
-                    DeleteA();
+                    DeleteT();
                     break;
                 case 0:
                     return;
@@ -207,78 +231,86 @@ internal class Program
         }
         while (true);
     }
-   
-    void CreateT()
+
+    /// <summary>
+    /// create a task according to the user input and print it
+    /// </summary>
+    /// <exception cref="Exception">wrong input</exception>
+    static void CreateT()
     {
-        Console.WriteLine(@"Enter:alias,description,complexity,deliverables and remarks:");
-        string? _alias = Console.ReadLine();
-        string? _descripition = Console.ReadLine();
-        string? c = Console.ReadLine();
-        DO.AgentExperience _complexity=(AgentExperience)int.Parse(c);
-        string? _deliverables = Console.ReadLine();
-        string? _remarks = Console.ReadLine();
-        DateTime start = new DateTime(2024, 1, 1);
-        int range = (DateTime.Today - start).Days;
-        DateTime _createAtDate = start.AddDays(s_rand.Next(range));
-        Task newTask=new Task(0,_alias,_descripition, _createAtDate ,null,false,_complexity,null,null,null,null,null,null);
-        int? t= s_dalTask.Create(newTask);
-        if (t != null)
-            Console.WriteLine(t);
+        Console.WriteLine(@"Enter:alias,description,complexity(1- for field agent,2- for hacker, 3- for invetgator),deliverables and remarks:");
+        
+        string _alias = Console.ReadLine()!;
+        string _descripition = Console.ReadLine()!;
+        if (!int.TryParse(Console.ReadLine(), out int _complexity))
+           throw new Exception("Wrong input");
+        string _deliverables = Console.ReadLine()!;
+        string _remarks = Console.ReadLine()!;
+        DateTime _createAtDate= DateTime.Now;
+        Task newTask=new Task(0,_alias,_descripition, _createAtDate ,null,false,(AgentExperience)_complexity,null,null,null,null,null,null);
+        Console.WriteLine(s_dalTask!.Create(newTask));
     }
-    void ReadT()
+    /// <summary>
+    /// Read the task with the given id and print it
+    /// </summary>
+    /// <exception cref="Exception">wrong input</exception>
+    static void ReadT()
     {
         Console.WriteLine(@"Enter id:");
-        string? d = Console.ReadLine();
-        int _id = int.Parse(d);
-        Task? t = new Task();
-        t = s_dalTask.Read(_id);
-        if (t != null)
-            Console.WriteLine(t);
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new Exception("Wrong input");
+
+        Console.WriteLine(s_dalTask!.Read(_id));
     }
-    void ReadAllT()
+    /// <summary>
+    /// Create a list with all the tasks that exist
+    /// </summary>
+    static void ReadAllT()
     {
         List<Task> _listT;
-        _listT = s_dalTask.ReadAll();
-        foreach (Task t in _listT)
+        _listT = s_dalTask!.ReadAll();
+        foreach (Task t in _listT)// print all the tasks in the list
             Console.WriteLine(t);
     }
-    void UpdateT()
-    {
-        Console.WriteLine(@"Enter id:");
-        string? d = Console.ReadLine();
-        int _id = int.Parse(d);
-        Task? t = new Task();
-        t = s_dalTask.Read(_id);
-        if (t != null)
-        {
-            Console.WriteLine(t);
-            Console.WriteLine(@"Enter:alias,description,complexity,deliverables and remarks:");
-            string? _alias = Console.ReadLine();
-            string? _descripition = Console.ReadLine();
-            string? c = Console.ReadLine();
-            DO.AgentExperience _complexity = (AgentExperience)int.Parse(c);
-            string? _deliverables = Console.ReadLine();
-            string? _remarks = Console.ReadLine();
-            DateTime start = new DateTime(2024, 1, 1);
-            int range = (DateTime.Today - start).Days;
-            DateTime _createAtDate = start.AddDays(s_rand.Next(range));
-            Task newTask = new Task(0, _alias, _descripition, _createAtDate, null, false, _complexity, null, null, null, null, null, null);
-            s_dalTask.Update(newTask);
-        }
-    }
-
-    void DeleteT()
-    {
-        Console.WriteLine(@"Enter id:");
-        string d = Console.ReadLine();
-        int _id = int.Parse(d);
-        s_dalTask.Delete(_id);
-    }
-    /////////////////////////////////////// Dependency////////////////////////////////////
     /// <summary>
-    ///
+    /// Enter id of a task, print this task and then update it.
     /// </summary>
-    void CaseDependency()
+    /// <exception cref="Exception">wrong input</exception>
+    static void UpdateT()
+    {
+        Console.WriteLine(@"Enter id:");
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new Exception("Wrong input");
+        Console.WriteLine(s_dalTask!.Read(_id));// If the task with this id exists print it,else don't print anything
+        Console.WriteLine(@"Enter:alias,description,complexity(1- for field agent,2- for hacker, 3- for invetgator),deliverables and remarks:");
+        string _alias = Console.ReadLine()!;
+        string _descripition = Console.ReadLine()!;
+        if (!int.TryParse(Console.ReadLine(), out int _complexity))
+            throw new Exception("Wrong input");
+        string _deliverables = Console.ReadLine()!;
+        string _remarks = Console.ReadLine()!;
+        DateTime _createAtDate = DateTime.Now;
+
+       Task newTask = new Task(_id, _alias, _descripition, _createAtDate, null, false,(AgentExperience) _complexity, null, null, null,null, _deliverables, _remarks, null);
+       s_dalTask.Update(newTask);
+        
+    }
+    /// <summary>
+    /// Delete the task with the given id
+    /// </summary>
+    /// <exception cref="Exception">wrong input</exception>
+    static void DeleteT()
+    {
+        Console.WriteLine(@"Enter id:");
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new Exception("Wrong input");
+        s_dalTask!.Delete(_id);
+    }
+    /////////////////////////////////////// Dependency ////////////////////////////////////
+    ////// <summary>
+    /// The function represents a sub menu of a dependency 'SCRUB' functions
+    /// </summary>
+    static void CaseDependency()
     {
         do
         {
@@ -290,8 +322,8 @@ internal class Program
         press 5 to delete a dependency
         press 0 to return to the main menu
         ");
-            string tmp = Console.ReadLine(); ;
-            int choise = int.Parse(tmp);
+            if (!int.TryParse(Console.ReadLine(), out int choise))
+                throw new Exception("Wrong input");
             switch (choise)
             {
                 case 1:
@@ -321,61 +353,71 @@ internal class Program
         
 
     }
-    void CreateD()
+    /// <summary>
+    /// create a dependency according to the user input and print it
+    /// </summary>
+    /// <exception cref="Exception">wrong input</exception>
+    static void CreateD()
     {
-        Console.WriteLine(@"Enter:depentTask and depedsOnTask:");
-        string? d1 = Console.ReadLine();
-        int _DependentTask = int.Parse(d1);
-        string? d2 = Console.ReadLine();
-        int _DependsOnTask = int.Parse(d2);
-        Dependency dep = new Dependency(_DependentTask, _DependsOnTask);
-        int? d= s_dalDependency.Create(dep);
-        if (d != null)
-            Console.WriteLine(d);
+        Console.WriteLine(@"Enter:dependentTask id and depedsOnTask id:");
+        if (!int.TryParse(Console.ReadLine(), out int  _DependentTask))
+            throw new Exception("Wrong input");
+        if (!int.TryParse(Console.ReadLine(), out int _DependsOnTask))
+            throw new Exception("Wrong input");
+        Dependency dep = new Dependency(0,_DependentTask, _DependsOnTask);
+        Console.WriteLine(s_dalDependency!.Create(dep));
     }
-    void ReadD()
+    /// <summary>
+    /// Read the dependency with the given id and print it
+    /// </summary>
+    /// <exception cref="Exception">wrong input</exception>
+    static void ReadD()
     {
-        Console.WriteLine("Enter: id:");
-        string? d = Console.ReadLine();
-        int _id = int.Parse(d);
-        Dependency? dep = new Dependency();
-        dep = s_dalDependency.Read(_id);
-        if (dep != null)
-            Console.WriteLine(dep);
+        Console.WriteLine("Enter id:");
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new Exception("Wrong input");
+
+        Console.WriteLine(s_dalDependency!.Read(_id));
     }
-    void ReadAllD()
+    /// <summary>
+    /// Create a list with all the dependencies that exist
+    /// </summary>
+    static void ReadAllD()
     {
         List<Dependency> _listD;
-        _listD = s_dalDependency.ReadAll();
-        foreach (Dependency dep in _listD)
+        _listD = s_dalDependency!.ReadAll();
+        foreach (Dependency dep in _listD)// print all the dependencies in the list
             Console.WriteLine(dep);
     }
-    void UpdateD()
+    /// <summary>
+    /// Enter id of a dependency, print this dependency and then update it.
+    /// </summary>
+    /// <exception cref="Exception">wrong input</exception>
+    static void UpdateD()
     {
-        Console.WriteLine("Enter: id:");
-        string? d = Console.ReadLine();
-        int _id = int.Parse(d);
-        Dependency? dep = new Dependency();
-        dep = s_dalDependency.Read(_id);
-        if (dep != null)
-        {
-            Console.WriteLine(dep);
-            Console.WriteLine(@"Enter:depentTask and depedsOnTask:");
-            string? d1 = Console.ReadLine();
-            int _DependentTask = int.Parse(d1);
-            string? d2 = Console.ReadLine();
-            int _DependsOnTask = int.Parse(d2);
-            Dependency newdep = new Dependency(_DependentTask, _DependsOnTask);
-            s_dalDependency.Update(newdep);
-        }
-    }
+        Console.WriteLine("Enter id:");
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new Exception("Wrong input");
+        Console.WriteLine(s_dalTask!.Read(_id));// If the task with this id exists print it,else don't print anything
 
-    void DeleteD()
+        Console.WriteLine(@"Enter:dependentTask id and depedsOnTask id:");
+        if (!int.TryParse(Console.ReadLine(), out int _DependentTask))
+            throw new Exception("Wrong input");
+        if (!int.TryParse(Console.ReadLine(), out int _DependsOnTask))
+            throw new Exception("Wrong input");
+       Dependency dep = new Dependency(_id,_DependentTask, _DependsOnTask);
+       s_dalDependency!.Update(dep);
+    }
+    /// <summary>
+    /// Delete the dependency with the given id
+    /// </summary>
+    /// <exception cref="Exception">wrong input</exception>
+    static void DeleteD()
     {
-        Console.WriteLine("Enter: id:");
-        string d = Console.ReadLine();
-        int _id = int.Parse(d);
-        s_dalDependency.Delete(_id);
+        Console.WriteLine("Enter id:");
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new Exception("Wrong input");
+        s_dalDependency!.Delete(_id);
     }
 }
 

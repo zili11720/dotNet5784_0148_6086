@@ -1,6 +1,7 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
+using System;
 
 /// <summary>
 /// The class initialization initializes the database with 5 agents, 
@@ -10,15 +11,19 @@ public static class Initialization
 {
     //variables for access to the inplementations
     private static IAgent? s_dalAgent;
-    private static IDependency? s_dalDependency;
     private static ITask? s_dalTask;
+    private static IDependency? s_dalDependency;
 
     //A variable to create rendom numbers
     private static readonly Random s_rand = new();
 
+    static DateTime currentDate = DateTime.Now;
+    //A variable which represents the start date of the project
+    static DateTime startProjectDate = currentDate.AddMonths(1);
+
     //// <summary>
-   /// The methods create 5 agents. 
-   /// </summary>
+    /// The method createAgent creates 5 agents. 
+    /// </summary>
     private static void createAgent()
     {
         string[] agentsNames =
@@ -31,14 +36,14 @@ public static class Initialization
         };
         int[] agentsSpecialities =
         {
-           1,1,1,2,3
+           1,1,1,2,3//The numbers will be coverted to type enum-AgentExperience
         };
         for (int i = 0; i < 5; i++)
         {
             int _id;
             do
                 _id = s_rand.Next(200000000, 400000000);//Random id
-            while (s_dalAgent.Read(_id) != null);//make sure each id is unique
+            while (s_dalAgent!.Read(_id) != null);//make sure each id is unique
 
             int _cost = s_rand.Next(300, 500);//random cost per hour
 
@@ -84,7 +89,7 @@ public static class Initialization
         };
         string[] _descriptions =
         {
-            "Check for finger prints in order to to obtain incriminating evidence",
+            "Check for finger prints in the crime ciene in order to to obtain incriminating evidence",
             "Go over security cameras photages in order to identify the criminal's face",
             "Look for the criminal's identity in government databases according to the fingerprints and photages found",
             "Search previous bank activities of the criminal",
@@ -175,75 +180,70 @@ public static class Initialization
             "No remarks",
             "The details contain:the agents who will take part in the mission, the time of the raid etc.",
         };
-        int _agentId;
+        int[] _complexity =
+        { 
+            1,2,2,2,2,2,1,2,3,3,3,3,3,3,3,1,3,1,1,1,3,1,1,1,3,1,2,3
+        };
+
         for(int i = 0;i<28 ;i++)
         {
-            do
-                _agentId = s_rand.Next(200000000, 400000000); //Id of the agent that was assigned to this task
-            while (s_dalTask!.Read(_agentId) != null);//make sure the agent with this id exists
-
-            DateTime start = new DateTime(2024, 1, 1);
-            int range = (DateTime.Today - start).Days;
-            DateTime _createAtDate = start.AddDays(s_rand.Next(range));
-            Random random = new Random();
-            int randomDays = random.Next(range);
-            DateTime _scheduledDate = start.AddDays(randomDays);
-            DateTime _deadLineDate = new DateTime(2024, 6, 1);
-            TimeSpan _RequiredEffortTime = TimeSpan.FromDays(s_rand.Next((_deadLineDate - start).Days));
-            DateTime _CompleteDate = start.AddDays(randomDays);
-            DateTime _startDate = start.AddDays(s_rand.Next((_CompleteDate - _scheduledDate).Days));
-
-            AgentExperience _complexity = (AgentExperience)s_rand.Next(1,4);//the specialty required to perform the task
-            Task newTask = new(_agentId, _aliasses[i], _descriptions[i], _createAtDate, _RequiredEffortTime, false, _complexity, _startDate, _scheduledDate, _deadLineDate, _CompleteDate, _deliverables[i], _remarks[i]);
+            //A range of a month between the currrent date and the day of the begining of the project 
+            int range = (startProjectDate - currentDate).Days;
+          
+            DateTime? _createAtDate = currentDate.AddDays(s_rand.Next(range+1));
+   
+            Task newTask = new(0, _aliasses[i], _descriptions[i], _createAtDate, null, false, (AgentExperience)_complexity[i], null, null, null, null, _deliverables[i], _remarks[i],null);
             s_dalTask!.Create(newTask);
         }
     }
-
+    /// <summary>
+    /// The method creates 40 dependencies between the tasks above
+    /// </summary>
     private static void createDependency()
     {
-        Dependency[] links = {
-        new Dependency(1,3),
-        new Dependency(2,3),
-        new Dependency(3,4),
-        new Dependency(3,5),
-        new Dependency(1,3),
-        new Dependency(3,6),
-        new Dependency(4,13),
-        new Dependency(4,19),
-        new Dependency(8,18),
-        new Dependency(8,16),
-        new Dependency(5,16),
-        new Dependency(5,18),
-        new Dependency(6,18),
-        new Dependency(10,13),
-        new Dependency(10,14),
-        new Dependency(11,13),
-        new Dependency(11,14),
-        new Dependency(12,13),
-        new Dependency(12,14),
-        new Dependency(16,19),
-        new Dependency(16,17),
-        new Dependency(18,19),
-        new Dependency(18,20),
-        new Dependency(13,21),
-        new Dependency(14,15),
-        new Dependency(15,21),
-        new Dependency(19,21),
-        new Dependency(20,19),
-        new Dependency(22,23),
-        new Dependency(22,24),
-        new Dependency(22,25),
-        new Dependency(22,21),
-        new Dependency(17,25),
-        new Dependency(21,25),
-        new Dependency(25,26),
-        new Dependency(26,28),
-        new Dependency(20,27),
-        new Dependency(7,27),
-        new Dependency(19,27),
-        new Dependency(8,17),
-        new Dependency(2,14)
-        };
+
+        s_dalDependency!.Create(new Dependency(0,1,3));
+        s_dalDependency.Create(new Dependency(0,2,3));
+        s_dalDependency.Create(new Dependency(0,3,4));
+        s_dalDependency.Create(new Dependency(0,3,5));
+        s_dalDependency.Create(new Dependency(0,1,3));
+        s_dalDependency.Create(new Dependency(0,3,6));
+        s_dalDependency.Create(new Dependency(0,4,13));
+        s_dalDependency.Create(new Dependency(0,4,19));
+        s_dalDependency.Create(new Dependency(0,8,18));
+        s_dalDependency.Create(new Dependency(0,8,16));
+        s_dalDependency.Create(new Dependency(0,5,16));
+        s_dalDependency.Create(new Dependency(0,5,18));
+        s_dalDependency.Create(new Dependency(0,6,18));
+        s_dalDependency.Create(new Dependency(0,10,13));
+        s_dalDependency.Create(new Dependency(0,10,14));
+        s_dalDependency.Create(new Dependency(0,11,13));
+        s_dalDependency.Create(new Dependency(0,11,14));
+        s_dalDependency.Create(new Dependency(0,12,13));
+        s_dalDependency.Create(new Dependency(0,12,14));
+        s_dalDependency.Create(new Dependency(0,16,19));
+        s_dalDependency.Create(new Dependency(0,16,17));
+        s_dalDependency.Create(new Dependency(0,18,19));
+        s_dalDependency.Create(new Dependency(0,18,20));
+        s_dalDependency.Create(new Dependency(0,13,21));
+        s_dalDependency.Create(new Dependency(0,14,15));
+        s_dalDependency.Create(new Dependency(0,15,21));
+        s_dalDependency.Create(new Dependency(0,19,21));
+        s_dalDependency.Create(new Dependency(0,20,19));
+        s_dalDependency.Create(new Dependency(0,22,23));
+        s_dalDependency.Create(new Dependency(0,22,24));
+        s_dalDependency.Create(new Dependency(0,22,25));
+        s_dalDependency.Create(new Dependency(0,22,21));
+        s_dalDependency.Create(new Dependency(0,17,25));
+        s_dalDependency.Create(new Dependency(0,21,25));
+        s_dalDependency.Create(new Dependency(0,25,26));
+        s_dalDependency.Create(new Dependency(0,26,28));
+        s_dalDependency.Create(new Dependency(0,20,27));
+        s_dalDependency.Create(new Dependency(0,7,27));
+        s_dalDependency.Create(new Dependency(0,19,27));
+        s_dalDependency.Create(new Dependency(0,8,17));
+        s_dalDependency.Create(new Dependency(0,2,14));
+        
 }
 
     public static void Do(IAgent? dalAgent, ITask? dalTask, IDependency? dalDependency)

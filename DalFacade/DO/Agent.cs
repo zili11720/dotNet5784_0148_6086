@@ -12,17 +12,12 @@ namespace DO;
 public record Agent
 (
     int Id,
-    //string? Specialty=null,
     string? Email = null,
     double? Cost = null,
     string? Name = null,
     DO.AgentExperience? Specialty = null
 )
 {
-    public Agent() : this(0) { }//empty ctr
-    ////public Agent(int _Id,string _Email, string _Name, DO.AgentExperience _Specialty) : this() 
-    ////{ Id = _Id; Email = _Email;  Name = _Name; Specialty = _Specialty; }//parameters ctr
-    
-
+    public Agent() : this(0) { }//empty constructor
 }
 

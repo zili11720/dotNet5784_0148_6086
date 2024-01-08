@@ -15,10 +15,6 @@ public record Dependency
   int DependsOnTask
 )
 {
-    public Dependency() : this(0, 0, 0) { }//empty ctr
-    public Dependency(int _DependentTask, int _DependsOnTask) : this()
-    { DependentTask = _DependentTask; 
-     DependsOnTask = _DependsOnTask; }
-
+    public Dependency() : this(0, 0, 0) { }//empty constructor
 
 }

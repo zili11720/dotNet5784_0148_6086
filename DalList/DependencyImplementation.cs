@@ -1,8 +1,7 @@
 ﻿namespace Dal;
 using DalApi;
 using DO;
-using System.Collections.Generic;
-using System.Data.Common;
+
 /// <summary>
 ///Implementation of the interface that manages a dependency betweem two tasks
 ///the interface contains the CRUD methods
@@ -18,8 +17,9 @@ public class DependencyImplementation : IDependency
     }
     public void Delete(int id)//Throw an exception, a dependency musn't be deleted
     {
-        throw new Exception($"Dependency with ID={id} does Not exist");
-    }
+        if (DataSource.Dependencies.RemoveAll(Dependency => Dependency.Id == id) == 0)
+            throw new Exception($"Dependency with ID={id} does Not exist");
+    } 
 
     public Dependency? Read(int id)//Return the dependency with the id given if it exists
     {
@@ -36,7 +36,7 @@ public class DependencyImplementation : IDependency
         Dependency? existingItem=DataSource.Dependencies.Find(Dependency => Dependency.Id == item.Id);
         if (existingItem != null)
         {
-            DataSource.Dependencies.Remove(existingItem); //remove the dependency with this id from the list
+            DataSource.Dependencies.Remove(existingItem); //Remove the dependency with this id from the list
             DataSource.Dependencies.Add(item);
         }
         else

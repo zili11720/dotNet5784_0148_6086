@@ -2,9 +2,6 @@
 using DalApi;
 using DO;
 
-using System.Collections.Generic;
-using System.Data.Common;
-
 /// <summary>
 ///Implementation of the interface that manages an Agent entity
 ///the interface contains the CRUD methods
@@ -17,6 +14,7 @@ public class AgentImplementation : IAgent
         if(Read(item.Id) is not null)//Check if this id already exists in the database
             throw new Exception($"An agent with ID={item.Id} already exists");
         //else
+        
         DataSource.Agents.Add(item);
         return item.Id; 
     }

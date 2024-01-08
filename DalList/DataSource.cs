@@ -1,7 +1,11 @@
 ﻿namespace Dal;
+
+using System.Collections;
 using System.Collections.Generic;
 /// <summary>
-/// Lists of the entities Agent,task and dependency
+/// Running numbers
+/// Dates of the start+end of the project
+/// Lists of the entities agent,task and dependency
 /// </summary>
 internal static class DataSource
 {
@@ -15,7 +19,12 @@ internal static class DataSource
          internal const int startDependencyId = 1;
          private static int nextDependencyId = startDependencyId;
          internal static int NextDependencyId { get => nextDependencyId++; }
+
+        public static DateTime? StartProjectDate { get; set; } = null;//Start date of the project
+        public static DateTime? EndProjectDate { get; set; } = null;//End date of the project
     }
+
+    //Lists of the entities agent,task and dependency
     internal static List<DO.Agent> Agents { get; } = new();
     internal static List<DO.Task> Tasks { get; } = new();
     internal static List<DO.Dependency> Dependencies { get; } = new();
