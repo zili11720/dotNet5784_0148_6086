@@ -7,7 +7,7 @@ using DO;
 ///the interface contains the CRUD methods
 /// </summary>
 
-public class TaskImplementation : ITask
+internal class TaskImplementation : ITask
 {
     public int Create(Task item)//Add a new task to the list
     {

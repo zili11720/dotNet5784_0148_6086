@@ -7,7 +7,7 @@ using DO;
 ///the interface contains the CRUD methods
 /// </summary>
 
-public class DependencyImplementation : IDependency
+internal class DependencyImplementation : IDependency
 {
     public int Create(Dependency item)//add a new dependency to the list
     {

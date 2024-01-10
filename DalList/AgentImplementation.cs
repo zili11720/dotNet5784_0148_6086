@@ -7,7 +7,7 @@ using DO;
 ///the interface contains the CRUD methods
 /// </summary>
 
-public class AgentImplementation : IAgent
+internal class AgentImplementation : IAgent
 {
     public int Create(Agent item)//Add a new agent to the list
     {
