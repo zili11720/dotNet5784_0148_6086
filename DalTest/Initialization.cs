@@ -36,7 +36,7 @@ public static class Initialization
         };
         int[] agentsSpecialities =
         {
-           1,1,1,2,3//The numbers will be coverted to type enum-AgentExperience
+           1,1,1,2,3//The numbers will be converted to type enum-AgentExperience
         };
         for (int i = 0; i < 5; i++)
         {
@@ -52,7 +52,7 @@ public static class Initialization
         }
     }
     /// <summary>
-    ///The method creates 28 differnt tasks that make up a larger goal:catching a criminal 
+    ///The method creates 28 different tasks that make up a larger goal:catching a criminal 
     /// </summary>
     private static void createTask()
     {
@@ -89,9 +89,9 @@ public static class Initialization
         };
         string[] _descriptions =
         {
-            "Check for finger prints in the crime ciene in order to to obtain incriminating evidence",
-            "Go over security cameras photages in order to identify the criminal's face",
-            "Look for the criminal's identity in government databases according to the fingerprints and photages found",
+            "Check for finger prints in the crime scene in order to to obtain incriminating evidence",
+            "Go over security cameras phootages in order to identify the criminal's face",
+            "Look for the criminal's identity in government databases according to the fingerprints and photoges found",
             "Search previous bank activities of the criminal",
             "Locate the criminal's house",
             "Locate the criminal's car",
@@ -248,7 +248,7 @@ public static class Initialization
 
     public static void Do(IDal? dal)
     {
-        s_dal=dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        s_dal=dal ?? throw new NullReferenceException("DAL object can not be null!");
         createAgent();
         createTask();
         createDependency();   

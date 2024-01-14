@@ -13,7 +13,7 @@ internal class AgentImplementation : IAgent
     public int Create(Agent item)//Add a new agent to the list
     {
         if (Read(item.Id) is not null)//Check if this id already exists in the database
-            throw new Exception($"An agent with ID={item.Id} already exists");
+            throw new DalAlreadyExistsException($"An agent with ID={item.Id} already exists");
         //else
 
         DataSource.Agents.Add(item);
@@ -23,7 +23,7 @@ internal class AgentImplementation : IAgent
     public void Delete(int id)//Delete the agent with the id given if he/she exists
     {
         if (DataSource.Agents.RemoveAll(Agent => Agent.Id == id) == 0)
-            throw new Exception($"An agent with ID={id} does not exist");
+            throw new DalDoesNotExistException($"An agent with ID={id} does not exist");
     }
 
     public Agent? Read(int id)//Return the agent with the id given if he/she exists
@@ -52,6 +52,6 @@ internal class AgentImplementation : IAgent
             DataSource.Agents.Add(item);
         }
         else
-            throw new Exception($"An agent with ID={item.Id} does not exist");
+            throw new DalDoesNotExistException($"An agent with ID={item.Id} does not exist");
     }
 }

@@ -4,7 +4,7 @@ using DO;
 using System.Linq;
 
 /// <summary>
-///Implementation of the interface that manages a dependency betweem two tasks
+///Implementation of the interface that manages a dependency between two tasks
 ///the interface contains the CRUD methods
 /// </summary>
 
@@ -19,7 +19,7 @@ internal class DependencyImplementation : IDependency
     public void Delete(int id)//Throw an exception, a dependency musn't be deleted
     {
         if (DataSource.Dependencies.RemoveAll(Dependency => Dependency.Id == id) == 0)
-            throw new Exception($"Dependency with ID={id} does Not exist");
+            throw new DalDoesNotExistException($"Dependency with ID={id} does Not exist");
     }
     public Dependency? Read(int id)//Return the dependency with the id given if it exists
     {
@@ -48,6 +48,6 @@ internal class DependencyImplementation : IDependency
             DataSource.Dependencies.Add(item);
         }
         else
-            throw new Exception($"Dependency with ID={item.Id} does Not exist");
+            throw new DalDoesNotExistException($"Dependency with ID={item.Id} does Not exist");
     }
 }
