@@ -1,10 +1,8 @@
 ﻿namespace DalTest;
-
-using Dal;
 using DalApi;
 using DO;
 using System;
-using System.Xml.Linq;
+
 /// <summary>
 /// Main program
 /// the program allows to create/delete/update/read the 3 entities:
@@ -12,17 +10,14 @@ using System.Xml.Linq;
 /// </summary>
 internal class Program
 {
-    //private static IAgent? s_dalAgent = new AgentImplementation();//stage 1
-    //private static ITask? s_dalTask = new TaskImplementation();//stage 1
-    //private static IDependency? s_dalDependency = new DependencyImplementation();//stage 1
-    private static IDal? s_dal=new DalList();//stage 2
     private static readonly Random s_rand = new();
+    static readonly IDal s_dal = new Dal.DalList();
 
     /// <summary>
     /// The main function presents a main menu with the options:
     /// agent,task,dependency and exit, and sends the user to the matching sub menu.
     /// </summary>
-    
+
     static void Main(string[] args)
     {
         try
@@ -57,7 +52,7 @@ internal class Program
 
                 }
             }
-            while(true);
+            while (true);
         }
         catch (Exception e)//Catch all exeptions and print them
         {
@@ -106,7 +101,7 @@ internal class Program
                     break;
             }
         }
-        while(true);
+        while (true);
 
 
     }
@@ -114,7 +109,7 @@ internal class Program
     /// create an agent according to the user input and print the agent(ToString)
     /// </summary>
     /// <exception cref="Exception">wrong input</exception>
-    static void CreateA() 
+    static void CreateA()
     {
         Console.WriteLine("Enter:Id,email,cost per hour,name and specialty(1- for field agent,2- for hacker, 3- for invetgator):");
         if (!int.TryParse(Console.ReadLine(), out int _id))
@@ -128,7 +123,7 @@ internal class Program
 
         Agent newA = new Agent(_id, _email, _cost, _name, (AgentExperience)_specialty);
         Console.WriteLine(s_dal!.Agent.Create(newA));
-        
+
     }
     /// <summary>
     /// Read the agent with the given id and print the agent(ToString)
@@ -147,9 +142,9 @@ internal class Program
     /// </summary>
     static void ReadAllA()
     {
-        List<Agent> _listA;
+        IEnumerable<Agent?> _listA;
         _listA = s_dal!.Agent.ReadAll();
-        foreach (Agent a in _listA)//print all the agents in the list
+        foreach (Agent? a in _listA)//print all the agents in the list
             Console.WriteLine(a);
     }
 
@@ -162,7 +157,7 @@ internal class Program
         Console.WriteLine(@"Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
             throw new Exception("Wrong input");
-  
+
         Console.WriteLine(s_dal!.Agent.Read(_id));//If the agent with this id exists print the agent,else don't print anything
         Console.WriteLine("Enter:name,email,cost, and specialty(1- for field agent,2- for hacker, 3- for invetgator):");//Enter new data for this agent
         string _name = Console.ReadLine()!;
@@ -172,8 +167,8 @@ internal class Program
         if (!int.TryParse(Console.ReadLine(), out int _specialty))
             throw new Exception("Wrong input");
 
-          Agent newA = new Agent(_id, _email, _cost, _name, (AgentExperience)_specialty);
-           s_dal.Agent.Update(newA); //zili
+        Agent newA = new Agent(_id, _email, _cost, _name, (AgentExperience)_specialty);
+        s_dal.Agent.Update(newA); //zili
     }
     /// <summary>
     /// Delete the agent with the given id 
@@ -183,8 +178,8 @@ internal class Program
     {
         Console.WriteLine(@"Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
-             throw new Exception("Wrong input");
-         s_dal!.Agent.Delete(_id);
+            throw new Exception("Wrong input");
+        s_dal!.Agent.Delete(_id);
     }
     ////////////////////////////// Task ////////////////////////////////////
     ////// <summary>
@@ -239,15 +234,15 @@ internal class Program
     static void CreateT()
     {
         Console.WriteLine(@"Enter:alias,description,complexity(1- for field agent,2- for hacker, 3- for invetgator),deliverables and remarks:");
-        
+
         string _alias = Console.ReadLine()!;
         string _descripition = Console.ReadLine()!;
         if (!int.TryParse(Console.ReadLine(), out int _complexity))
-           throw new Exception("Wrong input");
+            throw new Exception("Wrong input");
         string _deliverables = Console.ReadLine()!;
         string _remarks = Console.ReadLine()!;
-        DateTime _createAtDate= DateTime.Now;
-        Task newTask=new Task(0,_alias,_descripition, _createAtDate ,null,false,(AgentExperience)_complexity,null,null,null,null,null,null);
+        DateTime _createAtDate = DateTime.Now;
+        Task newTask = new Task(0, _alias, _descripition, _createAtDate, null, false, (AgentExperience)_complexity, null, null, null, null, null, null);
         Console.WriteLine(s_dal!.Task.Create(newTask));
     }
     /// <summary>
@@ -267,9 +262,9 @@ internal class Program
     /// </summary>
     static void ReadAllT()
     {
-        List<Task> _listT;
+        IEnumerable<Task?> _listT;
         _listT = s_dal!.Task.ReadAll();
-        foreach (Task t in _listT)// print all the tasks in the list
+        foreach (Task? t in _listT)// print all the tasks in the list
             Console.WriteLine(t);
     }
     /// <summary>
@@ -291,9 +286,9 @@ internal class Program
         string _remarks = Console.ReadLine()!;
         DateTime _createAtDate = DateTime.Now;
 
-       Task newTask = new Task(_id, _alias, _descripition, _createAtDate, null, false,(AgentExperience) _complexity, null, null, null,null, _deliverables, _remarks, null);
-       s_dal!.Task.Update(newTask);//zili
-        
+        Task newTask = new Task(_id, _alias, _descripition, _createAtDate, null, false, (AgentExperience)_complexity, null, null, null, null, _deliverables, _remarks, null);
+        s_dal!.Task.Update(newTask);//zili
+
     }
     /// <summary>
     /// Delete the task with the given id
@@ -314,7 +309,7 @@ internal class Program
     {
         do
         {
-        Console.WriteLine(@"Choose one of the following:
+            Console.WriteLine(@"Choose one of the following:
         press 1 to add a dependency
         prees 2 to read a dependency
         press 3 to read all dependencies
@@ -349,8 +344,8 @@ internal class Program
 
             }
         }
-        while(true);
-        
+        while (true);
+
 
     }
     /// <summary>
@@ -360,11 +355,11 @@ internal class Program
     static void CreateD()
     {
         Console.WriteLine(@"Enter:dependentTask id and depedsOnTask id:");
-        if (!int.TryParse(Console.ReadLine(), out int  _DependentTask))
+        if (!int.TryParse(Console.ReadLine(), out int _DependentTask))
             throw new Exception("Wrong input");
         if (!int.TryParse(Console.ReadLine(), out int _DependsOnTask))
             throw new Exception("Wrong input");
-        Dependency dep = new Dependency(0,_DependentTask, _DependsOnTask);
+        Dependency dep = new Dependency(0, _DependentTask, _DependsOnTask);
         Console.WriteLine(s_dal!.Dependency.Create(dep));
     }
     /// <summary>
@@ -384,9 +379,9 @@ internal class Program
     /// </summary>
     static void ReadAllD()
     {
-        List<Dependency> _listD;
+        IEnumerable<Dependency?> _listD;
         _listD = s_dal!.Dependency.ReadAll();
-        foreach (Dependency dep in _listD)// print all the dependencies in the list
+        foreach (Dependency? dep in _listD)// print all the dependencies in the list
             Console.WriteLine(dep);
     }
     /// <summary>
@@ -405,8 +400,8 @@ internal class Program
             throw new Exception("Wrong input");
         if (!int.TryParse(Console.ReadLine(), out int _DependsOnTask))
             throw new Exception("Wrong input");
-       Dependency dep = new Dependency(_id,_DependentTask, _DependsOnTask);
-       s_dal!.Dependency.Update(dep);
+        Dependency dep = new Dependency(_id, _DependentTask, _DependsOnTask);
+        s_dal!.Dependency.Update(dep);
     }
     /// <summary>
     /// Delete the dependency with the given id

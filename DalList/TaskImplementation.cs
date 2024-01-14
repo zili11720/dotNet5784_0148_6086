@@ -24,12 +24,20 @@ internal class TaskImplementation : ITask
 
     public Task? Read(int id)//Return the task with the id given if it exists
     {
-        return DataSource.Tasks.Find(Task => Task.Id == id);
+        return DataSource.Tasks.FirstOrDefault(Task => Task.Id == id);
+    }
+    public Task? Read(Func<Task, bool> filter)//Return the first task that satisfies the condition of the func filter
+    {
+        return DataSource.Tasks.FirstOrDefault(filter);
     }
 
-    public List<Task> ReadAll()//Return all the tasks in the list
+    public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)//Return all the tasks in the list or just the tasks that fulfiil the condition
     {
-        return new List<Task>(DataSource.Tasks);
+        if (filter == null)
+            return DataSource.Tasks.Select(item => item);
+        else
+            return DataSource.Tasks.Where(filter);
+
     }
     public void Update(Task item)//Replace the task with the id identical to the id of the task 'item' ,with item
     {

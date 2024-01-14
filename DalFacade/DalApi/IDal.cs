@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DalApi
+namespace DalApi;
+
+public interface IDal
 {
-    public interface IDal
-    {
-        IAgent Agent { get; }
-        ITask Task { get; }
-        IDependency Dependency { get; }
-    }
+    IAgent Agent { get; }
+    ITask Task { get; }
+    IDependency Dependency { get; }
 }
 

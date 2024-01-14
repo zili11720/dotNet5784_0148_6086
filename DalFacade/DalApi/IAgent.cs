@@ -7,10 +7,4 @@ using DO;
 /// </summary>
 public interface IAgent: ICrud< Agent>
 {
-//    int Create(Agent item); //Create a new Agent
-//    Agent? Read(int id); //Read an agent by its ID 
-//    List<Agent> ReadAll(); //Read all Agents
-//    void Update(Agent item); //Update an Agent
-//    void Delete(int id); //Delete an Agent by its Id
-
 }

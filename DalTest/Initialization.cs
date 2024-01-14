@@ -9,10 +9,8 @@ using System;
 /// </summary>
 public static class Initialization
 {
-    //variables for access to the inplementations
-    //private static IAgent? s_dalAgent; //stage 1
-    //private static ITask? s_dalTask; //stage 1
-    //private static IDependency? s_dalDependency;//stage 1
+
+    //a variable to access to the inplementations
     private static IDal? s_dal;//Stage 2
     //A variable to create rendom numbers
     private static readonly Random s_rand = new();
@@ -250,9 +248,6 @@ public static class Initialization
 
     public static void Do(IDal? dal)
     {
-        //s_dalAgent = dalAgent ?? throw new NullReferenceException("DAL can not be null!");//stage 1
-        //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");//stage 1
-        //s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");//stage 1
         s_dal=dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
         createAgent();
         createTask();

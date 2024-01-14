@@ -1,6 +1,7 @@
-﻿namespace Dal;
+namespace Dal;
 using DalApi;
 using DO;
+using System.Linq;
 
 /// <summary>
 ///Implementation of the interface that manages an Agent entity
@@ -11,12 +12,12 @@ internal class AgentImplementation : IAgent
 {
     public int Create(Agent item)//Add a new agent to the list
     {
-        if(Read(item.Id) is not null)//Check if this id already exists in the database
+        if (Read(item.Id) is not null)//Check if this id already exists in the database
             throw new Exception($"An agent with ID={item.Id} already exists");
         //else
-        
+
         DataSource.Agents.Add(item);
-        return item.Id; 
+        return item.Id;
     }
 
     public void Delete(int id)//Delete the agent with the id given if he/she exists
@@ -27,12 +28,19 @@ internal class AgentImplementation : IAgent
 
     public Agent? Read(int id)//Return the agent with the id given if he/she exists
     {
-        return DataSource.Agents.Find(Agent => Agent.Id == id);
+        return DataSource.Agents.FirstOrDefault(Agent => Agent.Id == id);
     }
 
-    public List<Agent> ReadAll()//Return all the agents in the list
+    public Agent? Read(Func<Agent, bool> filter)//Return the first agent that satisfies the condition of the func filter
     {
-        return new List<Agent>(DataSource.Agents);
+        return DataSource.Agents.FirstOrDefault(filter);
+    }
+    public IEnumerable<Agent?> ReadAll(Func<Agent, bool>? filter = null)//return all the agents or just the agents that fulfiil the condition
+    {
+        if (filter == null)
+            return DataSource.Agents.Select(item => item);
+        else
+            return DataSource.Agents.Where(filter);
     }
 
     public void Update(Agent item)//Replace the agent with the id identical to the id of the agent' item' with item

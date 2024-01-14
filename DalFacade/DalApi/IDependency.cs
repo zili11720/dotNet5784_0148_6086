@@ -7,9 +7,4 @@ using DO;
 /// </summary>
 public interface IDependency : ICrud<Dependency>
 {
-    //int Create(Dependency item); //Create a new dependency in DAL
-    //Dependency? Read(int id); //Read ea dependency its ID 
-    //List<Dependency> ReadAll(); //Read all dependencies
-    //void Update(Dependency item); //Update a dependency
-    //void Delete(int id); //Delete a dependency
 }

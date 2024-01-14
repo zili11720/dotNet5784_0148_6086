@@ -1,6 +1,7 @@
 ﻿namespace Dal;
 using DalApi;
 using DO;
+using System.Linq;
 
 /// <summary>
 ///Implementation of the interface that manages a dependency betweem two tasks
@@ -19,16 +20,23 @@ internal class DependencyImplementation : IDependency
     {
         if (DataSource.Dependencies.RemoveAll(Dependency => Dependency.Id == id) == 0)
             throw new Exception($"Dependency with ID={id} does Not exist");
-    } 
-
+    }
     public Dependency? Read(int id)//Return the dependency with the id given if it exists
     {
-        return DataSource.Dependencies.Find(Dependency => Dependency.Id == id);
+        return DataSource.Dependencies.FirstOrDefault(Dependency=> Dependency.Id == id);
     }
 
-    public List<Dependency> ReadAll()//return all the depencies in the list
+    public Dependency? Read(Func<Dependency, bool> filter)//Return the first dependency that satisfies the condition of the func filter
     {
-        return new List<Dependency>(DataSource.Dependencies);
+        return DataSource.Dependencies.FirstOrDefault(filter);
+    }
+
+    public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter = null)//return all the dependencies or just the dependencies which fulfiil the condition
+    {
+        if (filter == null)
+            return DataSource.Dependencies.Select(item => item);
+        else
+            return DataSource.Dependencies.Where(filter);
     }
 
     public void Update(Dependency item)//Replace the dependency with the id identical to the id of the dependency 'item' with item
