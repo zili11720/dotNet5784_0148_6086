@@ -137,7 +137,11 @@ press 0 to return to the main menu
         Console.WriteLine(@"Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
             throw new DalInvalidInputException("Wrong input");
-        Console.WriteLine(s_dal!.Agent.Read(_id));
+        Agent? tmp = s_dal!.Agent.Read(_id);
+        if (tmp != null)
+            Console.WriteLine(tmp);
+        else
+            Console.WriteLine($"Agents with id={_id} doe's not exist");
     }
     /// <summary>
     /// Create a list with all the agents that exist
@@ -257,8 +261,11 @@ press 0 to return to the main menu
         Console.WriteLine(@"Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
             throw new DalInvalidInputException("Wrong input");
-
-        Console.WriteLine(s_dal!.Task.Read(_id));
+        Task? tmp = s_dal!.Task.Read(_id);
+        if (tmp != null)
+            Console.WriteLine(tmp);
+        else
+            Console.WriteLine($"Task with id={_id} doe's not exist");
     }
     /// <summary>
     /// Create a list with all the tasks that exist
@@ -375,8 +382,11 @@ press 0 to return to the main menu
         Console.WriteLine("Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
             throw new DalInvalidInputException("Wrong input");
-
-        Console.WriteLine(s_dal!.Dependency.Read(_id));
+        Dependency? tmp = s_dal!.Dependency.Read(_id);
+        if (tmp != null)
+            Console.WriteLine(tmp);
+        else
+            Console.WriteLine($"Agents with id={_id} doe's not exist");
     }
     /// <summary>
     /// Create a list with all the dependencies that exist
