@@ -25,11 +25,12 @@ internal class Program
             Initialization.Do(s_dal);//stage 2//First initialization of the database
             do
             {
-                Console.WriteLine(@"Choose one of the following:
-        press 1 for an agent
-        prees 2 for a task
-        press 3 for a dependency
-        press 0 to exit");
+                Console.WriteLine(@"
+Choose one of the following:
+press 1 for an agent
+prees 2 for a task
+press 3 for a dependency
+press 0 to exit");
                 if (!int.TryParse(Console.ReadLine(), out int choise))
                     throw new DalInvalidInputException("Wrong input");
                 switch (choise)
@@ -67,13 +68,14 @@ internal class Program
     {
         do
         {
-            Console.WriteLine(@"Choose one of the following:
-        press 1 to add an agent
-        prees 2 to read an agent
-        press 3 to read all agents
-        press 4 to update an agent
-        press 5 to delete an agent
-        press 0 to return to the main menu
+            Console.WriteLine(@"
+Choose one of the following:
+press 1 to add an agent
+prees 2 to read an agent
+press 3 to read all agents
+press 4 to update an agent
+press 5 to delete an agent
+press 0 to return to the main menu
         ");
             if (!int.TryParse(Console.ReadLine(), out int choise))
                 throw new DalInvalidInputException("Wrong input");
@@ -189,13 +191,14 @@ internal class Program
     {
         do
         {
-            Console.WriteLine(@"Choose one of the following:
-        press 1 to add a Task
-        prees 2 to read a Task
-        press 3 to read all Tasks
-        press 4 to update a Task
-        press 5 to delete a Task
-        press 0 to return to the main menu
+            Console.WriteLine(@"
+Choose one of the following:
+press 1 to add a Task
+prees 2 to read a Task
+press 3 to read all Tasks
+press 4 to update a Task
+press 5 to delete a Task
+press 0 to return to the main menu
         ");
             if (!int.TryParse(Console.ReadLine(), out int choise))
                 throw new DalInvalidInputException("Wrong input");
@@ -309,13 +312,14 @@ internal class Program
     {
         do
         {
-            Console.WriteLine(@"Choose one of the following:
-        press 1 to add a dependency
-        prees 2 to read a dependency
-        press 3 to read all dependencies
-        press 4 to update a dependency
-        press 5 to delete a dependency
-        press 0 to return to the main menu
+            Console.WriteLine(@"
+Choose one of the following:
+press 1 to add a dependency
+prees 2 to read a dependency
+press 3 to read all dependencies
+press 4 to update a dependency
+press 5 to delete a dependency
+press 0 to return to the main menu
         ");
             if (!int.TryParse(Console.ReadLine(), out int choise))
                 throw new DalInvalidInputException("Wrong input");
