@@ -28,12 +28,5 @@ public class DalDeletionImpossibleException : Exception
 {
     public DalDeletionImpossibleException(string? message) : base(message) { }
 }
-/// <summary>
-/// An exception for when the user enters invalid input in the main program
-/// </summary>
-[Serializable]
-public class DalInvalidInputException : Exception
-{
-    public DalInvalidInputException(string? message) : base(message) { }
-}
+
 

@@ -22,7 +22,7 @@ internal class Program
     {
         try
         {
-            Initialization.Do(s_dal);//stage 2//First initialization of the database
+            Initialization.Do(s_dal);//First initialization of the database
             do
             {
                 Console.WriteLine(@"
@@ -32,7 +32,7 @@ prees 2 for a task
 press 3 for a dependency
 press 0 to exit");
                 if (!int.TryParse(Console.ReadLine(), out int choise))
-                    throw new DalInvalidInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 switch (choise)
                 {
                     case 1:
@@ -66,9 +66,11 @@ press 0 to exit");
     /// </summary>
     static void CaseAgent()
     {
-        do
+        try
         {
-            Console.WriteLine(@"
+            do
+            {
+                Console.WriteLine(@"
 Choose one of the following:
 press 1 to add an agent
 prees 2 to read an agent
@@ -77,51 +79,54 @@ press 4 to update an agent
 press 5 to delete an agent
 press 0 to return to the main menu
         ");
-            if (!int.TryParse(Console.ReadLine(), out int choise))
-                throw new DalInvalidInputException("Wrong input");
-            switch (choise)
-            {
-                case 1:
-                    CreateA();
-                    break;
-                case 2:
-                    ReadA();
-                    break;
-                case 3:
-                    ReadAllA();
-                    break;
-                case 4:
-                    UpdateA();
-                    break;
-                case 5:
-                    DeleteA();
-                    break;
-                case 0:
-                    return;
-                default:
-                    Console.WriteLine("Invalid choice. Please try again.");
-                    break;
+                if (!int.TryParse(Console.ReadLine(), out int choise))
+                    throw new FormatException("Wrong input");
+                switch (choise)
+                {
+                    case 1:
+                        CreateA();
+                        break;
+                    case 2:
+                        ReadA();
+                        break;
+                    case 3:
+                        ReadAllA();
+                        break;
+                    case 4:
+                        UpdateA();
+                        break;
+                    case 5:
+                        DeleteA();
+                        break;
+                    case 0:
+                        return;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
             }
+            while (true);
         }
-        while (true);
-
-
+        catch(Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
     /// <summary>
     /// create an agent according to the user input and print the agent(ToString)
     /// </summary>
-    /// <exception cref="DalInvalidInputException">wrong input</exception>
+    /// <exception cref="FormatException">wrong input</exception>
     static void CreateA()
     {
         Console.WriteLine("Enter:Id,email,cost per hour,name and specialty(1- for field agent,2- for hacker, 3- for invetgator):");
         if (!int.TryParse(Console.ReadLine(), out int _id))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         string _email = Console.ReadLine()!;
         if (!int.TryParse(Console.ReadLine(), out int _cost))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         string _name = Console.ReadLine()!;
         if (!int.TryParse(Console.ReadLine(), out int _specialty))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
 
         Agent newA = new Agent(_id, _email, _cost, _name, (AgentExperience)_specialty);
         Console.WriteLine(s_dal!.Agent.Create(newA));
@@ -130,13 +135,13 @@ press 0 to return to the main menu
     /// <summary>
     /// Read the agent with the given id and print the agent(ToString)
     /// </summary>
-    /// <exception cref="DalInvalidInputException">wrong input</exception>
+    /// <exception cref="FormatException">wrong input</exception>
 
     static void ReadA()
     {
         Console.WriteLine(@"Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         Agent? tmp = s_dal!.Agent.Read(_id);
         if (tmp != null)
             Console.WriteLine(tmp);
@@ -157,21 +162,21 @@ press 0 to return to the main menu
     /// <summary>
     /// Enter id of an agent, print this agent and then update it.
     /// </summary>
-    /// <exception cref="DalInvalidInputException">wrong input</exception>
+    /// <exception cref="FormatException">wrong input</exception>
     static void UpdateA()
     {
         Console.WriteLine(@"Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
 
         Console.WriteLine(s_dal!.Agent.Read(_id));//If the agent with this id exists print the agent,else don't print anything
         Console.WriteLine("Enter:name,email,cost, and specialty(1- for field agent,2- for hacker, 3- for invetgator):");//Enter new data for this agent
         string _name = Console.ReadLine()!;
         string _email = Console.ReadLine()!;
         if (!int.TryParse(Console.ReadLine(), out int _cost))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         if (!int.TryParse(Console.ReadLine(), out int _specialty))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
 
         Agent newA = new Agent(_id, _email, _cost, _name, (AgentExperience)_specialty);
         s_dal.Agent.Update(newA); //zili
@@ -179,12 +184,12 @@ press 0 to return to the main menu
     /// <summary>
     /// Delete the agent with the given id 
     /// </summary>
-    /// <exception cref="DalInvalidInputException">wrong input</exception>
+    /// <exception cref="FormatException">wrong input</exception>
     static void DeleteA()
     {
         Console.WriteLine(@"Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         s_dal!.Agent.Delete(_id);
     }
     ////////////////////////////// Task ////////////////////////////////////
@@ -193,9 +198,11 @@ press 0 to return to the main menu
     /// </summary>
     static void CaseTask()
     {
-        do
+        try
         {
-            Console.WriteLine(@"
+            do
+            {
+                Console.WriteLine(@"
 Choose one of the following:
 press 1 to add a Task
 prees 2 to read a Task
@@ -204,40 +211,45 @@ press 4 to update a Task
 press 5 to delete a Task
 press 0 to return to the main menu
         ");
-            if (!int.TryParse(Console.ReadLine(), out int choise))
-                throw new DalInvalidInputException("Wrong input");
-            switch (choise)
-            {
-                case 1:
-                    CreateT();
-                    break;
-                case 2:
-                    ReadT();
-                    break;
-                case 3:
-                    ReadAllT();
-                    break;
-                case 4:
-                    UpdateT();
-                    break;
-                case 5:
-                    DeleteT();
-                    break;
-                case 0:
-                    return;
-                default:
-                    Console.WriteLine("Invalid choice. Please try again.");
-                    break;
+                if (!int.TryParse(Console.ReadLine(), out int choise))
+                    throw new FormatException("Wrong input");
+                switch (choise)
+                {
+                    case 1:
+                        CreateT();
+                        break;
+                    case 2:
+                        ReadT();
+                        break;
+                    case 3:
+                        ReadAllT();
+                        break;
+                    case 4:
+                        UpdateT();
+                        break;
+                    case 5:
+                        DeleteT();
+                        break;
+                    case 0:
+                        return;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
 
+                }
             }
+            while (true);
         }
-        while (true);
+        catch(Exception e)
+        { 
+            Console.WriteLine(e);
+        }
     }
 
     /// <summary>
     /// create a task according to the user input and print it
     /// </summary>
-    /// <exception cref="DalInvalidInputException">wrong input</exception>
+    /// <exception cref="FormatException">wrong input</exception>
     static void CreateT()
     {
         Console.WriteLine(@"Enter:alias,description,complexity(1- for field agent,2- for hacker, 3- for invetgator),deliverables and remarks:");
@@ -245,7 +257,7 @@ press 0 to return to the main menu
         string _alias = Console.ReadLine()!;
         string _descripition = Console.ReadLine()!;
         if (!int.TryParse(Console.ReadLine(), out int _complexity))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         string _deliverables = Console.ReadLine()!;
         string _remarks = Console.ReadLine()!;
         DateTime _createAtDate = DateTime.Now;
@@ -255,12 +267,12 @@ press 0 to return to the main menu
     /// <summary>
     /// Read the task with the given id and print it
     /// </summary>
-    /// <exception cref="DalInvalidInputException">wrong input</exception>
+    /// <exception cref="FormatException">wrong input</exception>
     static void ReadT()
     {
         Console.WriteLine(@"Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         Task? tmp = s_dal!.Task.Read(_id);
         if (tmp != null)
             Console.WriteLine(tmp);
@@ -280,18 +292,18 @@ press 0 to return to the main menu
     /// <summary>
     /// Enter id of a task, print this task and then update it.
     /// </summary>
-    /// <exception cref="DalInvalidInputException">wrong input</exception>
+    /// <exception cref="FormatException">wrong input</exception>
     static void UpdateT()
     {
         Console.WriteLine(@"Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         Console.WriteLine(s_dal!.Task.Read(_id));// If the task with this id exists print it,else don't print anything
         Console.WriteLine(@"Enter:alias,description,complexity(1- for field agent,2- for hacker, 3- for invetgator),deliverables and remarks:");
         string _alias = Console.ReadLine()!;
         string _descripition = Console.ReadLine()!;
         if (!int.TryParse(Console.ReadLine(), out int _complexity))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         string _deliverables = Console.ReadLine()!;
         string _remarks = Console.ReadLine()!;
         DateTime _createAtDate = DateTime.Now;
@@ -303,12 +315,12 @@ press 0 to return to the main menu
     /// <summary>
     /// Delete the task with the given id
     /// </summary>
-    /// <exception cref="DalInvalidInputException">wrong input</exception>
+    /// <exception cref="FormatException">wrong input</exception>
     static void DeleteT()
     {
         Console.WriteLine(@"Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         s_dal!.Task.Delete(_id);
     }
     /////////////////////////////////////// Dependency ////////////////////////////////////
@@ -317,9 +329,11 @@ press 0 to return to the main menu
     /// </summary>
     static void CaseDependency()
     {
-        do
+        try
         {
-            Console.WriteLine(@"
+            do
+            {
+                Console.WriteLine(@"
 Choose one of the following:
 press 1 to add a dependency
 prees 2 to read a dependency
@@ -328,60 +342,65 @@ press 4 to update a dependency
 press 5 to delete a dependency
 press 0 to return to the main menu
         ");
-            if (!int.TryParse(Console.ReadLine(), out int choise))
-                throw new DalInvalidInputException("Wrong input");
-            switch (choise)
-            {
-                case 1:
-                    CreateD();
-                    break;
-                case 2:
-                    ReadD();
-                    break;
-                case 3:
-                    ReadAllD();
-                    break;
-                case 4:
-                    UpdateD();
-                    break;
-                case 5:
-                    DeleteD();
-                    break;
-                case 0:
-                    return;
-                default:
-                    Console.WriteLine("Invalid choice. Please try again.");
-                    break;
+                if (!int.TryParse(Console.ReadLine(), out int choise))
+                    throw new FormatException("Wrong input");
+                switch (choise)
+                {
+                    case 1:
+                        CreateD();
+                        break;
+                    case 2:
+                        ReadD();
+                        break;
+                    case 3:
+                        ReadAllD();
+                        break;
+                    case 4:
+                        UpdateD();
+                        break;
+                    case 5:
+                        DeleteD();
+                        break;
+                    case 0:
+                        return;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
 
+                }
             }
+            while (true);
         }
-        while (true);
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
 
+        }
 
     }
     /// <summary>
     /// create a dependency according to the user input and print it
     /// </summary>
-    /// <exception cref="DalInvalidInputException">wrong input</exception>
+    /// <exception cref="FormatException">wrong input</exception>
     static void CreateD()
     {
         Console.WriteLine(@"Enter:dependentTask id and depedsOnTask id:");
         if (!int.TryParse(Console.ReadLine(), out int _DependentTask))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         if (!int.TryParse(Console.ReadLine(), out int _DependsOnTask))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         Dependency dep = new Dependency(0, _DependentTask, _DependsOnTask);
         Console.WriteLine(s_dal!.Dependency.Create(dep));
     }
     /// <summary>
     /// Read the dependency with the given id and print it
     /// </summary>
-    /// <exception cref="DalInvalidInputException">wrong input</exception>
+    /// <exception cref="FormatException">wrong input</exception>
     static void ReadD()
     {
         Console.WriteLine("Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         Dependency? tmp = s_dal!.Dependency.Read(_id);
         if (tmp != null)
             Console.WriteLine(tmp);
@@ -401,31 +420,31 @@ press 0 to return to the main menu
     /// <summary>
     /// Enter id of a dependency, print this dependency and then update it.
     /// </summary>
-    /// <exception cref="DalInvalidInputException">wrong input</exception>
+    /// <exception cref="FormatException">wrong input</exception>
     static void UpdateD()
     {
         Console.WriteLine("Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         Console.WriteLine(s_dal!.Task.Read(_id));// If the task with this id exists print it,else don't print anything
 
         Console.WriteLine(@"Enter:dependentTask id and depedsOnTask id:");
         if (!int.TryParse(Console.ReadLine(), out int _DependentTask))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         if (!int.TryParse(Console.ReadLine(), out int _DependsOnTask))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         Dependency dep = new Dependency(_id, _DependentTask, _DependsOnTask);
         s_dal!.Dependency.Update(dep);
     }
     /// <summary>
     /// Delete the dependency with the given id
     /// </summary>
-    /// <exception cref="DalInvalidInputException">wrong input</exception>
+    /// <exception cref="FormatException">wrong input</exception>
     static void DeleteD()
     {
         Console.WriteLine("Enter id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
-            throw new DalInvalidInputException("Wrong input");
+            throw new FormatException("Wrong input");
         s_dal!.Dependency.Delete(_id);
     }
 }
