@@ -58,4 +58,11 @@ internal class AgentImplementation:IAgent
         Agents.Add(item);//Add the updates agent to the list
         XMLTools.SaveListToXMLSerializer(Agents, s_agents_xml);//Write the updated list to the xml file
     }
+
+    public void Clear()
+    {
+        List<Agent> Agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);//Load the list from the xml file
+        Agents.Clear();//Earase all the agents in the list
+        XMLTools.SaveListToXMLSerializer(Agents, s_agents_xml);//Write the updated list to the xml file
+    }
 }

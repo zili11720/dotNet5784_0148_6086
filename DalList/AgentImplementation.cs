@@ -54,4 +54,9 @@ internal class AgentImplementation : IAgent
         else
             throw new DalDoesNotExistException($"An agent with ID={item.Id} does not exist");
     }
+
+    public void Clear()
+    {
+        throw new NotImplementedException();
+    }
 }

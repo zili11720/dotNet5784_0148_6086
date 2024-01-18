@@ -2,6 +2,7 @@
 using DalApi;
 using DO;
 using System;
+using Dal;
 
 /// <summary>
 /// Main program
@@ -11,7 +12,8 @@ using System;
 internal class Program
 {
     private static readonly Random s_rand = new();
-    static readonly IDal s_dal = new Dal.DalList();
+    //static readonly IDal s_dal = new DalList(); //stage 2
+    static readonly IDal s_dal = new DalXml();
 
     /// <summary>
     /// The main function presents a main menu with the options:
@@ -22,7 +24,7 @@ internal class Program
     {
         try
         {
-            Initialization.Do(s_dal);//First initialization of the database
+           // Initialization.Do(s_dal);//First initialization of the database
             do
             {
                 Console.WriteLine(@"
@@ -30,6 +32,7 @@ Choose one of the following:
 press 1 for an agent
 prees 2 for a task
 press 3 for a dependency
+press 4 in order to initialize the data base 
 press 0 to exit");
                 if (!int.TryParse(Console.ReadLine(), out int choise))
                     throw new FormatException("Wrong input");
@@ -43,6 +46,15 @@ press 0 to exit");
                         break;
                     case 3:
                         CaseDependency();
+                        break;
+                     case 4:
+                        Console.Write("Would you like to create Initial data? (Yes/No)");
+                        string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
+                        if (ans == "Yes")
+                        {
+                            EaraseData();//Delete the old data base
+                            Initialization.Do(s_dal);
+                        }
                         break;
                     case 0:
                         Environment.Exit(0);
@@ -61,6 +73,13 @@ press 0 to exit");
         }
 
     }
+    static void EaraseData()
+    {
+        s_dal!.Agent.Clear();
+        s_dal!.Task.Clear();
+        s_dal!.Dependency.Clear();
+    }
+
     /// <summary>
     /// The function represents a sub menu of an agent's 'SCRUB' functions
     /// </summary>

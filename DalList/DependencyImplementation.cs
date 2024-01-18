@@ -50,4 +50,9 @@ internal class DependencyImplementation : IDependency
         else
             throw new DalDoesNotExistException($"Dependency with ID={item.Id} does Not exist");
     }
+
+    public void Clear()
+    {
+        throw new NotImplementedException();
+    }
 }

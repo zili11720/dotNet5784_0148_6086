@@ -50,4 +50,9 @@ internal class TaskImplementation : ITask
         else
             throw new DalDoesNotExistException($"Task with ID={item.Id} does Not exist");
     }
+
+    public void Clear()
+    {
+        throw new NotImplementedException();
+    }
 }
