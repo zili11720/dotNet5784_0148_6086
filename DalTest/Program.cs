@@ -73,6 +73,9 @@ press 0 to exit");
         }
 
     }
+    /// <summary>
+    /// Reset all the files
+    /// </summary>
     static void EaraseData()
     {
         s_dal!.Agent.Clear();
