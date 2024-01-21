@@ -16,12 +16,12 @@ internal class TaskImplementation : ITask
     /// <returns>The id of the new task</returns>
     public int Create(DO.Task item)
     {
-        List<DO.Task> Tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
 
         int nextId = Config.NextTaskId;//Get the next running number
         DO.Task copy=item with { Id= nextId };
-        Tasks.Add(copy);
-        XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
+        tasks.Add(copy);
+        XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);
 
         return nextId;
     }
@@ -32,10 +32,10 @@ internal class TaskImplementation : ITask
     /// <exception cref="DalDoesNotExistException">A task with the given id does not exist in the file</exception>
     public void Delete(int id)
     {
-        List<DO.Task> Tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
-        if (Tasks.RemoveAll(it => it.Id == id) == 0)
+        List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        if (tasks.RemoveAll(it => it.Id == id) == 0)
             throw new DalDoesNotExistException($"Task with ID={id} does Not exist");
-        XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
+        XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);
 
     }
     /// <summary>
@@ -45,8 +45,8 @@ internal class TaskImplementation : ITask
     /// <returns>The requested task if it exists.else, a default value</returns>
     public DO.Task? Read(int id)
     {
-        List<DO.Task> Tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
-        return Tasks.FirstOrDefault(it => it.Id == id);
+        List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        return tasks.FirstOrDefault(it => it.Id == id);
     }
     /// <summary>
     /// Return the first task that meets the condition of the method 'filter'
@@ -55,8 +55,8 @@ internal class TaskImplementation : ITask
     /// <returns>The requested task if it exists.else, a default value</returns>
     public DO.Task? Read(Func<DO.Task, bool> filter)
     {
-        List<DO.Task> Tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
-        return Tasks.FirstOrDefault(filter);
+        List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        return tasks.FirstOrDefault(filter);
     }
     /// <summary>
     /// Return all the tasks in the file that meet the condition of the method 'filter'
@@ -65,11 +65,11 @@ internal class TaskImplementation : ITask
     /// <returns>All the tasks in the file that meet the condition</returns>
     public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? filter = null)
     {
-        List<DO.Task> Tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         if (filter == null)
-            return Tasks.Select(item => item);
+            return tasks.Select(item => item);
         else
-            return Tasks.Where(filter);
+            return tasks.Where(filter);
     }
     /// <summary>
     /// Update a task with new information
@@ -78,19 +78,19 @@ internal class TaskImplementation : ITask
     /// <exception cref="DalDoesNotExistException">A task with the given id does not exist in the file</exception>
     public void Update(DO.Task item)
     {
-        List<DO.Task> Tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
-        if (Tasks.RemoveAll(it => it.Id == item.Id) == 0)
+        List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        if (tasks.RemoveAll(it => it.Id == item.Id) == 0)
             throw new DalDoesNotExistException($"Task with ID={item.Id} does Not exist");
-        Tasks.Add(item);
-        XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
+        tasks.Add(item);
+        XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);
     }
     /// <summary>
     /// Clear the file completely from all the tasks
     /// </summary>
     public void Clear()
     {
-        List<DO.Task> Tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
-        Tasks.Clear();//Earase all the agents in the list
-        XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);//Write the updated list to the xml file
+        List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        tasks.Clear();//Earase all the agents in the list
+        XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);//Write the updated list to the xml file
     }
 }    

@@ -1,5 +1,7 @@
 ﻿using DalApi;
 using DO;
+using System.Data.Common;
+using System.Xml.Linq;
 namespace Dal;
 /// <summary>
 /// Implementation of the interface that manages a dependency between two tasks
@@ -16,15 +18,24 @@ internal class DependencyImplementation:IDependency
     /// <returns>The id of the new dependency</returns>
     public int Create(Dependency item)
     {
-        List<Dependency> Dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
+        //XElement elemDep = new XElement("Dependency");
+        //XElement elemId = new XElement("Id", DataSource.Config.NextDependencyId);
+        //elemDep.Add(elemId);
+        //XElement elemDependentT = new XElement("DependentTask", item.DependentTask);
+        //elemDep.Add(elemDependentT);
+        //XElement elemDependOnT = new XElement("DependOnTask", item.DependOnTask);
+        //elemDep.Add(elemDependOnT);
+
+        List<Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
 
         int nextId = Config.NextDependencyId;//Get the next running number
         Dependency copy = item with { Id = nextId };
-        Dependencies.Add(copy);
-        XMLTools.SaveListToXMLSerializer(Dependencies, s_dependencies_xml);
+        dependencies.Add(copy);
+        XMLTools.SaveListToXMLSerializer(dependencies, s_dependencies_xml);
 
         return nextId;
     }
+
     /// <summary>
     /// Delete the dependency with the id given from the file if it exists
     /// </summary>
@@ -32,11 +43,12 @@ internal class DependencyImplementation:IDependency
     /// <exception cref="DalDoesNotExistException">A dependency with the given id does not exist in the file</exception>
     public void Delete(int id)
     {
-        List<Dependency> Dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
-        if (Dependencies.RemoveAll(it => it.Id == id) == 0)
+        List<Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
+        if (dependencies.RemoveAll(it => it.Id == id) == 0)
             throw new DalDoesNotExistException($"Dependency with ID={id} does Not exist");
-        XMLTools.SaveListToXMLSerializer(Dependencies, s_dependencies_xml);
+        XMLTools.SaveListToXMLSerializer(dependencies, s_dependencies_xml);
     }
+
     /// <summary>
     /// Return the dependency with the given id if it exists
     /// </summary>
@@ -44,8 +56,8 @@ internal class DependencyImplementation:IDependency
     /// <returns>The requested dependency if it exists.else, a default value</returns>
     public Dependency? Read(int id)
     {
-        List<Dependency> Dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
-        return Dependencies.FirstOrDefault(it => it.Id == id);
+        List<Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
+        return dependencies.FirstOrDefault(it => it.Id == id);
     }
     /// <summary>
     /// Return the first dependency that meets the condition of the method 'filter'
@@ -54,8 +66,8 @@ internal class DependencyImplementation:IDependency
     /// <returns>The requested dependency if it exists.else, a default value</returns>
     public Dependency? Read(Func<Dependency, bool> filter)
     {
-        List<Dependency> Dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
-        return Dependencies.FirstOrDefault(filter);
+        List<Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
+        return dependencies.FirstOrDefault(filter);
     }
     /// <summary>
     /// Return all the dependencies in the file that meet the condition of the method 'filter'
@@ -64,11 +76,11 @@ internal class DependencyImplementation:IDependency
     /// <returns>All the dependencies in the file that meet the condition</returns>
     public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter = null)
     {
-        List<Dependency> Dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
+        List<Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
         if (filter == null)
-            return Dependencies.Select(item => item);
+            return dependencies.Select(item => item);
         else
-            return Dependencies.Where(filter);
+            return dependencies.Where(filter);
     }
     /// <summary>
     /// Update a dependency with new information
@@ -77,19 +89,19 @@ internal class DependencyImplementation:IDependency
     /// <exception cref="DalDoesNotExistException">A dependency with the given id does not exist in the file</exception>
     public void Update(Dependency item)
     {
-        List<Dependency> Dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
-        if (Dependencies.RemoveAll(it => it.Id == item.Id) == 0)
+        List<Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
+        if (dependencies.RemoveAll(it => it.Id == item.Id) == 0)
             throw new DalDoesNotExistException($"Dependency with ID={item.Id} does Not exist");
-        Dependencies.Add(item);
-        XMLTools.SaveListToXMLSerializer(Dependencies, s_dependencies_xml);
+        dependencies.Add(item);
+        XMLTools.SaveListToXMLSerializer(dependencies, s_dependencies_xml);
     }
     /// <summary>
     /// Clear the file completely from all the dependencies
     /// </summary>
     public void Clear()
     {
-        List<Dependency> Dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
-        Dependencies.Clear();//Earase all the dependencies in the list
-        XMLTools.SaveListToXMLSerializer(Dependencies, s_dependencies_xml);//Write the updated list to the xml file
+        List<Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
+        dependencies.Clear();//Earase all the dependencies in the list
+        XMLTools.SaveListToXMLSerializer(dependencies, s_dependencies_xml);//Write the updated list to the xml file
     }
 }

@@ -2,6 +2,7 @@
 using DalApi;
 using DO;
 using System.Linq;
+using System.Xml.Linq;
 
 /// <summary>
 ///Implementation of the interface that manages a dependency between two tasks

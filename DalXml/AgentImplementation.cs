@@ -20,9 +20,9 @@ internal class AgentImplementation:IAgent
         if (Read(item.Id) is not null)
             throw new DalAlreadyExistsException($"An agent with ID={item.Id} already exists");
         
-        List<Agent> Agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
-        Agents.Add(item);
-        XMLTools.SaveListToXMLSerializer(Agents, s_agents_xml);
+        List<Agent> agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
+        agents.Add(item);
+        XMLTools.SaveListToXMLSerializer(agents, s_agents_xml);
 
         return item.Id;
     }
@@ -33,10 +33,10 @@ internal class AgentImplementation:IAgent
     /// <exception cref="DalDoesNotExistException">An agent with the given id does not exist in the file</exception>
     public void Delete(int id)
     {
-        List<Agent> Agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
-        if (Agents.RemoveAll(it => it.Id == id) == 0)
+        List<Agent> agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
+        if (agents.RemoveAll(it => it.Id == id) == 0)
             throw new DalDoesNotExistException($"Agent with ID={id} does Not exist");
-        XMLTools.SaveListToXMLSerializer(Agents, s_agents_xml);
+        XMLTools.SaveListToXMLSerializer(agents, s_agents_xml);
     }
     /// <summary>
     /// Return the agent with the given id
@@ -45,8 +45,8 @@ internal class AgentImplementation:IAgent
     /// <returns>The requested agent if he exists.else, a default value</returns>
     public Agent? Read(int id)
     {
-        List<Agent> Agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
-        return Agents.FirstOrDefault(it => it.Id == id);
+        List<Agent> agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
+        return agents.FirstOrDefault(it => it.Id == id);
     }
     /// <summary>
     /// Return the first agent who meets the condition of the method 'filter'
@@ -55,8 +55,8 @@ internal class AgentImplementation:IAgent
     /// <returns>The requested agent if exists,else return a default value</returns>
     public Agent? Read(Func<Agent, bool> filter)
     {
-        List<Agent> Agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
-        return Agents.FirstOrDefault(filter);
+        List<Agent> agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
+        return agents.FirstOrDefault(filter);
     }
     /// <summary>
     /// Return all the agents in the file that meet the condition of the method 'filter'
@@ -65,11 +65,11 @@ internal class AgentImplementation:IAgent
     /// <returns>All the agents in the file that meet the condition</returns>
     public IEnumerable<Agent?> ReadAll(Func<Agent, bool>? filter = null)
     {
-        List<Agent> Agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
+        List<Agent> agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
         if (filter == null)
-            return Agents.Select(item => item);
+            return agents.Select(item => item);
         else
-            return Agents.Where(filter);
+            return agents.Where(filter);
     }
     /// <summary>
     /// Update an agent with new information
@@ -78,19 +78,20 @@ internal class AgentImplementation:IAgent
     /// <exception cref="DalDoesNotExistException">An agent with the given id does not exist in the file</exception>
     public void Update(Agent item)
     {
-        List<Agent> Agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
-        if (Agents.RemoveAll(it => it.Id == item.Id) == 0)
+        List<Agent> agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
+        if (agents.RemoveAll(it => it.Id == item.Id) == 0)
             throw new DalDoesNotExistException($"Agent with ID={item.Id} does Not exist");
-        Agents.Add(item);
-        XMLTools.SaveListToXMLSerializer(Agents, s_agents_xml);
+        agents.Add(item);
+        XMLTools.SaveListToXMLSerializer(agents, s_agents_xml);
     }
+
     /// <summary>
     /// Clear the file completely
     /// </summary>
     public void Clear()
     {
-        List<Agent> Agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
-        Agents.Clear();//Earase all the agents in the list
-        XMLTools.SaveListToXMLSerializer(Agents, s_agents_xml);//Write the empty list to the xml file
+        List<Agent> agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
+        agents.Clear();//Earase all the agents in the list
+        XMLTools.SaveListToXMLSerializer(agents, s_agents_xml);//Write the empty list to the xml file
     }
 }

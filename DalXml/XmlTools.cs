@@ -30,10 +30,10 @@ static class XMLTools
     #region XmlConfig
     public static int GetAndIncreaseNextId(string data_config_xml, string elemName)
     {
-        XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
+        XElement root =LoadListFromXMLElement(data_config_xml);
         int nextId = root.ToIntNullable(elemName) ?? throw new FormatException($"can't convert id.  {data_config_xml}, {elemName}");
         root.Element(elemName)?.SetValue((nextId + 1).ToString());
-        XMLTools.SaveListToXMLElement(root, data_config_xml);
+        SaveListToXMLElement(root, data_config_xml);
         return nextId;
     }
     #endregion
