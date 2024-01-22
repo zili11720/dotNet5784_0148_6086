@@ -92,5 +92,7 @@ internal class TaskImplementation : ITask
         List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         tasks.Clear();//Earase all the agents in the list
         XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);//Write the updated list to the xml file
+
+        Config.NextTaskId = 1;//initialize id running number
     }
 }    

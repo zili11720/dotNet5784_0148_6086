@@ -1,5 +1,4 @@
-﻿
-using DalApi;
+﻿using DalApi;
 namespace Dal;
 sealed public class DalXml : IDal
 {

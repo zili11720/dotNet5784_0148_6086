@@ -1,7 +1,5 @@
 ﻿using DalApi;
 using DO;
-using System.Data.Common;
-using System.Linq;
 using System.Xml.Linq;
 namespace Dal;
 /// <summary>
@@ -12,11 +10,41 @@ internal class DependencyImplementation:IDependency
 {
     readonly string s_dependencies_xml = "dependencies";//Name of the file that contains all the dependencies
 
-    ///// <summary>
-    ///// Add a new dependency to the file
-    ///// </summary>
-    ///// <param name="item">A 'temporary' dependency with the details of the dependency that needs to be added</param>
-    ///// <returns>The id of the new dependency</returns>
+    /// <summary>
+    /// Convert an XElememnt to a dependency
+    /// </summary>
+    /// <param name="elem">XElement to be converted</param>
+    /// <returns>A new dependency</returns>
+    /// <exception cref="FormatException">Failed to convert xml string to intger</exception>
+    static Dependency getDependencyFromXElement(XElement elem)
+    {
+        return new Dependency()
+        {
+            Id = elem.ToIntNullable(nameof(Dependency.Id))?? throw new FormatException("Can't convert id"),
+            DependentTask = elem.ToIntNullable(nameof(Dependency.DependentTask))?? throw new FormatException("Can't convert id"),
+            DependsOnTask = elem.ToIntNullable(nameof(Dependency.DependsOnTask))?? throw new FormatException("Can't convert id")
+        };
+    }
+    /// <summary>
+    /// Convert a dependency to an XElememnt
+    /// </summary>
+    /// <param name="dep">The dependency to be converted</param>
+    /// <returns>new XElement</returns>
+    static XElement getXElementFromDependency(Dependency dep)
+    {
+        return new XElement("Dependency",
+            new XElement("Id", dep.Id),
+            new XElement("DependentTask", dep.DependentTask),
+            new XElement("DependsOnTask", dep.DependsOnTask)
+        );
+    }
+
+
+    /// <summary>
+    /// Add a new dependency to the file
+    /// </summary>
+    /// <param name="item">A 'temporary' dependency with the details of the dependency that needs to be added</param>
+    // <returns>The id of the new dependency</returns>
     public int Create(Dependency item)
     {
         XElement? dependencies = XMLTools.LoadListFromXMLElement(s_dependencies_xml);
@@ -25,13 +53,6 @@ internal class DependencyImplementation:IDependency
         dependencies.Add(getXElementFromDependency(newDep));
         XMLTools.SaveListToXMLElement(dependencies, s_dependencies_xml);
 
-        //XElement elemDep = new XElement("Dependency");
-        //XElement elemId = new XElement("Id",nextId);
-        //elemDep.Add(elemId);
-        //XElement elemDependentT = new XElement("DependentTask", item.DependentTask);
-        //elemDep.Add(elemDependentT);
-        //XElement elemDependOnT = new XElement("DependsOnTask", item.DependsOnTask);
-        //elemDep.Add(elemDependOnT);
         return nextId;
     }
      
@@ -112,14 +133,14 @@ internal class DependencyImplementation:IDependency
     public void Clear()
     {
         XElement? dependencies = XMLTools.LoadListFromXMLElement(s_dependencies_xml);
-        dependencies.Elements().Select(dep => getDependencyFromXElement(dep)).Remove();
+        dependencies.RemoveAll();
         XMLTools.SaveListToXMLElement(dependencies, s_dependencies_xml);
+
+        Config.NextDependencyId = 1;//initialize id running number
     }
 }
 
 
 
 
-     //    Id = int.TryParse((string?)depElem.Element("Id"), out var _id) ? _id : throw new FormatException("Can't convert id"),
-     //    DependentTask = int.TryParse((string?)depElem.Element("DependTask"), out var dependentTask) ? dependentTask : throw new FormatException("Can't convert id"),
-     //    DependsOnTask = int.TryParse((string?)depElem.Element("DependsOnTask"), out var dependsOnTask) ? dependsOnTask : throw new FormatException("Can't convert id")
+    
