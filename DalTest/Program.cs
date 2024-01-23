@@ -2,7 +2,6 @@
 using DalApi;
 using DO;
 using System;
-using Dal;
 
 /// <summary>
 /// Main program
@@ -13,7 +12,7 @@ internal class Program
 {
     private static readonly Random s_rand = new();
     //static readonly IDal s_dal = new DalList(); //stage 2
-    static readonly IDal s_dal = new DalXml();
+    static readonly IDal s_dal = Factory.Get;
 
     /// <summary>
     /// The main function presents a main menu with the options:
@@ -53,7 +52,7 @@ press 0 to exit");
                         if (ans == "Yes")
                         {
                             EaraseData();//Delete the old data base
-                            Initialization.Do(s_dal);
+                            Initialization.Do();
                         }
                         break;
                     case 0:

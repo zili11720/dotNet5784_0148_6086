@@ -54,6 +54,5 @@ internal class DependencyImplementation : IDependency
 
     public void Clear()
     {
-        throw new NotImplementedException();
     }
 }

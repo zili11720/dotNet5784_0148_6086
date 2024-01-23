@@ -153,7 +153,7 @@ public static class Initialization
         {
             "Check for finger prints of possible  partners in crime",
             "Check for photages of possible  partners in crime",
-            "No remarks",
+             "No remarks",
             "Keep track on current activities",
             "Pay attention if there are multiple adresses",
             "No remarks",
@@ -246,9 +246,9 @@ public static class Initialization
         
 }
 
-    public static void Do(IDal? dal)
+    public static void Do()
     {
-        s_dal=dal ?? throw new NullReferenceException("DAL object can not be null!");
+        s_dal = DalApi.Factory.Get;
         createAgent();
         createTask();
         createDependency();   

@@ -53,6 +53,5 @@ internal class TaskImplementation : ITask
 
     public void Clear()
     {
-        throw new NotImplementedException();
     }
 }

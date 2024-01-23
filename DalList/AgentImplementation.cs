@@ -57,6 +57,5 @@ internal class AgentImplementation : IAgent
 
     public void Clear()
     {
-        throw new NotImplementedException();
     }
 }

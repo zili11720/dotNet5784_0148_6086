@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Dal;
 using DalApi;
-sealed public class DalList : IDal
+sealed internal class DalList : IDal
 {
+    public static IDal Instance {get;}=new DalList();
+    private DalList() { }
+
     public IAgent Agent =>  new AgentImplementation();
 
     public ITask Task =>  new TaskImplementation();
