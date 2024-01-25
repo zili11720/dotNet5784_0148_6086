@@ -1,5 +1,9 @@
 ﻿using DalApi;
 namespace Dal;
+/// <summary>
+/// Singleton static class DalXml
+/// Data of the project is stored in xml files
+/// </summary>
 sealed internal class DalXml : IDal
 {
     public static IDal Instance { get; } = new DalXml();

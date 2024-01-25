@@ -1,7 +1,12 @@
 ﻿namespace DalApi;
 using static DalApi.Config;
 using System.Reflection;
-
+/// <summary>
+/// Simple Factory
+/// Allowing BL to create an intance of DalList/DalXml.
+/// The method Get reads the wanted class name from xml file
+/// by the class 'config', and creates the matching instance
+/// </summary>
 public static class Factory
 {
     public static IDal Get

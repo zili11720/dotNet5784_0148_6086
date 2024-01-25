@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Dal;
 using DalApi;
+/// <summary>
+/// Singleton static class DalList
+/// Data of the project is stored in lists
+/// </summary>
 sealed internal class DalList : IDal
 {
     public static IDal Instance {get;}=new DalList();
