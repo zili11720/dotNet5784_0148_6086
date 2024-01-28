@@ -6,15 +6,14 @@ internal class TaskImplementation : ITask
 {
 
     private DalApi.IDal _dal = DalApi.Factory.Get;
+
     public int Create(BO.Task? boTask)
     {
-        if (boTask!.Id <= 0 || boTask.Alias =="")
+        if (boTask!.Id <= 0 || boTask.Alias == "")
             return 0;
-        //IEnumerable<int> dependentTasks = from TaskInList item in boTask.DependenciesList
-        //                                   select item.Id;
-       
+        IEnumerable<int> dependencies = boTask.DependenciesList!.Select(d => _dal.Dependency.Create(new DO.Dependency(0, d.Id, boTask.Id)));
 
-        DO.Task newDoTask = new DO.Task(boTask.Id, boTask.Alias!,boTask.Description!, boTask.CreatedAtDate, boTask.RequiredEffortTime,false, (DO.AgentExperience?)boTask.Copmlexity, boTask.StartDate, boTask.SchedualedDate,boTask.DeadlineDate,boTask.CompleteDate, boTask.Deliverables, boTask.Remarks, boTask.TaskAgent!.Item1);
+        DO.Task newDoTask = new DO.Task(boTask.Id, boTask.Alias!, boTask.Description!, boTask.CreatedAtDate, boTask.RequiredEffortTime, false, (DO.AgentExperience?)boTask.Copmlexity, boTask.StartDate, boTask.SchedualedDate, boTask.DeadlineDate, boTask.CompleteDate, boTask.Deliverables, boTask.Remarks, boTask.TaskAgent!.Item1);
         try
         {
             int TaskId = _dal.Task.Create(newDoTask);
@@ -22,8 +21,8 @@ internal class TaskImplementation : ITask
         }
         catch (DO.DalAlreadyExistsException ex)
         {
-         throw new BO.BlAlreadyExistsException($"Task with ID={boTask.Id} already exists", ex); 
-         
+            throw new BO.BlAlreadyExistsException($"Task with ID={boTask.Id} already exists", ex);
+
         }
     }
 
@@ -60,18 +59,21 @@ internal class TaskImplementation : ITask
         };
 
     }
-
-    public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? func = null)
+    //public IEnumerable<BO.TaskInList> ReadAllWithFilter(IEnumerable<BO.TaskInList> taskInLists, )
+    public IEnumerable<BO.TaskInList> ReadAll()
     {
 
-        return ((IEnumerable<BO.Task>)(from DO.Task doTask in _dal.Task.ReadAll()
-                select new BO.TaskInList
-                {
-                    Id = doTask.Id,
-                    Alias = doTask.Alias,
-                    Description = doTask.Description,
-                    Status = TaskStatus.Unscheduled
-                }));
+        return from DO.Task doTask in _dal.Task.ReadAll()
+               select new BO.TaskInList
+               {
+                   Id = doTask.Id,
+                   Alias = doTask.Alias,
+                   Description = doTask.Description,
+                   Status = TaskStatus.Unscheduled
+               };
+                
+
+               
     }
 
     public void Update(BO.Task boTask)

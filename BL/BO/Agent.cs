@@ -7,7 +7,7 @@
 /// <param name="Cost">Salary per hour</param>
 /// <param name="Name">A secret nickname of an agent</param>
 /// <param name="Specialty">The specialty of an agent(hacker/field agent/investigator etc.)</param>
-/// <param name="CurrentTask">A task's id and alias the agent currently working on</param>
+/// <param name="CurrentTask">A task's id and alias ,the agent currently working on</param>
 public class Agent
 {
     public int Id { get; init; }
@@ -15,7 +15,7 @@ public class Agent
     public double? Cost { get; set; }
     public string? Name { get; init; }
     public BO.AgentExperience? Specialty { get; set; }
-    public Tuple<int,string>? CurrentTask { get; set; }
+    public BO.TaskInAgent? CurrentTask { get => CurrentTask; set => CurrentTask = value; }/////////////////////
 
     public override string ToString() => this.ToStringProperty();
     

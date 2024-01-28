@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <None Remove="BlImplementation\NewFile1.txt" />
-    <None Remove="BO\NewFile1.txt" />
   </ItemGroup>
 
   <ItemGroup>

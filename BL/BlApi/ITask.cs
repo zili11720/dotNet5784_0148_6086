@@ -5,10 +5,11 @@
 /// </summary>
 public interface ITask
 {
-    public int Create(BO.Task boTask);
-    public BO.Task? Read(int id);
-    public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? func = null);
-    public void Delete(int id);
-    public void Update(BO.Task boTask);
-    public void UpdateScheduledStartDate(int taskId,DateTime? start);
+   int Create(BO.Task boTask);
+   BO.Task? Read(int id);
+   IEnumerable<BO.TaskInList> ReadAll();
+    //public IEnumerable<BO.TaskInList> ReadAllWithFilter(IEnumerable<BO.>    Func<BO.Task, bool>? func = null);
+   void Delete(int id);
+   void Update(BO.Task boTask);
+   void UpdateScheduledStartDate(int taskId,DateTime? start);
 }

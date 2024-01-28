@@ -7,8 +7,8 @@
 /// <param name="Specialty">The specialty of an agent(hacker/field agent/investigator etc.)</param>
 public class AgentInList
 {
-    public int Id { get; init; }
-    public string? Name { get; init; }
+    public required int Id { get; init;}
+    public string? Name { get; init;}
     public BO.AgentExperience? Specialty { get; set; }
 
     public override string ToString() => this.ToStringProperty();

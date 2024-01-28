@@ -5,8 +5,8 @@
 /// </summary>
 public interface ITaskInList
 {
-    public BO.TaskInList? Read(int id);
-    public int Create(BO.TaskInList botaskList);
-    public void Delete(int id);
-    public void Update(BO.TaskInList botaskList);
+    //public BO.TaskInList? Read(int id);
+    //public int Create(BO.TaskInList botaskList);
+    //public void Delete(int id);
+    //public void Update(BO.TaskInList botaskList);
 }

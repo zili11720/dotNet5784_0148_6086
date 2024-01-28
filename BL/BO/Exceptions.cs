@@ -73,3 +73,12 @@ public class BlWrongDateOrderException : Exception
 {
     public BlWrongDateOrderException(string? message) : base(message) { }
 }
+
+/// <summary>
+/// The agent with the given id doen't have a task with the requested id
+/// </summary>
+[Serializable]
+public class BlWrongAgentForTaskException : Exception
+{
+    public BlWrongAgentForTaskException(string? message) : base(message) { }
+}

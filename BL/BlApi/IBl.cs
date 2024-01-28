@@ -5,8 +5,8 @@
 /// </summary>
 public interface IBl
 {
-    public IAgent Agent { get; }
-    public ITask Task { get; }
-    public ITaskInList TaskInList { get; }
-    public IAgentInList AgentInList {  get; }   
+   IAgent Agent { get; }
+   ITask Task { get; }
+   ITaskInList TaskInList { get; }
+   IAgentInList AgentInList {  get; }   
 }

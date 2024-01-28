@@ -1,28 +1,12 @@
-﻿
-namespace BlImplementation;
-using BlApi;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-internal class TaskInListImplementation : ITaskInList
+namespace BlImplementation
 {
-    private DalApi.IDal _dal = DalApi.Factory.Get;
-
-    public int Create(BO.TaskInList botaskList)
+    internal class TaskInListImplementation
     {
-        throw new NotImplementedException();
-    }
-
-    public void Delete(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public BO.TaskInList? Read(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Update(BO.TaskInList botaskList)
-    {
-        throw new NotImplementedException();
     }
 }
