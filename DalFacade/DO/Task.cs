@@ -32,7 +32,7 @@ public record Task
     DateTime? CompleteDate = null,
     string? Deliverables = null,
     string? Remarks = null,
-    int? Agentld = 0
+    int? AgentId = 0
 )
 {
     public Task() : this(1, "", "") { }//empty constructor

@@ -16,7 +16,7 @@
 /// <param name="CompleteDate">The actual date the task was completed</param>
 /// <param name="Deliverables">Deliverables of the task</param>
 /// <param name="Remarks">Special remarks about the task</param>
-/// <param name="Agent">The id and name of the agent assigned to the task</param>
+/// <param name="TaskAgent">The id and name of the agent assigned to the task</param>
 /// <param name="Copmlexity">The minimum agent level required in ordet to complete the task</param>
 
 public class Task
@@ -35,7 +35,7 @@ public class Task
     public DateTime? CompleteDate { get; set; }
     public string? Deliverables { get; set; }
     public string? Remarks { get; set; }
-    public Tuple <int,string>? TaskAgent { get; set; }
+    public AgentInTask? TaskAgent { get; set; }
     public BO.AgentExperience? Copmlexity {  get; set; }
 
     public override string ToString() => this.ToStringProperty();

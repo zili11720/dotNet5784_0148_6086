@@ -1,5 +1,7 @@
 ﻿namespace BlImplementation;
 using BlApi;
+using BO;
+using DO;
 using System.Collections.Generic;
 //using System.Reflection;
 
@@ -16,8 +18,15 @@ internal class AgentImplementation : IAgent
         //boAgent.Name.IsEmptuString();
         //boAgent.Email.IsNotEmail();
         //boAgent.Cost.IsGreaterThenZero();
-        if (boAgent.Id < 0 || boAgent.Name == "" || boAgent.Cost < 0 || boAgent.Email!.Contains("@gmail.com") == false)
-            return 0;
+        //if (boAgent.Id < 0 || boAgent.Name == "" || boAgent.Cost < 0 || boAgent.Email!.Contains("@gmail.com") == false)
+        if (boAgent!.Id <= 0)
+            throw new BlNumberCanNotBeNegetiveException("Id can't be negative");
+        if (boAgent.Name == "")
+            throw new BlNullPropertyException("Agent's name must have a value");
+        if (boAgent.Cost < 0)
+            throw new BlNumberCanNotBeNegetiveException("Agent's cost can't be negative");
+        if (boAgent.Email!.Contains("@gmail.com") == false)
+            throw new BlWrongEmailFormatException("Worng email format");
         DO.Agent newDoAgent = new DO.Agent(boAgent.Id, boAgent.Email, boAgent.Cost, boAgent.Name, (DO.AgentExperience?)boAgent.Specialty);
         try
         {
@@ -39,9 +48,9 @@ internal class AgentImplementation : IAgent
                 throw new BO.BlDoesNotExistException($"Agent with ID={id} does Not exist");
 
             //if (CurrentTask == null)
-            //    throw new BO.BlDeletionImpossibleException("Agent can't be deleted");
+            //    throw new BO.BlDeletionImpossibleException("Agent can't be deleted");  
 
-            IEnumerable<DO.Task> doTasks = from DO.Task task in _dal.Task.ReadAll(task => task.Agentld == id)
+            IEnumerable<DO.Task> doTasks = from DO.Task task in _dal.Task.ReadAll(task => task.AgentId == id)
                                            where task.StartDate >= DateTime.Now
                                            select task;
             if (doTasks.Any())
@@ -60,7 +69,7 @@ internal class AgentImplementation : IAgent
         DO.Task? doTask = _dal.Task.Read(TaskId);
         if (doTask == null)
             throw new BO.BlDoesNotExistException($"Task with ID={TaskId} does Not exist");
-        if (doTask.Agentld != agentId)
+        if (doTask.AgentId != agentId)
             throw new BO.BlWrongAgentForTaskException($"The Agent with the id= {agentId} does not have a task with id={TaskId}");
         return new BO.TaskInList
         {
@@ -68,8 +77,7 @@ internal class AgentImplementation : IAgent
             Alias = doTask.Alias,
             Description = doTask.Description,
             Status = BO.Tools.CalcStatus(doTask),
-        };
-        
+        };  
     }
 
     public BO.Agent? Read(int id)
@@ -77,7 +85,7 @@ internal class AgentImplementation : IAgent
        DO.Agent? doAgent=_dal.Agent.Read(id);
        if (doAgent == null)
             throw new BO.BlDoesNotExistException($"Agent with ID={id} does Not exist");
-        DO.Task? doTask= _dal.Task.Read(task => task.Agentld == id && task.StartDate < DateTime.Now && task.CompleteDate > DateTime.Now);
+        DO.Task? doTask= _dal.Task.Read(task => task.AgentId == id && task.StartDate < DateTime.Now && task.CompleteDate > DateTime.Now);
         BO.Agent boAgent= new BO.Agent()
         {
             Id = doAgent.Id,
@@ -88,7 +96,7 @@ internal class AgentImplementation : IAgent
         };
         if (doTask != null)
         {
-            boAgent.CurrentTask.Id = doTask.Id;
+            boAgent.CurrentTask!.Id = doTask.Id;
             boAgent.CurrentTask.Alias = doTask.Alias;
         }
         else
@@ -109,6 +117,23 @@ internal class AgentImplementation : IAgent
 
     public void Update(BO.Agent boAgent)
     {
-        throw new NotImplementedException();
+        if (boAgent!.Id <= 0)
+            throw new BlNumberCanNotBeNegetiveException("Id can't be negative");
+        if (boAgent.Name == "")
+            throw new BlNullPropertyException("Agent's name must have a value");
+        if (boAgent.Cost < 0)
+            throw new BlNumberCanNotBeNegetiveException("Agent's cost can't be negative");
+        if (boAgent.Email!.Contains("@gmail.com") == false)
+            throw new BlWrongEmailFormatException("Worng email format");
+        //////////////לעדכן משימות!!!!
+        DO.Agent newDoAgent = new DO.Agent(boAgent.Id, boAgent.Email, boAgent.Cost, boAgent.Name, (DO.AgentExperience?)boAgent.Specialty);
+        try
+        {
+            _dal.Agent.Update(newDoAgent);
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BO.BlDoesNotExistException($"Agent with ID={boAgent.Id} deo's not exist", ex);
+        }
     }
 }

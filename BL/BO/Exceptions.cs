@@ -82,3 +82,12 @@ public class BlWrongAgentForTaskException : Exception
 {
     public BlWrongAgentForTaskException(string? message) : base(message) { }
 }
+
+public class BlNumberCanNotBeNegetiveException : Exception
+{
+    public BlNumberCanNotBeNegetiveException(string? message) : base(message) { }
+}
+public class BlWrongEmailFormatException : Exception
+{
+    public BlWrongEmailFormatException(string? message) : base(message) { }
+}

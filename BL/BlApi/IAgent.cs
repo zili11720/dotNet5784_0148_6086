@@ -7,7 +7,7 @@ public interface IAgent
 {
    BO.Agent? Read(int id);
    int Create(BO.Agent boAgent);
-   IEnumerable<BO.Agent> ReadAll(Func<BO.Agent, bool>? func=null);
+   IEnumerable<BO.AgentInList> ReadAll(Func<BO.Agent, bool>? func=null);
    void Delete(int id);
    void Update(BO.Agent boAgent);
    BO.TaskInList GetDetailedTaskForAgent(int agentId, int TaskId);
