@@ -16,4 +16,7 @@ public class Agent
     public string? Name { get; init; }
     public BO.AgentExperience? Specialty { get; set; }
     public Tuple<int,string>? CurrentTask { get; set; }
+
+    public override string ToString() => this.ToStringProperty();
+    
 }

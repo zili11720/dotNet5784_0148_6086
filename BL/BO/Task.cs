@@ -37,4 +37,6 @@ public class Task
     public string? Remarks { get; set; }
     public Tuple <int,string>? TaskAgent { get; set; }
     public BO.AgentExperience? Copmlexity {  get; set; }
+
+    public override string ToString() => this.ToStringProperty();
 }

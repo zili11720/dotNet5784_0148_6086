@@ -13,4 +13,6 @@ public class TaskInList
     public string? Alias { get; init; }
     public string? Description { get;set; }
     public TaskStatus Status { get; set; }
+
+    public override string ToString() => this.ToStringProperty();
 }
