@@ -8,7 +8,7 @@ internal class AgentImplementation : IAgent
 
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
-    //public object CurrentTask{ get; private set; }
+    
 
     public int Create(BO.Agent boAgent)
     {
@@ -38,12 +38,12 @@ internal class AgentImplementation : IAgent
             if (doTask == null)
                 throw new BO.BlDoesNotExistException($"Agent with ID={id} does Not exist");
 
-            if (this.CurrentTask == null)
-                throw new BO.BlDeletionImpossibleException("Agent can't be deleted");
+            //if (CurrentTask == null)
+            //    throw new BO.BlDeletionImpossibleException("Agent can't be deleted");
 
-            IEnumerable<DO.Task> doTasks = from DO.Task doTask in _dal.Task.ReadAll(doTask => doTask.Agentld == id)
-                                           where doTask.CompleteDate >= DateTime.Now
-                                           select doTask;
+            IEnumerable<DO.Task> doTasks = from DO.Task task in _dal.Task.ReadAll(task => task.Agentld == id)
+                                           where task.StartDate >= DateTime.Now
+                                           select task;
             if (doTasks.Any())
                 throw new BO.BlDeletionImpossibleException("Agent can't be deleted");
             _dal.Agent.Delete(id);
@@ -67,7 +67,7 @@ internal class AgentImplementation : IAgent
             Id = doTask.Id,
             Alias = doTask.Alias,
             Description = doTask.Description,
-            Status = BO.TaskStatus.CalcStatus(doTask)
+            Status = BO.Tools.CalcStatus(doTask),
         };
         
     }
@@ -75,29 +75,36 @@ internal class AgentImplementation : IAgent
     public BO.Agent? Read(int id)
     {
        DO.Agent? doAgent=_dal.Agent.Read(id);
-        if (doAgent == null)
+       if (doAgent == null)
             throw new BO.BlDoesNotExistException($"Agent with ID={id} does Not exist");
-        var task = _dal.Task.Read(task => task.Agentld == id && task.StartDate < DateTime.Now && task.CompleteDate > DateTime.Now);
-        return new BO.Agent()
+        DO.Task? doTask= _dal.Task.Read(task => task.Agentld == id && task.StartDate < DateTime.Now && task.CompleteDate > DateTime.Now);
+        BO.Agent boAgent= new BO.Agent()
         {
             Id = doAgent.Id,
             Email = doAgent.Email,
             Cost = doAgent.Cost,
             Name = doAgent.Name,
             Specialty = (BO.AgentExperience?)doAgent.Specialty,
-            CurrentTask = (task.Id, id)
         };
+        if (doTask != null)
+        {
+            boAgent.CurrentTask.Id = doTask.Id;
+            boAgent.CurrentTask.Alias = doTask.Alias;
+        }
+        else
+            boAgent.CurrentTask = null;
+        return boAgent;
     }
 
-    public IEnumerable<BO.Agent> ReadAll(Func<BO.Agent, bool>? func = null)
+    public IEnumerable<BO.AgentInList> ReadAll(Func<BO.Agent, bool>? func = null)
     {
-        return (IEnumerable<BO.Agent>)(from DO.Agent doAgent in _dal.Agent.ReadAll()
+        return from DO.Agent doAgent in _dal.Agent.ReadAll()
                 select new BO.AgentInList
                 {
                     Id=doAgent.Id,
                     Name=doAgent.Name,
                     Specialty = (BO.AgentExperience?)doAgent.Specialty,
-                });        
+                };        
     }
 
     public void Update(BO.Agent boAgent)
