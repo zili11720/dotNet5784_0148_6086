@@ -49,29 +49,19 @@ public class BlXMLFileLoadCreateException : Exception
                 : base(message, innerException) { }
 }
 /// <summary>
-/// Property is null and can't be used
+/// An exception for dates mistakes
 /// </summary>
 [Serializable]
-public class BlNullPropertyException : Exception
+public class BlWrongDateException : Exception
 {
-    public BlNullPropertyException(string? message) : base(message) { }
+    public BlWrongDateException(string? message) : base(message) { }
 }
 /// <summary>
-/// 
+/// Exception for wrong input such as:negetive id/cost, wrong email format etc.
 /// </summary>
-[Serializable]
-public class BlWrongCategoryException : Exception
+public class BlWrongInputException : Exception
 {
-    public BlWrongCategoryException(string? message) : base(message) { }
-}
-
-/// <summary>
-/// The date given is logically wrong
-/// </summary>
-[Serializable]
-public class BlWrongDateOrderException : Exception
-{
-    public BlWrongDateOrderException(string? message) : base(message) { }
+    public BlWrongInputException(string? message) : base(message) { }
 }
 
 /// <summary>
@@ -81,13 +71,4 @@ public class BlWrongDateOrderException : Exception
 public class BlWrongAgentForTaskException : Exception
 {
     public BlWrongAgentForTaskException(string? message) : base(message) { }
-}
-
-public class BlNumberCanNotBeNegetiveException : Exception
-{
-    public BlNumberCanNotBeNegetiveException(string? message) : base(message) { }
-}
-public class BlWrongEmailFormatException : Exception
-{
-    public BlWrongEmailFormatException(string? message) : base(message) { }
 }

@@ -7,6 +7,4 @@ public interface IBl
 {
    IAgent Agent { get; }
    ITask Task { get; }
-   ITaskInList TaskInList { get; }
-   IAgentInList AgentInList {  get; }   
 }

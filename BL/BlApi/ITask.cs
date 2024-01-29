@@ -6,10 +6,9 @@
 public interface ITask
 {
    int Create(BO.Task boTask);
-   BO.Task? Read(int id);
-   IEnumerable<BO.TaskInList> ReadAll();
-    //public IEnumerable<BO.TaskInList> ReadAllWithFilter(IEnumerable<BO.>    Func<BO.Task, bool>? func = null);
-   void Delete(int id);
+    void Delete(int id);
+    BO.Task? Read(int id);
+   IEnumerable<BO.TaskInList> ReadAll(Func<BO.TaskInList, bool>? func = null);
    void Update(BO.Task boTask);
    void UpdateScheduledStartDate(int taskId,DateTime? start);
 }

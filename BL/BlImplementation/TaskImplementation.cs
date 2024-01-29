@@ -2,18 +2,29 @@
 using BlApi;
 using BO;
 using System.ComponentModel.Design;
+using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 
 internal class TaskImplementation : ITask
 {
 
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
+    /// <summary>
+    /// Add new task to dal based on a logic tasl 'boTask'
+    /// </summary>
+    /// <param name="boTask"></param>
+    /// <returns>Id of rhe added task</returns>
+    /// <exception cref="BlWrongInputException">negative id/alias is empty</exception>
+    /// <exception cref="BO.BlAlreadyExistsException"></exception>
     public int Create(BO.Task? boTask)
     {
         if (boTask!.Id <= 0)
-            throw new BlNumberCanNotBeNegetiveException("Id can't be negative");
+            throw new BlWrongInputException("Id can't be negative");
         if (boTask.Alias == "")
-            throw new BlNullPropertyException("Task's alias must have a value");
+            throw new BlWrongInputException("Task's alias must have a value");
+
+        //create new dependencies based on the dependencies list of task
         IEnumerable<int> dependencies = boTask.DependenciesList!.Select(d => _dal.Dependency.Create(new DO.Dependency(0, d.Id, boTask.Id)));
 
         DO.Task newDoTask = new DO.Task()
@@ -29,9 +40,8 @@ internal class TaskImplementation : ITask
             CompleteDate=boTask.CompleteDate,
             Deliverables=boTask.Deliverables,
             Remarks=boTask.Remarks,
-            AgentId=boTask.TaskAgent!.Id
+            AgentId=(boTask.TaskAgent==null)?null:boTask.TaskAgent.Id
         };
-
         try
         {
             int TaskId = _dal.Task.Create(newDoTask);
@@ -43,74 +53,85 @@ internal class TaskImplementation : ITask
 
         }
     }
-
+    /// <summary>
+    /// Delete the task with the id given
+    /// </summary>
+    /// <param name="id">Id of the task to delete</param>
+    /// <exception cref="BO.BlDeletionImpossibleException">Can't delete the task because other tasks depend on her</exception>
+    /// <exception cref="BO.BlDoesNotExistException">A task with the id given doesn't exist</exception>
     public void Delete(int id)
     {
-       DO.Task? doTask = _dal.Task.Read(id);
-       if (doTask == null)
-           throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
-        DO.Dependency? doDep = _dal.Dependency.Read(dep => dep.DependsOnTask == id);
-        if (doDep != null)
-            throw new BO.BlDeletionImpossibleException("Deletion is impossible");
-         _dal.Task.Delete(id);
-        ////////////לשאול אם צריך לתפוס חריגה מהדל למרות שכבר בדקנו שזה קיים
-    }
 
+        try
+        {
+            DO.Task? doTask = _dal.Task.Read(id);
+  
+            DO.Dependency? doDep = _dal.Dependency.Read(dep => dep.DependsOnTask == id);
+            if (doDep != null)
+                throw new BO.BlDeletionImpossibleException("Deletion is impossible");
+            _dal.Task.Delete(id);
+        }
+        catch(DO.DalDoesNotExistException ex)
+        {
+            throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist",ex);
+        } 
+    }
+    /// <summary>
+    /// Returns logic task based on the matching dal task with the id given
+    /// </summary>
+    /// <param name="id">Id of the requested task</param>
+    /// <returns>A logic task with the given id</returns>
+    /// <exception cref="BO.BlDoesNotExistException">A task with the given id doesn't exist</exception>
     public BO.Task? Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(id);
-        if (doTask == null)
+        if (doTask != null)
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
 
-        DO.Agent? doAgent=_dal.Agent.Read(agent=>agent.Id==id);
-             
-        BO.Task boTask=new BO.Task()
+        DO.Agent? doAgent = _dal.Agent.Read(agent => agent.Id == doTask!.AgentId);
+
+        BO.Task boTask = new BO.Task()
         {
             Id = id,
-            Alias = doTask.Alias,
+            Alias = doTask!.Alias,
             Description = doTask.Description,
-            Status=Tools.CalcStatus(doTask),
+            Status = doTask.CalcStatus(),
             DependenciesList = null,
             CreatedAtDate = doTask.CreatedAtDate,
-            SchedualedDate=doTask.SchedualedDate,
+            SchedualedDate = doTask.SchedualedDate,
             StartDate = doTask.StartDate,
             RequiredEffortTime = doTask.RequiredEffortTime,
-            EstimatedCompleteDate=null,
-            DeadlineDate=doTask.DeadlineDate,
-            CompleteDate=doTask.CompleteDate,
-            Deliverables =doTask.Deliverables,
-            Remarks =doTask.Remarks,
-            Copmlexity=(BO.AgentExperience?)doTask.Copmlexity,
+            EstimatedCompleteDate = null,
+            DeadlineDate = doTask.DeadlineDate,
+            CompleteDate = doTask.CompleteDate,
+            Deliverables = doTask.Deliverables,
+            Remarks = doTask.Remarks,
+            TaskAgent = (doAgent == null) ? null : new AgentInTask() { Id = doAgent.Id, Name = doAgent.Name },
+            Copmlexity = (BO.AgentExperience?)doTask.Copmlexity,
         };
-        if (doAgent != null)
-        {
-           boTask.TaskAgent!.Id = doAgent.Id;
-           boTask.TaskAgent.Name = doAgent.Name;
-        }
-        else
-            boTask.TaskAgent = null;
+
         return boTask;
     }
-    //public IEnumerable<BO.TaskInList> ReadAllWithFilter(IEnumerable<BO.TaskInList> taskInLists, )
-    public IEnumerable<BO.TaskInList> ReadAll()
+    public IEnumerable<BO.TaskInList> ReadAll(Func<BO.TaskInList, bool>? func = null)
     {
+        
+        return _dal.Task.ReadAll().Select(t => new BO.TaskInList
+        {
+            Id = t.Id,
+            Alias = t.Alias,
+            Description = t.Description,
+            Status = t.CalcStatus()
+        });
 
-        return from DO.Task doTask in _dal.Task.ReadAll()
-               select new BO.TaskInList
-               {
-                   Id = doTask.Id,
-                   Alias = doTask.Alias,
-                   Description = doTask.Description,
-                   Status = Tools.CalcStatus(doTask)
-               };
+        //להוסיף אופציה לפילטר
     }
 
     public void Update(BO.Task boTask)
     {
         if (boTask!.Id <= 0)
-            throw new BlNumberCanNotBeNegetiveException("Id can't be negative");
+            throw new BlWrongInputException("Id can't be negative");
         if (boTask.Alias == "")
-            throw new BlNullPropertyException("Task's alias must have a value");
+            throw new BlWrongInputException("Task's alias must have a value");
         ////אם צריך לעדכן תלויות ומהנס
 
         DO.Task newDoTask = new DO.Task()
@@ -142,9 +163,14 @@ internal class TaskImplementation : ITask
 
     public void UpdateScheduledStartDate(int taskId, DateTime? start)
     {
-        IEnumerable<DO.Task> doTasks = from DO.Dependency dep in _dal.Dependency.ReadAll(dep => dep.DependsOnTask == taskId)
-                                       select _dal.Task.Read(dep.DependsOnTask);
-                                     //  where this.ScheduledDate < start;
-        ///IEnumerable<DO.Task> tasks=doTasks.Where 
+        IEnumerable<DO.Task?> doTasks = _dal.Dependency.ReadAll(dep => dep.DependsOnTask == taskId).Select(dep => _dal.Task.Read(dep.Id)).Where(t=>t!=null);
+        DO.Task? previousTask = doTasks.FirstOrDefault(task => task.StartDate == null);
+        if (previousTask != null)
+            throw new BlWrongDateException("Previous tasks don't have a starting date");
+        previousTask = doTasks.FirstOrDefault(task => task.CompleteDate>start);
+        if (previousTask != null)
+            throw new BlWrongDateException("Start date is too early");
+        /////לבדוקקקקקקקקק
     }
+
 }

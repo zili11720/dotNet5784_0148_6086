@@ -18,12 +18,12 @@
 /// <param name="Remarks">Special remarks about the task</param>
 /// <param name="TaskAgent">The id and name of the agent assigned to the task</param>
 /// <param name="Copmlexity">The minimum agent level required in ordet to complete the task</param>
-
+/// </summary>
 public class Task
 {
     public int Id { get; init; }
-    public string? Alias { get;init; }////////////////////init/set
-    public string? Description { get; set; }////////init/set
+    public string? Alias { get;init; }
+    public string? Description { get; set; }
     public TaskStatus? Status { get; set; }  
     public List<BO.TaskInList>? DependenciesList { get; set; }
     public DateTime? CreatedAtDate { get; init; }

@@ -23,18 +23,18 @@ static internal class Tools
         return str;
    }
 
-    internal static TaskStatus CalcStatus(DO.Task task)
+    internal static TaskStatus CalcStatus(this DO.Task task)
     {
         if (task.SchedualedDate == null)
             return TaskStatus.Unscheduled;
-        if (task.SchedualedDate!=null&& task.StartDate< DateTime.Now)
-           return TaskStatus.Scheduled;
-        if(task.StartDate>=DateTime.Now &&task.CompleteDate<DateTime.Now)
+        if (task.SchedualedDate != null && task.StartDate < DateTime.Now)
+            return TaskStatus.Scheduled;
+        if (task.StartDate >= DateTime.Now && task.CompleteDate < DateTime.Now)
             return TaskStatus.OnTrack;
         if (task.CompleteDate >= DateTime.Now)
             return TaskStatus.Done;
         else
-            throw new BlWrongDateOrderException("Task's dates are impossible");
+            throw new BO.BlWrongDateException("Task's dates are impossible");
     }
 
 

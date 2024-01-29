@@ -8,6 +8,7 @@
 /// <param name="Name">A secret nickname of an agent</param>
 /// <param name="Specialty">The specialty of an agent(hacker/field agent/investigator etc.)</param>
 /// <param name="CurrentTask">A task's id and alias ,the agent currently working on</param>
+/// </summary>
 public class Agent
 {
     public int Id { get; init; }
