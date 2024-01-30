@@ -37,8 +37,4 @@ static internal class Tools
             throw new BO.BlWrongDateException("Task's dates are impossible");
     }
 
-
-
-
-
 }
