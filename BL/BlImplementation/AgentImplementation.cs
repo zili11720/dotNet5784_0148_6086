@@ -167,7 +167,7 @@ internal class AgentImplementation : IAgent
             Id = doTask.Id,
             Alias = doTask.Alias,
             Description = doTask.Description,
-            Status = doTask.CalcStatus(),
+            Status = doTask.CalcStatus()
         };
     }
     /// <summary>
@@ -185,7 +185,7 @@ internal class AgentImplementation : IAgent
                    Id = doTask.Id,
                    Alias = doTask.Alias,
                    Description = doTask.Description,
-                   Status = doTask.CalcStatus(),
+                   Status = doTask.CalcStatus()
                };
     }
 }
