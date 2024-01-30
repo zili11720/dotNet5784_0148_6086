@@ -10,5 +10,6 @@ public interface ITask
     BO.Task? Read(int id);
    IEnumerable<BO.TaskInList> ReadAll(Func<BO.TaskInList, bool>? func = null);
    void Update(BO.Task boTask);
-   void UpdateScheduledStartDate(int taskId,DateTime? start);
+    void UpdateScheduledStartDate(int taskId, DateTime? start);
+    /////////////הוספת פעולה נוכחית של סוכן/////////////////////////////
 }
