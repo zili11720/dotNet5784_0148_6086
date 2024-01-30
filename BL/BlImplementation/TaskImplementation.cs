@@ -25,7 +25,7 @@ internal class TaskImplementation : ITask
             throw new BlWrongInputException("Task's alias must have a value");
 
         //create new dependencies based on the dependencies list of task
-        IEnumerable<int> dependencies = boTask.DependenciesList!.Select(d => _dal.Dependency.Create(new DO.Dependency(0, d.Id, boTask.Id)));
+        IEnumerable<int> dependencies = boTask.DependenciesList!.Select(d => _dal.Dependency.Create(new DO.Dependency(0, boTask.Id, d.Id)));
 
         DO.Task newDoTask = new DO.Task()
         {   Id=boTask.Id,
@@ -114,7 +114,6 @@ internal class TaskImplementation : ITask
     }
     public IEnumerable<BO.TaskInList> ReadAll(Func<BO.TaskInList, bool>? func = null)
     {
-        
         return _dal.Task.ReadAll().Select(t => new BO.TaskInList
         {
             Id = t.Id,
@@ -163,7 +162,7 @@ internal class TaskImplementation : ITask
 
     public void UpdateScheduledStartDate(int taskId, DateTime? start)
     {
-        IEnumerable<DO.Task?> doTasks = _dal.Dependency.ReadAll(dep => dep.DependsOnTask == taskId).Select(dep => _dal.Task.Read(dep.Id)).Where(t=>t!=null);
+        IEnumerable<DO.Task?> doTasks = _dal.Dependency.ReadAll(dep => dep.DependentTask == taskId).Select(dep => _dal.Task.Read(dep.Id));//.Where(t=>t!=null);
         DO.Task? previousTask = doTasks.FirstOrDefault(task => task.StartDate == null);
         if (previousTask != null)
             throw new BlWrongDateException("Previous tasks don't have a starting date");

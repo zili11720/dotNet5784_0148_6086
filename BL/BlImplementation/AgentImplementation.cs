@@ -71,8 +71,7 @@ internal class AgentImplementation : IAgent
     /// <returns>A logic agent with the given id</returns>
     /// <exception cref="BO.BlDoesNotExistException">Agent with the given id wasn't found</exception>
     public BO.Agent? Read(int id)
-    {
-          
+    { 
         DO.Agent? doAgent = _dal.Agent.Read(id);
         if(doAgent == null)
            throw new BO.BlDoesNotExistException($"An agent with ID={id} does not exist");
@@ -167,7 +166,7 @@ internal class AgentImplementation : IAgent
             Id = doTask.Id,
             Alias = doTask.Alias,
             Description = doTask.Description,
-            Status = doTask.CalcStatus(),
+            Status = doTask.CalcStatus()
         };
     }
     /// <summary>
@@ -185,7 +184,7 @@ internal class AgentImplementation : IAgent
                    Id = doTask.Id,
                    Alias = doTask.Alias,
                    Description = doTask.Description,
-                   Status = doTask.CalcStatus(),
+                   Status = doTask.CalcStatus()
                };
     }
 }
