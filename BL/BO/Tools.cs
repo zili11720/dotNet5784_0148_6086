@@ -37,8 +37,4 @@ static internal class Tools
             throw new BlWrongDateOrderException("Task's dates are impossible");
     }
 
-
-
-
-
 }
