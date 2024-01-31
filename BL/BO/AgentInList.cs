@@ -10,7 +10,7 @@ public class AgentInList
 {
     public required int Id { get; init;}
     public string? Name { get; init;}
-    public BO.AgentExperience? Specialty { get; init; }
+    public BO.AgentExperience? Specialty { get; init;}
 
     public override string ToString() => this.ToStringProperty();
 }
