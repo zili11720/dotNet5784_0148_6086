@@ -23,7 +23,7 @@ static internal class Tools
         return str;
    }
 
-    internal static TaskStatus CalcStatus(DO.Task task)
+    internal static TaskStatus CalcStatus(this DO.Task task)
     {
         if (task.SchedualedDate == null)
             return TaskStatus.Unscheduled;
@@ -34,7 +34,7 @@ static internal class Tools
         if (task.CompleteDate >= DateTime.Now)
             return TaskStatus.Done;
         else
-            throw new BlWrongDateOrderException("Task's dates are impossible");
+            throw new BlWrongDateException("Task's dates are impossible");
     }
 
 }

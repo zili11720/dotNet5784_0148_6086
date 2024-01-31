@@ -187,7 +187,7 @@ press 0 to return to the main menu
     static void UpdateA()
     {
         Console.WriteLine(@"Enter id:");
-        if (!int.TryParse(Console.ReadLine(), out int _id))
+        if    (!int.TryParse(Console.ReadLine(), out int _id))
             throw new FormatException("Wrong input");
 
         Console.WriteLine(s_dal!.Agent.Read(_id));//If the agent with this id exists print the agent,else don't print anything
