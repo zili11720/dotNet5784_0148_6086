@@ -1,4 +1,4 @@
-﻿using DalApi;
+﻿using System.Security.Cryptography;
 
 namespace BlTest;
 internal class Program
@@ -46,7 +46,7 @@ internal class Program
             Console.WriteLine(e);
         }
     }
-   
+
     /// <summary>
     /// The function represents a sub menu of an agent's 'SCRUB' functions
     /// </summary>
@@ -111,13 +111,17 @@ internal class Program
     /// <exception cref="FormatException">wrong input</exception>
     static void CreateA()
     {
-        Console.WriteLine("Enter:Id,email,cost per hour,name and specialty(1- for field agent,2- for hacker, 3- for invetgator):");
+        Console.WriteLine("Enter agent id:");
         if (!int.TryParse(Console.ReadLine(), out int _id))
             throw new FormatException("Wrong input");
+        Console.WriteLine("Enter agent email:");
         string _email = Console.ReadLine()!;
+        Console.WriteLine("Enter agent cost:");
         if (!int.TryParse(Console.ReadLine(), out int _cost))
             throw new FormatException("Wrong input");
+        Console.WriteLine("Enter agent name:");
         string _name = Console.ReadLine()!;
+        Console.WriteLine("Enter agent id:");
         if (!int.TryParse(Console.ReadLine(), out int _specialty))
             throw new FormatException("Wrong input");
         BO.Agent newA = new BO.Agent()
@@ -127,11 +131,7 @@ internal class Program
             Cost = _cost,
             Name = _name,
             Specialty = (BO.AgentExperience?)_specialty,
-            //CurrentTask = new CurrentTask
-            //{
-            //   
-            //}
-            // CurrentTask = (doTask == null) ? null : new BO.TaskInAgent() { Id = _id, Alias = _alias }
+            CurrentTask = null
         };
         //BO.Agent newA = new BO.Agent(_id, _email, _cost, _name, (BO.AgentExperience)_specialty,_currentTask);
         Console.WriteLine(s_bl!.Agent.Create(newA));
@@ -194,9 +194,23 @@ internal class Program
     }
     static void GetDetailedTaskForAgentA()
     {
-        
+        Console.WriteLine("Enter agent id and task id:");
+        if (!int.TryParse(Console.ReadLine(), out int _idTask))
+            throw new FormatException("Wrong input");
+        if (!int.TryParse(Console.ReadLine(), out int _idAgent))
+            throw new FormatException("Wrong input");
+        BO.TaskInList tmp = s_bl!.Agent.GetDetailedTaskForAgent(_idTask, _idAgent);
+        Console.WriteLine(tmp);
     }
-
+    static void GetAllAgentTasksA()
+    {
+        Console.WriteLine("Enter agent id:");
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new FormatException("Wrong input");
+        IEnumerable<BO.TaskInList> _list = s_bl!.Agent.GetAllAgentTasks(_id);
+        foreach(BO.TaskInList a in _list)
+        Console.WriteLine(a);
+    }
     static void CaseTask()
     {
         try
@@ -217,22 +231,22 @@ internal class Program
                 switch (choise)
                 {
                     case 1:
-                        //CreateT();
+                        CreateT();
                         break;
                     case 2:
-                        //ReadT();
+                        ReadT();
                         break;
                     case 3:
-                        //ReadAllT();
+                        ReadAllT();
                         break;
                     case 4:
                         //UpdateT();
                         break;
                     case 5:
-                        // DeleteT();
+                        DeleteT();
                         break;
                     case 6:
-                        //UpdateScheduledStartDateT();
+                        UpdateScheduledStartDateT();
                         break;
                     case 0:
                         return;
@@ -248,5 +262,128 @@ internal class Program
         {
             Console.WriteLine(e);
         }
+    }
+
+    /// <summary>
+    /// create a task according to the user input and print it
+    /// </summary>
+    /// <exception cref="FormatException">wrong input</exception>
+    static void CreateT()
+    {
+        Console.WriteLine("Enter task alias:");
+        string _alias = Console.ReadLine()!;
+        Console.WriteLine("Enter task description:");
+        string _description = Console.ReadLine()!;
+        Console.WriteLine("Enter task's list of dependencies:");
+        // List<BO.TaskInList>? DependenciesList            //צילי//
+        //Console.Write("Task create at date:");
+        DateTime _createdAtDate = DateTime.Now;
+        //if (!DateTime.TryParse(Console.ReadLine(), out DateTime _schedualedDate))
+        //    throw new FormatException("Wrong input");
+        //if (!DateTime.TryParse(Console.ReadLine(), out DateTime _startDate))
+        //    throw new FormatException("Wrong input");
+        Console.WriteLine("Enter task required effort time:");
+        if (!TimeSpan.TryParse(Console.ReadLine(), out TimeSpan _requiredEffortTime))
+            throw new FormatException("Wrong input");
+        //if (!DateTime.TryParse(Console.ReadLine(), out DateTime _estimatedCompleteDate))
+        //    throw new FormatException("Wrong input");
+        //if (!DateTime.TryParse(Console.ReadLine(), out DateTime _deadlineDate))
+        //    throw new FormatException("Wrong input");
+        //if (!DateTime.TryParse(Console.ReadLine(), out DateTime _completeDate))
+        //    throw new FormatException("Wrong input");
+        Console.WriteLine("Enter task deliverables:");
+        string _deliverables = Console.ReadLine()!;
+        Console.WriteLine("Enter task remarks:");
+        string _remarks = Console.ReadLine()!;
+        Console.WriteLine("Enter task complexity(1- for field agent,2- for hacker, 3- for invetgator):");
+        if (!BO.AgentExperience.TryParse(Console.ReadLine(), out BO.AgentExperience _complexity))
+            throw new FormatException("Wrong input");
+        BO.Task newTask = new BO.Task()
+        {
+            Alias = _alias!,
+            Description = _description!,
+            Status = BO.TaskStatus.Unscheduled,
+            CreatedAtDate = _createdAtDate,
+            SchedualedDate = null,
+            StartDate = null,
+            RequiredEffortTime = _requiredEffortTime,
+            EstimatedCompleteDate = null,
+            DeadlineDate = null,
+            CompleteDate = null,
+            Deliverables = _deliverables,
+            Remarks = _remarks,
+            TaskAgent = null,
+            //= new AgentInTask{ Id = _agentId,Name = _agentName},
+            Copmlexity = (BO.AgentExperience?)_complexity,
+        };
+        Console.WriteLine(s_bl!.Task.Create(newTask));
+    }
+    /// <summary>
+    /// Read the task with the given id and print it
+    /// </summary>
+    /// <exception cref="FormatException">wrong input</exception>
+    static void ReadT()
+    {
+        Console.WriteLine("Enter id:");
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new FormatException("Wrong input");
+        BO.Task? tmp = s_bl!.Task.Read(_id);
+        if (tmp != null)
+            Console.WriteLine(tmp);
+        else
+            Console.WriteLine($"Task with id={_id} doe's not exist");
+    }
+    /// <summary>
+    /// Create a list with all the tasks that exist
+    /// </summary>
+    static void ReadAllT()
+    {
+        Console.WriteLine("All the tasks:");
+        IEnumerable<BO.TaskInList?> _listT;
+        _listT = s_bl!.Task.ReadAll();
+        foreach (BO.TaskInList? t in _listT)// print all the tasks in the list
+            Console.WriteLine(t);
+    }
+    /// <summary>
+    /// Enter id of a task, print this task and then update it.
+    /// </summary>
+    /// <exception cref="FormatException">wrong input</exception>
+    //static void UpdateT()
+    //{
+    //    Console.WriteLine("Enter id:");
+    //    if (!int.TryParse(Console.ReadLine(), out int _id))
+    //        throw new FormatException("Wrong input");
+    //    Console.WriteLine(s_bl!.Task.Read(_id));// If the task with this id exists print it,else don't print anything
+    //    Console.WriteLine(@"Enter:alias,description,complexity(1- for field agent,2- for hacker, 3- for invetgator),deliverables and remarks:");
+    //    string _alias = Console.ReadLine()!;
+    //    string _descripition = Console.ReadLine()!;
+    //    if (!int.TryParse(Console.ReadLine(), out int _complexity))
+    //        throw new FormatException("Wrong input");
+    //    string _deliverables = Console.ReadLine()!;
+    //    string _remarks = Console.ReadLine()!;
+    //    DateTime _createAtDate = DateTime.Now;
+
+    //    BO.Task newTask = new BO.Task(_id, _alias, _descripition, _createAtDate, null, false, (AgentExperience)_complexity, null, null, null, null, _deliverables, _remarks, null);
+    //    s_bl!.Task.Update(newTask);//zili
+
+    //}
+    /// <summary>
+    /// Delete the task with the given id
+    /// </summary>
+    /// <exception cref="FormatException">wrong input</exception>
+    static void DeleteT()
+    {
+        Console.WriteLine("Enter id:");
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new FormatException("Wrong input");
+        s_bl!.Task.Delete(_id);
+    }
+    static void UpdateScheduledStartDateT()
+    {
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new FormatException("Wrong input");
+        if (!DateTime.TryParse(Console.ReadLine(), out DateTime _startDate))
+            throw new FormatException("Wrong input");
+        s_bl!.Task.UpdateScheduledStartDate(_id, _startDate);
     }
 }
