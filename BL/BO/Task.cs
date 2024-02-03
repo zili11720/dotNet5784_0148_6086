@@ -30,7 +30,7 @@ public class Task
     public DateTime? SchedualedDate { get; set; }
     public DateTime? StartDate { get; set; }
     public TimeSpan? RequiredEffortTime { get; set; }
-    public DateTime? EstimatedCompleteDate { get; set; }
+    public DateTime? EstimatedCompleteDate { get; set; }  
     public DateTime? DeadlineDate { get; init; }
     public DateTime? CompleteDate { get; set; }
     public string? Deliverables { get; set; }
