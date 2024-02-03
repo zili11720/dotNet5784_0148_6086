@@ -16,7 +16,7 @@ public class Agent
     public double? Cost { get; set; }
     public string? Name { get; init; }
     public BO.AgentExperience? Specialty { get; set; }
-    public BO.TaskInAgent? CurrentTask { get; set; } //{ get => CurrentTask; set => CurrentTask = value; }/////////////////////
+    public BO.TaskInAgent? CurrentTask { get; set; } 
 
     public override string ToString() => this.ToStringProperty();
     

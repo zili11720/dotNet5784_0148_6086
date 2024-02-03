@@ -12,7 +12,7 @@ public interface ICrud<T> where T : class
     int Create(T item); //Create a new T
     T? Read(int id); //Read a T by its ID 
     T? Read(Func<T, bool> filter);//Return the first T that satisfies the condition of the func filter
-    IEnumerable<T?> ReadAll(Func<T,bool>? filter = null); //Read all T
+    IEnumerable<T> ReadAll(Func<T,bool>? filter = null); //Read all T
     void Update(T item); //Update a T
     void Delete(int id); //Delete a T by its Id
     void Clear();//Delete all the T items in the data base

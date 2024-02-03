@@ -13,7 +13,7 @@ internal class AgentImplementation : IAgent
     public int Create(Agent item)//Add a new agent to the list
     {
         if (Read(item.Id) is not null)//Check if this id already exists in the database
-            throw new DalAlreadyExistsException($"An agent with ID={item.Id} already exists");
+            throw new DalAllreadyExistsException($"An agent with ID={item.Id} already exists");
         //else
 
         DataSource.Agents.Add(item);
@@ -35,7 +35,7 @@ internal class AgentImplementation : IAgent
     {
         return DataSource.Agents.FirstOrDefault(filter);
     }
-    public IEnumerable<Agent?> ReadAll(Func<Agent, bool>? filter = null)//return all the agents or just the agents that fulfiil the condition
+    public IEnumerable<Agent> ReadAll(Func<Agent, bool>? filter = null)//return all the agents or just the agents that fulfiil the condition
     {
         if (filter == null)
             return DataSource.Agents.Select(item => item);

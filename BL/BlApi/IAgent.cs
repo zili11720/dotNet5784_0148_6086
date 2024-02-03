@@ -8,9 +8,8 @@ public interface IAgent
     int Create(BO.Agent boAgent);
     void Delete(int id);
     BO.Agent? Read(int id);
-   IEnumerable<BO.AgentInList> ReadAll(Func<BO.AgentInList, bool>? filter=null);
-   void Update(BO.Agent boAgent);
-   BO.TaskInList GetDetailedTaskForAgent(int agentId, int TaskId);
-   IEnumerable<BO.TaskInList> GetAllAgentTasks(int agentId);
-   //פעולה שמחזירה את כל המשימות של סוכן
+    IEnumerable<BO.AgentInList> ReadAll(Func<BO.AgentInList, bool>? filter = null);
+    void Update(BO.Agent boAgent);
+    BO.TaskInList GetDetailedTaskForAgent(int agentId, int TaskId);
+    IEnumerable<BO.TaskInList> GetAllAgentTasks(int agentId);
 }

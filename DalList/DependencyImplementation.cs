@@ -32,7 +32,7 @@ internal class DependencyImplementation : IDependency
         return DataSource.Dependencies.FirstOrDefault(filter);
     }
 
-    public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter = null)//return all the dependencies or just the dependencies which fulfiil the condition
+    public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? filter = null)//return all the dependencies or just the dependencies which fulfiil the condition
     {
         if (filter == null)
             return DataSource.Dependencies.Select(item => item);
