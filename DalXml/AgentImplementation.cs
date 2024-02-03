@@ -14,11 +14,11 @@ internal class AgentImplementation:IAgent
     /// </summary>
     /// <param name="item">The agent to add</param>
     /// <returns>added agent id</returns>
-    /// <exception cref="DalAlreadyExistsException">An agent with the given id already exists</exception>
+    /// <exception cref="DalAllreadyExistsException">An agent with the given id already exists</exception>
     public int Create(Agent item)
     {
         if (Read(item.Id) is not null)
-            throw new DalAlreadyExistsException($"An agent with ID={item.Id} already exists");
+            throw new DalAllreadyExistsException($"An agent with ID={item.Id} already exists");
         
         List<Agent> agents = XMLTools.LoadListFromXMLSerializer<Agent>(s_agents_xml);
         agents.Add(item);

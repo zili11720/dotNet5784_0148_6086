@@ -31,7 +31,7 @@ internal class TaskImplementation : ITask
         return DataSource.Tasks.FirstOrDefault(filter);
     }
 
-    public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)//Return all the tasks in the list or just the tasks that fulfiil the condition
+    public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null)//Return all the tasks in the list or just the tasks that fulfiil the condition
     {
         if (filter == null)
             return DataSource.Tasks.Select(item => item);

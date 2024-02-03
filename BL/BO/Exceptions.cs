@@ -22,10 +22,10 @@ public class BlDoesNotExistException : Exception
 /// Exception for when an item's requested id already exist 
 /// </summary>
 [Serializable]
-public class BlAlreadyExistsException : Exception
+public class BlAllreadyExistsException : Exception
 {
-    public BlAlreadyExistsException(string? message) : base(message) { }
-    public BlAlreadyExistsException(string message, Exception innerException)
+    public BlAllreadyExistsException(string? message) : base(message) { }
+    public BlAllreadyExistsException(string message, Exception innerException)
                 : base(message, innerException) { }
 }
 /// <summary>
@@ -72,3 +72,12 @@ public class BlWrongAgentForTaskException : Exception
 {
     public BlWrongAgentForTaskException(string? message) : base(message) { }
 }
+/// <summary>
+/// 
+/// </summary>
+[Serializable]
+public class BlProjectStageException : Exception
+{
+    public BlProjectStageException(string? message) : base(message) { }
+}
+

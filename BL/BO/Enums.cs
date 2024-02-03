@@ -15,4 +15,12 @@ public enum TaskStatus
 {
     Unscheduled, Scheduled, OnTrack, Done
 };
+/// <summary>
+/// An enum that represents the project's status
+/// </summary>
+public enum ProjectStatus
+{
+    PlanningTime,ScheduleTime,ExecutionTime
+};
+
 

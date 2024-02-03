@@ -27,14 +27,15 @@ static internal class Tools
     {
         if (task.SchedualedDate == null)
             return TaskStatus.Unscheduled;
-        if (task.SchedualedDate!=null&& task.StartDate< DateTime.Now)
-           return TaskStatus.Scheduled;
-        if(task.StartDate>=DateTime.Now &&task.CompleteDate<DateTime.Now)
+        if (task.SchedualedDate != null && task.StartDate < DateTime.Now)
+            return TaskStatus.Scheduled;
+        if (task.StartDate >= DateTime.Now && task.CompleteDate < DateTime.Now)
             return TaskStatus.OnTrack;
         if (task.CompleteDate >= DateTime.Now)
             return TaskStatus.Done;
         else
             throw new BlWrongDateException("Task's dates are impossible");
     }
+
 
 }

@@ -1,4 +1,6 @@
-﻿namespace BlApi;
+﻿using BO;
+
+namespace BlApi;
 /// <summary>
 /// Interface of IBl
 /// Access to all the logic interfaces in Bl

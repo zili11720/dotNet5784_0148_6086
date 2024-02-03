@@ -12,5 +12,7 @@ public class AgentInList
     public string? Name { get; init;}
     public BO.AgentExperience? Specialty { get; init;}
 
+    public BO.TaskInAgent? CurrentTask { get; set; }
+
     public override string ToString() => this.ToStringProperty();
 }

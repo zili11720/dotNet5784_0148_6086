@@ -16,9 +16,9 @@ public class DalDoesNotExistException : Exception
 /// Exception for when item's requested id already exist
 /// </summary>
 [Serializable]
-public class DalAlreadyExistsException : Exception
+public class DalAllreadyExistsException : Exception
 {
-    public DalAlreadyExistsException(string? message) : base(message) { }
+    public DalAllreadyExistsException(string? message) : base(message) { }
 }
 /// <summary>
 /// Object T mustn't be deleted
