@@ -11,5 +11,6 @@ public interface ITask
     IEnumerable<BO.TaskInList> ReadAll(Func<BO.TaskInList, bool>? func = null);
     void Update(BO.Task boTask);
     void UpdateScheduledStartDate(int taskId, DateTime? start);
-    /////////////הוספת פעולה נוכחית של סוכן/////////////////////////////
+
+    //להוסיף הקצאת משימה לסוכן כדי להשתמש בתוך העדכון של משימה לשדה סוכן
 }
