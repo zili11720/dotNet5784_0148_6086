@@ -198,7 +198,7 @@ internal class TaskImplementation : ITask
     public void UpdateScheduledStartDate(int taskId, DateTime? start)
     {
         if (Bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
-            throw new BO.BlProjectStageException("Can't update a start date for a task on the current project satge");
+            throw new BO.BlProjectStageException("Can't update a start date for a task on the current project stage");
 
         BO.Task boTask = Read(taskId)!;
         if (boTask.DependenciesList is not null && boTask.DependenciesList.Any())
@@ -262,7 +262,7 @@ internal class TaskImplementation : ITask
 
         if(Bl.GetProjectStatus()==BO.ProjectStatus.PlanningTime)
         {
-            if (updatedTask.SchedualedDate is not null || updatedTask.SchedualedDate is not null)
+            if (updatedTask.SchedualedDate is not null || updatedTask.TaskAgent is not null)
                 throw new BO.BlProjectStageException("Can't update start date or assign an agent on current project stage");
         }
         if (Bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
@@ -270,5 +270,9 @@ internal class TaskImplementation : ITask
             if (updatedTask.RequiredEffortTime != taskToUpdate!.RequiredEffortTime)
                 throw new BO.BlProjectStageException("Duration time required for a task can't be changed on current project stage");
         }
+    }
+    private void CreateSchedule()
+    {
+     
     }
 }

@@ -97,17 +97,18 @@ internal class AgentImplementation : IAgent
         if (filter == null)
         {
             return from DO.Agent doAgent in _dal.Agent.ReadAll()
-                   let CurrentTsk = GetAllAgentTasks(doAgent.Id).FirstOrDefault(t => t.Status == TaskStatus.OnTrack)
+                   //let CurrentTsk = GetAllAgentTasks(doAgent.Id).FirstOrDefault(t => t.Status == TaskStatus.OnTrack)
+                   //where CurrentTsk is not null
                    select new BO.AgentInList
                    {
                        Id = doAgent.Id,
                        Name = doAgent.Name,
                        Specialty = (BO.AgentExperience?)doAgent.Specialty,
-                       CurrentTask = new BO.TaskInAgent()
-                       {
-                           Id = CurrentTsk.Id,
-                           Alias = CurrentTsk.Alias,
-                       }
+                       //CurrentTask = new BO.TaskInAgent()
+                       //{
+                       //    Id = CurrentTsk.Id,
+                       //    Alias = CurrentTsk.Alias,
+                       //}
                    };
         }
         else//filter isn't null
@@ -137,6 +138,9 @@ internal class AgentImplementation : IAgent
     {
         CheckValidation(boAgent);
 
+        if (boAgent.Specialty < Read(boAgent.Id).Specialty)
+            throw new BO.BlWrongInputException("New agent level can't be lower than his previous level");
+        
         DO.Agent newDoAgent = new DO.Agent(boAgent.Id, boAgent.Email, boAgent.Cost, boAgent.Name, (DO.AgentExperience?)boAgent.Specialty);
         try
         {

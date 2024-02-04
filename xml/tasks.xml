@@ -14,7 +14,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Confirmed finger ptints</Deliverables>
     <Remarks>Check for finger prints of possible  partners in crime</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>2</Id>
@@ -30,7 +30,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Photage of the criminal's face</Deliverables>
     <Remarks>Check for photages of possible  partners in crime</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>3</Id>
@@ -46,7 +46,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Confirmed identity of the criminal</Deliverables>
     <Remarks>No remarks</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>4</Id>
@@ -62,7 +62,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Bank activities details</Deliverables>
     <Remarks>Keep track on current activities</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>5</Id>
@@ -78,7 +78,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>House location</Deliverables>
     <Remarks>Pay attention if there are multiple adresses</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>6</Id>
@@ -94,7 +94,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Car license plate number</Deliverables>
     <Remarks>No remarks</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>7</Id>
@@ -110,7 +110,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Implanted citation device in car</Deliverables>
     <Remarks>No remarks</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>8</Id>
@@ -126,7 +126,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Security Cameras control</Deliverables>
     <Remarks>Hack to the street security cameras to surround the whole area</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>9</Id>
@@ -142,7 +142,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Suitable witnesses</Deliverables>
     <Remarks>No remarks</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>10</Id>
@@ -158,7 +158,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Testimony of a first witness</Deliverables>
     <Remarks>Check witnesses record before investigation </Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>11</Id>
@@ -174,7 +174,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Testimony of a second witness</Deliverables>
     <Remarks>Check witnesses record before investigation</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>12</Id>
@@ -190,7 +190,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Testimony of a third witness</Deliverables>
     <Remarks>Check witnesses record before investigation</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>13</Id>
@@ -206,7 +206,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Full report on the criminal's past</Deliverables>
     <Remarks>Include jobs, family situation and acquaintances</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>14</Id>
@@ -222,7 +222,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Conclusions from the testimonies</Deliverables>
     <Remarks>take into account real photages from the crime ciene</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>15</Id>
@@ -238,7 +238,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Full documanted report on the testimonies</Deliverables>
     <Remarks>No remarks</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>16</Id>
@@ -254,7 +254,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Information about the conduct of the criminal's home</Deliverables>
     <Remarks>Suspiciouse activities may be leaving the house at strange hours, unknown visiters etc.</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>17</Id>
@@ -270,7 +270,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Full sketch of the criminal's house</Deliverables>
     <Remarks>Pay attention to multiple entrences and escape routes </Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>18</Id>
@@ -286,7 +286,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Accurate information on the criminal's daily schedule</Deliverables>
     <Remarks>No remarks</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>19</Id>
@@ -302,7 +302,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Full documanted report on the criminal's daily schedule</Deliverables>
     <Remarks>No remarks</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>20</Id>
@@ -318,7 +318,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>implanted chip in the criminal's phone</Deliverables>
     <Remarks>No remarks</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>21</Id>
@@ -334,7 +334,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>An updated staff with a plan for the next move</Deliverables>
     <Remarks>Take into account the past report, witnesses testemonies and daily schedule.</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>22</Id>
@@ -350,7 +350,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>A list of needed equipment/repair</Deliverables>
     <Remarks>No remarks</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>23</Id>
@@ -366,7 +366,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Full functioning equipment</Deliverables>
     <Remarks>No remarks</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>24</Id>
@@ -382,7 +382,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Reaching Maximum shooting skill</Deliverables>
     <Remarks>No remarks</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>25</Id>
@@ -398,7 +398,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Simulation of the day of the raid</Deliverables>
     <Remarks>pay attention to possible surprises ike people who might appear in the ciene</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>26</Id>
@@ -414,7 +414,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Good performances on the simulation</Deliverables>
     <Remarks>No remarks</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>27</Id>
@@ -430,7 +430,7 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Information about phone calls and secret meetings</Deliverables>
     <Remarks>No remarks</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
   </Task>
   <Task>
     <Id>28</Id>
@@ -446,6 +446,902 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>A final raid plan</Deliverables>
     <Remarks>The details contain:the agents who will take part in the mission, the time of the raid etc.</Remarks>
-    <Agentld xsi:nil="true" />
+    <AgentId>0</AgentId>
+  </Task>
+  <Task>
+    <Id>29</Id>
+    <Alias>Finger ptints</Alias>
+    <Description>Check for finger prints in the crime scene in order to to obtain incriminating evidence</Description>
+    <CreatedAtDate>2024-02-08T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Confirmed finger ptints</Deliverables>
+    <Remarks>Check for finger prints of possible  partners in crime</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>30</Id>
+    <Alias>Security cameras photage</Alias>
+    <Description>Go over security cameras phootages in order to identify the criminal's face</Description>
+    <CreatedAtDate>2024-02-11T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Photage of the criminal's face</Deliverables>
+    <Remarks>Check for photages of possible  partners in crime</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>31</Id>
+    <Alias>Confirm identity</Alias>
+    <Description>Look for the criminal's identity in government databases according to the fingerprints and photoges found</Description>
+    <CreatedAtDate>2024-02-03T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Confirmed identity of the criminal</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>32</Id>
+    <Alias>Bank activity</Alias>
+    <Description>Search previous bank activities of the criminal</Description>
+    <CreatedAtDate>2024-02-13T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Bank activities details</Deliverables>
+    <Remarks>Keep track on current activities</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>33</Id>
+    <Alias>Locate house</Alias>
+    <Description>Locate the criminal's house</Description>
+    <CreatedAtDate>2024-03-03T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>House location</Deliverables>
+    <Remarks>Pay attention if there are multiple adresses</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>34</Id>
+    <Alias>Locate car</Alias>
+    <Description>Locate the criminal's car</Description>
+    <CreatedAtDate>2024-02-06T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Car license plate number</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>35</Id>
+    <Alias>Citation device</Alias>
+    <Description>Plant a citation device in the criminal's car</Description>
+    <CreatedAtDate>2024-02-21T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Implanted citation device in car</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>36</Id>
+    <Alias>Security Cameras control</Alias>
+    <Description>Hack security Cameras in the criminal's house</Description>
+    <CreatedAtDate>2024-02-16T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Security Cameras control</Deliverables>
+    <Remarks>Hack to the street security cameras to surround the whole area</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>37</Id>
+    <Alias>Find witnesses</Alias>
+    <Description>Find optional witnesses in order to get more evidences</Description>
+    <CreatedAtDate>2024-02-03T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Suitable witnesses</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>38</Id>
+    <Alias>witness1</Alias>
+    <Description>Investigate first witness</Description>
+    <CreatedAtDate>2024-02-06T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Testimony of a first witness</Deliverables>
+    <Remarks>Check witnesses record before investigation </Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>39</Id>
+    <Alias>witness2</Alias>
+    <Description>Investigate second witness</Description>
+    <CreatedAtDate>2024-02-19T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Testimony of a second witness</Deliverables>
+    <Remarks>Check witnesses record before investigation</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>40</Id>
+    <Alias>witness3</Alias>
+    <Description>Investigate third witness</Description>
+    <CreatedAtDate>2024-02-26T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Testimony of a third witness</Deliverables>
+    <Remarks>Check witnesses record before investigation</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>41</Id>
+    <Alias>Past report</Alias>
+    <Description>Make a detailed report about the criminal's past</Description>
+    <CreatedAtDate>2024-02-26T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Full report on the criminal's past</Deliverables>
+    <Remarks>Include jobs, family situation and acquaintances</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>42</Id>
+    <Alias>Compare testimonies</Alias>
+    <Description>Compare the testimonies of the witnesses in order to check reliability</Description>
+    <CreatedAtDate>2024-02-04T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Conclusions from the testimonies</Deliverables>
+    <Remarks>take into account real photages from the crime ciene</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>43</Id>
+    <Alias>Witnesses report</Alias>
+    <Description>Make a report on the witnesses testimonies and their conclusions</Description>
+    <CreatedAtDate>2024-03-03T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Full documanted report on the testimonies</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>44</Id>
+    <Alias>House watch</Alias>
+    <Description>Watch the criminal's house and check for suspicious activities</Description>
+    <CreatedAtDate>2024-02-17T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Information about the conduct of the criminal's home</Deliverables>
+    <Remarks>Suspiciouse activities may be leaving the house at strange hours, unknown visiters etc.</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>45</Id>
+    <Alias>House sketch</Alias>
+    <Description>Make a live model of the criminal's house in order to prepare for the raid</Description>
+    <CreatedAtDate>2024-02-17T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Full sketch of the criminal's house</Deliverables>
+    <Remarks>Pay attention to multiple entrences and escape routes </Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>46</Id>
+    <Alias>Daily following</Alias>
+    <Description>Follow the criminal around for a whole day in order to understand his daily routine</Description>
+    <CreatedAtDate>2024-02-08T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Accurate information on the criminal's daily schedule</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>47</Id>
+    <Alias>daily schedule report</Alias>
+    <Description>Make a report about the daily schedule of the criminal</Description>
+    <CreatedAtDate>2024-02-21T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Full documanted report on the criminal's daily schedule</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>48</Id>
+    <Alias>Chip implantation</Alias>
+    <Description>Implant a chip in the criminal's phone</Description>
+    <CreatedAtDate>2024-02-28T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>implanted chip in the criminal's phone</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>49</Id>
+    <Alias>Staff meeting</Alias>
+    <Description>Have a staff meeting about your finding and plan the final act</Description>
+    <CreatedAtDate>2024-02-22T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>An updated staff with a plan for the next move</Deliverables>
+    <Remarks>Take into account the past report, witnesses testemonies and daily schedule.</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>50</Id>
+    <Alias>Equipment inspection</Alias>
+    <Description>Check the functionality of the equipment needed to the final mission</Description>
+    <CreatedAtDate>2024-02-11T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>A list of needed equipment/repair</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>51</Id>
+    <Alias>Complete equipment deficiencies</Alias>
+    <Description>Buy/fix equipment as needed</Description>
+    <CreatedAtDate>2024-02-20T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Full functioning equipment</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>52</Id>
+    <Alias>Ranges</Alias>
+    <Description>Practice in Ranges</Description>
+    <CreatedAtDate>2024-02-13T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Reaching Maximum shooting skill</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>53</Id>
+    <Alias>Build simulation</Alias>
+    <Description>Build a simulation of the final mission</Description>
+    <CreatedAtDate>2024-02-24T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Simulation of the day of the raid</Deliverables>
+    <Remarks>pay attention to possible surprises ike people who might appear in the ciene</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>54</Id>
+    <Alias>Practice simulatin</Alias>
+    <Description>Practice the simulatin</Description>
+    <CreatedAtDate>2024-03-02T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Good performances on the simulation</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>55</Id>
+    <Alias>Quote to implanted devices</Alias>
+    <Description>Quote to implanted devices in the criminal's care and personal phone</Description>
+    <CreatedAtDate>2024-02-12T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Information about phone calls and secret meetings</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>56</Id>
+    <Alias>Create final raid plan</Alias>
+    <Description>Decide on the final raid details according to the results of the simulation</Description>
+    <CreatedAtDate>2024-02-11T22:32:36.3993881+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>A final raid plan</Deliverables>
+    <Remarks>The details contain:the agents who will take part in the mission, the time of the raid etc.</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>57</Id>
+    <Alias>Finger ptints</Alias>
+    <Description>Check for finger prints in the crime scene in order to to obtain incriminating evidence</Description>
+    <CreatedAtDate>2024-02-25T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Confirmed finger ptints</Deliverables>
+    <Remarks>Check for finger prints of possible  partners in crime</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>58</Id>
+    <Alias>Security cameras photage</Alias>
+    <Description>Go over security cameras phootages in order to identify the criminal's face</Description>
+    <CreatedAtDate>2024-02-15T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Photage of the criminal's face</Deliverables>
+    <Remarks>Check for photages of possible  partners in crime</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>59</Id>
+    <Alias>Confirm identity</Alias>
+    <Description>Look for the criminal's identity in government databases according to the fingerprints and photoges found</Description>
+    <CreatedAtDate>2024-03-04T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Confirmed identity of the criminal</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>60</Id>
+    <Alias>Bank activity</Alias>
+    <Description>Search previous bank activities of the criminal</Description>
+    <CreatedAtDate>2024-03-01T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Bank activities details</Deliverables>
+    <Remarks>Keep track on current activities</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>61</Id>
+    <Alias>Locate house</Alias>
+    <Description>Locate the criminal's house</Description>
+    <CreatedAtDate>2024-03-04T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>House location</Deliverables>
+    <Remarks>Pay attention if there are multiple adresses</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>62</Id>
+    <Alias>Locate car</Alias>
+    <Description>Locate the criminal's car</Description>
+    <CreatedAtDate>2024-02-10T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Car license plate number</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>63</Id>
+    <Alias>Citation device</Alias>
+    <Description>Plant a citation device in the criminal's car</Description>
+    <CreatedAtDate>2024-02-16T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Implanted citation device in car</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>64</Id>
+    <Alias>Security Cameras control</Alias>
+    <Description>Hack security Cameras in the criminal's house</Description>
+    <CreatedAtDate>2024-02-15T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Security Cameras control</Deliverables>
+    <Remarks>Hack to the street security cameras to surround the whole area</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>65</Id>
+    <Alias>Find witnesses</Alias>
+    <Description>Find optional witnesses in order to get more evidences</Description>
+    <CreatedAtDate>2024-02-25T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Suitable witnesses</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>66</Id>
+    <Alias>witness1</Alias>
+    <Description>Investigate first witness</Description>
+    <CreatedAtDate>2024-02-04T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Testimony of a first witness</Deliverables>
+    <Remarks>Check witnesses record before investigation </Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>67</Id>
+    <Alias>witness2</Alias>
+    <Description>Investigate second witness</Description>
+    <CreatedAtDate>2024-02-20T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Testimony of a second witness</Deliverables>
+    <Remarks>Check witnesses record before investigation</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>68</Id>
+    <Alias>witness3</Alias>
+    <Description>Investigate third witness</Description>
+    <CreatedAtDate>2024-03-04T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Testimony of a third witness</Deliverables>
+    <Remarks>Check witnesses record before investigation</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>69</Id>
+    <Alias>Past report</Alias>
+    <Description>Make a detailed report about the criminal's past</Description>
+    <CreatedAtDate>2024-02-08T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Full report on the criminal's past</Deliverables>
+    <Remarks>Include jobs, family situation and acquaintances</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>70</Id>
+    <Alias>Compare testimonies</Alias>
+    <Description>Compare the testimonies of the witnesses in order to check reliability</Description>
+    <CreatedAtDate>2024-02-05T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Conclusions from the testimonies</Deliverables>
+    <Remarks>take into account real photages from the crime ciene</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>71</Id>
+    <Alias>Witnesses report</Alias>
+    <Description>Make a report on the witnesses testimonies and their conclusions</Description>
+    <CreatedAtDate>2024-03-01T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Full documanted report on the testimonies</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>72</Id>
+    <Alias>House watch</Alias>
+    <Description>Watch the criminal's house and check for suspicious activities</Description>
+    <CreatedAtDate>2024-02-20T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Information about the conduct of the criminal's home</Deliverables>
+    <Remarks>Suspiciouse activities may be leaving the house at strange hours, unknown visiters etc.</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>73</Id>
+    <Alias>House sketch</Alias>
+    <Description>Make a live model of the criminal's house in order to prepare for the raid</Description>
+    <CreatedAtDate>2024-02-27T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Full sketch of the criminal's house</Deliverables>
+    <Remarks>Pay attention to multiple entrences and escape routes </Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>74</Id>
+    <Alias>Daily following</Alias>
+    <Description>Follow the criminal around for a whole day in order to understand his daily routine</Description>
+    <CreatedAtDate>2024-02-16T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Accurate information on the criminal's daily schedule</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>75</Id>
+    <Alias>daily schedule report</Alias>
+    <Description>Make a report about the daily schedule of the criminal</Description>
+    <CreatedAtDate>2024-02-29T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Full documanted report on the criminal's daily schedule</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>76</Id>
+    <Alias>Chip implantation</Alias>
+    <Description>Implant a chip in the criminal's phone</Description>
+    <CreatedAtDate>2024-02-15T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>implanted chip in the criminal's phone</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>77</Id>
+    <Alias>Staff meeting</Alias>
+    <Description>Have a staff meeting about your finding and plan the final act</Description>
+    <CreatedAtDate>2024-02-19T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>An updated staff with a plan for the next move</Deliverables>
+    <Remarks>Take into account the past report, witnesses testemonies and daily schedule.</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>78</Id>
+    <Alias>Equipment inspection</Alias>
+    <Description>Check the functionality of the equipment needed to the final mission</Description>
+    <CreatedAtDate>2024-02-23T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>A list of needed equipment/repair</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>79</Id>
+    <Alias>Complete equipment deficiencies</Alias>
+    <Description>Buy/fix equipment as needed</Description>
+    <CreatedAtDate>2024-02-26T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Full functioning equipment</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>80</Id>
+    <Alias>Ranges</Alias>
+    <Description>Practice in Ranges</Description>
+    <CreatedAtDate>2024-02-26T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Reaching Maximum shooting skill</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>81</Id>
+    <Alias>Build simulation</Alias>
+    <Description>Build a simulation of the final mission</Description>
+    <CreatedAtDate>2024-02-08T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Simulation of the day of the raid</Deliverables>
+    <Remarks>pay attention to possible surprises ike people who might appear in the ciene</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>82</Id>
+    <Alias>Practice simulatin</Alias>
+    <Description>Practice the simulatin</Description>
+    <CreatedAtDate>2024-02-05T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Field_agent</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Good performances on the simulation</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>83</Id>
+    <Alias>Quote to implanted devices</Alias>
+    <Description>Quote to implanted devices in the criminal's care and personal phone</Description>
+    <CreatedAtDate>2024-02-13T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Hacker</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Information about phone calls and secret meetings</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>84</Id>
+    <Alias>Create final raid plan</Alias>
+    <Description>Decide on the final raid details according to the results of the simulation</Description>
+    <CreatedAtDate>2024-02-29T01:13:34.0050674+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <Copmlexity>Investigator</Copmlexity>
+    <StartDate xsi:nil="true" />
+    <SchedualedDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>A final raid plan</Deliverables>
+    <Remarks>The details contain:the agents who will take part in the mission, the time of the raid etc.</Remarks>
+    <AgentId xsi:nil="true" />
   </Task>
 </ArrayOfTask>
