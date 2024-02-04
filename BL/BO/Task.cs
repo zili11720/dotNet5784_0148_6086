@@ -27,7 +27,7 @@ public class Task
     public TaskStatus? Status { get; set; }  
     public List<BO.TaskInList>? DependenciesList { get; set; }
     public DateTime? CreatedAtDate { get; init; }
-    public DateTime? SchedualedDate { get; set; }
+    public DateTime? ScheduledDate { get; set; }
     public DateTime? StartDate { get; set; }
     public TimeSpan? RequiredEffortTime { get; set; }
     public DateTime? EstimatedCompleteDate { get; set; }  

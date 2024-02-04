@@ -11,7 +11,7 @@ namespace DO;
 /// <param name="IsMilestone">Milestones of the task</param>
 /// <param name="Copmlexity">The minimum agent level required in ordet to complete the task</param>
 /// <param name="StartDate">Actual start date of a task</param>
-/// <param name="SchedualedDate">Planned start date for a task</param>
+/// <param name="ScheduledDate">Planned start date for a task</param>
 /// <param name="DeadlineDate">Planned deadline for a task</param>
 /// <param name="CompleteDate">The actual date the task was completed</param>
 /// <param name="Deliverables">Deliverables of the task</param>
@@ -27,7 +27,7 @@ public record Task
     bool IsMilestone=false,
     DO.AgentExperience? Copmlexity = null,
     DateTime? StartDate = null,
-    DateTime? SchedualedDate = null,
+    DateTime? ScheduledDate = null,
     DateTime? DeadlineDate = null,
     DateTime? CompleteDate = null,
     string? Deliverables = null,

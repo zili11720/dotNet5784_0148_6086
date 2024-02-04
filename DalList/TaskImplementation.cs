@@ -53,5 +53,6 @@ internal class TaskImplementation : ITask
 
     public void Clear()
     {
+     
     }
 }

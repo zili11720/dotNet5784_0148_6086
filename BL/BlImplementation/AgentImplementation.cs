@@ -99,7 +99,7 @@ internal class AgentImplementation : IAgent
             return from DO.Agent doAgent in _dal.Agent.ReadAll()
                    //let CurrentTsk = GetAllAgentTasks(doAgent.Id).FirstOrDefault(t => t.Status == TaskStatus.OnTrack)
                    //where CurrentTsk is not null
-                   select new BO.AgentInList
+                   select new BO.AgentInList()
                    {
                        Id = doAgent.Id,
                        Name = doAgent.Name,
@@ -207,6 +207,11 @@ internal class AgentImplementation : IAgent
                };
     }
 
+    public void Clear()
+    {
+        _dal!.Agent.Clear();
+    }
+
     /// <summary>
     /// Check validation for the fields id,name,cost and email
     /// </summary>
@@ -223,7 +228,11 @@ internal class AgentImplementation : IAgent
         if (boAgent.Email!.Contains("@gmail.com") == false)
             throw new BO.BlWrongInputException("Worng email format");
     }
-    
+    //public IEnumerable<BO.Agent> GetRankAgent(int specialty)
+    //{
+
+    //}
+
 }
 
 

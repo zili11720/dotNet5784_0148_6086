@@ -1,115 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfAgent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Agent>
-    <Id>230429411</Id>
-    <Email>AlexCooper@gmai.com</Email>
-    <Cost>327</Cost>
-    <Name>Alex Cooper</Name>
-    <Specialty>Field_agent</Specialty>
-  </Agent>
-  <Agent>
-    <Id>255483329</Id>
-    <Email>JamesBond@gmai.com</Email>
-    <Cost>466</Cost>
-    <Name>James Bond</Name>
-    <Specialty>Field_agent</Specialty>
-  </Agent>
-  <Agent>
-    <Id>336083726</Id>
-    <Email>JoneAlon@gmai.com</Email>
-    <Cost>485</Cost>
-    <Name>Jone Alon</Name>
-    <Specialty>Hacker</Specialty>
-  </Agent>
-  <Agent>
-    <Id>305964914</Id>
-    <Email>CrisKlark@gmai.com</Email>
-    <Cost>323</Cost>
-    <Name>Cris Klark</Name>
-    <Specialty>Investigator</Specialty>
-  </Agent>
-  <Agent>
-    <Id>262161581</Id>
+    <Id>268047272</Id>
     <Email>EliChoen@gmai.com</Email>
-    <Cost>378</Cost>
+    <Cost>434</Cost>
     <Name>Eli Choen</Name>
     <Specialty>Field_agent</Specialty>
   </Agent>
   <Agent>
-    <Id>240723084</Id>
+    <Id>387167108</Id>
     <Email>AlexCooper@gmai.com</Email>
-    <Cost>396</Cost>
+    <Cost>324</Cost>
     <Name>Alex Cooper</Name>
     <Specialty>Field_agent</Specialty>
   </Agent>
   <Agent>
-    <Id>329548634</Id>
+    <Id>390776811</Id>
     <Email>JamesBond@gmai.com</Email>
-    <Cost>319</Cost>
+    <Cost>384</Cost>
     <Name>James Bond</Name>
     <Specialty>Field_agent</Specialty>
   </Agent>
   <Agent>
-    <Id>323728126</Id>
+    <Id>216125675</Id>
     <Email>JoneAlon@gmai.com</Email>
-    <Cost>385</Cost>
+    <Cost>390</Cost>
     <Name>Jone Alon</Name>
     <Specialty>Hacker</Specialty>
   </Agent>
   <Agent>
-    <Id>360594573</Id>
+    <Id>265502512</Id>
     <Email>CrisKlark@gmai.com</Email>
-    <Cost>478</Cost>
+    <Cost>470</Cost>
     <Name>Cris Klark</Name>
     <Specialty>Investigator</Specialty>
-  </Agent>
-  <Agent>
-    <Id>4535366</Id>
-    <Email>jnfj@gmail.com</Email>
-    <Cost>500</Cost>
-    <Name>ayala</Name>
-    <Specialty>Field_agent</Specialty>
-  </Agent>
-  <Agent>
-    <Id>368826039</Id>
-    <Email>EliChoen@gmai.com</Email>
-    <Cost>425</Cost>
-    <Name>Eli Choen</Name>
-    <Specialty>Field_agent</Specialty>
-  </Agent>
-  <Agent>
-    <Id>221239810</Id>
-    <Email>AlexCooper@gmai.com</Email>
-    <Cost>430</Cost>
-    <Name>Alex Cooper</Name>
-    <Specialty>Field_agent</Specialty>
-  </Agent>
-  <Agent>
-    <Id>355208896</Id>
-    <Email>JamesBond@gmai.com</Email>
-    <Cost>345</Cost>
-    <Name>James Bond</Name>
-    <Specialty>Field_agent</Specialty>
-  </Agent>
-  <Agent>
-    <Id>267633721</Id>
-    <Email>JoneAlon@gmai.com</Email>
-    <Cost>449</Cost>
-    <Name>Jone Alon</Name>
-    <Specialty>Hacker</Specialty>
-  </Agent>
-  <Agent>
-    <Id>263216999</Id>
-    <Email>CrisKlark@gmai.com</Email>
-    <Cost>369</Cost>
-    <Name>Cris Klark</Name>
-    <Specialty>Investigator</Specialty>
-  </Agent>
-  <Agent>
-    <Id>313053594</Id>
-    <Email>dan@gmail.com</Email>
-    <Cost>400</Cost>
-    <Name>Zili</Name>
-    <Specialty>Hacker</Specialty>
   </Agent>
 </ArrayOfAgent>

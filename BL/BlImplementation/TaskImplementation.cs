@@ -47,13 +47,13 @@ internal class TaskImplementation : ITask
             CreatedAtDate = boTask.CreatedAtDate,
             RequiredEffortTime = boTask.RequiredEffortTime,
             Copmlexity = (DO.AgentExperience?)boTask.Copmlexity,
-            StartDate = boTask.StartDate,//null
-            SchedualedDate = boTask.SchedualedDate,//null
-            DeadlineDate = boTask.DeadlineDate,///null
-            CompleteDate = boTask.CompleteDate,//null
+            StartDate = null,
+            ScheduledDate = null,
+            DeadlineDate = null,
+            CompleteDate = null,
             Deliverables = boTask.Deliverables,
             Remarks = boTask.Remarks,
-            AgentId = (boTask.TaskAgent == null) ? null : boTask.TaskAgent.Id//null
+            AgentId = null//(boTask.TaskAgent == null) ? null : boTask.TaskAgent.Id
         };
         try
         {
@@ -75,10 +75,10 @@ internal class TaskImplementation : ITask
     public void Delete(int id)
     {
         if (Bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
-            throw new BO.BlProjectStageException("Can't dekete tasks after the project has started");
+            throw new BO.BlProjectStageException("Can't deךete tasks after the project has started");
 
         DO.Task? doTask = _dal.Task.Read(id);
-        if (doTask is not null)
+        if (doTask is null)
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
         try
         {
@@ -101,20 +101,20 @@ internal class TaskImplementation : ITask
     public BO.Task? Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(id);
-        if (doTask is null)
+        if (doTask == null)
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
 
         DO.Agent? doAgent = _dal.Agent.Read(agent => agent.Id == doTask!.AgentId);
 
-        BO.Task boTask = new BO.Task()
+        return new BO.Task()
         {
             Id = id,
             Alias = doTask!.Alias,
             Description = doTask.Description,
             Status = doTask.CalcStatus(),
-            DependenciesList = GetDependenciesList(id),
+            DependenciesList = GetDependenciesList(id).ToList(),
             CreatedAtDate = doTask.CreatedAtDate,
-            SchedualedDate = doTask.SchedualedDate,
+            ScheduledDate = doTask.ScheduledDate,
             StartDate = doTask.StartDate,
             RequiredEffortTime = doTask.RequiredEffortTime,
             EstimatedCompleteDate = null,
@@ -125,8 +125,6 @@ internal class TaskImplementation : ITask
             TaskAgent = (doAgent == null) ? null : new BO.AgentInTask() { Id = doAgent.Id, Name = doAgent.Name },
             Copmlexity = (BO.AgentExperience?)doTask.Copmlexity,
         };
-
-        return boTask;
     }
     /// <summary>
     /// Returns all the tasks/the tasks that answer to a given condition
@@ -136,7 +134,7 @@ internal class TaskImplementation : ITask
     public IEnumerable<BO.TaskInList> ReadAll(Func<BO.TaskInList, bool>? filter = null)
     {
         if (filter == null)
-            return _dal.Task.ReadAll().Select(t => new BO.TaskInList
+            return _dal.Task.ReadAll().Select(t => new BO.TaskInList()
             {
                 Id = t.Id,
                 Alias = t.Alias,
@@ -144,7 +142,7 @@ internal class TaskImplementation : ITask
                 Status = t.CalcStatus()
             });
         else
-            return _dal.Task.ReadAll().Select(t => new BO.TaskInList
+            return _dal.Task.ReadAll().Select(t => new BO.TaskInList()
             {
                 Id = t.Id,
                 Alias = t.Alias,
@@ -163,8 +161,7 @@ internal class TaskImplementation : ITask
         {
             CheckValidation(boTask);
             IsUpdatePossible(boTask);
-            ////אם צריך לעדכן תלויות ומהנס
-
+            
             DO.Task newDoTask = new DO.Task()
             {
                 Id = boTask.Id,
@@ -180,7 +177,7 @@ internal class TaskImplementation : ITask
                 Remarks = boTask.Remarks,
                 AgentId = boTask.TaskAgent!.Id
             };
-            UpdateScheduledStartDate(boTask.Id, boTask.SchedualedDate);
+            UpdateScheduledStartDate(boTask.Id, boTask.ScheduledDate);
 
             _dal.Task.Update(newDoTask);
         }
@@ -207,10 +204,10 @@ internal class TaskImplementation : ITask
                 .Select(dep => _dal.Task.Read(dep.Id))
                 .Where(dep => dep is not null);
 
-            DO.Task? previousTask = previousTasks.FirstOrDefault(task => task!.SchedualedDate == null);
+            DO.Task? previousTask = previousTasks.FirstOrDefault(task => task!.ScheduledDate == null);
             if (previousTask is not null)
                 throw new BlWrongDateException("Can't schedule a start date because previous tasks don't have a starting date");
-            previousTask = previousTasks.FirstOrDefault(task => (task!.SchedualedDate + task.RequiredEffortTime) > start);
+            previousTask = previousTasks.FirstOrDefault(task => (task!.ScheduledDate + task.RequiredEffortTime) > start);
             if (previousTask is not null)
                 throw new BlWrongDateException("Start date musn't be earlier than previous task's complete date");
         }
@@ -219,7 +216,7 @@ internal class TaskImplementation : ITask
             throw new BlWrongDateException("Start date musn't be earlier than project start date");
 
 
-        boTask.SchedualedDate = start;
+        boTask.ScheduledDate = start;
         boTask.EstimatedCompleteDate = start + boTask.RequiredEffortTime;
         Update(boTask);
     }
@@ -230,18 +227,24 @@ internal class TaskImplementation : ITask
     /// </summary>
     /// <param name="id">Id of a task</param>
     /// <returns>A list of tasks this task depends on</returns>
-    private List<BO.TaskInList>? GetDependenciesList(int id)
+    public IEnumerable<BO.TaskInList> GetDependenciesList(int id)
     {
         return _dal.Dependency.ReadAll(d => d.DependentTask == id)
-            .Select(d => _dal.Task.Read(d.Id))
-            .Where(d => d != null)
-            .Select(d => new BO.TaskInList()
-            {
-                Id = d!.Id,
-                Alias = d.Alias,
-                Description = d.Description,
-                Status = d.CalcStatus(),
-            }).ToList();
+                              .Select(d => _dal.Task.Read(d.Id))
+                              .Where(d => d != null)
+                              .Select(d => new BO.TaskInList()
+                              {
+                                  Id = d!.Id,
+                                  Alias = d.Alias,
+                                  Description = d.Description,
+                                  Status = d.CalcStatus(),
+                              });
+    }
+
+    public void Clear()
+    {
+        _dal!.Task.Clear();
+        _dal!.Dependency.Clear();
     }
     /// <summary>
     /// Check validation of the fields id and alias
@@ -250,7 +253,7 @@ internal class TaskImplementation : ITask
     /// <exception cref="BlWrongInputException">Wrong value</exception>
     private void CheckValidation(BO.Task boTask)
     {
-        if (boTask!.Id <= 0)
+        if (boTask!.Id < 0)
             throw new BO.BlWrongInputException("Id can't be negative");
         if (string.IsNullOrEmpty(boTask.Alias))
             throw new BO.BlWrongInputException("Task's alias must have a value");
@@ -260,9 +263,9 @@ internal class TaskImplementation : ITask
     {
         BO.Task? taskToUpdate = Read(updatedTask.Id);
 
-        if(Bl.GetProjectStatus()==BO.ProjectStatus.PlanningTime)
+        if (Bl.GetProjectStatus() == BO.ProjectStatus.PlanningTime)
         {
-            if (updatedTask.SchedualedDate is not null || updatedTask.TaskAgent is not null)
+            if (updatedTask.ScheduledDate is not null || updatedTask.TaskAgent is not null)
                 throw new BO.BlProjectStageException("Can't update start date or assign an agent on current project stage");
         }
         if (Bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
@@ -270,9 +273,54 @@ internal class TaskImplementation : ITask
             if (updatedTask.RequiredEffortTime != taskToUpdate!.RequiredEffortTime)
                 throw new BO.BlProjectStageException("Duration time required for a task can't be changed on current project stage");
         }
+        if (Bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime) 
+        {
+            if (updatedTask.TaskAgent!.Id != taskToUpdate.TaskAgent!.Id)
+                throw new BO.BlProjectStageException("Can't assign an agent for a task on current project stage");
+            DO.Agent? agentOfTask = _dal.Agent.Read(taskToUpdate.TaskAgent.Id);
+            if ((BO.AgentExperience)updatedTask.Copmlexity > (BO.AgentExperience)agentOfTask.Specialty)
+                throw new BO.BlWrongAgentForTaskException("Agent specialty can't be lower than task comlexity");
+        }
+
     }
-    private void CreateSchedule()
+    public void CreateSchedule()
     {
-     
+        if (Bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
+            throw new BO.BlProjectStageException("Can't update a start date for the tasks on the current project stage");
+
+        foreach (var boTaskInList in ReadAll())
+        {
+            var FinishDates = _dal.Dependency.ReadAll(t => t.DependentTask == boTaskInList.Id)
+                                      .Select(t => _dal.Task.Read(t.Id))
+                                      .Where(t => t != null)
+                                      .Select(t => t.ScheduledDate + t.RequiredEffortTime);
+            DateTime? ScheduledStartDate = null;
+            if (FinishDates.Any())
+                ScheduledStartDate = FinishDates.Max();
+            else
+                ScheduledStartDate = Bl.StartProjectDate;
+
+            BO.Task botask = Read(boTaskInList.Id)!;
+
+            DO.Task newDoTask = new DO.Task()
+            {
+                Id = botask.Id!,
+                Alias = botask.Alias!,
+                Description = botask.Description!,
+                CreatedAtDate = botask.CreatedAtDate,
+                RequiredEffortTime = botask.RequiredEffortTime,
+                Copmlexity = (DO.AgentExperience?)botask.Copmlexity,
+                StartDate = null,
+                DeadlineDate = null,
+                CompleteDate = null,
+                Deliverables = botask.Deliverables,
+                Remarks = botask.Remarks,
+                AgentId = null,
+
+                ScheduledDate = DateTime.Now//ScheduledStartDate
+            };
+
+            _dal.Task.Update(newDoTask);
+        };
     }
 }

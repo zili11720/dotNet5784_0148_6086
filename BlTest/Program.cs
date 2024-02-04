@@ -1,6 +1,4 @@
-﻿using BO;
-
-namespace BlTest;
+﻿namespace BlTest;
 /// <summary>
 /// Test for Bl
 /// </summary>
@@ -13,7 +11,11 @@ internal class Program
         Console.Write("Would you like to create Initial data? (Yes/No)");
         string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
         if (ans == "Yes")
+        {
+            s_bl.Agent.Clear();
+            s_bl.Task.Clear();
             DalTest.Initialization.Do();
+        }
         try
         {
             do
@@ -177,14 +179,12 @@ internal class Program
         Console.WriteLine("Enter new cost:");
         if (!int.TryParse(Console.ReadLine(), out int _cost))
             throw new FormatException("Wrong input");
-        Console.WriteLine("Enter new specialty:");
+        Console.WriteLine("Enter agent specialty(1- for field agent,2- for hacker, 3- for invetgator:  new level can't be lower than old level");
         if (!int.TryParse(Console.ReadLine(), out int _specialty))
             throw new FormatException("Wrong input");
         Console.WriteLine("Enter current task id:");
         if (!int.TryParse(Console.ReadLine(), out int _taskId))
             throw new FormatException("Wrong input");
-        Console.WriteLine("Enter currrent task alias:");
-        string _alias = Console.ReadLine()!;
         BO.Agent newA = new BO.Agent()
         {
             Id = _id,
@@ -192,7 +192,7 @@ internal class Program
             Cost = _cost,
             Name = _name,
             Specialty = (BO.AgentExperience?)_specialty,
-            CurrentTask = new BO.TaskInAgent { Id = _taskId, Alias = _alias }
+            CurrentTask = new BO.TaskInAgent { Id = _taskId, Alias = null }
         };
         s_bl!.Agent.Update(newA);
     }
@@ -240,6 +240,8 @@ internal class Program
                 Console.WriteLine("press 4 to update a Task");
                 Console.WriteLine("press 5 to delete a Task");
                 Console.WriteLine("press 6 to update scheduled start date");
+                Console.WriteLine("press 7 to get previous tasks a task depends on");
+                Console.WriteLine("press 8 to initialize automatically statrts date for all the tasks");
                 Console.WriteLine("press 0 to return to the main menu");
 
                 if (!int.TryParse(Console.ReadLine(), out int choise))
@@ -263,6 +265,12 @@ internal class Program
                         break;
                     case 6:
                         UpdateScheduledStartDateT();
+                        break;
+                    case 7:
+                        GetDependenciesListT();
+                        break;
+                    case 8:
+                        s_bl!.Task.CreateSchedule();
                         break;
                     case 0:
                         return;
@@ -307,7 +315,7 @@ internal class Program
             Description = _description,
             Status = BO.TaskStatus.Unscheduled,
             CreatedAtDate = _createdAtDate,
-            SchedualedDate = null,
+            ScheduledDate = null,
             StartDate = null,
             RequiredEffortTime = _requiredEffortTime,
             EstimatedCompleteDate = null,
@@ -321,12 +329,13 @@ internal class Program
         Console.WriteLine("Enter number of tasks this task depends on:");
         if (!int.TryParse(Console.ReadLine(), out int num))
             throw new FormatException("Wrong input");
+        newTask.DependenciesList= new List<BO.TaskInList>();
         for (int i = 0; i < num; i++)
         {
-            Console.WriteLine("Enter id of the tasks:");
+            Console.WriteLine("Enter id of the task:");
             if (!int.TryParse(Console.ReadLine(), out int _id))
                 throw new FormatException("Wrong input");
-            BO.TaskInList _dependencyTask = new BO.TaskInList { Id = _id, Alias = null, Description = null, Status = null };
+            BO.TaskInList? _dependencyTask = new BO.TaskInList { Id = _id, Alias = null, Description = null, Status = null };
             newTask.DependenciesList!.Add(_dependencyTask);
         }
         Console.WriteLine(s_bl!.Task.Create(newTask));
@@ -373,8 +382,8 @@ internal class Program
         Console.WriteLine("Enter new task description:");
         string _description = Console.ReadLine()!;
         Console.WriteLine("Enter new  task schedualed date:");
-         if (!DateTime.TryParse(Console.ReadLine(), out DateTime _schedualedDate))
-        throw new FormatException("Wrong input");
+        if (!DateTime.TryParse(Console.ReadLine(), out DateTime _schedualedDate))
+            throw new FormatException("Wrong input");
         Console.WriteLine("Enter task start date:");
         if (!DateTime.TryParse(Console.ReadLine(), out DateTime _startDate))
             throw new FormatException("Wrong input");
@@ -406,11 +415,11 @@ internal class Program
         {
             Alias = _alias,
             Description = _description,
-            DependenciesList=oldTask.DependenciesList,
+            DependenciesList = oldTask.DependenciesList,
             Status = oldTask.Status,
             CreatedAtDate = oldTask.CreatedAtDate,
-            SchedualedDate = _schedualedDate,
-            StartDate =_startDate,
+            ScheduledDate = _schedualedDate,
+            StartDate = _startDate,
             RequiredEffortTime = _requiredEffortTime,
             EstimatedCompleteDate = _estimatedCompleteDate,
             DeadlineDate = _deadlineDate,
@@ -442,5 +451,16 @@ internal class Program
         if (!DateTime.TryParse(Console.ReadLine(), out DateTime _startDate))
             throw new FormatException("Wrong input");
         s_bl!.Task.UpdateScheduledStartDate(_id, _startDate);
+    }
+
+    static void GetDependenciesListT()
+    {
+        Console.WriteLine("Enter task id:");
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new FormatException("Wrong input");
+        IEnumerable<BO.TaskInList?> _listT;
+        _listT = s_bl!.Task.GetDependenciesList(_id);
+        foreach (BO.TaskInList? t in _listT)// print all the tasks in the list
+            Console.WriteLine(t);
     }
 }

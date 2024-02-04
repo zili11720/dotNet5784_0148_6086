@@ -5,6 +5,7 @@
 /// </summary>
 public interface IAgent
 {
+    void Clear();
     int Create(BO.Agent boAgent);
     void Delete(int id);
     BO.Agent? Read(int id);
@@ -12,4 +13,5 @@ public interface IAgent
     void Update(BO.Agent boAgent);
     BO.TaskInList GetDetailedTaskForAgent(int agentId, int TaskId);
     IEnumerable<BO.TaskInList> GetAllAgentTasks(int agentId);
+   // public IEnumerable<BO.Agent> GetRankAgent(int specialty);
 }

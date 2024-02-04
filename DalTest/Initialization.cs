@@ -12,6 +12,7 @@ public static class Initialization
 
     //a variable to access to the inplementations
     private static IDal? s_dal;//Stage 2
+
     //A variable to create rendom numbers
     private static readonly Random s_rand = new();
     private const int MIN_ID = 200000000; //zili
