@@ -1,4 +1,8 @@
 ﻿namespace BlTest;
+using BlApi;
+using BO;
+using System.Security.Cryptography;
+
 /// <summary>
 /// Test for Bl
 /// </summary>
@@ -159,7 +163,7 @@ internal class Program
     {
         Console.WriteLine("All agents:");
         IEnumerable<BO.AgentInList> _listA;
-        _listA = s_bl!.Agent.ReadAll();
+        _listA = s_bl!.Agent.ReadAll(/*(BO.AgentInList) a => (BO.AgentInList)a.Specialty== BO.AgentExperience.Field_agent*/);
         foreach (BO.AgentInList a in _listA)//print all the agents in the list
             Console.WriteLine(a);
     }
@@ -381,6 +385,9 @@ internal class Program
         string _alias = Console.ReadLine()!;
         Console.WriteLine("Enter new task description:");
         string _description = Console.ReadLine()!;
+       //if( Bl.GetProjectStatus())
+        //{
+        //}
         Console.WriteLine("Enter new  task schedualed date:");
         if (!DateTime.TryParse(Console.ReadLine(), out DateTime _schedualedDate))
             throw new FormatException("Wrong input");
@@ -413,6 +420,7 @@ internal class Program
             throw new FormatException("Wrong input");
         BO.Task newTask = new BO.Task()
         {
+            Id=_id,
             Alias = _alias,
             Description = _description,
             DependenciesList = oldTask.DependenciesList,

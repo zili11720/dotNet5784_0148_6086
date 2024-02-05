@@ -25,7 +25,6 @@ public class Task
     public string? Alias { get;init; }
     public string? Description { get; set; }
     public TaskStatus? Status { get; set; }  
-    public List<BO.TaskInList>? DependenciesList { get; set; }
     public DateTime? CreatedAtDate { get; init; }
     public DateTime? ScheduledDate { get; set; }
     public DateTime? StartDate { get; set; }
@@ -35,8 +34,17 @@ public class Task
     public DateTime? CompleteDate { get; set; }
     public string? Deliverables { get; set; }
     public string? Remarks { get; set; }
-    public AgentInTask? TaskAgent { get; set; }
     public BO.AgentExperience? Copmlexity {  get; set; }
+
+
+
+
+
+
+
+
+    public AgentInTask? TaskAgent { get; set; }
+    public List<BO.TaskInList>? DependenciesList { get; set; }
 
     public override string ToString() => this.ToStringProperty();
 }

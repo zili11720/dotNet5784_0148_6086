@@ -10,22 +10,17 @@ static internal class Tools
 
    internal static string ToStringProperty<T>(this T t)
    {
-        string str = "";
-        foreach(PropertyInfo item in t!.GetType().GetProperties())
+        var type =t!.GetType();
+        string str=type.Name+Environment.NewLine;
+        foreach(PropertyInfo item in type.GetProperties())
         {  
             var value = item.GetValue(t);
 
-           //if (item.PropertyType.IsGenericType &&
-           //item.PropertyType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
-           // {
-           //     // If the property is a generic list type, call ToStringProperty recursively
-           //     str += $"\n{item.Name}: {ToStringProperty(value)}";
-           // }
-           // //if (item.PropertyType() == typeof(IEnumerable<>)) //if the item is a list type
-            //{
-            //    ToStringProperty(value);
-            //}
-            str +="\n"+item.Name + ":" + item.GetValue(t, null);//.tostring
+            if (value is IEnumerable enumerable and not string)
+                str += Environment.NewLine + item.Name + ":" + Environment.NewLine + string.Join(Environment.NewLine,
+                    enumerable.Cast<object>().Select(o =>o));
+            else
+             str += item.Name + ":" + item.GetValue(t, null)+"\n";//.tostring
         }
         return str;
    }

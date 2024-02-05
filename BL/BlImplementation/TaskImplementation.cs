@@ -161,7 +161,7 @@ internal class TaskImplementation : ITask
         {
             CheckValidation(boTask);
             IsUpdatePossible(boTask);
-            
+
             DO.Task newDoTask = new DO.Task()
             {
                 Id = boTask.Id,
@@ -273,9 +273,9 @@ internal class TaskImplementation : ITask
             if (updatedTask.RequiredEffortTime != taskToUpdate!.RequiredEffortTime)
                 throw new BO.BlProjectStageException("Duration time required for a task can't be changed on current project stage");
         }
-        if (Bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime) 
+        if (Bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime)
         {
-            if (updatedTask.TaskAgent!.Id != taskToUpdate.TaskAgent!.Id)
+            if (updatedTask.TaskAgent is not null)
                 throw new BO.BlProjectStageException("Can't assign an agent for a task on current project stage");
             DO.Agent? agentOfTask = _dal.Agent.Read(taskToUpdate.TaskAgent.Id);
             if ((BO.AgentExperience)updatedTask.Copmlexity > (BO.AgentExperience)agentOfTask.Specialty)

@@ -94,39 +94,54 @@ internal class AgentImplementation : IAgent
     /// <returns>IEnumarable of logic agents in a list</returns>
     public IEnumerable<BO.AgentInList> ReadAll(Func<BO.AgentInList, bool>? filter = null)
     {
-        if (filter == null)
-        {
-            return from DO.Agent doAgent in _dal.Agent.ReadAll()
-                   //let CurrentTsk = GetAllAgentTasks(doAgent.Id).FirstOrDefault(t => t.Status == TaskStatus.OnTrack)
-                   //where CurrentTsk is not null
-                   select new BO.AgentInList()
+        return from DO.Agent doAgent in _dal.Agent.ReadAll()//get all agents from dal
+               let CurrentTsk = GetAllAgentTasks(doAgent.Id).FirstOrDefault(t => t.Status == TaskStatus.OnTrack)
+               let boAgentInList =  new BO.AgentInList()//convert them to 'AgentInList'
+               {
+                   Id = doAgent.Id,
+                   Name = doAgent.Name,
+                   Specialty = (BO.AgentExperience?)doAgent.Specialty,
+                   CurrentTask = CurrentTsk is null ? null : new BO.TaskInAgent()
                    {
-                       Id = doAgent.Id,
-                       Name = doAgent.Name,
-                       Specialty = (BO.AgentExperience?)doAgent.Specialty,
-                       //CurrentTask = new BO.TaskInAgent()
-                       //{
-                       //    Id = CurrentTsk.Id,
-                       //    Alias = CurrentTsk.Alias,
-                       //}
-                   };
-        }
-        else//filter isn't null
-            return from DO.Agent doAgent in _dal.Agent.ReadAll()//get all agents from dal
-                   let CurrentTsk = GetAllAgentTasks(doAgent.Id).FirstOrDefault(t => t.Status == TaskStatus.OnTrack)
-                   let boAgentInList = new BO.AgentInList()//convert them to 'AgentInList'
-                   {
-                       Id = doAgent.Id,
-                       Name = doAgent.Name,
-                       Specialty = (BO.AgentExperience?)doAgent.Specialty,
-                       CurrentTask = new BO.TaskInAgent()
-                       {
-                           Id = CurrentTsk.Id,
-                           Alias = CurrentTsk.Alias,
-                       }
+                       Id = CurrentTsk.Id,
+                       Alias = CurrentTsk.Alias
                    }
-                   where filter(boAgentInList)//choose those who fulfill the condition
-                   select boAgentInList;
+               }
+               where filter is null? true: filter(boAgentInList)//choose those who fulfill the condition
+               select boAgentInList;
+        //if (filter == null)
+        //{
+        //    return from DO.Agent doAgent in _dal.Agent.ReadAll()
+        //           //let CurrentTsk = GetAllAgentTasks(doAgent.Id).FirstOrDefault(t => t.Status == TaskStatus.OnTrack)
+        //           //where CurrentTsk is not null
+        //           select new BO.AgentInList()
+        //           {
+        //               Id = doAgent.Id,
+        //               Name = doAgent.Name,
+        //               Specialty = (BO.AgentExperience?)doAgent.Specialty,
+        //               //CurrentTask = new BO.TaskInAgent()
+        //               //{
+        //               //    Id = CurrentTsk.Id,
+        //               //    Alias = CurrentTsk.Alias,
+        //               //}
+        //           };
+        //}
+        //else//filter isn't null
+        //    return from DO.Agent doAgent in _dal.Agent.ReadAll()//get all agents from dal
+        //           let CurrentTsk = GetAllAgentTasks(doAgent.Id).FirstOrDefault(t => t.Status == TaskStatus.OnTrack)
+        //           let boAgentInList = new BO.AgentInList()//convert them to 'AgentInList'
+        //           {
+        //               Id = doAgent.Id,
+        //               Name = doAgent.Name,
+        //               Specialty = (BO.AgentExperience?)doAgent.Specialty,
+        //               CurrentTask = new BO.TaskInAgent()
+        //               {
+        //                   Id = CurrentTsk.Id,
+        //                   Alias = CurrentTsk.Alias,
+        //               }
+        //           }
+        //           where filter(boAgentInList)//choose those who fulfill the condition
+        //           select boAgentInList;
     }
     /// <summary>
     /// Update an agent

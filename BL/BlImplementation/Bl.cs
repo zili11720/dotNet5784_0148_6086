@@ -11,16 +11,19 @@ internal class Bl : IBl
     private static DalApi.IDal _dal = DalApi.Factory.Get;
     public IAgent Agent => new AgentImplementation();
     public ITask Task => new TaskImplementation();
-    public static DateTime? StartProjectDate { get; set; } =null;//Start date of the project
+    public static DateTime? StartProjectDate { get; set; } =new DateTime(2024,5,7);//Start date of the project
     public static DateTime? EndProjectDate { get; set; } = null;//End date of the project
 
     public static BO.ProjectStatus GetProjectStatus()
     {
         if (StartProjectDate is null)
             return BO.ProjectStatus.PlanningTime;
-        if (_dal.Task.ReadAll(task => task.StartDate is null).Any())
+        if (_dal.Task.ReadAll(task => task.ScheduledDate is null).Any())
             return BO.ProjectStatus.ScheduleTime;
-        else
-            return BO.ProjectStatus.ExecutionTime;
-    }  
+        return BO.ProjectStatus.ExecutionTime;
+    }
+    //init
+    //reset
+    //creteluz-bonos
+    //CalcStatus
 }
