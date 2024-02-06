@@ -190,9 +190,11 @@ public static class Initialization
         {
             //A range of a month between the currrent date and the day of the begining of the project 
             int range = (startProjectDate - currentDate).Days;
-          
-            DateTime? _createAtDate = currentDate.AddDays(s_rand.Next(range+1));
-   
+
+            //DateTime? _createAtDate = currentDate.AddDays(s_rand.Next(range+1));
+            DateTime? _createAtDate = DateTime.Now;
+
+
             Task newTask = new(0, _aliasses[i], _descriptions[i], _createAtDate, null, false, (AgentExperience)_complexity[i], null, null, null, null, _deliverables[i], _remarks[i],null);
             s_dal!.Task.Create(newTask);
         }

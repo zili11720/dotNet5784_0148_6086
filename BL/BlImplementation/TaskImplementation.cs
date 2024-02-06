@@ -22,23 +22,6 @@ internal class TaskImplementation : ITask
 
         CheckValidation(boTask);
 
-        boTask.DependenciesList!
-            .Select(d => _dal.Task.Read(d.Id))
-            .Where(d => d is not null)
-            .Select(d =>
-            {
-                //create new dependencies based on the dependencies list of task
-                _dal.Dependency.Create(new DO.Dependency(0, boTask.Id, d!.Id));
-
-                return new BO.TaskInList//update the list of dependencies
-                {
-                    Id = d.Id,
-                    Alias = d.Alias,
-                    Description = d.Description,
-                    Status = d.CalcStatus(),
-                };
-            });
-
         DO.Task newDoTask = new DO.Task()
         {
             Id = boTask.Id,
@@ -58,6 +41,11 @@ internal class TaskImplementation : ITask
         try
         {
             int TaskId = _dal.Task.Create(newDoTask);
+            if (boTask.DependenciesList is not null)
+            {
+                var newDependencies = (from dep in boTask.DependenciesList
+                                       select _dal.Dependency.Create(new DO.Dependency(0, TaskId, dep!.Id))).ToList();
+            }
             return TaskId;
         }
         catch (DO.DalAllreadyExistsException ex)

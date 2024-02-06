@@ -29,9 +29,9 @@ static internal class Tools
     {
         if (task.ScheduledDate == null)
             return TaskStatus.Unscheduled;
-        if (task.ScheduledDate != null && task.StartDate < DateTime.Now|| task.StartDate==null)
+        if (task.ScheduledDate != null && task.StartDate < DateTime.Now || task.StartDate == null)
             return TaskStatus.Scheduled;
-        if (task.StartDate >= DateTime.Now && task.CompleteDate < DateTime.Now||task.CompleteDate==null)
+        if (task.StartDate >= DateTime.Now && task.CompleteDate < DateTime.Now || task.CompleteDate == null)
             return TaskStatus.OnTrack;
         if (task.CompleteDate >= DateTime.Now)
             return TaskStatus.Done;

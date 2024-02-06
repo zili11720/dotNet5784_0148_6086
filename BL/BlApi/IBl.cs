@@ -7,6 +7,10 @@ namespace BlApi;
 /// </summary>
 public interface IBl
 {
-   IAgent Agent { get; }
-   ITask Task { get; }
+    IAgent Agent { get; }
+    ITask Task { get; }
+
+    //BO.TaskStatus CalcStatus(DO.Task task);
+
+
 }

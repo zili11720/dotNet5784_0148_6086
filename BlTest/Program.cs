@@ -12,14 +12,6 @@ internal class Program
 
     static void Main(string[] args)
     {
-        Console.Write("Would you like to create Initial data? (Yes/No)");
-        string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
-        if (ans == "Yes")
-        {
-            s_bl.Agent.Clear();
-            s_bl.Task.Clear();
-            DalTest.Initialization.Do();
-        }
         try
         {
             do
@@ -27,6 +19,7 @@ internal class Program
                 Console.WriteLine("Choose one of the following:");
                 Console.WriteLine("press 1 for an agent");
                 Console.WriteLine("prees 2 for a task");
+                Console.WriteLine("press 3 for more options");
                 Console.WriteLine("press 0 to exit");
 
                 if (!int.TryParse(Console.ReadLine(), out int choise))
@@ -38,6 +31,9 @@ internal class Program
                         break;
                     case 2:
                         CaseTask();
+                        break;
+                    case 3:
+                        GenralOperations();
                         break;
                     case 0:
                         Environment.Exit(0);
@@ -55,7 +51,62 @@ internal class Program
             Console.WriteLine(e);
         }
     }
+    static void GenralOperations()
+    {
+        try
+        {
+            do
+            {
+                Console.WriteLine("Choose one of the following:");
+                Console.WriteLine("press 1 to reset the data base:");
+                Console.WriteLine("prees 2 to initialize the data base:");
+                Console.WriteLine("press 3 to get project status");
+                Console.WriteLine("press 4 to enter project start date:");
+                Console.WriteLine("press 0 to return to the main menu");
 
+                if (!int.TryParse(Console.ReadLine(), out int choise))
+                    throw new FormatException("Wrong input");
+                switch (choise)
+                {
+                    case 1:
+                        Console.Write("Would you like to reset all data? (Yes/No)");
+                        string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
+                        if (ans == "Yes")
+                        {
+                            s_bl.Agent.Clear();
+                            s_bl.Task.Clear();
+                        }
+                        break;
+                    case 2:
+                        Console.Write("Would you like to create Initial data? (Yes/No)");
+                        string? answer = Console.ReadLine() ?? throw new FormatException("Wrong input");
+                        if (answer == "Yes")
+                        {
+                            s_bl.Agent.Clear();
+                            s_bl.Task.Clear();
+                            DalTest.Initialization.Do();
+                        }
+                        break;
+                    case 3:
+                       //Console.WriteLine(Bl.GetProjectStatus())
+                        break;
+                    case 4:
+                        /////
+                        break;
+                    case 0:
+                        return;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+            }
+            while (true);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
     /// <summary>
     /// The function represents a sub menu for an agent
     /// </summary>
@@ -163,7 +214,7 @@ internal class Program
     {
         Console.WriteLine("All agents:");
         IEnumerable<BO.AgentInList> _listA;
-        _listA = s_bl!.Agent.ReadAll(/*(BO.AgentInList) a => (BO.AgentInList)a.Specialty== BO.AgentExperience.Field_agent*/);
+        _listA = s_bl!.Agent.ReadAll(/*a => a.Specialty == BO.AgentExperience.Field_agent*/);
         foreach (BO.AgentInList a in _listA)//print all the agents in the list
             Console.WriteLine(a);
     }
