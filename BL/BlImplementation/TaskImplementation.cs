@@ -8,6 +8,8 @@ internal class TaskImplementation : ITask
 
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
     /// <summary>
     /// Add new task to dal based on a logic tasl 'boTask'
     /// </summary>
@@ -17,7 +19,7 @@ internal class TaskImplementation : ITask
     /// <exception cref="BO.BlAlreadyExistsException"></exception>
     public int Create(BO.Task boTask)
     {
-        if (Bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
+        if (s_bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
             throw new BO.BlProjectStageException("Can't create new tasks after the project has started");
 
         CheckValidation(boTask);
@@ -29,7 +31,7 @@ internal class TaskImplementation : ITask
             Description = boTask.Description!,
             CreatedAtDate = boTask.CreatedAtDate,
             RequiredEffortTime = boTask.RequiredEffortTime,
-            Copmlexity = (DO.AgentExperience?)boTask.Copmlexity,
+            Complexity = (DO.AgentExperience?)boTask.Complexity,
             StartDate = null,
             ScheduledDate = null,
             DeadlineDate = null,
@@ -62,7 +64,7 @@ internal class TaskImplementation : ITask
     /// <exception cref="BO.BlDoesNotExistException">A task with the id given doesn't exist</exception>
     public void Delete(int id)
     {
-        if (Bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
+        if (s_bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
             throw new BO.BlProjectStageException("Can't deךete tasks after the project has started");
 
         DO.Task? doTask = _dal.Task.Read(id);
@@ -99,7 +101,7 @@ internal class TaskImplementation : ITask
             Id = id,
             Alias = doTask!.Alias,
             Description = doTask.Description,
-            Status = doTask.CalcStatus(),
+            Status = CalcStatus(doTask),
             DependenciesList = GetDependenciesList(id).ToList(),
             CreatedAtDate = doTask.CreatedAtDate,
             ScheduledDate = doTask.ScheduledDate,
@@ -111,7 +113,7 @@ internal class TaskImplementation : ITask
             Deliverables = doTask.Deliverables,
             Remarks = doTask.Remarks,
             TaskAgent = (doAgent == null) ? null : new BO.AgentInTask() { Id = doAgent.Id, Name = doAgent.Name },
-            Copmlexity = (BO.AgentExperience?)doTask.Copmlexity,
+            Complexity = (BO.AgentExperience?)doTask.Complexity,
         };
     }
     /// <summary>
@@ -127,7 +129,7 @@ internal class TaskImplementation : ITask
                 Id = t.Id,
                 Alias = t.Alias,
                 Description = t.Description,
-                Status = t.CalcStatus()
+                Status = CalcStatus(t)
             });
         else
             return _dal.Task.ReadAll().Select(t => new BO.TaskInList()
@@ -135,7 +137,7 @@ internal class TaskImplementation : ITask
                 Id = t.Id,
                 Alias = t.Alias,
                 Description = t.Description,
-                Status = t.CalcStatus()
+                Status = CalcStatus(t)
             }).Where(filter);
     }
     /// <summary>
@@ -157,7 +159,7 @@ internal class TaskImplementation : ITask
                 Description = boTask.Description!,
                 CreatedAtDate = boTask.CreatedAtDate,
                 RequiredEffortTime = boTask.RequiredEffortTime,
-                Copmlexity = (DO.AgentExperience?)boTask.Copmlexity,
+                Complexity = (DO.AgentExperience?)boTask.Complexity,
                 StartDate = boTask.StartDate,
                 DeadlineDate = boTask.DeadlineDate,
                 CompleteDate = boTask.CompleteDate,
@@ -182,7 +184,7 @@ internal class TaskImplementation : ITask
     /// <exception cref="BlWrongDateException">Date is impossible du to previous tasks dates</exception>
     public void UpdateScheduledStartDate(int taskId, DateTime? start)
     {
-        if (Bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
+        if (s_bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
             throw new BO.BlProjectStageException("Can't update a start date for a task on the current project stage");
 
         BO.Task boTask = Read(taskId)!;
@@ -218,14 +220,14 @@ internal class TaskImplementation : ITask
     public IEnumerable<BO.TaskInList> GetDependenciesList(int id)
     {
         return _dal.Dependency.ReadAll(d => d.DependentTask == id)
-                              .Select(d => _dal.Task.Read(d.Id))
+                              .Select(d => _dal.Task.Read(d.DependsOnTask))
                               .Where(d => d != null)
                               .Select(d => new BO.TaskInList()
                               {
                                   Id = d!.Id,
                                   Alias = d.Alias,
                                   Description = d.Description,
-                                  Status = d.CalcStatus(),
+                                  Status = CalcStatus(d),
                               });
     }
 
@@ -246,34 +248,43 @@ internal class TaskImplementation : ITask
         if (string.IsNullOrEmpty(boTask.Alias))
             throw new BO.BlWrongInputException("Task's alias must have a value");
     }
-
+    /// <summary>
+    /// Check if the update of certain fields is possible according to the current project status and other parameters
+    /// </summary>
+    /// <param name="updatedTask">Task with the updated data from the user</param>
+    /// <exception cref="BO.BlProjectStageException">Project stage doesn't allow changes to the field</exception>
+    /// <exception cref="BO.BlWrongAgentForTaskException">Agent specialty is lower than the task complexity</exception>
     private void IsUpdatePossible(BO.Task updatedTask)
     {
         BO.Task? taskToUpdate = Read(updatedTask.Id);
 
-        if (Bl.GetProjectStatus() == BO.ProjectStatus.PlanningTime)
+        if (s_bl.GetProjectStatus() == BO.ProjectStatus.PlanningTime)
         {
             if (updatedTask.ScheduledDate is not null || updatedTask.TaskAgent is not null)
                 throw new BO.BlProjectStageException("Can't update start date or assign an agent on current project stage");
         }
-        if (Bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
+        if (s_bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
         {
             if (updatedTask.RequiredEffortTime != taskToUpdate!.RequiredEffortTime)
                 throw new BO.BlProjectStageException("Duration time required for a task can't be changed on current project stage");
         }
-        if (Bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime)
+        if (s_bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime)
         {
             if (updatedTask.TaskAgent is not null)
                 throw new BO.BlProjectStageException("Can't assign an agent for a task on current project stage");
             DO.Agent? agentOfTask = _dal.Agent.Read(taskToUpdate.TaskAgent.Id);
-            if ((BO.AgentExperience)updatedTask.Copmlexity > (BO.AgentExperience)agentOfTask.Specialty)
+            if ((BO.AgentExperience)updatedTask.Complexity > (BO.AgentExperience)agentOfTask.Specialty)
                 throw new BO.BlWrongAgentForTaskException("Agent specialty can't be lower than task comlexity");
         }
-
     }
+    /// <summary>
+    /// Create start date for all the tasks automaticaly
+    /// </summary>
+    /// <exception cref="BO.BlProjectStageException">Can't assign satart date for tasks on the current project stage</exception>
     public void CreateSchedule()
     {
-        if (Bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
+        //////להוסיף בדיקות....
+        if (s_bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
             throw new BO.BlProjectStageException("Can't update a start date for the tasks on the current project stage");
 
         foreach (var boTaskInList in ReadAll())
@@ -297,7 +308,7 @@ internal class TaskImplementation : ITask
                 Description = botask.Description!,
                 CreatedAtDate = botask.CreatedAtDate,
                 RequiredEffortTime = botask.RequiredEffortTime,
-                Copmlexity = (DO.AgentExperience?)botask.Copmlexity,
+                Complexity = (DO.AgentExperience?)botask.Complexity,
                 StartDate = null,
                 DeadlineDate = null,
                 CompleteDate = null,
@@ -310,5 +321,24 @@ internal class TaskImplementation : ITask
 
             _dal.Task.Update(newDoTask);
         };
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="task"></param>
+    /// <returns></returns>
+    /// <exception cref="BlWrongDateException"></exception>
+    public TaskStatus CalcStatus(DO.Task task)
+    {
+        if (task.ScheduledDate == null)
+            return TaskStatus.Unscheduled;
+        if (task.ScheduledDate != null && task.StartDate < DateTime.Now || task.StartDate == null)
+            return TaskStatus.Scheduled;
+        if (task.StartDate >= DateTime.Now && task.CompleteDate < DateTime.Now || task.CompleteDate == null)
+            return TaskStatus.OnTrack;
+        if (task.CompleteDate >= DateTime.Now)
+            return TaskStatus.Done;
+        else
+            throw new BlWrongDateException("Task's dates are impossible");
     }
 }

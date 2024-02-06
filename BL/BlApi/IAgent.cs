@@ -13,5 +13,5 @@ public interface IAgent
     void Update(BO.Agent boAgent);
     BO.TaskInList GetDetailedTaskForAgent(int agentId, int TaskId);
     IEnumerable<BO.TaskInList> GetAllAgentTasks(int agentId);
-   // public IEnumerable<BO.Agent> GetRankAgent(int specialty);
+    IEnumerable<BO.TaskInList> AvailableTasks(int agentId);
 }

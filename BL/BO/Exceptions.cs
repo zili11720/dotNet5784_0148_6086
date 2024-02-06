@@ -1,5 +1,4 @@
-﻿
-namespace BO;
+﻿namespace BO;
 /// <summary>
 /// Classes for managing different types of exceptions
 /// Some are initially caught in Dal 

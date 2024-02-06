@@ -1,7 +1,5 @@
 ﻿namespace BlTest;
-using BlApi;
 using BO;
-using System.Security.Cryptography;
 
 /// <summary>
 /// Test for Bl
@@ -69,29 +67,17 @@ internal class Program
                 switch (choise)
                 {
                     case 1:
-                        Console.Write("Would you like to reset all data? (Yes/No)");
-                        string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
-                        if (ans == "Yes")
-                        {
-                            s_bl.Agent.Clear();
-                            s_bl.Task.Clear();
-                        }
+                        s_bl.ResetData();
                         break;
                     case 2:
-                        Console.Write("Would you like to create Initial data? (Yes/No)");
-                        string? answer = Console.ReadLine() ?? throw new FormatException("Wrong input");
-                        if (answer == "Yes")
-                        {
-                            s_bl.Agent.Clear();
-                            s_bl.Task.Clear();
-                            DalTest.Initialization.Do();
-                        }
+                        s_bl.InitializeData();
+                        DalTest.Initialization.Do();
                         break;
                     case 3:
-                       //Console.WriteLine(Bl.GetProjectStatus())
+                        Console.WriteLine(s_bl.GetProjectStatus());
                         break;
                     case 4:
-                        /////
+                        s_bl.SetProjectStartDate();
                         break;
                     case 0:
                         return;
@@ -108,7 +94,7 @@ internal class Program
         }
     }
     /// <summary>
-    /// The function represents a sub menu for an agent
+    /// The function represents a sub menu for an agent 
     /// </summary>
     static void CaseAgent()
     {
@@ -124,6 +110,7 @@ internal class Program
                 Console.WriteLine("press 5 to delete an agent");
                 Console.WriteLine("press 6 to get detailed task for agent");
                 Console.WriteLine("press 7 to get all agent tasks");
+                Console.WriteLine("press 8 to get all available tasks for an agent");
                 Console.WriteLine("press 0 to return to the main menu");
 
                 if (!int.TryParse(Console.ReadLine(), out int choise))
@@ -150,6 +137,9 @@ internal class Program
                         break;
                     case 7:
                         GetAllAgentTasksA();
+                        break;
+                    case 8:
+                        GetAllAvailableTasks();
                         break;
                     case 0:
                         return;
@@ -281,6 +271,15 @@ internal class Program
         foreach (BO.TaskInList a in _list)
             Console.WriteLine(a);
     }
+    static void GetAllAvailableTasks()
+    {
+        Console.WriteLine("Enter agent id:");
+        if (!int.TryParse(Console.ReadLine(), out int _id))
+            throw new FormatException("Wrong input");
+        IEnumerable<BO.TaskInList> _list = s_bl!.Agent.AvailableTasks(_id);
+        foreach (BO.TaskInList a in _list)
+            Console.WriteLine(a);
+    }
 
     static void CaseTask()
     {
@@ -379,12 +378,12 @@ internal class Program
             Deliverables = _deliverables,
             Remarks = _remarks,
             TaskAgent = null,
-            Copmlexity = (BO.AgentExperience?)_complexity,
+            Complexity = (BO.AgentExperience?)_complexity,
         };
         Console.WriteLine("Enter number of tasks this task depends on:");
         if (!int.TryParse(Console.ReadLine(), out int num))
             throw new FormatException("Wrong input");
-        newTask.DependenciesList= new List<BO.TaskInList>();
+        newTask.DependenciesList = new List<BO.TaskInList>();
         for (int i = 0; i < num; i++)
         {
             Console.WriteLine("Enter id of the task:");
@@ -436,7 +435,7 @@ internal class Program
         string _alias = Console.ReadLine()!;
         Console.WriteLine("Enter new task description:");
         string _description = Console.ReadLine()!;
-       //if( Bl.GetProjectStatus())
+        //if( Bl.GetProjectStatus())
         //{
         //}
         Console.WriteLine("Enter new  task schedualed date:");
@@ -461,17 +460,24 @@ internal class Program
         string _deliverables = Console.ReadLine()!;
         Console.WriteLine("Enter task remarks:");
         string _remarks = Console.ReadLine()!;
-        Console.WriteLine("Enter agent id:");
-        if (!int.TryParse(Console.ReadLine(), out int _AgentId))
-            throw new FormatException("Wrong input");
-        Console.WriteLine("Enter agent name:");
-        string _AgentName = Console.ReadLine()!;
+        int _agentid = 0;
+        string? _agentName = null;
+        if (s_bl.GetProjectStatus() == ProjectStatus.ExecutionTime)
+        {
+            Console.WriteLine("Enter agent id:");
+            if (!int.TryParse(Console.ReadLine(), out int _AgentId))
+                throw new FormatException("Wrong input");
+            Console.WriteLine("Enter agent name:");
+            string _AgentName = Console.ReadLine()!;
+            _agentid = _AgentId;
+            _agentName = _AgentName;
+        }
         Console.WriteLine("Enter task complexity(1- for field agent,2- for hacker, 3- for invetgator):");
         if (!BO.AgentExperience.TryParse(Console.ReadLine(), out BO.AgentExperience _complexity))
             throw new FormatException("Wrong input");
         BO.Task newTask = new BO.Task()
         {
-            Id=_id,
+            Id = _id,
             Alias = _alias,
             Description = _description,
             DependenciesList = oldTask.DependenciesList,
@@ -485,8 +491,8 @@ internal class Program
             CompleteDate = _completeDate,
             Deliverables = _deliverables,
             Remarks = _remarks,
-            TaskAgent = new BO.AgentInTask { Id = _AgentId, Name = _AgentName },
-            Copmlexity = (BO.AgentExperience?)_complexity,
+            TaskAgent = _agentName is null ? null : new BO.AgentInTask { Id = _agentid, Name = _agentName },
+            Complexity = (BO.AgentExperience?)_complexity,
         };
         s_bl!.Task.Update(newTask);
     }

@@ -22,19 +22,19 @@
 public class Task
 {
     public int Id { get; init; }
-    public string? Alias { get;init; }
+    public string? Alias { get; init; }
     public string? Description { get; set; }
-    public TaskStatus? Status { get; set; }  
+    public TaskStatus? Status { get; set; }
     public DateTime? CreatedAtDate { get; init; }
     public DateTime? ScheduledDate { get; set; }
     public DateTime? StartDate { get; set; }
     public TimeSpan? RequiredEffortTime { get; set; }
-    public DateTime? EstimatedCompleteDate { get; set; }  
+    public DateTime? EstimatedCompleteDate { get; set; }
     public DateTime? DeadlineDate { get; init; }
     public DateTime? CompleteDate { get; set; }
     public string? Deliverables { get; set; }
     public string? Remarks { get; set; }
-    public BO.AgentExperience? Copmlexity {  get; set; }
+    public BO.AgentExperience? Complexity { get; set; }
 
 
 

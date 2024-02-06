@@ -2,12 +2,15 @@
 using BlApi;
 using BO;
 using System.Collections.Generic;
-//using System.Reflection;
 
 internal class AgentImplementation : IAgent
 {
 
     private DalApi.IDal _dal = DalApi.Factory.Get;
+
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+    private readonly TaskImplementation _task = new TaskImplementation();
 
     /// <summary>
     /// Add an agent to dal according to the given Bl agent
@@ -72,7 +75,7 @@ internal class AgentImplementation : IAgent
         if (doAgent == null)
             throw new BO.BlDoesNotExistException($"An agent with ID={id} does not exist");
 
-        DO.Task? doTask = _dal.Task.Read(task => task.AgentId == id && task.CalcStatus() == BO.TaskStatus.OnTrack/*StartDate < DateTime.Now && task.CompleteDate > DateTime.Now*/);
+        DO.Task? doTask = _dal.Task.Read(task => task.AgentId == id && _task.CalcStatus(task) == BO.TaskStatus.OnTrack/*StartDate < DateTime.Now && task.CompleteDate > DateTime.Now*/);
 
         BO.Agent boAgent = new BO.Agent()
         {
@@ -96,7 +99,7 @@ internal class AgentImplementation : IAgent
     {
         return from DO.Agent doAgent in _dal.Agent.ReadAll()//get all agents from dal
                let CurrentTsk = GetAllAgentTasks(doAgent.Id).FirstOrDefault(t => t.Status == TaskStatus.OnTrack)
-               let boAgentInList =  new BO.AgentInList()//convert them to 'AgentInList'
+               let boAgentInList = new BO.AgentInList()//convert them to 'AgentInList'
                {
                    Id = doAgent.Id,
                    Name = doAgent.Name,
@@ -107,41 +110,8 @@ internal class AgentImplementation : IAgent
                        Alias = CurrentTsk.Alias
                    }
                }
-               where filter is null? true: filter(boAgentInList)//choose those who fulfill the condition
+               where filter is null ? true : filter(boAgentInList)//choose those who fulfill the condition
                select boAgentInList;
-        //if (filter == null)
-        //{
-        //    return from DO.Agent doAgent in _dal.Agent.ReadAll()
-        //           //let CurrentTsk = GetAllAgentTasks(doAgent.Id).FirstOrDefault(t => t.Status == TaskStatus.OnTrack)
-        //           //where CurrentTsk is not null
-        //           select new BO.AgentInList()
-        //           {
-        //               Id = doAgent.Id,
-        //               Name = doAgent.Name,
-        //               Specialty = (BO.AgentExperience?)doAgent.Specialty,
-        //               //CurrentTask = new BO.TaskInAgent()
-        //               //{
-        //               //    Id = CurrentTsk.Id,
-        //               //    Alias = CurrentTsk.Alias,
-        //               //}
-        //           };
-        //}
-        //else//filter isn't null
-        //    return from DO.Agent doAgent in _dal.Agent.ReadAll()//get all agents from dal
-        //           let CurrentTsk = GetAllAgentTasks(doAgent.Id).FirstOrDefault(t => t.Status == TaskStatus.OnTrack)
-        //           let boAgentInList = new BO.AgentInList()//convert them to 'AgentInList'
-        //           {
-        //               Id = doAgent.Id,
-        //               Name = doAgent.Name,
-        //               Specialty = (BO.AgentExperience?)doAgent.Specialty,
-        //               CurrentTask = new BO.TaskInAgent()
-        //               {
-        //                   Id = CurrentTsk.Id,
-        //                   Alias = CurrentTsk.Alias,
-        //               }
-        //           }
-        //           where filter(boAgentInList)//choose those who fulfill the condition
-        //           select boAgentInList;
     }
     /// <summary>
     /// Update an agent
@@ -155,7 +125,7 @@ internal class AgentImplementation : IAgent
 
         if (boAgent.Specialty < Read(boAgent.Id).Specialty)
             throw new BO.BlWrongInputException("New agent level can't be lower than his previous level");
-        
+
         DO.Agent newDoAgent = new DO.Agent(boAgent.Id, boAgent.Email, boAgent.Cost, boAgent.Name, (DO.AgentExperience?)boAgent.Specialty);
         try
         {
@@ -163,9 +133,9 @@ internal class AgentImplementation : IAgent
 
             if (boAgent.CurrentTask is not null)
             {
-                if (Bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime)
+                if (s_bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime)
                     throw new BO.BlProjectStageException("Agent can't start a task on the current project stage");
-               //update the task allocated to this agent
+                //update the task allocated to this agent
                 DO.Task? taskToUpdate = _dal.Task.Read(boAgent.CurrentTask.Id);
                 if (taskToUpdate is null)
                     throw new BO.BlDoesNotExistException($"Task with ID={boAgent.CurrentTask.Id} does Not exist,please try to allocate a different task");
@@ -200,7 +170,7 @@ internal class AgentImplementation : IAgent
             Id = doTask.Id,
             Alias = doTask.Alias,
             Description = doTask.Description,
-            Status = doTask.CalcStatus()
+            Status = _task.CalcStatus(doTask)
         };
     }
     /// <summary>
@@ -212,13 +182,13 @@ internal class AgentImplementation : IAgent
     {
         return from DO.Task doTask in _dal.Task.ReadAll()
                where doTask.AgentId == agentId
-               orderby doTask.Id descending   ///////////
+               orderby doTask.Id descending
                select new BO.TaskInList
                {
                    Id = doTask.Id,
                    Alias = doTask.Alias,
                    Description = doTask.Description,
-                   Status = doTask.CalcStatus()
+                   Status = _task.CalcStatus(doTask)
                };
     }
 
@@ -243,11 +213,34 @@ internal class AgentImplementation : IAgent
         if (boAgent.Email!.Contains("@gmail.com") == false)
             throw new BO.BlWrongInputException("Worng email format");
     }
-    //public IEnumerable<BO.Agent> GetRankAgent(int specialty)
-    //{
+    /// <summary>
+    /// Returns the available tasks for an agent
+    /// </summary>
+    /// <param name="agentId">The id of the agent</param>
+    /// <returns>A collection of the available tasks as TaskInList</returns>
+    /// <exception cref="BO.BlDoesNotExistException">No available tasks for an agent of a certain specialty</exception>
+    public IEnumerable<BO.TaskInList> AvailableTasks(int agentId)
+    {
+        BO.Agent? boagent = Read(agentId);
 
-    //}
+        var complexityTasks = _dal.Task.ReadAll().GroupBy(t => (int)t.Complexity!);
+        var tasks = complexityTasks.FirstOrDefault(t => t.Key <= (int)boagent.Specialty!);
+        if (tasks is null)
+            throw new BO.BlDoesNotExistException("No available tasks for this agent's level");
+        IEnumerable<TaskInList> availableTasks = tasks.Where(t => t is not null)
+                                                      .Where(t => t.AgentId is null)
+                                                      .Select(t => new BO.TaskInList()
+                                                      {
+                                                          Id = t.Id,
+                                                          Alias = t.Alias,
+                                                          Description = t.Description,
+                                                          Status = _task.CalcStatus(t)
+                                                      });
 
+        if (availableTasks is null)
+            throw new BO.BlDoesNotExistException("No available tasks for this agent");
+        return availableTasks;
+    }
 }
 
 

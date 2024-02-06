@@ -9,7 +9,7 @@ namespace DO;
 /// <param name="CreatedAtDate">The creation date of the task</param>
 /// <param name="RequiredEffortTime">The amount of time (in days) required in order to complete the task</param>
 /// <param name="IsMilestone">Milestones of the task</param>
-/// <param name="Copmlexity">The minimum agent level required in ordet to complete the task</param>
+/// <param name="Complexity">The minimum agent level required in ordet to complete the task</param>
 /// <param name="StartDate">Actual start date of a task</param>
 /// <param name="ScheduledDate">Planned start date for a task</param>
 /// <param name="DeadlineDate">Planned deadline for a task</param>
@@ -25,7 +25,7 @@ public record Task
     DateTime? CreatedAtDate=null,
     TimeSpan? RequiredEffortTime = null,
     bool IsMilestone=false,
-    DO.AgentExperience? Copmlexity = null,
+    DO.AgentExperience? Complexity = null,
     DateTime? StartDate = null,
     DateTime? ScheduledDate = null,
     DateTime? DeadlineDate = null,

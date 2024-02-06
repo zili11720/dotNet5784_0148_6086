@@ -1,6 +1,5 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using BO;
 
 
 /// <summary>
@@ -14,8 +13,11 @@ internal class Bl : IBl
     public ITask Task => new TaskImplementation();
     public static DateTime? StartProjectDate { get; set; } = null;//new DateTime(2024,5,7);//Start date of the project
     public static DateTime? EndProjectDate { get; set; } = null;//End date of the project
-
-    public static BO.ProjectStatus GetProjectStatus()
+                                                                //// <summary>
+    ///Returns the current status of the project:Planning time/Schedule time/Execution time
+    /// </summary>
+    /// <returns></returns>
+    public BO.ProjectStatus GetProjectStatus()
     {
         if (StartProjectDate is null)
             return BO.ProjectStatus.PlanningTime;
@@ -23,21 +25,46 @@ internal class Bl : IBl
             return BO.ProjectStatus.ScheduleTime;
         return BO.ProjectStatus.ExecutionTime;
     }
-    //public TaskStatus CalcStatus(DO.Task task)
-    //{
-    //    if (task.ScheduledDate == null)
-    //        return TaskStatus.Unscheduled;
-    //    if (task.ScheduledDate != null && task.StartDate < DateTime.Now || task.StartDate == null)
-    //        return TaskStatus.Scheduled;
-    //    if (task.StartDate >= DateTime.Now && task.CompleteDate < DateTime.Now || task.CompleteDate == null)
-    //        return TaskStatus.OnTrack;
-    //    if (task.CompleteDate >= DateTime.Now)
-    //        return TaskStatus.Done;
-    //    else
-    //        throw new BlWrongDateException("Task's dates are impossible");
-    //}
-    //init
-    //reset
-    //creteluz-bonos
-    //CalcStatus
+    /// <summary>
+    /// Set the project with a start date according to the manager input
+    /// </summary>
+    /// <exception cref="FormatException"></exception>
+    void IBl.SetProjectStartDate()
+    {
+        Console.WriteLine("Enter project start date:");
+        if (!DateTime.TryParse(Console.ReadLine(), out DateTime _startDate))
+            throw new FormatException("Wrong input");
+        StartProjectDate = _startDate;
+    }
+    /// <summary>
+    /// Reset the data of the project. Erase all agents,tasks,dependencies and project start date
+    /// </summary>
+    /// <exception cref="FormatException"></exception>
+    void IBl.ResetData()
+    {
+        Console.Write("Would you like to reset the project data? (Yes/No)");
+        string? answer = Console.ReadLine() ?? throw new FormatException("Wrong input");
+        if (answer == "Yes")
+        {
+            Agent.Clear();
+            Task.Clear();
+            StartProjectDate = null;
+        }
+    }
+    /// <summary>
+    /// Initialize the database with basic entities (dalTest.initialization)
+    /// </summary>
+    /// <exception cref="FormatException"></exception>
+    void IBl.InitializeData()
+    {
+        Console.Write("Would you like to create Initial data? (Yes/No)");
+        string? answer = Console.ReadLine() ?? throw new FormatException("Wrong input");
+        if (answer == "Yes")
+        {
+            Agent.Clear();
+            Task.Clear();
+            StartProjectDate = null;
+            //DalTest.Initialization.Do();
+        }
+    }
 }

@@ -23,7 +23,7 @@ internal class Program
     {
         try
         {
-           // Initialization.Do(s_dal);//First initialization of the database
+            // Initialization.Do(s_dal);//First initialization of the database
             do
             {
                 Console.WriteLine(@"
@@ -46,7 +46,7 @@ press 0 to exit");
                     case 3:
                         CaseDependency();
                         break;
-                     case 4:
+                    case 4:
                         Console.Write("Would you like to create Initial data? (Yes/No)");
                         string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
                         if (ans == "Yes")
@@ -128,7 +128,7 @@ press 0 to return to the main menu
             }
             while (true);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e);
         }
@@ -187,7 +187,7 @@ press 0 to return to the main menu
     static void UpdateA()
     {
         Console.WriteLine(@"Enter id:");
-        if    (!int.TryParse(Console.ReadLine(), out int _id))
+        if (!int.TryParse(Console.ReadLine(), out int _id))
             throw new FormatException("Wrong input");
 
         Console.WriteLine(s_dal!.Agent.Read(_id));//If the agent with this id exists print the agent,else don't print anything
@@ -261,8 +261,8 @@ press 0 to return to the main menu
             }
             while (true);
         }
-        catch(Exception e)
-        { 
+        catch (Exception e)
+        {
             Console.WriteLine(e);
         }
     }

@@ -1,6 +1,5 @@
 ﻿namespace BO;
 
-
 /// <summary>
 /// An enum that represents three possible specialties of a secret agent
 /// </summary>
@@ -20,7 +19,7 @@ public enum TaskStatus
 /// </summary>
 public enum ProjectStatus
 {
-    PlanningTime,ScheduleTime,ExecutionTime
+    PlanningTime, ScheduleTime, ExecutionTime
 };
 
 

@@ -1,5 +1,4 @@
-﻿using System;
-namespace BO;
+﻿namespace BO;
 /// <summary>
 /// A logic entity for an agent as a property in the entity task
 /// </summary>
@@ -8,8 +7,8 @@ namespace BO;
 /// </summary>
 public class AgentInTask
 {
-    public int Id{ get; init; }
-    public string? Name { get;init; }
+    public int Id { get; init; }
+    public string? Name { get; init; }
 
     public override string ToString() => this.ToStringProperty();
 }

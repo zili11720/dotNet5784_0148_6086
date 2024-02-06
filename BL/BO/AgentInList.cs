@@ -8,9 +8,9 @@
 /// </summary>
 public class AgentInList
 {
-    public required int Id { get; init;}
-    public string? Name { get; init;}
-    public BO.AgentExperience? Specialty { get; init;}
+    public required int Id { get; init; }
+    public string? Name { get; init; }
+    public BO.AgentExperience? Specialty { get; init; }
 
     public BO.TaskInAgent? CurrentTask { get; set; }
 
