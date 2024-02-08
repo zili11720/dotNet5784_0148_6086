@@ -27,9 +27,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{B984A68B-E8C
 		xml\tasks.xml = xml\tasks.xml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{143CB30C-6C57-4045-94DB-0BE6294DD7EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{143CB30C-6C57-4045-94DB-0BE6294DD7EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlTest", "BlTest\BlTest.csproj", "{FC243A13-6658-4996-BA1F-044A26B86F5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BlTest\BlTest.csproj", "{FC243A13-6658-4996-BA1F-044A26B86F5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{F4A5DE16-565A-4D5E-8096-748759F850AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,9 +67,16 @@ Global
 		{FC243A13-6658-4996-BA1F-044A26B86F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC243A13-6658-4996-BA1F-044A26B86F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC243A13-6658-4996-BA1F-044A26B86F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4A5DE16-565A-4D5E-8096-748759F850AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A5DE16-565A-4D5E-8096-748759F850AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A5DE16-565A-4D5E-8096-748759F850AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4A5DE16-565A-4D5E-8096-748759F850AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F4A5DE16-565A-4D5E-8096-748759F850AD} = {EE5A8BB9-1F53-4843-A6EB-35ADD1C54EA1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F4C2E6FA-BCCB-4268-A9E2-EB813FA0E9F1}

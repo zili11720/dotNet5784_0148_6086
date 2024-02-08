@@ -11,9 +11,9 @@ internal class Bl : IBl
     private static DalApi.IDal _dal = DalApi.Factory.Get;
     public IAgent Agent => new AgentImplementation();
     public ITask Task => new TaskImplementation();
-    public static DateTime? StartProjectDate { get; set; } = null;//new DateTime(2024,5,7);//Start date of the project
+    public static DateTime? StartProjectDate { get; set; } = null;//Start date of the project
     public static DateTime? EndProjectDate { get; set; } = null;//End date of the project
-                                                                //// <summary>
+    //// <summary>
     ///Returns the current status of the project:Planning time/Schedule time/Execution time
     /// </summary>
     /// <returns></returns>

@@ -273,7 +273,7 @@ internal class TaskImplementation : ITask
             if (updatedTask.TaskAgent is not null)
                 throw new BO.BlProjectStageException("Can't assign an agent for a task on current project stage");
             DO.Agent? agentOfTask = _dal.Agent.Read(taskToUpdate.TaskAgent.Id);
-            if ((BO.AgentExperience)updatedTask.Complexity > (BO.AgentExperience)agentOfTask.Specialty)
+            if ((BO.AgentExperience)updatedTask.Complexity! > (BO.AgentExperience)agentOfTask.Specialty!)
                 throw new BO.BlWrongAgentForTaskException("Agent specialty can't be lower than task comlexity");
         }
     }

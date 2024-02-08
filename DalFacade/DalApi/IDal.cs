@@ -8,5 +8,7 @@ public interface IDal
     IAgent Agent { get; }
     ITask Task { get; }
     IDependency Dependency { get; }
+
+
 }
 

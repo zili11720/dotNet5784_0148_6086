@@ -1,0 +1,15 @@
+﻿<Window x:Class="PL.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <!--A Botton for all agent content-->
+        <Button Content="Handle Agents" HorizontalAlignment="Left" Margin="160,180,0,0" VerticalAlignment="Top" Height="120" Width="200" Click="btnAgents_Click"/>
+        <!--A button for Initialization-->
+        <Button Content="Initialize Data" HorizontalAlignment="Left" Margin="420,180,0,0" VerticalAlignment="Top" Height="120" Width="200" Click="btnInitialize_Click"/>
+    </Grid>
+</Window>
