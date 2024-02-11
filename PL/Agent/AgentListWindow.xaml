@@ -5,7 +5,8 @@
      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
      xmlns:local="clr-namespace:PL.Agent"
      mc:Ignorable="d"
-     Title="AgentListWindow" Height="640" Width="800">
+     Title="AgentListWindow" Height="640" Width="800"
+     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <!--External grid-->
     <Grid>
         <Grid.RowDefinitions>
@@ -20,9 +21,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Label" Grid.Column="0" HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top"/>
-            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <ComboBox ItemsSource="{Binding Source={StaticResource  AgentExperienceCollectionKey}}"
+                      Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Grid>
-        <ListView Grid.Row="1">
+        <ListView Margin ="5" Grid.Row="1" ItemsSource="{Binding Path=CourseList}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -30,11 +32,8 @@
             </ListView.View>
         </ListView>
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
-
-
     </Grid>
 </Window>
-
 
 
 

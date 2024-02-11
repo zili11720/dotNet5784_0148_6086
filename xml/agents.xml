@@ -35,4 +35,39 @@
     <Name>Cris Klark</Name>
     <Specialty>Investigator</Specialty>
   </Agent>
+  <Agent>
+    <Id>210003669</Id>
+    <Email>EliChoen@gmai.com</Email>
+    <Cost>318</Cost>
+    <Name>Eli Choen</Name>
+    <Specialty>Field_agent</Specialty>
+  </Agent>
+  <Agent>
+    <Id>230728539</Id>
+    <Email>AlexCooper@gmai.com</Email>
+    <Cost>455</Cost>
+    <Name>Alex Cooper</Name>
+    <Specialty>Field_agent</Specialty>
+  </Agent>
+  <Agent>
+    <Id>371669649</Id>
+    <Email>JamesBond@gmai.com</Email>
+    <Cost>442</Cost>
+    <Name>James Bond</Name>
+    <Specialty>Field_agent</Specialty>
+  </Agent>
+  <Agent>
+    <Id>230015453</Id>
+    <Email>JoneAlon@gmai.com</Email>
+    <Cost>494</Cost>
+    <Name>Jone Alon</Name>
+    <Specialty>Hacker</Specialty>
+  </Agent>
+  <Agent>
+    <Id>368806520</Id>
+    <Email>CrisKlark@gmai.com</Email>
+    <Cost>310</Cost>
+    <Name>Cris Klark</Name>
+    <Specialty>Investigator</Specialty>
+  </Agent>
 </ArrayOfAgent>
