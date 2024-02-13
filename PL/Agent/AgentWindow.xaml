@@ -5,8 +5,68 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Agent"
         mc:Ignorable="d"
-        Title="AgentWindow" Height="450" Width="800">
+        Title="AgentWindow" Height="500" Width="400"
+        DataContext="{Binding CurrentAgent, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    <Window.Resources>
+        <Style
+            TargetType="Label">
+            <Setter Property="FontSize"
+             Value="16" />
+            <Setter Property="FontFamily"
+               Value="Cambria"/>
+            <Setter Property="FontWeight"
+             Value="Bold" />
+        </Style>
+        <Style x:Key="TextBoxStyle"
+           TargetType="TextBox">
+            <Setter Property="FontSize"
+             Value="12" />
+            <Setter Property="FontFamily"
+             Value="Cambria"/>
+            <Setter Property="FontWeight"
+             Value="Bold" />
+        </Style>
+    </Window.Resources>
     <Grid>
-       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Id:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" />
+        <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="20,20,0,0" TextWrapping="Wrap" Text="Enter Id" VerticalAlignment="Top" Width="120"/>
+
+        <Label Content="Name:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Margin="20,20,0,0" TextWrapping="Wrap" Text="Enter name" VerticalAlignment="Top" Width="120"/>
+
+        <Label Content="Email:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top"/>
+        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Margin="20,20,0,0" TextWrapping="Wrap" Text="Enter Email" VerticalAlignment="Top" Width="120"/>
+
+        <Label Content="Specialty:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top"/>
+        <ComboBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Margin="20,20,0,0" VerticalAlignment="Top" Width="120" FontFamily="Cambria" FontSize="12" FontWeight="Bold"/>
+
+        <Label Content="Cost:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top"/>
+        <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Margin="20,20,0,0" TextWrapping="Wrap" Text="Enter Cost" VerticalAlignment="Top" Width="120"/>
+
+        <Label Content="Current Task Id:" Grid.Row="5" Grid.Column="0"  HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top"/>
+        <TextBox Grid.Row="5"  Grid.Column="1" HorizontalAlignment="Center" Margin="20,20,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
+        <Label Content="Current Task Alias:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top"/>
+        <TextBox Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" Margin="20,20,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
+        <Button Content="Button" Grid.Row="7" HorizontalAlignment="Left" Margin="100,20,0,0"  VerticalAlignment="Top" RenderTransformOrigin="0.467,1.704" Background="LightBlue" FontFamily="Cambria" FontWeight="Bold"/>
+
+
+
+
     </Grid>
 </Window>

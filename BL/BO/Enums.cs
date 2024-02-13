@@ -5,7 +5,7 @@
 /// </summary>
 public enum AgentExperience
 {
-    Field_agent = 1, Hacker, Investigator ,All
+    Field_agent = 1, Hacker, Investigator ,None
 };
 /// <summary>
 /// An enum that represents a task's status
