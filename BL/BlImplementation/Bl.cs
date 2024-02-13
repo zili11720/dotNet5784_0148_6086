@@ -43,14 +43,9 @@ internal class Bl : IBl
     /// <exception cref="FormatException"></exception>
     void IBl.ResetData()
     {
-        Console.Write("Would you like to reset the project data? (Yes/No)");
-        string? answer = Console.ReadLine() ?? throw new FormatException("Wrong input");
-        if (answer == "Yes")
-        {
-            Agent.Clear();
-            Task.Clear();
-            StartProjectDate = null;
-        }
+        Agent.Clear();
+        Task.Clear();
+        StartProjectDate = null;
     }
     /// <summary>
     /// Initialize the database with basic entities (dalTest.initialization)
@@ -58,14 +53,9 @@ internal class Bl : IBl
     /// <exception cref="FormatException"></exception>
     void IBl.InitializeData()
     {
-        Console.Write("Would you like to create Initial data? (Yes/No)");
-        string? answer = Console.ReadLine() ?? throw new FormatException("Wrong input");
-        if (answer == "Yes")
-        {
-            Agent.Clear();
-            Task.Clear();
-            StartProjectDate = null;
-            //DalTest.Initialization.Do();
-        }
+        Agent.Clear();
+        Task.Clear();
+        StartProjectDate = null;
+        DalTest.Initialization.Do();
     }
 }

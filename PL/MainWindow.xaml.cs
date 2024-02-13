@@ -17,6 +17,7 @@ namespace PL;
 /// </summary>
 public partial class MainWindow : Window
 {
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public MainWindow()
     {
         InitializeComponent();
@@ -29,13 +30,25 @@ public partial class MainWindow : Window
     private void btnInitialize_Click(object sender, RoutedEventArgs e)
     {
         string message = "Are you sure you want to initialize the data?";
-        string title = "Date Initialization";
+        string title = "Data Initialization";
         MessageBoxButton buttons = MessageBoxButton.YesNo;
         MessageBoxResult result= MessageBox.Show(message,title, buttons);
         if (result == MessageBoxResult.Yes)
-            DalTest.Initialization.Do();
+            s_bl.InitializeData();
+        //DalTest.Initialization.Do();
         else
             this.Close();
     }
 
+    private void btnReset_Click(object sender, RoutedEventArgs e)
+    {
+        string message = "Are you sure you want to reset the data?";
+        string title = "Data Reset";
+        MessageBoxButton buttons = MessageBoxButton.YesNo;
+        MessageBoxResult result = MessageBox.Show(message, title, buttons);
+        if (result == MessageBoxResult.Yes)
+            s_bl.ResetData();
+        else
+            this.Close();
+    }
 }

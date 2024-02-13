@@ -67,11 +67,16 @@ internal class Program
                 switch (choise)
                 {
                     case 1:
-                        s_bl.ResetData();
+                        Console.Write("Would you like to reset the project data? (Yes/No)");
+                        string? answer1 = Console.ReadLine() ?? throw new FormatException("Wrong input");
+                        if (answer1 == "Yes")
+                            s_bl.ResetData();
                         break;
                     case 2:
-                        s_bl.InitializeData();
-                        DalTest.Initialization.Do();
+                        Console.Write("Would you like to create Initial data? (Yes/No)");
+                        string? answer2 = Console.ReadLine() ?? throw new FormatException("Wrong input");
+                        if (answer2 == "Yes")
+                            s_bl.InitializeData();
                         break;
                     case 3:
                         Console.WriteLine(s_bl.GetProjectStatus());
