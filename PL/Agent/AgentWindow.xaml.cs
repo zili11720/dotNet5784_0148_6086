@@ -45,5 +45,10 @@ public partial class AgentWindow : Window
             MessageBox.Show(ex.Message,"Could not find an agent with a given id",MessageBoxButton.OK,MessageBoxImage.Exclamation);
             this.Close();
         }
-    }  
+    }
+
+    private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
 }

@@ -36,12 +36,12 @@ public partial class AgentListWindow : Window
 
     public static readonly DependencyProperty AgentListProperty = 
         DependencyProperty.Register("AgentList", typeof(IEnumerable<BO.AgentInList>), typeof(AgentListWindow), new PropertyMetadata(null));
-    public BO.AgentExperience Experience{ get; set; } = BO.AgentExperience.All;
+    public BO.AgentExperience Experience{ get; set; } = BO.AgentExperience.None;
     
 
     private void cbAgentExperience_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        AgentList= (Experience == BO.AgentExperience.All)?
+        AgentList= (Experience == BO.AgentExperience.None)?
         s_bl?.Agent.ReadAll()! : s_bl?.Agent.ReadAll(item => item.Specialty == Experience)!;
     }
 }
