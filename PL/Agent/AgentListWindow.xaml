@@ -25,7 +25,7 @@
                       SelectedValue="{Binding Path=Experience ,Mode=TwoWay}"
                       ItemsSource="{Binding Source={StaticResource  AgentExperienceCollectionKey}}" SelectionChanged="cbAgentExperience_SelectionChanged" />
         </Grid>
-        <ListView Margin ="5" Grid.Row="1" ItemsSource="{Binding Path=AgentList}" MouseDoubleClick="lsUpdateAgent_DoubleClick">
+        <ListView Margin ="5" Grid.Row="1" ItemsSource="{Binding Path=AgentList}" MouseDoubleClick="lsUpdateAgent_DoubleClick" BorderBrush="#FF91959C" Foreground="#FF0E0E0E">
             <ListView.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FF060606"/>

@@ -35,9 +35,6 @@ public partial class MainWindow : Window
         MessageBoxResult result= MessageBox.Show(message,title, buttons);
         if (result == MessageBoxResult.Yes)
             s_bl.InitializeData();
-        //DalTest.Initialization.Do();
-        //else
-        //    this.Close();
     }
 
     private void btnReset_Click(object sender, RoutedEventArgs e)
@@ -48,7 +45,5 @@ public partial class MainWindow : Window
         MessageBoxResult result = MessageBox.Show(message, title, buttons);
         if (result == MessageBoxResult.Yes)
             s_bl.ResetData();
-        //else
-        //    this.Close();
     }
 }

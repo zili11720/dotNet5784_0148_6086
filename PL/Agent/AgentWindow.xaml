@@ -76,13 +76,7 @@
         <ComboBox Grid.Row="3" Grid.Column="1"
                 ItemsSource="{Binding Source={StaticResource AgentExperienceCollectionKey}}" 
                 SelectedValue="{Binding Specialty, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                  HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Width="120" FontFamily="Cambria" FontSize="12" FontWeight="Bold" Height="20">
-            <ComboBox.Background>
-                <LinearGradientBrush EndPoint="0,1">
-                    <GradientStop Color="#FFF0F0F0"/>
-                    <GradientStop Color="#FFFFFBFB" Offset="1"/>
-                </LinearGradientBrush>
-            </ComboBox.Background>
+                 HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Width="120" FontFamily="Cambria" FontSize="12" Height="20">
         </ComboBox>
 
         <Label Content="Cost:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top" Height="29" Width="46"/>
