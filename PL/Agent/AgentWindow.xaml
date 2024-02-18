@@ -16,6 +16,8 @@
                Value="Cambria"/>
             <Setter Property="FontWeight"
              Value="Bold" />
+            <Setter Property="Foreground"
+                    Value="red"/>
         </Style>
         <Style x:Key="TextBoxStyle"
            TargetType="TextBox">
@@ -31,10 +33,10 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF423E56"/>
-                <GradientStop Color="White" Offset="1"/>
-                <GradientStop Color="#FF5366B0" Offset="0.506"/>
-                <GradientStop Color="#FF3A5F97" Offset="0.308"/>
+                <GradientStop Color="#FF060606"/>
+                <GradientStop Color="#FF474D67" Offset="1"/>
+                <GradientStop Color="#FF323646" Offset="0.506"/>
+                <GradientStop Color="#FF181A1D"/>
             </LinearGradientBrush>
         </Grid.Background>
 
@@ -73,7 +75,14 @@
         <ComboBox Grid.Row="3" Grid.Column="1"
                 ItemsSource="{Binding Source={StaticResource AgentExperienceCollectionKey}}" 
                 SelectedValue="{Binding Specialty, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                  HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Width="120" FontFamily="Cambria" FontSize="12" FontWeight="Bold" Height="20"/>
+                  HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Width="120" FontFamily="Cambria" FontSize="12" FontWeight="Bold" Height="20">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="#FFF0F0F0"/>
+                    <GradientStop Color="#FFFFFBFB" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
 
         <Label Content="Cost:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top" Height="29" Width="46"/>
         <TextBox Grid.Row="4" Grid.Column="1"
@@ -91,7 +100,7 @@
                  HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
 
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
-                Grid.Row="7" HorizontalAlignment="Left" Margin="40,20,0,0"  VerticalAlignment="Top" RenderTransformOrigin="0.467,1.704" Background="LightBlue" FontFamily="Cambria" FontWeight="Bold" 
+                Grid.Row="7" HorizontalAlignment="Left" Margin="40,20,0,0"  VerticalAlignment="Top" RenderTransformOrigin="0.467,1.704" Background="#FF1A1F21" FontFamily="Cambria" FontWeight="Bold" 
                 Click="btnAddUpdate_Click" Height="20" Width="100"/>
     </Grid>
 </Window>
