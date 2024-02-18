@@ -32,11 +32,12 @@ public partial class AgentWindow : Window
         DependencyProperty.Register("CurrentAgent", typeof(BO.Agent), typeof(AgentWindow), new PropertyMetadata(null));
 
 
-    public AgentWindow(int AgentId = 0)
+    public AgentWindow(int AgentId = 0/*default Id of the agent*/)
     {
         InitializeComponent();
         try
         {
+            //Fetch the agent with the given id or create a new one with defult values if the id does not exist
             CurrentAgent = (AgentId is not 0) ? s_bl.Agent.Read(AgentId)! : new BO.Agent() { Id = 0, Email = "", Cost = 0, Name = "", Specialty = BO.AgentExperience.None, CurrentTask = null };
         }
         catch(BO.BlDoesNotExistException ex)
@@ -48,7 +49,27 @@ public partial class AgentWindow : Window
     }
 
     private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
-    {
-
+    { 
+        try
+        {
+            if (s_bl.Agent.ReadAll().Any(a => a.Id == CurrentAgent.Id) is true)
+            {
+                s_bl.Agent.Update(CurrentAgent);
+                MessageBox.Show("Agent was successfuly updated");
+                this.Close();
+                new AgentListWindow().Show();
+            }
+            else
+            {
+                s_bl.Agent.Create(CurrentAgent);
+                MessageBox.Show("Agent was successfuly added");
+                this.Close();
+                new AgentListWindow().Show();
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
     }
 }

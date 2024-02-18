@@ -123,7 +123,7 @@ internal class AgentImplementation : IAgent
     {
         CheckValidation(boAgent);
 
-        if (boAgent.Specialty < Read(boAgent.Id).Specialty)
+        if (boAgent.Specialty < Read(boAgent.Id)!.Specialty)
             throw new BO.BlWrongInputException("New agent level can't be lower than his previous level");
 
         DO.Agent newDoAgent = new DO.Agent(boAgent.Id, boAgent.Email, boAgent.Cost, boAgent.Name, (DO.AgentExperience?)boAgent.Specialty);

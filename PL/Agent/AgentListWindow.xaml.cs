@@ -44,4 +44,20 @@ public partial class AgentListWindow : Window
         AgentList= (Experience == BO.AgentExperience.None)?
         s_bl?.Agent.ReadAll()! : s_bl?.Agent.ReadAll(item => item.Specialty == Experience)!;
     }
+
+    private void btnAddNewAgent_Click(object sender, RoutedEventArgs e)
+    {
+        new AgentWindow().ShowDialog();
+        this.Close();
+    }
+
+    private void lsUpdateAgent_DoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        BO.AgentInList? agentInList = (sender as ListView)?.SelectedItem as BO.AgentInList;
+        if (agentInList is not null)
+        {
+            new AgentWindow(agentInList.Id).ShowDialog();
+            this.Close();
+        }
+    }
 }

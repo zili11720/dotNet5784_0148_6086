@@ -202,7 +202,7 @@ internal class TaskImplementation : ITask
                 throw new BlWrongDateException("Start date musn't be earlier than previous task's complete date");
         }
         else//task has no dependencies
-            if (Bl.StartProjectDate is null || start < Bl.StartProjectDate)
+            if (_dal.StartProjectDate is null || start < _dal.StartProjectDate)
             throw new BlWrongDateException("Start date musn't be earlier than project start date");
 
 
@@ -272,7 +272,7 @@ internal class TaskImplementation : ITask
         {
             if (updatedTask.TaskAgent is not null)
                 throw new BO.BlProjectStageException("Can't assign an agent for a task on current project stage");
-            DO.Agent? agentOfTask = _dal.Agent.Read(taskToUpdate.TaskAgent.Id);
+            DO.Agent? agentOfTask = _dal.Agent.Read(taskToUpdate.TaskAgent!.Id);
             if ((BO.AgentExperience)updatedTask.Complexity! > (BO.AgentExperience)agentOfTask.Specialty!)
                 throw new BO.BlWrongAgentForTaskException("Agent specialty can't be lower than task comlexity");
         }
@@ -297,7 +297,7 @@ internal class TaskImplementation : ITask
             if (FinishDates.Any())
                 ScheduledStartDate = FinishDates.Max();
             else
-                ScheduledStartDate = Bl.StartProjectDate;
+                ScheduledStartDate = _dal.StartProjectDate;
 
             BO.Task botask = Read(boTaskInList.Id)!;
 

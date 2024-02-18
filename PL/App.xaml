@@ -6,5 +6,6 @@
     <Application.Resources>
         <local:AgentExperienceCollection x:Key="AgentExperienceCollectionKey"/>
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
+        <local:ConvertIdToIsEnabled x:Key="ConverIdToIsEnabledKey"/>
     </Application.Resources>
 </Application>

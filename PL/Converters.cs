@@ -8,6 +8,9 @@ using System.Windows.Data;
 
 namespace PL;
 
+/// <summary>
+//  Returns button content according to id value
+/// </summary> 
 class ConvertIdToContent : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -20,4 +23,18 @@ class ConvertIdToContent : IValueConverter
         throw new NotImplementedException();
     }
 }
+class ConvertIdToIsEnabled : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (int)value == 0 ? true : false;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+
 
