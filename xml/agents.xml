@@ -1,2 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfAgent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfAgent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Agent>
+    <Id>203235663</Id>
+    <Email>EliChoen@gmail.com</Email>
+    <Cost>329</Cost>
+    <Name>Eli Choen</Name>
+    <Specialty>Field_agent</Specialty>
+  </Agent>
+  <Agent>
+    <Id>399513463</Id>
+    <Email>AlexCooper@gmail.com</Email>
+    <Cost>449</Cost>
+    <Name>Alex Cooper</Name>
+    <Specialty>Field_agent</Specialty>
+  </Agent>
+  <Agent>
+    <Id>268275386</Id>
+    <Email>JamesBond@gmail.com</Email>
+    <Cost>428</Cost>
+    <Name>James Bond</Name>
+    <Specialty>Field_agent</Specialty>
+  </Agent>
+  <Agent>
+    <Id>292699260</Id>
+    <Email>JoneAlon@gmail.com</Email>
+    <Cost>439</Cost>
+    <Name>Jone Alon</Name>
+    <Specialty>Hacker</Specialty>
+  </Agent>
+  <Agent>
+    <Id>351456681</Id>
+    <Email>CrisKlark@gmail.com</Email>
+    <Cost>408</Cost>
+    <Name>Cris Klark</Name>
+    <Specialty>Investigator</Specialty>
+  </Agent>
+  <Agent>
+    <Id>4423535</Id>
+    <Email>wnfjnrei@gmail.com</Email>
+    <Cost>500</Cost>
+    <Name>dsd</Name>
+    <Specialty>Hacker</Specialty>
+  </Agent>
+</ArrayOfAgent>
