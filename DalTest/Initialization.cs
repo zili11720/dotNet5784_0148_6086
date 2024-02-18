@@ -15,8 +15,8 @@ public static class Initialization
 
     //A variable to create rendom numbers
     private static readonly Random s_rand = new();
-    private const int MIN_ID = 200000000; //zili
-    private const int MAX_ID = 400000000; //zili
+    private const int MIN_ID = 200000000; 
+    private const int MAX_ID = 400000000; 
 
     static DateTime currentDate = DateTime.Now;
     //A variable which represents the start date of the project
@@ -33,7 +33,7 @@ public static class Initialization
         };
         string[] agentsEmail =
         {
-        "EliChoen@gmai.com","AlexCooper@gmai.com", "JamesBond@gmai.com", "JoneAlon@gmai.com","CrisKlark@gmai.com"
+        "EliChoen@gmail.com","AlexCooper@gmail.com", "JamesBond@gmail.com", "JoneAlon@gmail.com","CrisKlark@gmail.com"
         };
         int[] agentsSpecialities =
         {

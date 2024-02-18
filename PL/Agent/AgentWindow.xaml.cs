@@ -43,7 +43,7 @@ public partial class AgentWindow : Window
         catch(BO.BlDoesNotExistException ex)
         {
             CurrentAgent = null;
-            MessageBox.Show(ex.Message,"Could not find an agent with a given id",MessageBoxButton.OK,MessageBoxImage.Exclamation);
+            MessageBox.Show(ex.Message,"Could not find an agent with a given id",MessageBoxButton.OK,MessageBoxImage.Error);
             this.Close();
         }
     }
@@ -55,21 +55,21 @@ public partial class AgentWindow : Window
             if (s_bl.Agent.ReadAll().Any(a => a.Id == CurrentAgent.Id) is true)
             {
                 s_bl.Agent.Update(CurrentAgent);
-                MessageBox.Show("Agent was successfuly updated");
+                MessageBox.Show("Agent was successfuly updated","success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
                 new AgentListWindow().Show();
             }
             else
             {
                 s_bl.Agent.Create(CurrentAgent);
-                MessageBox.Show("Agent was successfuly added");
+                MessageBox.Show("Agent was successfuly added", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
                 new AgentListWindow().Show();
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message,"Worng input", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }
