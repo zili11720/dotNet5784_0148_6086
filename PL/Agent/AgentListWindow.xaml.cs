@@ -48,7 +48,6 @@ public partial class AgentListWindow : Window
     private void btnAddNewAgent_Click(object sender, RoutedEventArgs e)
     {
         new AgentWindow().ShowDialog();
-        this.Close();
     }
 
     private void lsUpdateAgent_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -57,7 +56,12 @@ public partial class AgentListWindow : Window
         if (agentInList is not null)
         {
             new AgentWindow(agentInList.Id).ShowDialog();
-            this.Close();
         }
+    }
+
+    private void reOpenList_activated(object sender, EventArgs e)
+    {
+        AgentList = (Experience == BO.AgentExperience.None) ?
+        s_bl?.Agent.ReadAll()! : s_bl?.Agent.ReadAll(item => item.Specialty == Experience)!;
     }
 }

@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace PL.Agent;
 
@@ -40,36 +28,35 @@ public partial class AgentWindow : Window
             //Fetch the agent with the given id or create a new one with defult values if the id does not exist
             CurrentAgent = (AgentId is not 0) ? s_bl.Agent.Read(AgentId)! : new BO.Agent() { Id = 0, Email = "", Cost = 0, Name = "", Specialty = BO.AgentExperience.None, CurrentTask = null };
         }
-        catch(BO.BlDoesNotExistException ex)
+        catch (BO.BlDoesNotExistException ex)
         {
             CurrentAgent = null;
-            MessageBox.Show(ex.Message,"Could not find an agent with a given id",MessageBoxButton.OK,MessageBoxImage.Error);
+            MessageBox.Show(ex.Message, "Could not find an agent with a given id", MessageBoxButton.OK, MessageBoxImage.Error);
             this.Close();
         }
     }
 
     private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
-    { 
+    {
         try
         {
             if (s_bl.Agent.ReadAll().Any(a => a.Id == CurrentAgent.Id) is true)
             {
                 s_bl.Agent.Update(CurrentAgent);
-                MessageBox.Show("Agent was successfuly updated","success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Agent was successfuly updated", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
-                new AgentListWindow().Show();
             }
             else
             {
                 s_bl.Agent.Create(CurrentAgent);
                 MessageBox.Show("Agent was successfuly added", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
-                new AgentListWindow().Show();
+
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message,"Worng input", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(ex.Message, "Worng input", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

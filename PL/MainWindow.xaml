@@ -14,7 +14,16 @@
               Value="Ariel"/>
             <Setter Property="FontWeight"
            Value="Bold"/>
-
+            <!--Trigger for mouse enter -->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
     </Window.Resources>
