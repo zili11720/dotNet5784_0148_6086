@@ -44,7 +44,7 @@ public partial class AgentListWindow : Window
         BO.AgentInList? agentInList = (sender as ListView)?.SelectedItem as BO.AgentInList;
         if (agentInList is not null)
         {
-            new AgentWindow(agentInList.Id).ShowDialog();
+            new AgentWindow(agentInList.Id).ShowDialog() ;
         }
     }
 
