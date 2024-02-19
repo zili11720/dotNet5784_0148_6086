@@ -7,5 +7,42 @@
         <local:AgentExperienceCollection x:Key="AgentExperienceCollectionKey"/>
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToIsEnabled x:Key="ConverIdToIsEnabledKey"/>
+        <LinearGradientBrush x:Key="BlueGrayLinearBrushKey"
+            EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF060606"/>
+            <GradientStop Color="#FF57595F" Offset="1"/>
+            <GradientStop Color="#FF787F8E" Offset="0.506"/>
+            <GradientStop Color="#FF2D5171"/>
+        </LinearGradientBrush>
+        <Style
+            TargetType="Label">
+            <Setter Property="FontSize"
+            Value="16" />
+            <Setter Property="FontFamily"
+            Value="Cambria"/>
+           <Setter Property="FontWeight"
+           Value="Bold" />
+           <Setter Property="Foreground"
+            Value="White"/>
+        </Style>
+        <Style 
+           TargetType="TextBox">
+           <Setter Property="FontSize"
+           Value="12"/>
+           <Setter Property="FontFamily"
+           Value="Cambria"/>
+           <Setter Property="FontWeight"
+           Value="Bold" />
+       </Style>
+       <Style 
+          TargetType="ComboBox">
+          <Setter Property="FontSize"
+          Value="12"/>
+          <Setter Property="FontFamily"
+          Value="Cambria"/>
+          <Setter Property="FontWeight"
+          Value="Bold" />
+        </Style>
+
     </Application.Resources>
 </Application>

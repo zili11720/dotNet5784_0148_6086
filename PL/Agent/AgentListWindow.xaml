@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Specialty" Grid.Column="0" HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top"/>
+            <Label Content="Specialty" Grid.Column="0" HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top" Foreground="Black"/>
             <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                       SelectedValue="{Binding Path=Experience ,Mode=TwoWay}"
                       ItemsSource="{Binding Source={StaticResource  AgentExperienceCollectionKey}}" SelectionChanged="cbAgentExperience_SelectionChanged" />

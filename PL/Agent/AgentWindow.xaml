@@ -8,7 +8,7 @@
         Title="AgentWindow" Height="500" Width="400"
         DataContext="{Binding CurrentAgent, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <Window.Resources>
-        <Style
+        <!--<Style
             TargetType="Label">
             <Setter Property="FontSize"
              Value="16" />
@@ -27,17 +27,12 @@
              Value="Cambria"/>
             <Setter Property="FontWeight"
              Value="Bold" />
-        </Style>
+        </Style>-->
 
     </Window.Resources>
     <Grid>
         <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF060606"/>
-                <GradientStop Color="#FF57595F" Offset="1"/>
-                <GradientStop Color="#FF787F8E" Offset="0.506"/>
-                <GradientStop Color="#FF2D5171"/>
-            </LinearGradientBrush>
+            <StaticResource ResourceKey="BlueGrayLinearBrushKey"/>
         </Grid.Background>
 
         <Grid.RowDefinitions>
@@ -76,7 +71,7 @@
         <ComboBox Grid.Row="3" Grid.Column="1"
                 ItemsSource="{Binding Source={StaticResource AgentExperienceCollectionKey}}" 
                 SelectedValue="{Binding Specialty, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                 HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Width="120" FontFamily="Cambria" FontSize="12" Height="20">
+                 HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Width="120" Height="20">
         </ComboBox>
 
         <Label Content="Cost:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top" Height="29" Width="46"/>
