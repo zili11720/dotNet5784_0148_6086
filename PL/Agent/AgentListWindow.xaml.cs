@@ -1,17 +1,6 @@
-﻿using BO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PL.Agent;
 
@@ -34,14 +23,14 @@ public partial class AgentListWindow : Window
         set { SetValue(AgentListProperty, value); }
     }
 
-    public static readonly DependencyProperty AgentListProperty = 
+    public static readonly DependencyProperty AgentListProperty =
         DependencyProperty.Register("AgentList", typeof(IEnumerable<BO.AgentInList>), typeof(AgentListWindow), new PropertyMetadata(null));
-    public BO.AgentExperience Experience{ get; set; } = BO.AgentExperience.None;
-    
+    public BO.AgentExperience Experience { get; set; } = BO.AgentExperience.None;
+
 
     private void cbAgentExperience_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        AgentList= (Experience == BO.AgentExperience.None)?
+        AgentList = (Experience == BO.AgentExperience.None) ?
         s_bl?.Agent.ReadAll()! : s_bl?.Agent.ReadAll(item => item.Specialty == Experience)!;
     }
 

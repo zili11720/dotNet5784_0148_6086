@@ -224,7 +224,7 @@ internal class AgentImplementation : IAgent
         BO.Agent? boagent = Read(agentId);
 
         var complexityTasks = _dal.Task.ReadAll().GroupBy(t => (int)t.Complexity!);
-        var tasks = complexityTasks.FirstOrDefault(t => t.Key <= (int)boagent.Specialty!);
+        var tasks = complexityTasks.FirstOrDefault(t => t.Key <= (int)boagent!.Specialty!);
         if (tasks is null)
             throw new BO.BlDoesNotExistException("No available tasks for this agent's level");
         IEnumerable<TaskInList> availableTasks = tasks.Where(t => t is not null)

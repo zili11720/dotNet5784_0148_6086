@@ -15,24 +15,24 @@
     <Specialty>Field_agent</Specialty>
   </Agent>
   <Agent>
+    <Id>324852341</Id>
+    <Email>CrisKlark@gmail.com</Email>
+    <Cost>421</Cost>
+    <Name>Cris Klark</Name>
+    <Specialty>Investigator</Specialty>
+  </Agent>
+  <Agent>
     <Id>203979795</Id>
     <Email>JamesBond@gmail.com</Email>
-    <Cost>469</Cost>
+    <Cost>490</Cost>
     <Name>James Bond</Name>
     <Specialty>Field_agent</Specialty>
   </Agent>
   <Agent>
     <Id>365620924</Id>
     <Email>JoneAlon@gmail.com</Email>
-    <Cost>456</Cost>
+    <Cost>459</Cost>
     <Name>Jone Alon</Name>
-    <Specialty>Hacker</Specialty>
-  </Agent>
-  <Agent>
-    <Id>324852341</Id>
-    <Email>CrisKlark@gmail.com</Email>
-    <Cost>421</Cost>
-    <Name>Cris Klark</Name>
     <Specialty>Investigator</Specialty>
   </Agent>
 </ArrayOfAgent>
