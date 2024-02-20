@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="TaskListWindow" Height="450" Width="800"
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+        Title="TaskListWindow" Height="640" Width="900"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Activated="reLoadList_activated">
     <!--External grid-->
     <Grid>
         <Grid.RowDefinitions>
@@ -20,14 +20,26 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Complexity" Grid.Column="0" HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top" Foreground="Black"/>
-            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></ComboBox>
-                  <!--SelectedValue="{Binding Path=Experience ,Mode=TwoWay}"
-                  ItemsSource="{Binding Source={StaticResource  AgentExperienceCollectionKey}}" SelectionChanged="cbAgentExperience_SelectionChanged" />-->
+            <Label Content="Complexity" Grid.Column="0" HorizontalAlignment="Left" Margin="140,0,0,0" VerticalAlignment="Top" Foreground="Black"/>
+            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                SelectedValue="{Binding Path=Complexity ,Mode=TwoWay}"
+                ItemsSource="{Binding Source={StaticResource  AgentExperienceCollectionKey}}" SelectionChanged="cbTaskComplexity_SelectionChanged">
+            </ComboBox>
         </Grid>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Path=TaskList}">
-         
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Path=TaskList}" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="dgUpdateTask_DoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="Auto" />
+                <DataGridTextColumn Binding="{Binding Alias}" Header="Alias" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding Description}" Header="Description" Width="Auto"/>
+                <DataGridTemplateColumn Header="Status" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Status,Mode=TwoWay}" Background="{Binding Path=Status,Converter={StaticResource ConvertTaskStatusToColorKey}}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="btnAddNewTask_Click"/>
     </Grid>
 </Window>

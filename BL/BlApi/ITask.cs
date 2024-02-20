@@ -14,4 +14,5 @@ public interface ITask
     IEnumerable<BO.TaskInList> GetDependenciesList(int id);
     void Clear();
     void CreateSchedule();
+    IEnumerable<BO.TaskInList> GetTasksByComplexity(BO.AgentExperience complexity);
 }

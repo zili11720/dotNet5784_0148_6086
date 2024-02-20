@@ -34,7 +34,7 @@
         <!--A Botton for all agent,s content-->
         <Button Content="Handle Agents" HorizontalAlignment="Left" Margin="200,90,0,0" VerticalAlignment="Top" Height="100" Width="200" Click="btnAgents_Click"/>
         <!--A Botton for all task's content-->
-        <Button Content="Handle Tasks" HorizontalAlignment="Left" Margin="200,220,0,0" VerticalAlignment="Top" Height="100" Width="200" Click="btnAgents_Click" RenderTransformOrigin="-0.523,0.537"/>
+        <Button Content="Handle Tasks" HorizontalAlignment="Left" Margin="200,220,0,0" VerticalAlignment="Top" Height="100" Width="200"  RenderTransformOrigin="-0.523,0.537" Click="btnTasks_Click"/>
         <!--A button for Initialization-->
         <Button Content="Initialize Data" HorizontalAlignment="Left" Margin="445,90,0,0" VerticalAlignment="Top" Height="100" Width="200" Click="btnInitialize_Click"/>
         <!--Reset button-->

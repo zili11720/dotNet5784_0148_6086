@@ -4,7 +4,7 @@
     <Id>1</Id>
     <Alias>Finger ptints</Alias>
     <Description>Check for finger prints in the crime scene in order to to obtain incriminating evidence</Description>
-    <CreatedAtDate>2024-02-19T23:11:19.4481169+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:11.7143438+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Field_agent</Complexity>
@@ -20,7 +20,7 @@
     <Id>2</Id>
     <Alias>Security cameras photage</Alias>
     <Description>Go over security cameras phootages in order to identify the criminal's face</Description>
-    <CreatedAtDate>2024-02-19T23:11:19.5195412+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:11.7298152+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Hacker</Complexity>
@@ -36,7 +36,7 @@
     <Id>3</Id>
     <Alias>Confirm identity</Alias>
     <Description>Look for the criminal's identity in government databases according to the fingerprints and photoges found</Description>
-    <CreatedAtDate>2024-02-19T23:11:19.5946225+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:11.7734331+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Hacker</Complexity>
@@ -52,7 +52,7 @@
     <Id>4</Id>
     <Alias>Bank activity</Alias>
     <Description>Search previous bank activities of the criminal</Description>
-    <CreatedAtDate>2024-02-19T23:11:19.6379604+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:11.8069161+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Hacker</Complexity>
@@ -68,7 +68,7 @@
     <Id>5</Id>
     <Alias>Locate house</Alias>
     <Description>Locate the criminal's house</Description>
-    <CreatedAtDate>2024-02-19T23:11:19.7152499+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:11.8350519+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Hacker</Complexity>
@@ -84,7 +84,7 @@
     <Id>6</Id>
     <Alias>Locate car</Alias>
     <Description>Locate the criminal's car</Description>
-    <CreatedAtDate>2024-02-19T23:11:19.8316211+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:11.8623459+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Hacker</Complexity>
@@ -100,7 +100,7 @@
     <Id>7</Id>
     <Alias>Citation device</Alias>
     <Description>Plant a citation device in the criminal's car</Description>
-    <CreatedAtDate>2024-02-19T23:11:19.8631112+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:11.8878842+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Field_agent</Complexity>
@@ -116,7 +116,7 @@
     <Id>8</Id>
     <Alias>Security Cameras control</Alias>
     <Description>Hack security Cameras in the criminal's house</Description>
-    <CreatedAtDate>2024-02-19T23:11:19.9071162+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:11.9261406+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Hacker</Complexity>
@@ -132,7 +132,7 @@
     <Id>9</Id>
     <Alias>Find witnesses</Alias>
     <Description>Find optional witnesses in order to get more evidences</Description>
-    <CreatedAtDate>2024-02-19T23:11:19.9391862+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:11.9981647+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Investigator</Complexity>
@@ -148,7 +148,7 @@
     <Id>10</Id>
     <Alias>witness1</Alias>
     <Description>Investigate first witness</Description>
-    <CreatedAtDate>2024-02-19T23:11:19.9711326+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.0251179+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Investigator</Complexity>
@@ -164,7 +164,7 @@
     <Id>11</Id>
     <Alias>witness2</Alias>
     <Description>Investigate second witness</Description>
-    <CreatedAtDate>2024-02-19T23:11:20.0884044+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.047696+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Investigator</Complexity>
@@ -180,7 +180,7 @@
     <Id>12</Id>
     <Alias>witness3</Alias>
     <Description>Investigate third witness</Description>
-    <CreatedAtDate>2024-02-19T23:11:20.1241918+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.1180472+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Investigator</Complexity>
@@ -196,7 +196,7 @@
     <Id>13</Id>
     <Alias>Past report</Alias>
     <Description>Make a detailed report about the criminal's past</Description>
-    <CreatedAtDate>2024-02-19T23:11:20.1592714+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.1539671+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Investigator</Complexity>
@@ -212,7 +212,7 @@
     <Id>14</Id>
     <Alias>Compare testimonies</Alias>
     <Description>Compare the testimonies of the witnesses in order to check reliability</Description>
-    <CreatedAtDate>2024-02-19T23:11:20.3454586+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.2312352+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Investigator</Complexity>
@@ -228,7 +228,7 @@
     <Id>15</Id>
     <Alias>Witnesses report</Alias>
     <Description>Make a report on the witnesses testimonies and their conclusions</Description>
-    <CreatedAtDate>2024-02-19T23:11:20.3849945+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.2701155+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Investigator</Complexity>
@@ -244,7 +244,7 @@
     <Id>16</Id>
     <Alias>House watch</Alias>
     <Description>Watch the criminal's house and check for suspicious activities</Description>
-    <CreatedAtDate>2024-02-19T23:11:20.4399112+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.2887921+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Field_agent</Complexity>
@@ -260,7 +260,7 @@
     <Id>17</Id>
     <Alias>House sketch</Alias>
     <Description>Make a live model of the criminal's house in order to prepare for the raid</Description>
-    <CreatedAtDate>2024-02-19T23:11:20.4872458+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.3115195+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Investigator</Complexity>
@@ -276,7 +276,7 @@
     <Id>18</Id>
     <Alias>Daily following</Alias>
     <Description>Follow the criminal around for a whole day in order to understand his daily routine</Description>
-    <CreatedAtDate>2024-02-19T23:11:20.5403586+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.335872+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Field_agent</Complexity>
@@ -292,7 +292,7 @@
     <Id>19</Id>
     <Alias>daily schedule report</Alias>
     <Description>Make a report about the daily schedule of the criminal</Description>
-    <CreatedAtDate>2024-02-19T23:11:20.5861066+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.355679+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Field_agent</Complexity>
@@ -308,7 +308,7 @@
     <Id>20</Id>
     <Alias>Chip implantation</Alias>
     <Description>Implant a chip in the criminal's phone</Description>
-    <CreatedAtDate>2024-02-19T23:11:20.7270727+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.4327461+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Field_agent</Complexity>
@@ -324,7 +324,7 @@
     <Id>21</Id>
     <Alias>Staff meeting</Alias>
     <Description>Have a staff meeting about your finding and plan the final act</Description>
-    <CreatedAtDate>2024-02-19T23:11:20.809773+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.4594956+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Investigator</Complexity>
@@ -340,7 +340,7 @@
     <Id>22</Id>
     <Alias>Equipment inspection</Alias>
     <Description>Check the functionality of the equipment needed to the final mission</Description>
-    <CreatedAtDate>2024-02-19T23:11:20.8742564+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.4900099+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Field_agent</Complexity>
@@ -356,7 +356,7 @@
     <Id>23</Id>
     <Alias>Complete equipment deficiencies</Alias>
     <Description>Buy/fix equipment as needed</Description>
-    <CreatedAtDate>2024-02-19T23:11:20.9169985+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.520938+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Field_agent</Complexity>
@@ -372,7 +372,7 @@
     <Id>24</Id>
     <Alias>Ranges</Alias>
     <Description>Practice in Ranges</Description>
-    <CreatedAtDate>2024-02-19T23:11:21.1000362+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.8165642+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Field_agent</Complexity>
@@ -388,7 +388,7 @@
     <Id>25</Id>
     <Alias>Build simulation</Alias>
     <Description>Build a simulation of the final mission</Description>
-    <CreatedAtDate>2024-02-19T23:11:21.5083168+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.8592726+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Investigator</Complexity>
@@ -404,7 +404,7 @@
     <Id>26</Id>
     <Alias>Practice simulatin</Alias>
     <Description>Practice the simulatin</Description>
-    <CreatedAtDate>2024-02-19T23:11:21.5682216+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:12.9751628+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Field_agent</Complexity>
@@ -420,7 +420,7 @@
     <Id>27</Id>
     <Alias>Quote to implanted devices</Alias>
     <Description>Quote to implanted devices in the criminal's care and personal phone</Description>
-    <CreatedAtDate>2024-02-19T23:11:21.7684004+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:13.035922+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Hacker</Complexity>
@@ -436,7 +436,7 @@
     <Id>28</Id>
     <Alias>Create final raid plan</Alias>
     <Description>Decide on the final raid details according to the results of the simulation</Description>
-    <CreatedAtDate>2024-02-19T23:11:21.9119094+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-20T20:41:13.0597469+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <Complexity>Investigator</Complexity>

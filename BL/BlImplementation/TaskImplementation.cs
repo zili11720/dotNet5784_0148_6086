@@ -272,8 +272,8 @@ internal class TaskImplementation : ITask
         {
             if (updatedTask.TaskAgent is not null)
                 throw new BO.BlProjectStageException("Can't assign an agent for a task on current project stage");
-            DO.Agent? agentOfTask = _dal.Agent.Read(taskToUpdate.TaskAgent!.Id);
-            if ((BO.AgentExperience)updatedTask.Complexity! > (BO.AgentExperience)agentOfTask.Specialty!)
+            DO.Agent? agentOfTask = _dal.Agent.Read(taskToUpdate!.TaskAgent!.Id);
+            if ((BO.AgentExperience)updatedTask.Complexity! > (BO.AgentExperience)agentOfTask!.Specialty!)
                 throw new BO.BlWrongAgentForTaskException("Agent specialty can't be lower than task comlexity");
         }
     }
@@ -340,5 +340,18 @@ internal class TaskImplementation : ITask
             return TaskStatus.Done;
         else
             throw new BlWrongDateException("Task's dates are impossible");
+    }
+
+    public IEnumerable<BO.TaskInList> GetTasksByComplexity(BO.AgentExperience complexity) //לא ממייך
+    {
+        return _dal.Task.ReadAll()
+            .Where(item =>(BO.AgentExperience?)item.Complexity==(BO.AgentExperience?)complexity)
+            .Select(item => new BO.TaskInList()
+            {
+                Id = item!.Id,
+                Alias = item.Alias,
+                Description = item.Description,
+                Status = CalcStatus(item),
+            });
     }
 }

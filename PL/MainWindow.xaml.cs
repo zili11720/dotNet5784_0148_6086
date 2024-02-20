@@ -1,4 +1,5 @@
 ﻿using PL.Agent;
+using PL.Task;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,10 @@ public partial class MainWindow : Window
     private void btnAgents_Click(object sender, RoutedEventArgs e)
     {
         new AgentListWindow().Show();
+    }
+    private void btnTasks_Click(object sender, RoutedEventArgs e)
+    {
+        new TaskListWindow().Show();
     }
 
     private void btnInitialize_Click(object sender, RoutedEventArgs e)

@@ -30,8 +30,8 @@ public partial class AgentWindow : Window
         }
         catch (BO.BlDoesNotExistException ex)
         {
-            CurrentAgent = null;
-            MessageBox.Show(ex.Message, "Could not find an agent with a given id", MessageBoxButton.OK, MessageBoxImage.Error);
+            CurrentAgent = null!;
+            MessageBox.Show(ex.Message, "Could not find an agent with the given id", MessageBoxButton.OK, MessageBoxImage.Error);
             this.Close();
         }
     }

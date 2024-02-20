@@ -48,7 +48,8 @@ public partial class AgentListWindow : Window
         }
     }
 
-    private void reOpenList_activated(object sender, EventArgs e)
+
+    private void reLoadList_activated(object sender, EventArgs e)
     {
         AgentList = (Experience == BO.AgentExperience.None) ?
         s_bl?.Agent.ReadAll()! : s_bl?.Agent.ReadAll(item => item.Specialty == Experience)!;
