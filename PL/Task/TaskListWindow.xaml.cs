@@ -19,9 +19,28 @@ namespace PL.Task
     /// </summary>
     public partial class TaskListWindow : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public TaskListWindow()
         {
             InitializeComponent();
+            TaskList = s_bl.Task.ReadAll();
         }
+
+        public IEnumerable<BO.TaskInList> TaskList
+        {
+            get { return (IEnumerable<BO.TaskInList>)GetValue(TaskListProperty); }
+            set { SetValue(TaskListProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TaskListProperty =
+            DependencyProperty.Register("TaskListProperty", typeof(IEnumerable<BO.TaskInList>), typeof(TaskListWindow), new PropertyMetadata(null));
     }
+
+
+    
+
+
+
+
 }

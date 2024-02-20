@@ -25,8 +25,8 @@
                   <!--SelectedValue="{Binding Path=Experience ,Mode=TwoWay}"
                   ItemsSource="{Binding Source={StaticResource  AgentExperienceCollectionKey}}" SelectionChanged="cbAgentExperience_SelectionChanged" />-->
         </Grid>
-        <DataGrid Grid.Row="1">
-
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Path=TaskList}">
+         
         </DataGrid>
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
     </Grid>
