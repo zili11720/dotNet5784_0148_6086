@@ -5,121 +5,124 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="TaskWindow" Height="820" Width="550"
+        Title="TaskWindow" Height="600" Width="550"
          DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
-    <Grid Margin="0,10,0,-10">
-        <Grid.Background>
-            <StaticResource ResourceKey="BlueGrayLinearBrushKey"/>
-        </Grid.Background>
+    <ScrollViewer>
+        <Grid Margin="0,10,0,-10">
+            <Grid.Background>
+                <StaticResource ResourceKey="BlueGrayLinearBrushKey"/>
+            </Grid.Background>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="1.8*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="1.4*"/>
-        </Grid.ColumnDefinitions>
-        <Label Content="Id:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Width="120" Height="29" />
-        <TextBox Grid.Row="0" Grid.Column="1"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.8*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.4*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Id:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Width="120" Height="29" FontSize="16" />
+            <TextBox Grid.Row="0" Grid.Column="1"
           Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-          IsEnabled="False"
+          IsEnabled="False" 
           HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="140" Height="18"/>
 
-        <Label Content="Alias:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
-        <TextBox Grid.Row="1" Grid.Column="1"
+            <Label Content="Alias:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
+            <TextBox Grid.Row="1" Grid.Column="1"
           Text="{Binding Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="140" Height="17"/>
+          HorizontalAlignment="Left" Margin="50,20,0,0"  VerticalAlignment="Top" Width="140" Height="17" TextWrapping="Wrap"/>
 
-        <Label Content="Description:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="120"/>
-        <TextBox Grid.Row="2" Grid.Column="1"
+            <Label Content="Description:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="120"/>
+            <TextBox Grid.Row="2" Grid.Column="1"
           Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="60"/>
+          HorizontalAlignment="Left" Margin="50,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="60" RenderTransformOrigin="0.478,0.134"/>
 
-        <Label Content="Complexity:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="28" Width="120"/>
-        <ComboBox Grid.Row="3" Grid.Column="1"
-         ItemsSource="{Binding Source={StaticResource AgentExperienceCollectionKey}}" 
+            <Label Content="Complexity:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="28" Width="120"/>
+            <ComboBox Grid.Row="3" Grid.Column="1"
+            ItemsSource="{Binding Source={StaticResource AgentExperienceCollectionKey}}" 
          SelectedValue="{Binding Complexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-         HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Width="140" Height="20">
-        </ComboBox>
+         HorizontalAlignment="Left" Margin="50,17,0,0" VerticalAlignment="Top" Width="140" Height="20">
+            </ComboBox>
 
-        <Label Content="Status:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="90"/>
-        <TextBox Grid.Row="4" Grid.Column="1" IsEnabled="False"
+            <Label Content="Status:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="90"/>
+            <TextBox Grid.Row="4" Grid.Column="1" IsEnabled="False"
           Text="{Binding Status, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
           HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18"/>
 
-        <Label Content="Assigned Agent Id:" Grid.Row="5" Grid.Column="0"  HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="28" Width="149"/>
-        <TextBox Grid.Row="5"  Grid.Column="1"
+            <Label Content="Assigned Agent Id:" Grid.Row="5" Grid.Column="0"  HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="28" Width="149"/>
+            <TextBox Grid.Row="5"  Grid.Column="1"
           Text="{Binding TaskAgent.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
           HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="17" IsEnabled="False" Background="White"/>
 
-        <Label Content="Assigned Agent Name:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Height="29" Width="179"/>
-        <TextBox Grid.Row="6" Grid.Column="1" 
+            <Label Content="Assigned Agent Name:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Height="29" Width="179"/>
+            <TextBox Grid.Row="6" Grid.Column="1" 
           Text="{Binding TaskAgent.Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
           HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
 
-        <Label Content="Create At Date:" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
-        <TextBox Grid.Row="7" Grid.Column="1" 
+            <Label Content="Create At Date:" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
+            <TextBox Grid.Row="7" Grid.Column="1" 
          Text="{Binding CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
+         HorizontalAlignment="Left" Margin="50,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
 
-        <Label Content="Scheduled Date:" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
-        <TextBox Grid.Row="8" Grid.Column="1" 
+            <Label Content="Scheduled Date:" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
+            <TextBox Grid.Row="8" Grid.Column="1" 
          Text="{Binding ScheduledDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
+         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1" Grid.RowSpan="2"/>
 
-        <Label Content="start Date:" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
-        <TextBox Grid.Row="9" Grid.Column="1" 
+            <Label Content="start Date:" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
+            <TextBox Grid.Row="9" Grid.Column="1" 
          Text="{Binding StartDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
 
-        <Label Content="Required Effort Time:" Grid.Row="10" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="179"/>
-        <TextBox Grid.Row="10" Grid.Column="1" 
+            <Label Content="Required Effort Time:" Grid.Row="10" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="179"/>
+            <TextBox Grid.Row="10" Grid.Column="1" 
          Text="{Binding RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
 
-        <Label Content="Estimated Complete Date:" Grid.Row="11" Grid.Column="0" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Height="29" Width="200"/>
-        <TextBox Grid.Row="11" Grid.Column="1" 
+            <Label Content="Estimated Complete Date:" Grid.Row="11" Grid.Column="0" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Height="29" Width="200"/>
+            <TextBox Grid.Row="11" Grid.Column="1" 
          Text="{Binding EstimatedCompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
 
-        <Label Content="Complete Date:" Grid.Row="12" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
-        <TextBox Grid.Row="12" Grid.Column="1" 
+            <Label Content="Complete Date:" Grid.Row="12" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
+            <TextBox Grid.Row="12" Grid.Column="1" 
          Text="{Binding CompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
 
-        <Label Content="Deliverables:" Grid.Row="13" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
-        <TextBox Grid.Row="13" Grid.Column="1" 
+            <Label Content="Deliverables:" Grid.Row="13" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
+            <TextBox Grid.Row="13" Grid.Column="1" 
          Text="{Binding Deliverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
 
-        <Label Content="Remarks:" Grid.Row="14" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
-        <TextBox Grid.Row="14" Grid.Column="1" 
+            <Label Content="Remarks:" Grid.Row="14" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
+            <TextBox Grid.Row="14" Grid.Column="1" 
          Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="50" Background="White" BorderBrush="#FFF1F1F1"/>
+         HorizontalAlignment="Left" Margin="50,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="50" Background="White" BorderBrush="#FFF1F1F1"/>
 
-        <Label Content="Dependencies:" Grid.Row="15" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
-        <Button Grid.Row="15" Grid.Column="1" Content="Watch Dependencies" HorizontalAlignment="Left"  Width="140" Height="18" Margin="50,7,0,11" >
-        </Button>
+            <Label Content="Dependencies:" Grid.Row="15" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
+            <Button Grid.Row="15" Grid.Column="1" Content="Watch Dependencies" HorizontalAlignment="Left"  Width="140" Height="18" Margin="50,18,0,1" >
+            </Button>
 
 
-        <Button Content="Button"  Margin="60,10,0,0" Grid.Row="16" Grid.RowSpan="2" Height="20" Width="100"
-           HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.467,1.704" Background="#FFA2B0B7" FontFamily="Cambria" FontWeight="Bold">
-        </Button>
-    </Grid>
+            <Button Content="Button"  Margin="50,10,0,0" Grid.Row="16" Height="20" Width="100"
+           HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.467,1.704" Background="#FFA2B0B7" FontFamily="Cambria" FontWeight="Bold"/>
+        </Grid>
+    </ScrollViewer>
+
 </Window>

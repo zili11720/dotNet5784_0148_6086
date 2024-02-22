@@ -32,7 +32,7 @@
         <TextBox Grid.Row="0" Grid.Column="1"
                  Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
                  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToIsEnabledKey}}"
-                 HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18"/>
+                 HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18" MaxLength="9"/>
 
         <Label Content="Name:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
         <TextBox Grid.Row="1" Grid.Column="1"

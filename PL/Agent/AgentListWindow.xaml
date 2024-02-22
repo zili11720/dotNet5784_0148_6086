@@ -25,21 +25,30 @@
                       SelectedValue="{Binding Path=Experience ,Mode=TwoWay}"
                       ItemsSource="{Binding Source={StaticResource  AgentExperienceCollectionKey}}" SelectionChanged="cbAgentExperience_SelectionChanged" />
         </Grid>
-        <ListView Margin ="5" Grid.Row="1" ItemsSource="{Binding Path=AgentList}" MouseDoubleClick="lsUpdateAgent_DoubleClick" BorderBrush="#FF91959C" Foreground="#FF0E0E0E">
+        <!--<ListView Margin ="5" Grid.Row="1" ItemsSource="{Binding Path=AgentList}" MouseDoubleClick="lsUpdateAgent_DoubleClick" BorderBrush="#FF91959C" Foreground="#FF0E0E0E">
             <ListView.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF060606"/>
                     <GradientStop Color="WhiteSmoke"  Offset="1"/>
                     <GradientStop Color="DimGray"  Offset="0.506"/>
                     <GradientStop Color="Gray"/>
-                </LinearGradientBrush>
-            </ListView.Background>
+                </LinearGradientBrush>-->
+            <!--</ListView.Background>
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
-        </ListView>
+        </ListView>-->
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Path=AgentList}" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="lsUpdateAgent_DoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="*" />
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="*"/>
+                <DataGridTextColumn Binding="{Binding CurrentTask.Id}" Header="CurrentTask Id" Width="*"/>
+                <DataGridTextColumn Binding="{Binding CurrentTask.Alias}" Header="CurrentTask Alias" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Specialty}" Header="Specialty" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="btnAddNewAgent_Click"/>
     </Grid>
 </Window>

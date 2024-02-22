@@ -27,17 +27,17 @@
         </Style>
 
     </Window.Resources>
-    <Grid>
+    <Grid Margin="0,12,0,-12">
         <Grid.Background>
             <ImageBrush ImageSource="/mainwindowbackround.jpg" Opacity="0.7"/>
         </Grid.Background>
         <!--A Botton for all agent,s content-->
-        <Button Content="Handle Agents" HorizontalAlignment="Left" Margin="200,90,0,0" VerticalAlignment="Top" Height="100" Width="200" Click="btnAgents_Click"/>
+        <Button Content="Handle Agents" HorizontalAlignment="Left" Margin="170,90,0,0" VerticalAlignment="Top" Height="100" Width="200" Click="btnAgents_Click" FontWeight="Bold" FontSize="25" FontStyle="Italic"/>
         <!--A Botton for all task's content-->
-        <Button Content="Handle Tasks" HorizontalAlignment="Left" Margin="200,220,0,0" VerticalAlignment="Top" Height="100" Width="200"  RenderTransformOrigin="-0.523,0.537" Click="btnTasks_Click"/>
+        <Button Content="Handle Tasks" HorizontalAlignment="Left" Margin="170,210,0,0" VerticalAlignment="Top" Height="100" Width="200"  RenderTransformOrigin="-0.523,0.537" Click="btnTasks_Click" FontStyle="Italic" FontSize="25"/>
         <!--A button for Initialization-->
-        <Button Content="Initialize Data" HorizontalAlignment="Left" Margin="445,90,0,0" VerticalAlignment="Top" Height="100" Width="200" Click="btnInitialize_Click"/>
+        <Button Content="Initialize Data" HorizontalAlignment="Left" Margin="450,90,0,0" VerticalAlignment="Top" Height="100" Width="200" Click="btnInitialize_Click" FontSize="25" FontStyle="Italic"/>
         <!--Reset button-->
-        <Button Content="Reset Data" HorizontalAlignment="Left" Margin="445,220,0,0" VerticalAlignment="Top" Height="100" Width="200" Click="btnReset_Click"/>
+        <Button Content="Reset Data" HorizontalAlignment="Left" Margin="450,210,0,0" VerticalAlignment="Top" Height="100" Width="200" Click="btnReset_Click" FontSize="25" FontStyle="Italic"/>
     </Grid>
 </Window>
