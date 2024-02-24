@@ -120,8 +120,9 @@
             </Button>
 
 
-            <Button Content="Button"  Margin="50,10,0,0" Grid.Row="16" Height="20" Width="100"
-           HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.467,1.704" Background="#FFA2B0B7" FontFamily="Cambria" FontWeight="Bold"/>
+            <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}"  
+             Margin="50,10,0,0" Grid.Row="16" Height="20" Width="100"
+            HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.467,1.704" Background="#FFA2B0B7" FontFamily="Cambria" FontWeight="Bold" Click="btnAddUpdate_Click"/>
         </Grid>
     </ScrollViewer>
 

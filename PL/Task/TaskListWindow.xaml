@@ -28,13 +28,22 @@
         </Grid>
         <DataGrid Grid.Row="1" ItemsSource="{Binding Path=TaskList}" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="dgUpdateTask_DoubleClick">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="Auto" />
-                <DataGridTextColumn Binding="{Binding Alias}" Header="Alias" Width="Auto"/>
-                <DataGridTextColumn Binding="{Binding Description}" Header="Description" Width="Auto"/>
-                <DataGridTemplateColumn Header="Status" Width="Auto">
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="*" />
+                <DataGridTextColumn Binding="{Binding Alias}" Header="Alias" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Description}" Header="Description" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Complexity}" Header="Complexity" Width="*"/>
+                <DataGridTemplateColumn Header="Status" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Status,Mode=TwoWay}" Background="{Binding Path=Status,Converter={StaticResource ConvertTaskStatusToColorKey}}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!-- Button Column -->
+                <DataGridTemplateColumn Header="Actions" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete Agent"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -170,7 +170,8 @@ internal class AgentImplementation : IAgent
             Id = doTask.Id,
             Alias = doTask.Alias,
             Description = doTask.Description,
-            Status = _task.CalcStatus(doTask)
+            Status = _task.CalcStatus(doTask),
+            Complexity = (BO.AgentExperience?)doTask.Complexity
         };
     }
     /// <summary>
@@ -188,7 +189,8 @@ internal class AgentImplementation : IAgent
                    Id = doTask.Id,
                    Alias = doTask.Alias,
                    Description = doTask.Description,
-                   Status = _task.CalcStatus(doTask)
+                   Status = _task.CalcStatus(doTask),
+                   Complexity = (BO.AgentExperience?)doTask.Complexity
                };
     }
 
@@ -234,7 +236,8 @@ internal class AgentImplementation : IAgent
                                                           Id = t.Id,
                                                           Alias = t.Alias,
                                                           Description = t.Description,
-                                                          Status = _task.CalcStatus(t)
+                                                          Status = _task.CalcStatus(t),
+                                                          Complexity = (BO.AgentExperience?)t.Complexity
                                                       });
 
         if (availableTasks is null)

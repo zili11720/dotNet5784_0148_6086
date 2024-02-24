@@ -13,56 +13,89 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL.Task
+namespace PL.Task;
+
+/// <summary>
+/// Interaction logic for TaskWindow.xaml
+/// </summary>
+public partial class TaskWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for TaskWindow.xaml
-    /// </summary>
-    public partial class TaskWindow : Window
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    public BO.Task CurrentTask
     {
-        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public BO.Task CurrentTask
+        get { return (BO.Task)GetValue(CurrentTaskProperty); }
+        set { SetValue(CurrentTaskProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for CurrentTask.This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty CurrentTaskProperty =
+        DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
+
+    public TaskWindow(int TaskId=0)
+    {
+        InitializeComponent();
+        try
         {
-            get { return (BO.Task)GetValue(CurrentTaskProperty); }
-            set { SetValue(CurrentTaskProperty, value); }
+            //Fetch the task with the given id or create a new one with defult values
+            CurrentTask = (TaskId is not 0 ) ? s_bl.Task.Read(TaskId)! : new BO.Task()
+            { 
+                //id=next running number
+                Alias = "",
+                Description="",
+                Status=BO.TaskStatus.Unscheduled ,
+                CreatedAtDate=DateTime.Now,
+                ScheduledDate=null,
+                StartDate=null,
+                RequiredEffortTime=null,
+                EstimatedCompleteDate=null,
+                DeadlineDate=null,
+                CompleteDate=null,
+                Deliverables="",
+                Remarks="",
+                Complexity = null,
+                TaskAgent=null,
+                DependenciesList=null,
+            };
         }
-
-        // Using a DependencyProperty as the backing store for CurrentTask.This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CurrentTaskProperty =
-            DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
-
-        public TaskWindow(int TaskId=0)
+        catch (BO.BlDoesNotExistException ex)
         {
-            InitializeComponent();
-            try
+            CurrentTask = null!;
+            MessageBox.Show(ex.Message, "Could not find a task with the a given id", MessageBoxButton.OK, MessageBoxImage.Error);
+            this.Close();
+        }
+    }
+    private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            if (s_bl.Task.ReadAll().Any(a => a.Id == CurrentTask.Id) is true)
             {
-                //Fetch the task with the given id or create a new one with defult values
-                CurrentTask = (TaskId is not 0 ) ? s_bl.Task.Read(TaskId)! : new BO.Task()
-                { 
-                    //id=next running number
-                    Alias = "",
-                    Description="",
-                    Status=BO.TaskStatus.Unscheduled ,
-                    CreatedAtDate=DateTime.Now,
-                    ScheduledDate=null,
-                    StartDate=null,
-                    RequiredEffortTime=null,
-                    EstimatedCompleteDate=null,
-                    DeadlineDate=null,
-                    CompleteDate=null,
-                    Deliverables="",
-                    Remarks="",
-                    Complexity = null,
-                    TaskAgent=null,
-                    DependenciesList=null,
-                };
-            }
-            catch (BO.BlDoesNotExistException ex)
-            {
-                CurrentTask = null!;
-                MessageBox.Show(ex.Message, "Could not find a task with the a given id", MessageBoxButton.OK, MessageBoxImage.Error);
+                s_bl.Task.Update(CurrentTask);
+                MessageBox.Show("Task was successfuly updated", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
+            else
+            {
+                s_bl.Task.Create(CurrentTask);
+                MessageBox.Show("Task was successfuly added", "success", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
+
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Worng input", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+    }
+
+    private void btnOpenDepencyList_Click(object sender, RoutedEventArgs e)
+    {
+        if (((sender as Button)?.DataContext as BO.Task) is BO.Task task)
+        {
+            new DependencyListWindow(task.Id).ShowDialog();
         }
     }
 }
+
+

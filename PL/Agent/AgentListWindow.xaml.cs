@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using PL.Task;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -41,7 +42,7 @@ public partial class AgentListWindow : Window
 
     private void lsUpdateAgent_DoubleClick(object sender, MouseButtonEventArgs e)
     {
-        BO.AgentInList? agentInList = (sender as ListView)?.SelectedItem as BO.AgentInList;
+        BO.AgentInList? agentInList = (sender as DataGrid)?.SelectedItem as BO.AgentInList;
         if (agentInList is not null)
         {
             new AgentWindow(agentInList.Id).ShowDialog() ;

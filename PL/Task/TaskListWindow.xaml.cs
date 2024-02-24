@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+//using PL.Tools.ToObservableCollectionExtansion;
 
 namespace PL.Task
 {
@@ -27,7 +28,7 @@ namespace PL.Task
             TaskList = s_bl.Task.ReadAll();
         }
 
-        public IEnumerable<BO.TaskInList> TaskList
+        public IEnumerable<BO.TaskInList> TaskList     //ObservablCollection
         {
             get { return (IEnumerable<BO.TaskInList>)GetValue(TaskListProperty); }
             set { SetValue(TaskListProperty, value); }
@@ -36,12 +37,12 @@ namespace PL.Task
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TaskListProperty =
             DependencyProperty.Register("TaskListProperty", typeof(IEnumerable<BO.TaskInList>), typeof(TaskListWindow), new PropertyMetadata(null));
-
+        
         public BO.AgentExperience Complexity { get; set; } = BO.AgentExperience.None;
         private void cbTaskComplexity_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TaskList = (Complexity == BO.AgentExperience.None) ?
-            s_bl?.Task.ReadAll()! : s_bl?.Task.GetTasksByComplexity(Complexity)!; //לא עובד
+            s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => item.Complexity == Complexity)!;
         }
 
         private void btnAddNewTask_Click(object sender, RoutedEventArgs e)
@@ -56,19 +57,13 @@ namespace PL.Task
             {
                 new TaskWindow(taskInList.Id).ShowDialog();
             }
+
         }
 
         private void reLoadList_activated(object sender, EventArgs e)
         {
             TaskList = (Complexity == BO.AgentExperience.None) ?
-            s_bl?.Task.ReadAll()! : s_bl?.Task.GetTasksByComplexity(Complexity)!; //לא עובד
+            s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => item.Complexity == Complexity)!;
         }
     }
-
-
-    
-
-
-
-
 }
