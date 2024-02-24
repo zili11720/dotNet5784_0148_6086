@@ -21,6 +21,9 @@ namespace PL.Task;
 public partial class TaskWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+    private event Action <int, bool> _AddOrUpdate;
+
     public BO.Task CurrentTask
     {
         get { return (BO.Task)GetValue(CurrentTaskProperty); }
@@ -31,9 +34,10 @@ public partial class TaskWindow : Window
     public static readonly DependencyProperty CurrentTaskProperty =
         DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
 
-    public TaskWindow(int TaskId=0)
+    public TaskWindow(Action <int,bool> AddOrUpdate, int TaskId=0)
     {
         InitializeComponent();
+        _AddOrUpdate = AddOrUpdate;
         try
         {
             //Fetch the task with the given id or create a new one with defult values
@@ -71,12 +75,14 @@ public partial class TaskWindow : Window
             if (s_bl.Task.ReadAll().Any(a => a.Id == CurrentTask.Id) is true)
             {
                 s_bl.Task.Update(CurrentTask);
+                _AddOrUpdate(CurrentTask.Id, true);
                 MessageBox.Show("Task was successfuly updated", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
             else
             {
                 s_bl.Task.Create(CurrentTask);
+                _AddOrUpdate(CurrentTask.Id,false);
                 MessageBox.Show("Task was successfuly added", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
 

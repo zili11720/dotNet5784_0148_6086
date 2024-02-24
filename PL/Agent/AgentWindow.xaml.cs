@@ -8,7 +8,8 @@ namespace PL.Agent;
 public partial class AgentWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-
+    private event Action<int, bool> _AddOrUpdate;
+    private readonly bool _updated;
     public BO.Agent CurrentAgent
     {
         get { return (BO.Agent)GetValue(CurrentAgentProperty); }
@@ -20,9 +21,10 @@ public partial class AgentWindow : Window
         DependencyProperty.Register("CurrentAgent", typeof(BO.Agent), typeof(AgentWindow), new PropertyMetadata(null));
 
 
-    public AgentWindow(int AgentId = 0/*default Id of the agent*/)
+    public AgentWindow(Action<int,bool> AddOrUpdate,int AgentId = 0/*default Id of the agent*/)
     {
         InitializeComponent();
+        _AddOrUpdate = AddOrUpdate;
         try
         {
             //Fetch the agent with the given id or create a new one with defult values if the id does not exist
@@ -43,12 +45,14 @@ public partial class AgentWindow : Window
             if (s_bl.Agent.ReadAll().Any(a => a.Id == CurrentAgent.Id) is true)
             {
                 s_bl.Agent.Update(CurrentAgent);
+                _AddOrUpdate(CurrentAgent.Id, true);
                 MessageBox.Show("Agent was successfuly updated", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
             else
             {
                 s_bl.Agent.Create(CurrentAgent);
+                _AddOrUpdate(CurrentAgent.Id, false);
                 MessageBox.Show("Agent was successfuly added", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
 

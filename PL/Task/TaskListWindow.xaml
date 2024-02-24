@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
         Title="TaskListWindow" Height="640" Width="900"
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Activated="reLoadList_activated">
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+    <!--" Activated="reLoadList_activated"-->
     <!--External grid-->
     <Grid>
         <Grid.RowDefinitions>

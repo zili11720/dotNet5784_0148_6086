@@ -1,4 +1,5 @@
-﻿using PL.Task;
+﻿using PL.Tools;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,12 +16,12 @@ public partial class AgentListWindow : Window
     public AgentListWindow()
     {
         InitializeComponent();
-        AgentList = s_bl?.Agent.ReadAll()!;
+        AgentList = s_bl?.Agent.ReadAll()!.ToObservableCollection();
     }
 
-    public IEnumerable<BO.AgentInList> AgentList
+    public ObservableCollection<BO.AgentInList> AgentList
     {
-        get { return (IEnumerable<BO.AgentInList>)GetValue(AgentListProperty); }
+        get { return (ObservableCollection<BO.AgentInList>)GetValue(AgentListProperty); }
         set { SetValue(AgentListProperty, value); }
     }
 
@@ -32,12 +33,12 @@ public partial class AgentListWindow : Window
     private void cbAgentExperience_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         AgentList = (Experience == BO.AgentExperience.None) ?
-        s_bl?.Agent.ReadAll()! : s_bl?.Agent.ReadAll(item => item.Specialty == Experience)!;
+        s_bl?.Agent.ReadAll()!.ToObservableCollection() : s_bl?.Agent.ReadAll(item => item.Specialty == Experience)!.ToObservableCollection();
     }
 
     private void btnAddNewAgent_Click(object sender, RoutedEventArgs e)
     {
-        new AgentWindow().ShowDialog();
+        new AgentWindow(AddOrUpdate).ShowDialog();
     }
 
     private void lsUpdateAgent_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -45,14 +46,31 @@ public partial class AgentListWindow : Window
         BO.AgentInList? agentInList = (sender as DataGrid)?.SelectedItem as BO.AgentInList;
         if (agentInList is not null)
         {
-            new AgentWindow(agentInList.Id).ShowDialog() ;
+            new AgentWindow(AddOrUpdate,agentInList.Id).ShowDialog();
         }
     }
-
-
-    private void reLoadList_activated(object sender, EventArgs e)
+    private void AddOrUpdate(int Id, bool _updated)
     {
-        AgentList = (Experience == BO.AgentExperience.None) ?
-        s_bl?.Agent.ReadAll()! : s_bl?.Agent.ReadAll(item => item.Specialty == Experience)!;
+        BO.AgentInList agentInList = new BO.AgentInList()
+        {
+            Id = Id,
+            Name = s_bl.Agent.Read(Id)!.Name,
+            Specialty = (BO.AgentExperience?)s_bl.Agent.Read(Id)!.Specialty,
+            CurrentTask = null//s_bl.Agent.Read(Id).CurrentTask
+        };
+        if (_updated)
+        {
+            var oldTask = AgentList.FirstOrDefault(item => item.Id == Id);
+            AgentList.Remove(oldTask!);
+            //AgentList.OrderBy(item => item.Id == Id); //TO..
+        }
+        AgentList.Add(agentInList);
     }
+
+
+    //private void reLoadList_activated(object sender, EventArgs e)
+    //{
+    //    AgentList = (Experience == BO.AgentExperience.None) ?
+    //    s_bl?.Agent.ReadAll()!.ToObservableCollection() : s_bl?.Agent.ReadAll(item => item.Specialty == Experience)!.ToObservableCollection();
+    //}
 }

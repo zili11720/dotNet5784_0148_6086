@@ -14,6 +14,6 @@ public class TaskInList
     public string? Alias { get; set; }
     public string? Description { get; set; }
     public TaskStatus? Status { get; set; }
-    public BO.AgentExperience? Complexity { get; set; }
+    public BO.AgentExperience? Complexity { get; init; }
     public override string ToString() => this.ToStringProperty();
 }
