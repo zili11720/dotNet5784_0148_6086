@@ -27,6 +27,7 @@ public static class Initialization
     /// </summary>
     private static void createAgent()
     {
+
         string[] agentsNames =
         {
         "Eli Choen","Alex Cooper", "James Bond", "Jone Alon","Cris Klark"
@@ -209,7 +210,6 @@ public static class Initialization
         s_dal!.Dependency.Create(new Dependency(0, 3, 2));
         s_dal!.Dependency.Create(new Dependency(0, 4, 3));
         s_dal!.Dependency.Create(new Dependency(0, 5, 3));
-       //s_dal!.Dependency.Create(new Dependency(0, 3, 1));
         s_dal!.Dependency.Create(new Dependency(0, 6, 3));
         s_dal!.Dependency.Create(new Dependency(0, 13, 4));
         s_dal!.Dependency.Create(new Dependency(0, 19, 4));
