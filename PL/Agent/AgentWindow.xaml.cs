@@ -9,7 +9,6 @@ public partial class AgentWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     private event Action<int, bool> _AddOrUpdate;
-    private readonly bool _updated;
     public BO.Agent CurrentAgent
     {
         get { return (BO.Agent)GetValue(CurrentAgentProperty); }

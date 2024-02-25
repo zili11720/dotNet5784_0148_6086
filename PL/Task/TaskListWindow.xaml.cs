@@ -24,6 +24,7 @@ namespace PL.Task;
 public partial class TaskListWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
     public TaskListWindow()
     {
         InitializeComponent();
@@ -39,12 +40,12 @@ public partial class TaskListWindow : Window
     // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty TaskListProperty =
         DependencyProperty.Register("TaskListProperty", typeof(ObservableCollection<BO.TaskInList>), typeof(TaskListWindow), new PropertyMetadata(null));
-    
-    public BO.AgentExperience Complexity { get; set; } = BO.AgentExperience.None;
+    public BO.AgentExperience complexity { get; set; } = BO.AgentExperience.None;
+
     private void cbTaskComplexity_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        TaskList = (Complexity == BO.AgentExperience.None) ?
-        s_bl?.Task.ReadAll()!.ToObservableCollection() : s_bl?.Task.ReadAll(item => item.Complexity == Complexity)!.ToObservableCollection();
+        TaskList = (complexity == BO.AgentExperience.None) ?
+        s_bl?.Task.ReadAll()!.ToObservableCollection(): s_bl?.Task.ReadAll(item => item.Complexity == complexity)!.ToObservableCollection();
     }
 
     private void btnAddNewTask_Click(object sender, RoutedEventArgs e)
@@ -70,20 +71,34 @@ public partial class TaskListWindow : Window
             Alias = s_bl.Task.Read(Id)!.Alias,
             Description = s_bl.Task.Read(Id)!.Description,
             Status = s_bl.Task.Read(Id)!.Status,
-            Complexity = (BO.AgentExperience?)Complexity
+            Complexity = (BO.AgentExperience?)complexity
         };
         if(_updated) 
         {
             var oldTask=TaskList.FirstOrDefault(item => item.Id==Id);
             TaskList.Remove(oldTask!);
-            //TaskList.OrderBy(item => item.Id == Id); //TO.
         }
         TaskList.Add(taskInList);
     }
 
-
-   
-
+    private void btnDeleteTak_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the task?", "warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (MessageBoxResult.Yes == result)
+            {
+                BO.TaskInList? task = (sender as Button)!.CommandParameter as BO.TaskInList;
+                s_bl.Task.Delete(task!.Id);
+                TaskList.Remove(task);
+                MessageBox.Show("The task was deleted successfuly", "Well done!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
     //private void reLoadList_activated(object sender, EventArgs e)
     //{
     //    TaskList = (Complexity == BO.AgentExperience.None) ?

@@ -16,7 +16,7 @@ public partial class AgentListWindow : Window
     public AgentListWindow()
     {
         InitializeComponent();
-        AgentList = s_bl?.Agent.ReadAll()!.ToObservableCollection();
+        AgentList = s_bl?.Agent.ReadAll().ToObservableCollection()!;
     }
 
     public ObservableCollection<BO.AgentInList> AgentList
@@ -62,9 +62,27 @@ public partial class AgentListWindow : Window
         {
             var oldTask = AgentList.FirstOrDefault(item => item.Id == Id);
             AgentList.Remove(oldTask!);
-            //AgentList.OrderBy(item => item.Id == Id); //TO..
         }
         AgentList.Add(agentInList);
+    }
+
+    private void btnDeleteAgent_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the agent?", "warning", MessageBoxButton.YesNo, MessageBoxImage.Warning); 
+            if(MessageBoxResult.Yes==result)
+            {
+                BO.AgentInList agent = (sender as Button)?.CommandParameter as BO.AgentInList;
+                s_bl.Agent.Delete(agent!.Id);
+                AgentList.Remove(agent);
+                MessageBox.Show("The agent was deleted successfuly", "Well done!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 
 

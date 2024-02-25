@@ -10,13 +10,14 @@ using System.Linq;
 
 internal class AgentImplementation : IAgent
 {
+    private readonly UserImplementation _user = new UserImplementation();
     public int Create(Agent item)//Add a new agent to the list
     {
         if (Read(item.Id) is not null)//Check if this id already exists in the database
             throw new DalAllreadyExistsException($"An agent with ID={item.Id} already exists");
         //else
-
         DataSource.Agents.Add(item);
+        _user.Create(item);
         return item.Id;
     }
 
@@ -24,6 +25,7 @@ internal class AgentImplementation : IAgent
     {
         if (DataSource.Agents.RemoveAll(Agent => Agent.Id == id) == 0)
             throw new DalDoesNotExistException($"An agent with ID={id} does not exist");
+        _user.Delete(id);
     }
 
     public Agent? Read(int id)//Return the agent with the id given if he/she exists
