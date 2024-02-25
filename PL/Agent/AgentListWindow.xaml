@@ -37,7 +37,7 @@
                 <DataGridTemplateColumn Header="Actions" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete Agent"/>
+                            <Button Content="Delete Agent" Click="btnDeleteAgent_Click" Command="{Binding btnDeleteAgent_Click}" CommandParameter="{Binding}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -68,16 +68,18 @@
             <Label Content="Assigned Agent Id:" Grid.Row="5" Grid.Column="0"  HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="28" Width="149"/>
             <TextBox Grid.Row="5"  Grid.Column="1"
           Text="{Binding TaskAgent.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="17" IsEnabled="False" Background="White"/>
+          IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToIsEnabledReversedKey}}"
+          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="17" Background="White"/>
 
             <Label Content="Assigned Agent Name:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Height="29" Width="179"/>
             <TextBox Grid.Row="6" Grid.Column="1" 
           Text="{Binding TaskAgent.Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
+          IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToIsEnabledReversedKey}}"
           HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
 
             <Label Content="Create At Date:" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
             <TextBox Grid.Row="7" Grid.Column="1" 
-         Text="{Binding CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
+         Text="{Binding CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
          HorizontalAlignment="Left" Margin="50,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
 
             <Label Content="Scheduled Date:" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
@@ -97,12 +99,13 @@
 
             <Label Content="Estimated Complete Date:" Grid.Row="11" Grid.Column="0" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Height="29" Width="200"/>
             <TextBox Grid.Row="11" Grid.Column="1" 
-         Text="{Binding EstimatedCompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
+         Text="{Binding EstimatedCompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
 
             <Label Content="Complete Date:" Grid.Row="12" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
             <TextBox Grid.Row="12" Grid.Column="1" 
-         Text="{Binding CompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
+         Text="{Binding CompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+         IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToIsEnabledReversedKey}}"
          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
 
             <Label Content="Deliverables:" Grid.Row="13" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
@@ -116,7 +119,7 @@
          HorizontalAlignment="Left" Margin="50,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="50" Background="White" BorderBrush="#FFF1F1F1"/>
 
             <Label Content="Dependencies:" Grid.Row="15" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
-            <Button Grid.Row="15" Grid.Column="1" Content="Watch Dependencies" HorizontalAlignment="Left"  Width="140" Height="18" Margin="50,18,0,1" >
+            <Button Grid.Row="15" Grid.Column="1" Content="Watch Dependencies" HorizontalAlignment="Left"  Width="140" Height="18" Margin="50,18,0,1" Click="btnOpenDepencyList_Click" >
             </Button>
 
 

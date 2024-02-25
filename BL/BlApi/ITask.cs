@@ -1,4 +1,6 @@
-﻿namespace BlApi;
+﻿using BO;
+
+namespace BlApi;
 /// <summary>
 /// Interface of a task
 /// All availabe operations for a logic task 
@@ -14,4 +16,6 @@ public interface ITask
     IEnumerable<BO.TaskInList> GetDependenciesList(int id);
     void Clear();
     void CreateSchedule();
+
+    TaskInList ConvertTaskToTaskInList(DO.Task task);
 }

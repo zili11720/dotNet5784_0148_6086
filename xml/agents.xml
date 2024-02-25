@@ -35,11 +35,4 @@
     <Name>James Bond</Name>
     <Specialty>Hacker</Specialty>
   </Agent>
-  <Agent>
-    <Id>324434</Id>
-    <Email>dscd@gmail.com</Email>
-    <Cost>300</Cost>
-    <Name>dsmlcfk</Name>
-    <Specialty>Hacker</Specialty>
-  </Agent>
 </ArrayOfAgent>

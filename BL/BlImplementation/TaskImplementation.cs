@@ -124,23 +124,25 @@ internal class TaskImplementation : ITask
     public IEnumerable<BO.TaskInList> ReadAll(Func<BO.TaskInList, bool>? filter = null)
     {
         if (filter == null)
-            return _dal.Task.ReadAll().Select(t => new BO.TaskInList()
-            {
-                Id = t.Id,
-                Alias = t.Alias,
-                Description = t.Description,
-                Status = CalcStatus(t),
-                Complexity = (BO.AgentExperience?)t.Complexity
-            });
+            return _dal.Task.ReadAll().Select(t => ConvertTaskToTaskInList(t));
+        //return _dal.Task.ReadAll().Select(t => new BO.TaskInList()
+        //{
+        //    Id = t.Id,
+        //    Alias = t.Alias,
+        //    Description = t.Description,
+        //    Status = CalcStatus(t),
+        //    Complexity = (BO.AgentExperience?)t.Complexity
+        //});
         else
-            return _dal.Task.ReadAll().Select(t => new BO.TaskInList()
-            {
-                Id = t.Id,
-                Alias = t.Alias,
-                Description = t.Description,
-                Status = CalcStatus(t),
-                Complexity = (BO.AgentExperience?)t.Complexity,
-            }).Where(filter);
+            return _dal.Task.ReadAll().Select(t => ConvertTaskToTaskInList(t)).Where(filter);
+            //return _dal.Task.ReadAll().Select(t => new BO.TaskInList()
+            //{
+            //    Id = t.Id,
+            //    Alias = t.Alias,
+            //    Description = t.Description,
+            //    Status = CalcStatus(t),
+            //    Complexity = (BO.AgentExperience?)t.Complexity,
+            //}).Where(filter);
     }
     /// <summary>
     /// 
@@ -169,7 +171,8 @@ internal class TaskImplementation : ITask
                 Remarks = boTask.Remarks,
                 AgentId =boTask.TaskAgent is null?null: boTask.TaskAgent.Id
             };
-            UpdateScheduledStartDate(boTask.Id, boTask.ScheduledDate);
+            if(boTask.StartDate is not null)
+               UpdateScheduledStartDate(boTask.Id, boTask.ScheduledDate);
 
             _dal.Task.Update(newDoTask);
         }
@@ -223,15 +226,16 @@ internal class TaskImplementation : ITask
     {
         return _dal.Dependency.ReadAll(d => d.DependentTask == id)
                               .Select(d => _dal.Task.Read(d.DependsOnTask))
-                              .Where(d => d != null)
-                              .Select(d => new BO.TaskInList()
-                              {
-                                  Id = d!.Id,
-                                  Alias = d.Alias,
-                                  Description = d.Description,
-                                  Status = CalcStatus(d),
-                                  Complexity = (BO.AgentExperience?)d.Complexity,
-                              });
+                              .Where(d => d is not null)
+                              .Select(d => ConvertTaskToTaskInList(d!));
+                              //.Select(d => new BO.TaskInList()
+                              //{
+                              //    Id = d!.Id,
+                              //    Alias = d.Alias,
+                              //    Description = d.Description,
+                              //    Status = CalcStatus(d),
+                              //    Complexity = (BO.AgentExperience?)d.Complexity,
+                              //});
     }
 
     public void Clear()
@@ -247,7 +251,7 @@ internal class TaskImplementation : ITask
     private void CheckValidation(BO.Task boTask)
     {
         if (boTask!.Id < 0)
-            throw new BO.BlWrongInputException("Id can't be negative");
+            throw new BO.BlWrongInputException("Id is not valid");
         if (string.IsNullOrEmpty(boTask.Alias))
             throw new BO.BlWrongInputException("Task's alias must have a value");
     }
@@ -347,4 +351,18 @@ internal class TaskImplementation : ITask
         else
             throw new BlWrongDateException("Task's dates are impossible");
     }
+
+    public TaskInList ConvertTaskToTaskInList(DO.Task task)
+    {
+        return new BO.TaskInList()
+        {
+            Id = task!.Id,
+            Alias = task.Alias,
+            Description = task.Description,
+            Status = CalcStatus(task),
+            Complexity = (BO.AgentExperience?)task.Complexity,
+        };
+    }
+
+   
 }

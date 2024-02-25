@@ -23,7 +23,7 @@
             </Grid.ColumnDefinitions>
             <Label Content="Complexity" Grid.Column="0" HorizontalAlignment="Left" Margin="140,0,0,0" VerticalAlignment="Top" Foreground="Black"/>
             <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                SelectedValue="{Binding Path=Complexity ,Mode=TwoWay}"
+                SelectedValue="{Binding Path=complexity ,Mode=TwoWay}"
                 ItemsSource="{Binding Source={StaticResource  AgentExperienceCollectionKey}}" SelectionChanged="cbTaskComplexity_SelectionChanged">
             </ComboBox>
         </Grid>
@@ -44,7 +44,7 @@
                 <DataGridTemplateColumn Header="Actions" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete Agent"/>
+                            <Button Content="Delete Task" Click="btnDeleteTak_Click" Command="{Binding btnDeleteTak_Click}" CommandParameter="{Binding}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
