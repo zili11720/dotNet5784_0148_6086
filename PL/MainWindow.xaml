@@ -32,12 +32,14 @@
             <ImageBrush ImageSource="/mainwindowbackround.jpg" Opacity="0.7"/>
         </Grid.Background>
         <!--A Botton for all agent,s content-->
-        <Button Content="Handle Agents" HorizontalAlignment="Left" Margin="170,90,0,0" VerticalAlignment="Top" Height="100" Width="200" Click="btnAgents_Click" FontWeight="Bold" FontSize="25" FontStyle="Italic"/>
+        <Button Content="Handle Agents" HorizontalAlignment="Left" Margin="70,288,0,0" VerticalAlignment="Top" Height="100" Width="242" Click="btnAgents_Click" FontWeight="Bold" FontSize="25" FontStyle="Italic"/>
         <!--A Botton for all task's content-->
-        <Button Content="Handle Tasks" HorizontalAlignment="Left" Margin="170,210,0,0" VerticalAlignment="Top" Height="100" Width="200"  RenderTransformOrigin="-0.523,0.537" Click="btnTasks_Click" FontStyle="Italic" FontSize="25"/>
+        <Button Content="Handle Tasks" HorizontalAlignment="Left" Margin="498,288,0,0" VerticalAlignment="Top" Height="100" Width="258"  RenderTransformOrigin="-0.523,0.537" Click="btnTasks_Click" FontStyle="Italic" FontSize="25"/>
         <!--A button for Initialization-->
-        <Button Content="Initialize Data" HorizontalAlignment="Left" Margin="450,90,0,0" VerticalAlignment="Top" Height="100" Width="200" Click="btnInitialize_Click" FontSize="25" FontStyle="Italic"/>
+        <Button Content="Initialize Data" HorizontalAlignment="Left" Margin="70,47,0,0" VerticalAlignment="Top" Height="70" Width="242" Click="btnInitialize_Click" FontSize="20" FontStyle="Italic" RenderTransformOrigin="0.454,0.012"/>
         <!--Reset button-->
-        <Button Content="Reset Data" HorizontalAlignment="Left" Margin="450,210,0,0" VerticalAlignment="Top" Height="100" Width="200" Click="btnReset_Click" FontSize="25" FontStyle="Italic"/>
+        <Button Content="Reset Data" HorizontalAlignment="Left" Margin="498,47,0,0" VerticalAlignment="Top" Height="70" Width="258" Click="btnReset_Click" FontSize="20" FontStyle="Italic"/>
+        <Button Content="Add Project Start Date" HorizontalAlignment="Left" Margin="70,155,0,0" VerticalAlignment="Top" Height="70" Width="242"/>
+        <Button Content="Create Automatic Schedule" HorizontalAlignment="Left" Margin="498,155,0,0" VerticalAlignment="Top" Height="70" Width="258"/>
     </Grid>
 </Window>

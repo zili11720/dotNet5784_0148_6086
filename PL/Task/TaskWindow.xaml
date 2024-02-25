@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
         Title="TaskWindow" Height="600" Width="550"
-         DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+        DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <ScrollViewer>
         <Grid Margin="0,10,0,-10">
             <Grid.Background>
@@ -68,52 +68,52 @@
             <Label Content="Assigned Agent Id:" Grid.Row="5" Grid.Column="0"  HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="28" Width="149"/>
             <TextBox Grid.Row="5"  Grid.Column="1"
           Text="{Binding TaskAgent.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="17" IsEnabled="False" Background="White"/>
+          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="17" IsEnabled="False" />
 
             <Label Content="Assigned Agent Name:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Height="29" Width="179"/>
             <TextBox Grid.Row="6" Grid.Column="1" 
           Text="{Binding TaskAgent.Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
+          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" />
 
             <Label Content="Create At Date:" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
             <TextBox Grid.Row="7" Grid.Column="1" 
          Text="{Binding CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-         HorizontalAlignment="Left" Margin="50,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
+         HorizontalAlignment="Left" Margin="50,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" />
 
             <Label Content="Scheduled Date:" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
             <TextBox Grid.Row="8" Grid.Column="1" 
          Text="{Binding ScheduledDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1" Grid.RowSpan="2"/>
+         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Grid.RowSpan="2"/>
 
             <Label Content="start Date:" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
             <TextBox Grid.Row="9" Grid.Column="1" 
          Text="{Binding StartDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
+         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" />
 
             <Label Content="Required Effort Time:" Grid.Row="10" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="179"/>
             <TextBox Grid.Row="10" Grid.Column="1" 
          Text="{Binding RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
+         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" />
 
             <Label Content="Estimated Complete Date:" Grid.Row="11" Grid.Column="0" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Height="29" Width="200"/>
             <TextBox Grid.Row="11" Grid.Column="1" 
          Text="{Binding EstimatedCompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
-         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
+         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" />
 
             <Label Content="Complete Date:" Grid.Row="12" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
             <TextBox Grid.Row="12" Grid.Column="1" 
          Text="{Binding CompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
-         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
+         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" />
 
             <Label Content="Deliverables:" Grid.Row="13" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
             <TextBox Grid.Row="13" Grid.Column="1" 
          Text="{Binding Deliverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>
+         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18"/>
 
             <Label Content="Remarks:" Grid.Row="14" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
             <TextBox Grid.Row="14" Grid.Column="1" 
          Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-         HorizontalAlignment="Left" Margin="50,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="50" Background="White" BorderBrush="#FFF1F1F1"/>
+         HorizontalAlignment="Left" Margin="50,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="50" />
 
             <Label Content="Dependencies:" Grid.Row="15" Grid.Column="0" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Height="29" Width="149"/>
             <Button Grid.Row="15" Grid.Column="1" Content="Watch Dependencies" HorizontalAlignment="Left"  Width="140" Height="18" Margin="50,18,0,1" >

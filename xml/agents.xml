@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfAgent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Agent>
-    <Id>223374777</Id>
-    <Email>EliChoen@gmail.com</Email>
-    <Cost>306</Cost>
-    <Name>Eli Choen</Name>
-    <Specialty>Field_agent</Specialty>
-  </Agent>
-  <Agent>
     <Id>322487729</Id>
     <Email>AlexCooper@gmail.com</Email>
     <Cost>383</Cost>
@@ -41,5 +34,12 @@
     <Cost>300</Cost>
     <Name>dsmlcfk</Name>
     <Specialty>Hacker</Specialty>
+  </Agent>
+  <Agent>
+    <Id>223374777</Id>
+    <Email>EliChoen@gmail.com</Email>
+    <Cost>306</Cost>
+    <Name>dnjsncjsdn</Name>
+    <Specialty>Field_agent</Specialty>
   </Agent>
 </ArrayOfAgent>
