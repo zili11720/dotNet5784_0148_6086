@@ -165,14 +165,15 @@ internal class AgentImplementation : IAgent
             throw new BO.BlDoesNotExistException($"Task with ID={TaskId} does Not exist");
         if (doTask.AgentId != agentId)
             throw new BO.BlWrongAgentForTaskException($"The Agent with the id= {agentId} does not have a task with id={TaskId}");
-        return new BO.TaskInList
-        {
-            Id = doTask.Id,
-            Alias = doTask.Alias,
-            Description = doTask.Description,
-            Status = _task.CalcStatus(doTask),
-            Complexity = (BO.AgentExperience?)doTask.Complexity
-        };
+        return _task.ConvertTaskToTaskInList(doTask);
+        //return new BO.TaskInList
+        //{
+        //    Id = doTask.Id,
+        //    Alias = doTask.Alias,
+        //    Description = doTask.Description,
+        //    Status = _task.CalcStatus(doTask),
+        //    Complexity = (BO.AgentExperience?)doTask.Complexity
+        //};
     }
     /// <summary>
     /// Return all the tasks that were assigned to the agent with the given id
@@ -184,14 +185,15 @@ internal class AgentImplementation : IAgent
         return from DO.Task doTask in _dal.Task.ReadAll()
                where doTask.AgentId == agentId
                orderby doTask.Id descending
-               select new BO.TaskInList
-               {
-                   Id = doTask.Id,
-                   Alias = doTask.Alias,
-                   Description = doTask.Description,
-                   Status = _task.CalcStatus(doTask),
-                   Complexity = (BO.AgentExperience?)doTask.Complexity
-               };
+               select _task.ConvertTaskToTaskInList(doTask);
+               //select new BO.TaskInList
+               //{
+               //    Id = doTask.Id,
+               //    Alias = doTask.Alias,
+               //    Description = doTask.Description,
+               //    Status = _task.CalcStatus(doTask),
+               //    Complexity = (BO.AgentExperience?)doTask.Complexity
+               //};
     }
 
     public void Clear()
@@ -231,14 +233,15 @@ internal class AgentImplementation : IAgent
             throw new BO.BlDoesNotExistException("No available tasks for this agent's level");
         IEnumerable<TaskInList> availableTasks = tasks.Where(t => t is not null)
                                                       .Where(t => t.AgentId is null)
-                                                      .Select(t => new BO.TaskInList()
-                                                      {
-                                                          Id = t.Id,
-                                                          Alias = t.Alias,
-                                                          Description = t.Description,
-                                                          Status = _task.CalcStatus(t),
-                                                          Complexity = (BO.AgentExperience?)t.Complexity
-                                                      });
+                                                      .Select(t=>_task.ConvertTaskToTaskInList(t));
+                                                      //.Select(t => new BO.TaskInList()
+                                                      //{
+                                                      //    Id = t.Id,
+                                                      //    Alias = t.Alias,
+                                                      //    Description = t.Description,
+                                                      //    Status = _task.CalcStatus(t),
+                                                      //    Complexity = (BO.AgentExperience?)t.Complexity
+                                                      //});
 
         if (availableTasks is null)
             throw new BO.BlDoesNotExistException("No available tasks for this agent");

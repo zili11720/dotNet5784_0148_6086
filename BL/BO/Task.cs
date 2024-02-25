@@ -35,14 +35,6 @@ public class Task
     public string? Deliverables { get; set; }
     public string? Remarks { get; set; }
     public BO.AgentExperience? Complexity { get; set; }
-
-
-
-
-
-
-
-
     public AgentInTask? TaskAgent { get; set; }
     public List<BO.TaskInList>? DependenciesList { get; set; }
 

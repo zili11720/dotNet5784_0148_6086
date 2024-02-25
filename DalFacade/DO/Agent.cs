@@ -7,7 +7,7 @@ namespace DO;
 /// <param name="Id">Personal unique Id of an agent</param>
 /// <param name="Email">Personal Email of the agent</param>
 /// <param name="Cost">Salary per hour</param>
-/// <param name="Name">A secret nickname of an agent</param>
+/// <param name="Name">A name of an agent</param>
 /// <param name="Specialty">The specialty of an agent(hacker/field agent/investigator etc.)</param>
 /// </summary>
 public record Agent
