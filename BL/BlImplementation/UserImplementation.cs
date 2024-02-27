@@ -58,6 +58,21 @@ internal class UserImplementation : IUser
 
         return boUser;
     }
+    public User? Read(string userName)
+    {
+        DO.User? doUser = _dal.User.Read(userName);
+        if (doUser is null)
+            throw new BO.BlDoesNotExistException($"A user with User Name={userName} does not exist");
+
+        BO.User boUser = new BO.User()
+        {
+            UserId = doUser.UserId,
+            UserName = doUser.UserName,
+            Password = doUser.Password,
+            IsManager = doUser.IsManager
+        };
+        return boUser;
+    }
 
     public void Update(User item)
     {

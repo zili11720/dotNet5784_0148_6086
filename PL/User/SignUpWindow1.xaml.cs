@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace PL.User
 {
     /// <summary>
-    /// Interaction logic for PasswordWindow.xaml
+    /// Interaction logic for SignUpWindow1.xaml
     /// </summary>
-    public partial class PasswordWindow : Window
+    public partial class SignUpWindow1 : Window
     {
-        public PasswordWindow()
+        public SignUpWindow1()
         {
             InitializeComponent();
         }

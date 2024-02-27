@@ -26,6 +26,10 @@ internal class UserImplementation : IUser
     {
         return DataSource.Users.FirstOrDefault(User => User.UserId == id);
     }
+    public User? Read(string UserName)
+    {
+        return DataSource.Users.FirstOrDefault(User => User.UserName == UserName);
+    }
 
     public void Update(User item)
     {
