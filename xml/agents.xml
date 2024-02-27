@@ -21,25 +21,4 @@
     <Name>Cris Klark</Name>
     <Specialty>Investigator</Specialty>
   </Agent>
-  <Agent>
-    <Id>306135886</Id>
-    <Email>JamesBond@gmail.com</Email>
-    <Cost>500</Cost>
-    <Name>James Bond</Name>
-    <Specialty>Hacker</Specialty>
-  </Agent>
-  <Agent>
-    <Id>324434</Id>
-    <Email>dscd@gmail.com</Email>
-    <Cost>300</Cost>
-    <Name>dsmlcfk</Name>
-    <Specialty>Hacker</Specialty>
-  </Agent>
-  <Agent>
-    <Id>223374777</Id>
-    <Email>EliChoen@gmail.com</Email>
-    <Cost>306</Cost>
-    <Name>dnjsncjsdn</Name>
-    <Specialty>Field_agent</Specialty>
-  </Agent>
 </ArrayOfAgent>

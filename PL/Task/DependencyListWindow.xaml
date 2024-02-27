@@ -14,15 +14,19 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Dependencies" Grid.Row="0" Height="30" VerticalAlignment="Top" Margin="174,0,174,0" FontStyle="Italic" FontWeight="Bold" FontSize="20" />
-
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Path=DependencyList}" IsReadOnly="True" AutoGenerateColumns="False">
+        <Label Content="Dependencies" Height="40" VerticalAlignment="Center" Margin="174,0,174,0" FontStyle="Italic" FontWeight="Bold" FontSize="20" />
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Path=DependencyList, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False" Margin="0,0,0,36" Grid.RowSpan="2">
+            <DataGrid.Background>
+                <StaticResource ResourceKey="BlueGrayLinearBrushKey"/>
+            </DataGrid.Background>
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="*" />
                 <DataGridTextColumn Binding="{Binding Alias}" Header="Alias" Width="*"/>
                 <DataGridTextColumn Binding="{Binding Description}" Header="Description" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Complexity}" Header="Complexity" Width="*"/>
                 <DataGridTemplateColumn Header="Status" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -30,15 +34,20 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <!-- Button Column -->
+                <!--Button Column-->
                 <DataGridTemplateColumn Header="Actions" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete dependency"/>
+                            <Button Content="Delete dependency" Click="btnDeleteDependency_Click"/>
+                            <!--Command="{Binding btnDeleteDependency_Click}" CommandParameter="{Binding}-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Label Content="Enter a task id to add a dependency:"  Grid.Row="2" Margin="11,1,199,0"></Label>
+        <TextBox Grid.Row="2" Margin="301,9,139,10" RenderTransformOrigin="0.475,3.373" Text="{Binding NewDependencyId, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Add" Grid.Row="2" Margin="387,10,49,10" Click="btnAddDependency_Click" >
+        </Button>
     </Grid>
 </Window>

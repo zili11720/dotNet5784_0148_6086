@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -11,10 +11,6 @@
 	<UseCommonOutputDirectory>true</UseCommonOutputDirectory>
 	<RootNamespace />
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="BlImplementation\NewFile1.txt" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DalFacade\DalFacade.csproj" />

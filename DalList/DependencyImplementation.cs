@@ -54,5 +54,6 @@ internal class DependencyImplementation : IDependency
 
     public void Clear()
     {
+        DataSource.Dependencies.Clear();
     }
 }

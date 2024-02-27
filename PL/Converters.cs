@@ -54,7 +54,7 @@ class ConvertTaskStatusToColor : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         BO.TaskStatus status = (BO.TaskStatus)value;
-        switch (status) 
+        switch (status)
         {
             case BO.TaskStatus.Unscheduled:
                 return Brushes.DimGray;
@@ -66,7 +66,7 @@ class ConvertTaskStatusToColor : IValueConverter
                 return Brushes.Green;
             default:
                 return Brushes.White;
-        } 
+        }
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -74,6 +74,8 @@ class ConvertTaskStatusToColor : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+
 
 
 

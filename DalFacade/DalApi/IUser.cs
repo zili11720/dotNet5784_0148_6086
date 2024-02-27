@@ -5,8 +5,10 @@ using DO;
 /// </summary>
 public interface IUser
 {
-    void Create(Agent item);
+    string Create(User item);
     void Delete(int id);
-    void Update(Agent item);
+    User? Read(int id);
+    void Update(User item);
 
+    void Clear();
 }
