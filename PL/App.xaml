@@ -5,6 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources >
         <local:AgentExperienceCollection x:Key="AgentExperienceCollectionKey"/>
+        <local:TaskStatusCollection x:Key="TaskStatusCollectionKey"/>
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToIsEnabled x:Key="ConverIdToIsEnabledKey"/>
         <local:ConvertIdToIsEnabledReversed x:Key="ConverIdToIsEnabledReversedKey"/>

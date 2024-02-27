@@ -1,4 +1,10 @@
-﻿namespace DO;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BO;
 /// <summary>
 /// A user entity (manager/employee)
 /// </summary>
@@ -7,13 +13,13 @@
 /// <param name="Password">The user's password</param>
 /// <param name="IsManager">A boolien variable that indicats wether the user is a manager or an employee</param>
 /// </summary>
-public record User
-(
-    int UserId ,
+public class User
+{
+    public required int UserId;
 
-    string UserName,
-    
-    string Password,
+    public required string UserName;
 
-    bool IsManager=false
-);
+    public required string Password;
+
+    public bool IsManager = false;
+}

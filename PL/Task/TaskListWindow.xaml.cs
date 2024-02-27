@@ -31,15 +31,18 @@ public partial class TaskListWindow : Window
         TaskList = s_bl.Task.ReadAll().ToObservableCollection();
     }
 
-    public ObservableCollection<BO.TaskInList> TaskList    
+
+
+    public ObservableCollection<BO.TaskInList> TaskList
     {
         get { return (ObservableCollection<BO.TaskInList>)GetValue(TaskListProperty); }
         set { SetValue(TaskListProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+    // Using a DependencyProperty as the backing store for TaskList.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty TaskListProperty =
-        DependencyProperty.Register("TaskListProperty", typeof(ObservableCollection<BO.TaskInList>), typeof(TaskListWindow), new PropertyMetadata(null));
+        DependencyProperty.Register("TaskList", typeof(ObservableCollection<BO.TaskInList>), typeof(TaskListWindow), new PropertyMetadata(null));
+
     public BO.AgentExperience complexity { get; set; } = BO.AgentExperience.None;
 
     private void cbTaskComplexity_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -81,7 +84,7 @@ public partial class TaskListWindow : Window
         TaskList.Add(taskInList);
     }
 
-    private void btnDeleteTak_Click(object sender, RoutedEventArgs e)
+    private void btnDeleteTask_Click(object sender, RoutedEventArgs e)
     {
         try
         {
@@ -99,9 +102,11 @@ public partial class TaskListWindow : Window
             MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
-    //private void reLoadList_activated(object sender, EventArgs e)
-    //{
-    //    TaskList = (Complexity == BO.AgentExperience.None) ?
-    //    s_bl?.Task.ReadAll()!.ToObservableCollection() : s_bl?.Task.ReadAll(item => item.Complexity == Complexity)!.ToObservableCollection();
-    //}
+    public BO.TaskStatus status{ get; set; } = BO.TaskStatus.Unscheduled;
+
+    private void cbTaskStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        TaskList = (status == BO.TaskStatus.Unscheduled) ?
+       s_bl?.Task.ReadAll()!.ToObservableCollection() : s_bl?.Task.ReadAll(item => item.Status == status)!.ToObservableCollection();
+    }
 }

@@ -200,4 +200,9 @@
     <DependentTask>14</DependentTask>
     <DependsOnTask>2</DependsOnTask>
   </Dependency>
+  <Dependency>
+    <Id>41</Id>
+    <DependentTask>3</DependentTask>
+    <DependsOnTask>5</DependsOnTask>
+  </Dependency>
 </ArrayOfDependency>

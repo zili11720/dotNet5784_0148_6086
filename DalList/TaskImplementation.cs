@@ -53,6 +53,6 @@ internal class TaskImplementation : ITask
 
     public void Clear()
     {
-     
+        DataSource.Tasks.Clear();
     }
 }

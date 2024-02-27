@@ -20,11 +20,20 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Complexity" Grid.Column="0" HorizontalAlignment="Left" Margin="140,0,0,0" VerticalAlignment="Top" Foreground="Black"/>
-            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+            <Label Content="Filter by:" Grid.Column="0" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top" Foreground="Black" />
+            <Label Content="Complexity" Grid.Column="1" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top" Foreground="Black"/>
+            <ComboBox Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                 SelectedValue="{Binding Path=complexity ,Mode=TwoWay}"
                 ItemsSource="{Binding Source={StaticResource  AgentExperienceCollectionKey}}" SelectionChanged="cbTaskComplexity_SelectionChanged">
+            </ComboBox>
+            <Label Content="Status" Grid.Column="3" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top" Foreground="Black" Width="76"/>
+            <ComboBox Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+             SelectedValue="{Binding Path=status ,Mode=TwoWay}"
+             ItemsSource="{Binding Source={StaticResource  TaskStatusCollectionKey}}" SelectionChanged="cbTaskStatus_SelectionChanged">
             </ComboBox>
         </Grid>
         <DataGrid Grid.Row="1" ItemsSource="{Binding Path=TaskList}" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="dgUpdateTask_DoubleClick">
@@ -44,7 +53,7 @@
                 <DataGridTemplateColumn Header="Actions" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete Task" Click="btnDeleteTak_Click" Command="{Binding btnDeleteTak_Click}" CommandParameter="{Binding}"/>
+                            <Button Content="Delete Task" Click="btnDeleteTask_Click" HorizontalAlignment="Center" Height="20" Width="80" Command="{Binding btnDeleteTask_Click}" CommandParameter="{Binding}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

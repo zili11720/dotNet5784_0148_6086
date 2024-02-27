@@ -15,3 +15,12 @@ internal class AgentExperienceCollection: IEnumerable
     public IEnumerator GetEnumerator() => exp_enums.GetEnumerator();
  
 }
+
+internal class TaskStatusCollection : IEnumerable
+{
+    static readonly IEnumerable<BO.TaskStatus> status_enums =
+       (Enum.GetValues(typeof(BO.TaskStatus)) as IEnumerable<BO.TaskStatus>)!;
+
+    public IEnumerator GetEnumerator() => status_enums.GetEnumerator();
+
+}

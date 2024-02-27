@@ -193,22 +193,6 @@
     <AgentId xsi:nil="true" />
   </Task>
   <Task>
-    <Id>14</Id>
-    <Alias>Compare testimonies</Alias>
-    <Description>Compare the testimonies of the witnesses in order to check reliability</Description>
-    <CreatedAtDate>2024-02-24T23:58:43.400735+02:00</CreatedAtDate>
-    <RequiredEffortTime xsi:nil="true" />
-    <IsMilestone>false</IsMilestone>
-    <Complexity>Investigator</Complexity>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables>Conclusions from the testimonies</Deliverables>
-    <Remarks>take into account real photages from the crime ciene</Remarks>
-    <AgentId xsi:nil="true" />
-  </Task>
-  <Task>
     <Id>15</Id>
     <Alias>Witnesses report</Alias>
     <Description>Make a report on the witnesses testimonies and their conclusions</Description>
@@ -465,19 +449,19 @@
     <AgentId xsi:nil="true" />
   </Task>
   <Task>
-    <Id>30</Id>
-    <Alias>sdnkhks</Alias>
-    <Description>drrrrrrrrrrrrrrrrrrr</Description>
-    <CreatedAtDate>2024-02-25T01:39:04.1893197+02:00</CreatedAtDate>
+    <Id>14</Id>
+    <Alias>Compare testimonies</Alias>
+    <Description>njdnejnedf</Description>
+    <CreatedAtDate>2024-02-24T23:58:43.400735+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
-    <Complexity>Hacker</Complexity>
+    <Complexity>Investigator</Complexity>
     <StartDate xsi:nil="true" />
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
-    <Deliverables>eeeeeeeeee</Deliverables>
-    <Remarks>hhhhhhhhh</Remarks>
+    <Deliverables>Conclusions from the testimonies</Deliverables>
+    <Remarks>take into account real photages from the crime ciene</Remarks>
     <AgentId xsi:nil="true" />
   </Task>
 </ArrayOfTask>

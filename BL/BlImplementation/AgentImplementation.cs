@@ -10,8 +10,6 @@ internal class AgentImplementation : IAgent
 
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-    private readonly TaskImplementation _task = new TaskImplementation();
-
     /// <summary>
     /// Add an agent to dal according to the given Bl agent
     /// </summary>
@@ -72,10 +70,11 @@ internal class AgentImplementation : IAgent
     public BO.Agent? Read(int id)
     {
         DO.Agent? doAgent = _dal.Agent.Read(id);
-        if (doAgent == null)
+        if (doAgent is null)
             throw new BO.BlDoesNotExistException($"An agent with ID={id} does not exist");
 
-        DO.Task? doTask = _dal.Task.Read(task => task.AgentId == id && _task.CalcStatus(task) == BO.TaskStatus.OnTrack/*StartDate < DateTime.Now && task.CompleteDate > DateTime.Now*/);
+        //Find the current task of the agent
+        DO.Task? doTask = _dal.Task.Read(task => task.AgentId == id && s_bl.Task.CalcStatus(task) == BO.TaskStatus.OnTrack/*StartDate < DateTime.Now && task.CompleteDate > DateTime.Now*/);
 
         BO.Agent boAgent = new BO.Agent()
         {
@@ -161,11 +160,11 @@ internal class AgentImplementation : IAgent
     public BO.TaskInList GetDetailedTaskForAgent(int agentId, int TaskId)
     {
         DO.Task? doTask = _dal.Task.Read(TaskId);
-        if (doTask == null)
+        if (doTask is null)
             throw new BO.BlDoesNotExistException($"Task with ID={TaskId} does Not exist");
         if (doTask.AgentId != agentId)
             throw new BO.BlWrongAgentForTaskException($"The Agent with the id= {agentId} does not have a task with id={TaskId}");
-        return _task.ConvertTaskToTaskInList(doTask);
+        return s_bl.Task.ConvertTaskToTaskInList(doTask);
         //return new BO.TaskInList
         //{
         //    Id = doTask.Id,
@@ -185,7 +184,7 @@ internal class AgentImplementation : IAgent
         return from DO.Task doTask in _dal.Task.ReadAll()
                where doTask.AgentId == agentId
                orderby doTask.Id descending
-               select _task.ConvertTaskToTaskInList(doTask);
+               select s_bl.Task.ConvertTaskToTaskInList(doTask);
                //select new BO.TaskInList
                //{
                //    Id = doTask.Id,
@@ -233,7 +232,7 @@ internal class AgentImplementation : IAgent
             throw new BO.BlDoesNotExistException("No available tasks for this agent's level");
         IEnumerable<TaskInList> availableTasks = tasks.Where(t => t is not null)
                                                       .Where(t => t.AgentId is null)
-                                                      .Select(t=>_task.ConvertTaskToTaskInList(t));
+                                                      .Select(t=>s_bl.Task.ConvertTaskToTaskInList(t));
                                                       //.Select(t => new BO.TaskInList()
                                                       //{
                                                       //    Id = t.Id,

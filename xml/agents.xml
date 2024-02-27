@@ -28,11 +28,4 @@
     <Name>Cris Klark</Name>
     <Specialty>Investigator</Specialty>
   </Agent>
-  <Agent>
-    <Id>306135886</Id>
-    <Email>JamesBond@gmail.com</Email>
-    <Cost>500</Cost>
-    <Name>James Bond</Name>
-    <Specialty>Hacker</Specialty>
-  </Agent>
 </ArrayOfAgent>
