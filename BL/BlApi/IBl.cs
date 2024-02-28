@@ -7,6 +7,7 @@ public interface IBl
 {
     IAgent Agent { get; }
     ITask Task { get; }
+    IUser User { get; }
     void SetProjectStartDate();
     void ResetData();
     void InitializeData();

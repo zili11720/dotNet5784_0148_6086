@@ -15,8 +15,8 @@ public static class Initialization
 
     //A variable to create rendom numbers
     private static readonly Random s_rand = new();
-    private const int MIN_ID = 200000000; 
-    private const int MAX_ID = 400000000; 
+    private const int MIN_ID = 200000000;
+    private const int MAX_ID = 400000000;
 
     static DateTime currentDate = DateTime.Now;
     //A variable which represents the start date of the project
@@ -40,6 +40,14 @@ public static class Initialization
         {
            1,1,1,2,3//The numbers will be converted to type enum-AgentExperience
         };
+        string[] agentsPassword =
+        {
+        "Eli@123","Alex@123","James@123","Jone@123","Cris@123"
+        };
+        bool[] isManager =
+        {
+         false,false,false,false,true
+        };
         for (int i = 0; i < 5; i++)
         {
             int _id;
@@ -51,6 +59,9 @@ public static class Initialization
 
             Agent newAgent = new(_id, agentsEmail[i], _cost, agentsNames[i], (DO.AgentExperience)agentsSpecialities[i]);
             s_dal!.Agent.Create(newAgent);
+
+            User newUser = new(_id, agentsNames[i], agentsPassword[i], isManager[i]);
+            s_dal!.User.Create(newUser);
         }
     }
     /// <summary>
@@ -244,7 +255,7 @@ public static class Initialization
         s_dal!.Dependency.Create(new Dependency(0, 27, 20));
         s_dal!.Dependency.Create(new Dependency(0, 27, 7));
         s_dal!.Dependency.Create(new Dependency(0, 19, 27));
-        s_dal!.Dependency.Create(new Dependency(0, 17 ,8));
+        s_dal!.Dependency.Create(new Dependency(0, 17, 8));
         s_dal!.Dependency.Create(new Dependency(0, 14, 2));
 
     }

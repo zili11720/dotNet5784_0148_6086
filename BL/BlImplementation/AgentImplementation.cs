@@ -47,6 +47,10 @@ internal class AgentImplementation : IAgent
             if (doAgent is null)
                 throw new BO.BlDoesNotExistException($"An agent with ID={id} does not exist");
 
+            BO.User user = s_bl.User.Read(id);
+            if (user is not null&&user.IsManager is true)
+                throw new BO.BlDeletionImpossibleException("A manager can't be deleted before a new one is assigned");
+
             //check if this agent allresdy started/finished any tasks
             IEnumerable<DO.Task> doTasks = from DO.Task task in _dal.Task.ReadAll(task => task.AgentId == id)
                                            where task.StartDate >= DateTime.Now
@@ -215,6 +219,9 @@ internal class AgentImplementation : IAgent
             throw new BO.BlWrongInputException("Agent's cost can't be negative");
         if (boAgent.Email!.Contains("@gmail.com") == false)
             throw new BO.BlWrongInputException("Worng email format");
+        if(boAgent.Specialty==AgentExperience.None)
+            throw new BO.BlWrongInputException("Agent experience must be declared");
+
     }
     /// <summary>
     /// Returns the available tasks for an agent

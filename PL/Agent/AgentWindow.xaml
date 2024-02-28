@@ -25,8 +25,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="9*"/>
-            <!--<ColumnDefinition/>
-            <ColumnDefinition Width="0*"/>-->
         </Grid.ColumnDefinitions>
         <Label Content="Id:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Height="30" />
         <TextBox Grid.Row="0" Grid.Column="1"

@@ -8,6 +8,7 @@ namespace PL.Agent;
 public partial class AgentWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
     private event Action<int, bool> _AddOrUpdate;
     public BO.Agent CurrentAgent
     {

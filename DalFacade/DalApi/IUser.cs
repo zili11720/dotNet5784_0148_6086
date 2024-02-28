@@ -10,6 +10,5 @@ public interface IUser
     User? Read(int id);
     User? Read(string UserName);
     void Update(User item);
-
     void Clear();
 }

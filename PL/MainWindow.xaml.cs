@@ -19,9 +19,12 @@ namespace PL;
 public partial class MainWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+    //public User User { get; }
     public MainWindow()
     {
         InitializeComponent();
+
     }
     private void btnAgents_Click(object sender, RoutedEventArgs e)
     {

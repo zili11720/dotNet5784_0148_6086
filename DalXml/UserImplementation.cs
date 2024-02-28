@@ -11,8 +11,8 @@ internal class UserImplementation : IUser
 
     public string Create(User item)
     {
-        if (Read(item.UserId) is null)
-            throw new DalDoesNotExistException($"An agent with ID={item.UserId} deosn't exist");
+        if (Read(item.UserId) is not null)
+            throw new DalAllreadyExistsException($"An agent with ID={item.UserId} already exists");
 
         List<User> users = XMLTools.LoadListFromXMLSerializer<User>(s_users_xml);
         users.Add(item);
@@ -33,6 +33,12 @@ internal class UserImplementation : IUser
     {
         List<User> users = XMLTools.LoadListFromXMLSerializer<User>(s_users_xml);
         return users.FirstOrDefault(it => it.UserId == id);
+    }
+
+    public User? Read(string userName)
+    {
+        List<User> users = XMLTools.LoadListFromXMLSerializer<User>(s_users_xml);
+        return users.FirstOrDefault(it => it.UserName ==userName);
     }
 
     public void Update(User item)

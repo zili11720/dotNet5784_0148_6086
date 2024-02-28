@@ -15,11 +15,12 @@ namespace BO;
 /// </summary>
 public class User
 {
-    public required int UserId;
+    public int UserId;
 
-    public required string UserName;
+    public string? UserName;
 
-    public required string Password;
+    public  string? Password;
 
     public bool IsManager = false;
+    public override string ToString() => this.ToStringProperty();
 }

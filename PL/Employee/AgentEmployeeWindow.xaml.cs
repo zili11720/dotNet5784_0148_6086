@@ -15,7 +15,7 @@ namespace PL.Employee;
 public partial class AgentEmployeeWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-    public AgentEmployeeWindow()
+    public AgentEmployeeWindow(int _agentId)
     {
         InitializeComponent();
     }

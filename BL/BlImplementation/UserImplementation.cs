@@ -6,7 +6,7 @@ namespace BlImplementation;
 internal class UserImplementation : IUser
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public void Clear()
     {
         _dal.User.Clear();
@@ -14,19 +14,20 @@ internal class UserImplementation : IUser
 
     public string Create(User item)
     {
+        s_bl.Agent.Read(item.UserId);//Check if the id belongs to an existing agent
 
         try
         {
-            DO.User newDoUser = new DO.User(item.UserId, item.UserName, item.Password, item.IsManager);
-            if (_dal.User.Read(item.UserId) is null)
+            if (_dal.User.Read(item.UserId) is null)//Check if this agent stiil doesn't have a user
             {
+                DO.User newDoUser = new DO.User(item.UserId, item.UserName, item.Password, item.IsManager);
                 string userPassword = _dal.User.Create(newDoUser);
             }
             return item.Password;
         }
-        catch (DO.DalDoesNotExistException ex)
+        catch (DO.DalAllreadyExistsException ex)
         {
-            throw new BO.BlDoesNotExistException($"Agent with ID={item.UserId} does not exist", ex);
+            throw new BO.BlAllreadyExistsException($"A user with ID={item.UserId} allready exist", ex);
         }
     }
 

@@ -85,10 +85,4 @@ public partial class AgentListWindow : Window
         }
     }
 
-
-    //private void reLoadList_activated(object sender, EventArgs e)
-    //{
-    //    AgentList = (Experience == BO.AgentExperience.None) ?
-    //    s_bl?.Agent.ReadAll()!.ToObservableCollection() : s_bl?.Agent.ReadAll(item => item.Specialty == Experience)!.ToObservableCollection();
-    //}
 }

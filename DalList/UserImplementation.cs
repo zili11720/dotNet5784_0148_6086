@@ -10,8 +10,8 @@ internal class UserImplementation : IUser
 {
     public string Create(User item)
     {
-        if (Read(item.UserId) is null)//Check if this id exists in the database
-            throw new DalDoesNotExistException($"An agent with ID={item.UserId} deosn't exist");
+        if (Read(item.UserId) is not null)//Check if this id already exists in the database
+            throw new DalAllreadyExistsException($"A user with ID={item.UserId} already exists");
         DataSource.Users.Add(item);
         return item.Password;
     }
