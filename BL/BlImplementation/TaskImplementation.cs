@@ -9,7 +9,12 @@ internal class TaskImplementation : ITask
 
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
-    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+   // static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+    private readonly IBl _bl;
+
+    internal TaskImplementation(IBl bl) => _bl = bl;
+
 
     /// <summary>
     /// Add new task to dal based on a logic tasl 'boTask'
@@ -20,7 +25,7 @@ internal class TaskImplementation : ITask
     /// <exception cref="BO.BlAlreadyExistsException"></exception>
     public int Create(BO.Task boTask)
     {
-        if (s_bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
+        if (_bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
             throw new BO.BlProjectStageException("Can't create new tasks after the project has started");
 
         CheckValidation(boTask);
@@ -65,8 +70,8 @@ internal class TaskImplementation : ITask
     /// <exception cref="BO.BlDoesNotExistException">A task with the id given doesn't exist</exception>
     public void Delete(int id)
     {
-        if (s_bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
-            throw new BO.BlProjectStageException("Can't deךete tasks after the project has started");
+        if (_bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
+            throw new BO.BlProjectStageException("Can't delete tasks after the project has started");
 
         DO.Task? doTask = _dal.Task.Read(id);
         if (doTask is null)
@@ -174,7 +179,7 @@ internal class TaskImplementation : ITask
     /// <exception cref="BlWrongDateException">Date is impossible du to previous tasks dates</exception>
     public void UpdateScheduledStartDate(int taskId, DateTime? start)
     {
-        if (s_bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
+        if (_bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
             throw new BO.BlProjectStageException("Can't update a start date for a task on the current project stage");
 
         BO.Task boTask = Read(taskId)!;
@@ -250,17 +255,17 @@ internal class TaskImplementation : ITask
     {
         BO.Task? taskToUpdate = Read(updatedTask.Id);
 
-        if (s_bl.GetProjectStatus() == BO.ProjectStatus.PlanningTime)
+        if (_bl.GetProjectStatus() == BO.ProjectStatus.PlanningTime)
         {
             if (updatedTask.ScheduledDate is not null || updatedTask.TaskAgent is not null)
                 throw new BO.BlProjectStageException("Can't update start date or assign an agent on current project stage");
         }
-        if (s_bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
+        if (_bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
         {
             if (updatedTask.RequiredEffortTime != taskToUpdate!.RequiredEffortTime)
                 throw new BO.BlProjectStageException("Duration time required for a task can't be changed on current project stage");
         }
-        if (s_bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime)
+        if (_bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime)
         {
             if (updatedTask.TaskAgent is not null)
                 throw new BO.BlProjectStageException("Can't assign an agent for a task on current project stage");
@@ -279,7 +284,7 @@ internal class TaskImplementation : ITask
     public void CreateSchedule()
     {
         //////להוסיף בדיקות....
-        if (s_bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
+        if (_bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
             throw new BO.BlProjectStageException("Can't update a start date for the tasks on the current project stage");
 
         foreach (var boTaskInList in ReadAll())

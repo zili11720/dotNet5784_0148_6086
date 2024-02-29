@@ -38,7 +38,7 @@ internal class UserImplementation : IUser
     public User? Read(string userName)
     {
         List<User> users = XMLTools.LoadListFromXMLSerializer<User>(s_users_xml);
-        return users.FirstOrDefault(it => it.UserName ==userName);
+        return users.FirstOrDefault(it => it.UserName == userName);
     }
 
     public void Update(User item)

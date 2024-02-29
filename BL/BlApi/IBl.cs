@@ -12,5 +12,13 @@ public interface IBl
     void ResetData();
     void InitializeData();
     BO.ProjectStatus GetProjectStatus();
+    #region
+    DateTime Clock { get; }
+    DateTime updateYear();
+    DateTime updateDay();
+    DateTime updateHour();
+    DateTime ResetClock();
+    #endregion
+
 
 }

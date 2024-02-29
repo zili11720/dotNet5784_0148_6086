@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfAgent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Agent>
-    <Id>270050070</Id>
+    <Id>353798040</Id>
     <Email>EliChoen@gmail.com</Email>
-    <Cost>464</Cost>
+    <Cost>429</Cost>
     <Name>Eli Choen</Name>
     <Specialty>Field_agent</Specialty>
   </Agent>
   <Agent>
-    <Id>243173057</Id>
+    <Id>226037300</Id>
     <Email>AlexCooper@gmail.com</Email>
-    <Cost>459</Cost>
+    <Cost>372</Cost>
     <Name>Alex Cooper</Name>
     <Specialty>Field_agent</Specialty>
   </Agent>
   <Agent>
-    <Id>395781844</Id>
+    <Id>287906013</Id>
     <Email>JamesBond@gmail.com</Email>
-    <Cost>479</Cost>
+    <Cost>347</Cost>
     <Name>James Bond</Name>
     <Specialty>Field_agent</Specialty>
   </Agent>
   <Agent>
-    <Id>235058395</Id>
+    <Id>332057148</Id>
     <Email>JoneAlon@gmail.com</Email>
-    <Cost>378</Cost>
+    <Cost>459</Cost>
     <Name>Jone Alon</Name>
     <Specialty>Hacker</Specialty>
   </Agent>
   <Agent>
-    <Id>316758276</Id>
+    <Id>293821292</Id>
     <Email>CrisKlark@gmail.com</Email>
-    <Cost>347</Cost>
+    <Cost>421</Cost>
     <Name>Cris Klark</Name>
     <Specialty>Investigator</Specialty>
   </Agent>

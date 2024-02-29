@@ -36,7 +36,7 @@ public partial class PasswordWindow : Window
     public PasswordWindow()
     {
         InitializeComponent();
-        CurrentUser = new BO.User();
+        CurrentUser = new BO.User() { UserId = 0, UserName = "", Password = "",IsManager =false }; 
     }
 
     string? password = null;

@@ -22,5 +22,6 @@ public class User
     public  string? Password;
 
     public bool IsManager = false;
+
     public override string ToString() => this.ToStringProperty();
 }

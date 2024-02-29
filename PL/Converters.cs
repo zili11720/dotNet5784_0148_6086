@@ -4,8 +4,10 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Navigation;
 
 namespace PL;
 
@@ -49,6 +51,20 @@ class ConvertIdToIsEnabledReversed : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+class ConvertBoolToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (bool)value is true ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 class ConvertTaskStatusToColor : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -74,6 +90,7 @@ class ConvertTaskStatusToColor : IValueConverter
         throw new NotImplementedException();
     }
 }
+
 
 
 

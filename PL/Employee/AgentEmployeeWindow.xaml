@@ -10,17 +10,24 @@
         <Grid.Background>
             <ImageBrush ImageSource="/mainwindowbackround.jpg"/>
         </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="719*"/>
-            <ColumnDefinition Width="82*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Currnt Task details" HorizontalAlignment="Left" Margin="450,259,0,0" VerticalAlignment="Top" Height="115" Width="250" Click="btnTaskdDetails_Click"  FontWeight="Bold" FontSize="25" FontStyle="Italic"/>
-        <Button Content="Available Tasks" HorizontalAlignment="Left" Margin="109,259,0,0" VerticalAlignment="Top" Height="115" Width="250" Click="btnAvailableTasks_Click"  FontWeight="Bold" FontSize="25" FontStyle="Italic"/>
-        <Label Content="CurrentTask.Id:" Grid.Row="0" HorizontalAlignment="Left" Margin="56,40,0,0" VerticalAlignment="Top" Width="258" Height="54" FontSize="30" />
+        <Label Content="CurrentTask.Id:" Grid.Row="0" Width="258" Height="54" FontSize="30" />
+        <Label Content="CurrentTask.Alias:" Grid.Row="1"  Width="294" Height="61" FontSize="30"/>
+        <Button Content="Current Task details" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Height="115" Width="250" Click="btnTaskDetails_Click" FontSize="25"/>
+        <Button Content="Available Tasks" Grid.Row="2" Grid.Column="0" Height="115" Width="250" Click="btnAvailableTasks_Click"/>
+       
         <!--<TextBox Grid.Row="0" Grid.Column="1"
          Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="140" Height="18"/>-->
-        <Label Content="CurrentTask.Alias:" Grid.Column="0" HorizontalAlignment="Left" Margin="56,156,0,0" VerticalAlignment="Top" Width="294" Height="61" FontSize="30"/>
+        
         <!--<TextBox Grid.Row="1" Grid.Column="1"
         Text="{Binding Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
         HorizontalAlignment="Left" Margin="50,20,0,0"  VerticalAlignment="Top" Width="140" Height="17" TextWrapping="Wrap"/>-->

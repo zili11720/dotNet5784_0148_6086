@@ -11,8 +11,13 @@ internal class Bl : IBl
 {
     private static DalApi.IDal _dal = DalApi.Factory.Get;
     public IAgent Agent => new AgentImplementation();
-    public ITask Task => new TaskImplementation();
+    public ITask Task => new TaskImplementation(this);
     public IUser User => new UserImplementation();
+
+    private static DateTime s_Clock = DateTime.Now.Date;
+    public DateTime Clock { get { return s_Clock; } private set { s_Clock = value; } }
+
+
     //public static DateTime? StartProjectDate { get; set; } = null;//Start date of the project
     // public static DateTime? EndProjectDate { get; set; } = null;//End date of the project
 
@@ -63,4 +68,25 @@ internal class Bl : IBl
         _dal.StartProjectDate = null;
         DalTest.Initialization.Do();
     }
+
+    public DateTime updateYear()
+    {
+        return Clock = Clock.AddYears(1);
+    }
+
+    public DateTime updateDay()
+    {
+        return Clock = Clock.AddDays(1);
+    }
+
+    public DateTime updateHour()
+    {
+        return Clock = Clock.AddHours(1);
+    }
+
+    public DateTime ResetClock()
+    {
+       return Clock = DateTime.Now;
+    }
+
 }

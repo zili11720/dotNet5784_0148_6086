@@ -11,9 +11,13 @@ public record User
 (
     int UserId ,
 
-    string UserName,
+    string? UserName,
     
-    string Password,
+    string? Password,
 
     bool IsManager=false
-);
+)
+{
+    public User() : this(0, null, null) { }//empty constructor
+}
+

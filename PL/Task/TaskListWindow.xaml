@@ -16,9 +16,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!--Internal, Upper Grid-->
-        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto" 
+              Visibility="{Binding Path=isManager,Converter={StaticResource ConvertBoolToVisibilityKey}, Mode=OneTime}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -50,7 +51,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <!-- Button Column -->
-                <DataGridTemplateColumn Header="Actions" Width="*">
+                <DataGridTemplateColumn Header="Actions" Width="*" Visibility="{Binding Path=isManager,Converter={StaticResource ConvertBoolToVisibilityKey}, Mode=OneTime}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Delete Task" Click="btnDeleteTask_Click" HorizontalAlignment="Center" Height="20" Width="80" Command="{Binding btnDeleteTask_Click}" CommandParameter="{Binding}"/>
@@ -59,6 +60,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="btnAddNewTask_Click"/>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="btnAddNewTask_Click"
+                Visibility="{Binding Path=isManager,Converter={StaticResource ConvertBoolToVisibilityKey}, Mode=OneTime}"/>
     </Grid>
 </Window>

@@ -169,14 +169,7 @@ internal class AgentImplementation : IAgent
         if (doTask.AgentId != agentId)
             throw new BO.BlWrongAgentForTaskException($"The Agent with the id= {agentId} does not have a task with id={TaskId}");
         return s_bl.Task.ConvertTaskToTaskInList(doTask);
-        //return new BO.TaskInList
-        //{
-        //    Id = doTask.Id,
-        //    Alias = doTask.Alias,
-        //    Description = doTask.Description,
-        //    Status = _task.CalcStatus(doTask),
-        //    Complexity = (BO.AgentExperience?)doTask.Complexity
-        //};
+  
     }
     /// <summary>
     /// Return all the tasks that were assigned to the agent with the given id

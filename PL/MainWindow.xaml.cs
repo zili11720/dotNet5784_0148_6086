@@ -1,4 +1,5 @@
 ﻿using PL.Agent;
+using PL.Employee;
 using PL.Task;
 using System.Text;
 using System.Windows;
@@ -28,7 +29,8 @@ public partial class MainWindow : Window
     }
     private void btnAgents_Click(object sender, RoutedEventArgs e)
     {
-        new AgentListWindow().Show();
+       new AgentEmployeeWindow(332057148).Show();
+        //new AgentListWindow().Show();
     }
     private void btnTasks_Click(object sender, RoutedEventArgs e)
     {

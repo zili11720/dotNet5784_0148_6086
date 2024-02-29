@@ -41,8 +41,9 @@ public partial class UserWindow : Window
     {
        try
        {
-            CurrentUser = s_bl.User.Read(CurrentUser.UserName)!;
-            if(CurrentUser.Password != password)
+            // CurrentUser = s_bl.User.Read(CurrentUser.UserName)!;
+            CurrentUser = s_bl.User.Read(CurrentUser.UserName);
+            if (CurrentUser.Password != password)
             {
                 MessageBox.Show("Invalid password, Please try again","worng password", MessageBoxButton.OK, MessageBoxImage.Error);
             }

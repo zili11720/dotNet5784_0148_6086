@@ -55,5 +55,6 @@
         <Button Content="Add Project Start Date"  Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Height="50" Width="280" Background="{x:Null}" BorderBrush="#FF100F0F"/>
         <Button Content="Create Automatic Schedule" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Height="50" Width="280" BorderBrush="Black" Background="{x:Null}"/>
         <Label Content="Welcome" Grid.Row="1"  HorizontalAlignment="Left"  VerticalAlignment="Top" Height="203" Width="500" FontSize="90"  Foreground="#FF0F0F10" FontWeight="Bold" FontStyle="Italic" FontFamily="Sitka Small" Margin="20,36,0,0" Grid.RowSpan="3"/>
+        <DateTime Content="Clock" Grid.Row="1"/>
     </Grid>
 </Window>
