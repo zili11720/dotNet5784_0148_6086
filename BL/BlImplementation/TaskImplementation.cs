@@ -35,7 +35,7 @@ internal class TaskImplementation : ITask
             Id = boTask.Id,
             Alias = boTask.Alias!,
             Description = boTask.Description!,
-            CreatedAtDate = boTask.CreatedAtDate,
+            CreatedAtDate = /*boTask.CreatedAtDate, //*/_bl.Clock,
             RequiredEffortTime = boTask.RequiredEffortTime,
             Complexity = (DO.AgentExperience?)boTask.Complexity,
             StartDate = null,
@@ -332,11 +332,11 @@ internal class TaskImplementation : ITask
     {
         if (task.ScheduledDate == null)
             return TaskStatus.Unscheduled;
-        if (task.ScheduledDate != null && task.StartDate < DateTime.Now || task.StartDate == null)
+        if (task.ScheduledDate != null && task.StartDate < _bl.Clock || task.StartDate == null)
             return TaskStatus.Scheduled;
-        if (task.StartDate >= DateTime.Now && task.CompleteDate < DateTime.Now || task.CompleteDate == null)
+        if (task.StartDate >= _bl.Clock && task.CompleteDate < _bl.Clock || task.CompleteDate == null)
             return TaskStatus.OnTrack;
-        if (task.CompleteDate >= DateTime.Now)
+        if (task.CompleteDate >= _bl.Clock)
             return TaskStatus.Done;
         else
             throw new BlWrongDateException("Task's dates are impossible");

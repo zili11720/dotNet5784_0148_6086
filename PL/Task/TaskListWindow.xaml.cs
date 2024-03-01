@@ -65,7 +65,7 @@ public partial class TaskListWindow : Window
     }
     private void btnAddNewTask_Click(object sender, RoutedEventArgs e)
     {
-        new TaskWindow(AddOrUpdate).ShowDialog();
+        new TaskWindow(0,AddOrUpdate).ShowDialog();
     }
 
     private void dgUpdateTask_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -73,7 +73,7 @@ public partial class TaskListWindow : Window
         BO.TaskInList? taskInList=(sender as DataGrid)?.SelectedItem as BO.TaskInList;
         if(taskInList is not null) 
         {
-            new TaskWindow(AddOrUpdate,taskInList.Id).ShowDialog();
+            new TaskWindow(taskInList.Id,AddOrUpdate).ShowDialog();
         }
 
     }

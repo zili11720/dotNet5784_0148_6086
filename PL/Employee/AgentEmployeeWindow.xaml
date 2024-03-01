@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Employee"
         mc:Ignorable="d"
-        Title="AgentEmployeeWindow" Height="450" Width="800">
+        Title="AgentEmployeeWindow" Height="450" Width="800"
+        DataContext="{Binding CurrentEmployee, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/mainwindowbackround.jpg"/>
@@ -24,13 +25,12 @@
         <Button Content="Current Task details" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Height="115" Width="250" Click="btnTaskDetails_Click" FontSize="25"/>
         <Button Content="Available Tasks" Grid.Row="2" Grid.Column="0" Height="115" Width="250" Click="btnAvailableTasks_Click"/>
        
-        <!--<TextBox Grid.Row="0" Grid.Column="1"
-         Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="140" Height="18"/>-->
+        <TextBox Grid.Row="0" Grid.Column="1"
+         Text="{Binding CurrentEmployee.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+         HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Height="18"/>
         
-        <!--<TextBox Grid.Row="1" Grid.Column="1"
-        Text="{Binding Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-        HorizontalAlignment="Left" Margin="50,20,0,0"  VerticalAlignment="Top" Width="140" Height="17" TextWrapping="Wrap"/>-->
-
+        <TextBox Grid.Row="1" Grid.Column="1"
+        Text="{Binding CurrentEmployee.CurrentTask.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+        HorizontalAlignment="Left" Margin="50,20,0,0"  VerticalAlignment="Top" Width="140" Height="17" TextWrapping="Wrap"/>
     </Grid>
 </Window>
