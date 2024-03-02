@@ -82,8 +82,8 @@ public partial class TaskWindow : Window
             }
             else
             {
-                s_bl.Task.Create(CurrentTask);
-                _AddOrUpdate(CurrentTask.Id,false);
+                int nextId=s_bl.Task.Create(CurrentTask);
+                _AddOrUpdate(nextId,false);
                 MessageBox.Show("Task was successfuly added", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
 

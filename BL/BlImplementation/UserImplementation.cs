@@ -6,7 +6,10 @@ namespace BlImplementation;
 internal class UserImplementation : IUser
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+    private readonly IBl _bl;
+    internal UserImplementation(IBl bl) => _bl = bl;//Dependency injection
+
     public void Clear()
     {
         _dal.User.Clear();
@@ -14,7 +17,7 @@ internal class UserImplementation : IUser
 
     public string Create(User item)
     {
-        s_bl.Agent.Read(item.UserId);//Check if the id belongs to an existing agent
+        _bl.Agent.Read(item.UserId);//Check if the id belongs to an existing agent
 
         try
         {
@@ -47,8 +50,7 @@ internal class UserImplementation : IUser
     {
         DO.User? doUser = _dal.User.Read(id);
         if (doUser is null)
-            throw new BO.BlDoesNotExistException($"A user with ID {id} does not exist");
-
+            throw new BO.BlDoesNotExistException($"A user with id {id} does not exist");
         BO.User boUser = new BO.User()
         {
             UserId = doUser.UserId,

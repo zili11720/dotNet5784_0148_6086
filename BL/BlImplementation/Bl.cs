@@ -10,12 +10,12 @@ using BlApi;
 internal class Bl : IBl
 {
     private static DalApi.IDal _dal = DalApi.Factory.Get;
-    public IAgent Agent => new AgentImplementation();
+    public IAgent Agent => new AgentImplementation(this);
     public ITask Task => new TaskImplementation(this);
-    public IUser User => new UserImplementation();
+    public IUser User => new UserImplementation(this);
 
     private static DateTime s_Clock = DateTime.Now.Date;
-    public DateTime Clock { get { return s_Clock; } private set { s_Clock = value; } }
+    public DateTime Clock { get { return s_Clock.Date; } private set { s_Clock = value; } }
 
 
     //public static DateTime? StartProjectDate { get; set; } = null;//Start date of the project

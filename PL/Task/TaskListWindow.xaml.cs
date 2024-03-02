@@ -14,7 +14,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-//using PL.Tools.ToObservableCollectionExtansion;
 
 namespace PL.Task;
 
@@ -25,7 +24,7 @@ public partial class TaskListWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-    public bool isManager { get; set; } = false;
+    public bool isManager { get; set; } = true;
 
     public TaskListWindow(bool _isManager=true,int employeeId = 0)
     {

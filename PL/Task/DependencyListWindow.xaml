@@ -38,8 +38,8 @@
                 <DataGridTemplateColumn Header="Actions" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete dependency" Click="btnDeleteDependency_Click"/>
-                            <!--Command="{Binding btnDeleteDependency_Click}" CommandParameter="{Binding}-->
+                            <Button Content="Delete dependency" Click="btnDeleteDependency_Click"
+                            Command="{Binding btnDeleteDependency_Click}" CommandParameter="{Binding}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

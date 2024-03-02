@@ -8,7 +8,9 @@ internal class AgentImplementation : IAgent
 
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
-    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    private readonly IBl _bl;
+
+    internal AgentImplementation(IBl bl) => _bl = bl;//Dependency injection
 
     /// <summary>
     /// Add an agent to dal according to the given Bl agent
@@ -47,9 +49,14 @@ internal class AgentImplementation : IAgent
             if (doAgent is null)
                 throw new BO.BlDoesNotExistException($"An agent with ID={id} does not exist");
 
-            BO.User user = s_bl.User.Read(id);
-            if (user is not null&&user.IsManager is true)
-                throw new BO.BlDeletionImpossibleException("A manager can't be deleted before a new one is assigned");
+            DO.User user = _dal.User.Read(id)!;
+            if (user is not null)
+            {
+                if (user.IsManager is true)
+                    throw new BO.BlDeletionImpossibleException("A manager can't be deleted before a new one is assigned");
+                else
+                    _bl.User.Delete(id);
+            }
 
             //check if this agent allresdy started/finished any tasks
             IEnumerable<DO.Task> doTasks = from DO.Task task in _dal.Task.ReadAll(task => task.AgentId == id)
@@ -78,7 +85,7 @@ internal class AgentImplementation : IAgent
             throw new BO.BlDoesNotExistException($"An agent with ID={id} does not exist");
 
         //Find the current task of the agent
-        DO.Task? doTask = _dal.Task.Read(task => task.AgentId == id && s_bl.Task.CalcStatus(task) == BO.TaskStatus.OnTrack/*StartDate < DateTime.Now && task.CompleteDate > DateTime.Now*/);
+        DO.Task? doTask = _dal.Task.Read(task => task.AgentId == id && _bl.Task.CalcStatus(task) == BO.TaskStatus.OnTrack/*StartDate < DateTime.Now && task.CompleteDate > DateTime.Now*/);
 
         BO.Agent boAgent = new BO.Agent()
         {
@@ -136,7 +143,7 @@ internal class AgentImplementation : IAgent
 
             if (boAgent.CurrentTask is not null)
             {
-                if (s_bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime)
+                if (_bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime)
                     throw new BO.BlProjectStageException("Agent can't start a task on the current project stage");
                 //update the task allocated to this agent
                 DO.Task? taskToUpdate = _dal.Task.Read(boAgent.CurrentTask.Id);
@@ -168,7 +175,7 @@ internal class AgentImplementation : IAgent
             throw new BO.BlDoesNotExistException($"Task with ID={TaskId} does Not exist");
         if (doTask.AgentId != agentId)
             throw new BO.BlWrongAgentForTaskException($"The Agent with the id= {agentId} does not have a task with id={TaskId}");
-        return s_bl.Task.ConvertTaskToTaskInList(doTask);
+        return _bl.Task.ConvertTaskToTaskInList(doTask);
   
     }
     /// <summary>
@@ -181,7 +188,7 @@ internal class AgentImplementation : IAgent
         return from DO.Task doTask in _dal.Task.ReadAll()
                where doTask.AgentId == agentId
                orderby doTask.Id descending
-               select s_bl.Task.ConvertTaskToTaskInList(doTask);
+               select _bl.Task.ConvertTaskToTaskInList(doTask);
                //select new BO.TaskInList
                //{
                //    Id = doTask.Id,
@@ -204,16 +211,20 @@ internal class AgentImplementation : IAgent
     /// <exception cref="BO.BlWrongInputException">Wrong value</exception>
     private void CheckValidation(BO.Agent boAgent)
     {
-        if (boAgent!.Id <= 0)
+        if (boAgent!.Id == 0)
+            throw new BO.BlWrongInputException("Id must have a value");
+        if (boAgent!.Id < 0)
             throw new BO.BlWrongInputException("Id can't be negative");
         if (string.IsNullOrEmpty(boAgent.Name))
             throw new BO.BlWrongInputException("Agent's name must have a value");
         if (boAgent.Cost < 0)
             throw new BO.BlWrongInputException("Agent's cost can't be negative");
+        if(string.IsNullOrEmpty(boAgent.Email))
+            throw new BO.BlWrongInputException("Agent email must have a value");
         if (boAgent.Email!.Contains("@gmail.com") == false)
             throw new BO.BlWrongInputException("Worng email format");
         if(boAgent.Specialty==AgentExperience.None)
-            throw new BO.BlWrongInputException("Agent experience must be declared");
+            throw new BO.BlWrongInputException("Agent specialty must be declared");
 
     }
     /// <summary>
@@ -232,7 +243,7 @@ internal class AgentImplementation : IAgent
             throw new BO.BlDoesNotExistException("No available tasks for this agent's level");
         IEnumerable<TaskInList> availableTasks = tasks.Where(t => t is not null)
                                                       .Where(t => t.AgentId is null)
-                                                      .Select(t=>s_bl.Task.ConvertTaskToTaskInList(t));
+                                                      .Select(t=>_bl.Task.ConvertTaskToTaskInList(t));
                                                       //.Select(t => new BO.TaskInList()
                                                       //{
                                                       //    Id = t.Id,

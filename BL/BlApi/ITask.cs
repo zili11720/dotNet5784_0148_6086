@@ -16,7 +16,7 @@ public interface ITask
     IEnumerable<BO.TaskInList> GetDependenciesList(int id);
     void Clear();
     void CreateSchedule();
-    void AddDependency(int taskId,int depId);
+    TaskInList AddDependency(int taskId,int depId);
     void RemoveDependency(int taskId,int depId);
     BO.TaskStatus CalcStatus(DO.Task task);
     TaskInList ConvertTaskToTaskInList(DO.Task task);

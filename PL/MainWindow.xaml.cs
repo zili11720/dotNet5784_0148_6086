@@ -1,4 +1,5 @@
-﻿using PL.Employee;
+﻿using PL.Agent;
+using PL.Employee;
 using PL.Task;
 using System.Windows;
 
@@ -28,8 +29,8 @@ public partial class MainWindow : Window
     }
     private void btnAgents_Click(object sender, RoutedEventArgs e)
     {
-        new AgentEmployeeWindow(293821292).Show();
-        //new AgentListWindow().Show();
+        //new AgentEmployeeWindow(293821292).Show();
+        new AgentListWindow().Show();
     }
     private void btnTasks_Click(object sender, RoutedEventArgs e)
     {
@@ -58,21 +59,21 @@ public partial class MainWindow : Window
 
     private void btnResetClock_Click(object sender, RoutedEventArgs e)
     {
-        s_bl.ResetClock();
+       CurrentTime=s_bl.ResetClock();
     }
 
     private void btnAddDay_Click(object sender, RoutedEventArgs e)
     {
-        s_bl.updateDay();
+        CurrentTime = s_bl.updateDay();
     }
 
     private void btnAddHour_Clock(object sender, System.Windows.Controls.ContextMenuEventArgs e)
     {
-        s_bl.updateHour();
+        CurrentTime = s_bl.updateHour();
     }
 
     private void btnAddYear_Click(object sender, RoutedEventArgs e)
     {
-       s_bl.updateYear();
+        CurrentTime = s_bl.updateYear();
     }
 }

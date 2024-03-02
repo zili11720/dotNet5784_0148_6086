@@ -13,7 +13,7 @@ internal class TaskImplementation : ITask
 
     private readonly IBl _bl;
 
-    internal TaskImplementation(IBl bl) => _bl = bl;
+    internal TaskImplementation(IBl bl) => _bl = bl;//Dependency injection
 
 
     /// <summary>
@@ -26,16 +26,16 @@ internal class TaskImplementation : ITask
     public int Create(BO.Task boTask)
     {
         if (_bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
-            throw new BO.BlProjectStageException("Can't create new tasks after the project has started");
+            throw new BO.BlProjectStageException("Can't create new task after the project has started");
 
         CheckValidation(boTask);
 
         DO.Task newDoTask = new DO.Task()
         {
-            Id = boTask.Id,
+            // Id = boTask.Id,
             Alias = boTask.Alias!,
             Description = boTask.Description!,
-            CreatedAtDate = /*boTask.CreatedAtDate, //*/_bl.Clock,
+            CreatedAtDate =_bl.Clock,
             RequiredEffortTime = boTask.RequiredEffortTime,
             Complexity = (DO.AgentExperience?)boTask.Complexity,
             StartDate = null,
@@ -80,7 +80,7 @@ internal class TaskImplementation : ITask
         {
             DO.Dependency? doDep = _dal.Dependency.Read(dep => dep.DependsOnTask == id);
             if (doDep is not null)
-                throw new BO.BlDeletionImpossibleException("Deletion is impossible");
+                throw new BO.BlDeletionImpossibleException("Deletion is impossible, other tasks depend on this task!");
             _dal.Task.Delete(id);
         }
         catch (DO.DalDoesNotExistException ex)
@@ -161,7 +161,7 @@ internal class TaskImplementation : ITask
                 Remarks = boTask.Remarks,
                 AgentId = boTask.TaskAgent is null ? null : boTask.TaskAgent.Id
             };
-            if (boTask.StartDate is not null)
+            if (boTask.ScheduledDate is not null)
                 UpdateScheduledStartDate(boTask.Id, boTask.ScheduledDate);
 
             _dal.Task.Update(newDoTask);
@@ -183,6 +183,7 @@ internal class TaskImplementation : ITask
             throw new BO.BlProjectStageException("Can't update a start date for a task on the current project stage");
 
         BO.Task boTask = Read(taskId)!;
+        //Check if the given scheduled start date is later than planned complete dates of previous tasks
         if (boTask.DependenciesList is not null && boTask.DependenciesList.Any())
         {
             var previousTasks = boTask.DependenciesList!
@@ -218,14 +219,6 @@ internal class TaskImplementation : ITask
                               .Select(d => _dal.Task.Read(d.DependsOnTask))
                               .Where(d => d is not null)
                               .Select(d => ConvertTaskToTaskInList(d!));
-        //.Select(d => new BO.TaskInList()
-        //{
-        //    Id = d!.Id,
-        //    Alias = d.Alias,
-        //    Description = d.Description,
-        //    Status = CalcStatus(d),
-        //    Complexity = (BO.AgentExperience?)d.Complexity,
-        //});
     }
 
     public void Clear()
@@ -244,6 +237,8 @@ internal class TaskImplementation : ITask
             throw new BO.BlWrongInputException("Id is not valid");
         if (string.IsNullOrEmpty(boTask.Alias))
             throw new BO.BlWrongInputException("Task's alias must have a value");
+        if(boTask.Complexity is null || boTask.Complexity is AgentExperience.None)
+            throw new BO.BlWrongInputException("Task's complexity must be declared");
     }
     /// <summary>
     /// Check if the update of certain fields is possible according to the current project status and other parameters
@@ -354,7 +349,7 @@ internal class TaskImplementation : ITask
         };
     }
 
-    void ITask.AddDependency(int taskId, int depId)
+    TaskInList ITask.AddDependency(int taskId, int depId)
     {
         DO.Task? depTask = _dal.Task.Read(depId);
         if (depTask is null)
@@ -368,7 +363,8 @@ internal class TaskImplementation : ITask
             throw new BO.BlAllreadyExistsException("This dependency allready exists");
 
         _dal.Dependency.Create(new DO.Dependency(0, taskId, depId));
-        BO.Task task = Read(taskId)!;
+        DO.Task task = _dal.Task.Read(taskId)!;
+        return ConvertTaskToTaskInList(task);
     }
 
     void ITask.RemoveDependency(int taskId,int depId)
