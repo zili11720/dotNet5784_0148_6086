@@ -152,6 +152,7 @@ internal class TaskImplementation : ITask
                 Description = boTask.Description!,
                 CreatedAtDate = boTask.CreatedAtDate,
                 RequiredEffortTime = boTask.RequiredEffortTime,
+                ScheduledDate = boTask.ScheduledDate,
                 Complexity = (DO.AgentExperience?)boTask.Complexity,
                 StartDate = boTask.StartDate,
                 DeadlineDate = boTask.DeadlineDate,
@@ -160,9 +161,6 @@ internal class TaskImplementation : ITask
                 Remarks = boTask.Remarks,
                 AgentId = boTask.TaskAgent is null ? null : boTask.TaskAgent.Id
             };
-            if (boTask.ScheduledDate is not null)
-                UpdateScheduledStartDate(boTask.Id, boTask.ScheduledDate);
-
             _dal.Task.Update(newDoTask);
         }
         catch (DO.DalDoesNotExistException ex)
@@ -176,35 +174,35 @@ internal class TaskImplementation : ITask
     /// <param name="taskId">Id of the task to update</param>
     /// <param name="start">The wanted start date</param>
     /// <exception cref="BlWrongDateException">Date is impossible du to previous tasks dates</exception>
-    public void UpdateScheduledStartDate(int taskId, DateTime? start)
-    {
-        if (_bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
-            throw new BO.BlProjectStageException("Can't update a start date for a task on the current project stage");
+    //public void UpdateScheduledStartDate(int taskId, DateTime? start)
+    //{
+    //    if (_bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
+    //        throw new BO.BlProjectStageException("Can't update a start date for a task on the current project stage");
 
-        BO.Task boTask = Read(taskId)!;
-        //Check if the given scheduled start date is later than planned complete dates of previous tasks
-        if (boTask.DependenciesList is not null && boTask.DependenciesList.Any())
-        {
-            var previousTasks = boTask.DependenciesList!
-                .Select(dep => _dal.Task.Read(dep.Id))
-                .Where(dep => dep is not null);
+    //    BO.Task boTask = Read(taskId)!;
+    //    //Check if the given scheduled start date is later than planned complete dates of previous tasks
+    //    if (boTask.DependenciesList is not null && boTask.DependenciesList.Any())
+    //    {
+    //        var previousTasks = boTask.DependenciesList!
+    //            .Select(dep => _dal.Task.Read(dep.Id))
+    //            .Where(dep => dep is not null);
 
-            DO.Task? previousTask = previousTasks.FirstOrDefault(task => task!.ScheduledDate == null);
-            if (previousTask is not null)
-                throw new BlWrongDateException("Can't schedule a start date because previous tasks don't have a starting date");
-            previousTask = previousTasks.FirstOrDefault(task => (task!.ScheduledDate + task.RequiredEffortTime) > start);
-            if (previousTask is not null)
-                throw new BlWrongDateException("Start date musn't be earlier than previous task's complete date");
-        }
-        else//task has no dependencies
-            if (_dal.StartProjectDate is null || start < _dal.StartProjectDate)
-            throw new BlWrongDateException("Start date musn't be earlier than project start date");
+    //        DO.Task? previousTask = previousTasks.FirstOrDefault(task => task!.ScheduledDate == null);
+    //        if (previousTask is not null)
+    //            throw new BlWrongDateException("Can't schedule a start date because previous tasks don't have a starting date");
+    //        previousTask = previousTasks.FirstOrDefault(task => (task!.ScheduledDate + task.RequiredEffortTime) > start);
+    //        if (previousTask is not null)
+    //            throw new BlWrongDateException("Start date musn't be earlier than previous task's complete date");
+    //    }
+    //    else//task has no dependencies
+    //        if (_dal.StartProjectDate is null || start < _dal.StartProjectDate)
+    //        throw new BlWrongDateException("Start date musn't be earlier than project start date");
 
 
-        boTask.ScheduledDate = start;
-        boTask.EstimatedCompleteDate = start + boTask.RequiredEffortTime;
-        Update(boTask);
-    }
+    //    boTask.ScheduledDate = start;
+    //    boTask.EstimatedCompleteDate = start + boTask.RequiredEffortTime;
+    //    Update(boTask);
+    //}
 
     /// <summary>
     /// The methos gets a task's id and finds all the tasks that this task depends on them
@@ -238,6 +236,8 @@ internal class TaskImplementation : ITask
             throw new BO.BlWrongInputException("Task's alias must have a value");
         if (boTask.Complexity is null || boTask.Complexity is AgentExperience.None)
             throw new BO.BlWrongInputException("Task's complexity must be declared");
+        if (boTask.RequiredEffortTime is null)
+            throw new BO.BlWrongInputException("Task's required effort time must have a value");
     }
     /// <summary>
     /// Check if the update of certain fields is possible according to the current project status and other parameters
@@ -274,90 +274,68 @@ internal class TaskImplementation : ITask
     /// <summary>
     /// Create start date for all the tasks automaticaly
     /// </summary>
-    /// <exception cref="BO.BlProjectStageException">Can't assign satart date for tasks on the current project stage</exception>
-    public void CreateSchedule()
+    /// <exception cref="BO.BlProjectStageException">Can't assign start date for tasks on the current project stage</exception>
+    public void CreateAutomaticSchedule()
     {
-        //////להוסיף בדיקות....
+       
         if (_bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
-            throw new BO.BlProjectStageException("Can't update a start date for the tasks on the current project stage");
+            throw new BO.BlProjectStageException("Can't update a start date for the tasks before the project start date is decided");
 
-        foreach (var boTaskInList in ReadAll())
+        foreach (DO.Task doTask in _dal.Task.ReadAll())
         {
-            var FinishDates = _dal.Dependency.ReadAll(t => t.DependentTask == boTaskInList.Id)
-                                      .Select(t => _dal.Task.Read(t.Id))
-                                      .Where(t => t != null)
-                                      .Select(t => t.ScheduledDate + t.RequiredEffortTime);
-            DateTime? ScheduledStartDate = null;
-            if (FinishDates.Any())
-                ScheduledStartDate = FinishDates.Max();
-            else
-                ScheduledStartDate = _dal.StartProjectDate;
-
-            BO.Task botask = Read(boTaskInList.Id)!;
-
-            DO.Task newDoTask = new DO.Task()
-            {
-                Id = botask.Id!,
-                Alias = botask.Alias!,
-                Description = botask.Description!,
-                CreatedAtDate = botask.CreatedAtDate,
-                RequiredEffortTime = botask.RequiredEffortTime,
-                Complexity = (DO.AgentExperience?)botask.Complexity,
-                StartDate = null,
-                DeadlineDate = null,
-                CompleteDate = null,
-                Deliverables = botask.Deliverables,
-                Remarks = botask.Remarks,
-                AgentId = null,
-
-                ScheduledDate = DateTime.Now//ScheduledStartDate
-            };
-
-            _dal.Task.Update(newDoTask);
+            BO.Task botask = Read(doTask.Id)!;
+            RecursiveAutomaticSchedule(botask);
         };
     }
     /// <summary>
-    /// Craete a scheduled start date for a certain task
+    /// Recursive function for creation of start dates
     /// </summary>
-    /// <param name="task"></param>
-    private void CreateScheduledStartDate(BO.Task task)
+    /// <param name="boTask">The task that needs a scheduled date</param>
+    private void RecursiveAutomaticSchedule(BO.Task boTask)
+    {
+        if (boTask.ScheduledDate is not null)
+            return;
+        //If the task has no previous tasks
+        if (GetDependenciesList(boTask.Id) is null)
+        {
+            boTask.ScheduledDate = _dal.StartProjectDate;
+            Update(boTask);
+            return;
+        }
+        IEnumerable<BO.Task> dependentTasks = _dal.Dependency.ReadAll(t => t.DependentTask == boTask.Id)
+                                       .Select(t => Read(t.DependsOnTask))
+                                       .Where(t => t is not null && t.ScheduledDate is null).Select(t => t)!;
+        //If all previous tasks have scheduled start dates
+        if (!dependentTasks.Any())
+        {
+            CreateScheduledStartDate(boTask);
+            return;
+        }
+        //else, recursive call
+        foreach (BO.Task task in dependentTasks)
+        {
+            RecursiveAutomaticSchedule(task);
+        }
+
+
+    }
+    /// <summary>
+    /// Create a scheduled start date for a certain task
+    /// </summary>
+    /// <param name="botask">The task that needs a scheduled date</param>
+    private void CreateScheduledStartDate(BO.Task botask)
     {
         //Get finish dates of previous tasks
-        var FinishDates = _dal.Dependency.ReadAll(t => t.DependentTask == task.Id)
+        var FinishDates = _dal.Dependency.ReadAll(t => t.DependentTask == botask.Id)
                                      .Select(t => _dal.Task.Read(t.Id))
                                      .Where(t => t is not null)
                                      .Select(t => t.ScheduledDate + t.RequiredEffortTime);
-        DateTime? ScheduledStartDate = null;
-        //Set scheduled start date as the maximal finish date of the previous tasks,
-        //or as the project start date if the tasks has no previuos tasks
-        if (FinishDates.Any())
-            ScheduledStartDate = FinishDates.Max();
-        else
-            ScheduledStartDate = _dal.StartProjectDate;
-
-        BO.Task botask = Read(task.Id)!;
-
-        DO.Task newDoTask = new DO.Task()
-        {
-            Id = botask.Id!,
-            Alias = botask.Alias!,
-            Description = botask.Description!,
-            CreatedAtDate = botask.CreatedAtDate,
-            RequiredEffortTime = botask.RequiredEffortTime,
-            Complexity = (DO.AgentExperience?)botask.Complexity,
-            StartDate = null,
-            DeadlineDate = null,
-            CompleteDate = null,
-            Deliverables = botask.Deliverables,
-            Remarks = botask.Remarks,
-            AgentId = null,
-
-            ScheduledDate = ScheduledStartDate
-        };
-
-        _dal.Task.Update(newDoTask);
+        //Set scheduled start date as the maximal finish date of the previous tasks
+        DateTime? ScheduledStartDate = FinishDates.Max();
+       
+        botask.ScheduledDate = ScheduledStartDate;
+        Update(botask);
     }
-
 
     /// <summary>
     ///

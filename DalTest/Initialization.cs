@@ -207,7 +207,7 @@ public static class Initialization
             DateTime? _createAtDate = DateTime.Now;
 
 
-            Task newTask = new(0, _aliasses[i], _descriptions[i], _createAtDate, null, false, (AgentExperience)_complexity[i], null, null, null, null, _deliverables[i], _remarks[i], null);
+            Task newTask = new(0, _aliasses[i], _descriptions[i], _createAtDate, TimeSpan.FromDays(10), false, (AgentExperience)_complexity[i], null, null, null, null, _deliverables[i], _remarks[i], null);
             s_dal!.Task.Create(newTask);
         }
     }

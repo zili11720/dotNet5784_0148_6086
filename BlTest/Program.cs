@@ -329,7 +329,7 @@ internal class Program
                         GetDependenciesListT();
                         break;
                     case 8:
-                        s_bl!.Task.CreateSchedule();
+                        s_bl!.Task.CreateAutomaticSchedule();
                         break;
                     case 0:
                         return;
@@ -520,7 +520,7 @@ internal class Program
         Console.WriteLine("Enter task start date:");
         if (!DateTime.TryParse(Console.ReadLine(), out DateTime _startDate))
             throw new FormatException("Wrong input");
-        s_bl!.Task.UpdateScheduledStartDate(_id, _startDate);
+        //s_bl!.Task.UpdateScheduledStartDate(_id, _startDate);
     }
 
     static void GetDependenciesListT()

@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <User>
-    <UserId>318646623</UserId>
+    <UserId>310085958</UserId>
     <UserName>Eli Choen</UserName>
     <Password>Eli@123</Password>
     <IsManager>false</IsManager>
   </User>
   <User>
-    <UserId>256746994</UserId>
+    <UserId>352897827</UserId>
+    <UserName>Alex Cooper</UserName>
+    <Password>Alex@123</Password>
+    <IsManager>false</IsManager>
+  </User>
+  <User>
+    <UserId>249895852</UserId>
+    <UserName>James Bond</UserName>
+    <Password>James@123</Password>
+    <IsManager>false</IsManager>
+  </User>
+  <User>
+    <UserId>321974675</UserId>
     <UserName>Jone Alon</UserName>
     <Password>Jone@123</Password>
     <IsManager>false</IsManager>
   </User>
   <User>
-    <UserId>393973302</UserId>
+    <UserId>238737091</UserId>
     <UserName>Cris Klark</UserName>
     <Password>Cris@123</Password>
     <IsManager>true</IsManager>

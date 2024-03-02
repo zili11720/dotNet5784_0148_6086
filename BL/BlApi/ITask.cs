@@ -12,10 +12,9 @@ public interface ITask
     BO.Task? Read(int id);
     IEnumerable<BO.TaskInList> ReadAll(Func<BO.TaskInList, bool>? func = null);
     void Update(BO.Task boTask);
-    void UpdateScheduledStartDate(int taskId, DateTime? start);
     IEnumerable<BO.TaskInList> GetDependenciesList(int id);
     void Clear();
-    void CreateSchedule();
+    void CreateAutomaticSchedule();
     TaskInList AddDependency(int taskId,int depId);
     void RemoveDependency(int taskId,int depId);
     BO.TaskStatus CalcStatus(DO.Task task);
