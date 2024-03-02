@@ -96,7 +96,7 @@
             <Label Content="Scheduled Date:" Grid.Row="8" Grid.Column="0" HorizontalAlignment="left"  VerticalAlignment="Top" Height="30" Width="149"/>
             <DatePicker Grid.Row="8" Grid.Column="1" 
          Text="{Binding ScheduledDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-          IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToIsEnabledReversedKey}}"
+          IsEnabled="False"
          HorizontalAlignment="Center"  VerticalAlignment="Top" Width="140" Height="30"/>
 
             <Label Content="start Date:" Grid.Row="9" Grid.Column="0" HorizontalAlignment="left"   VerticalAlignment="Top" Height="30" Width="149"/>

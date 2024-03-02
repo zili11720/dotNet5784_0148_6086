@@ -2,14 +2,13 @@
 using BlApi;
 using BO;
 using System.Linq;
-using System.Runtime.Intrinsics.Arm;
 
 internal class TaskImplementation : ITask
 {
 
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
-   // static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    // static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
     private readonly IBl _bl;
 
@@ -35,7 +34,7 @@ internal class TaskImplementation : ITask
             // Id = boTask.Id,
             Alias = boTask.Alias!,
             Description = boTask.Description!,
-            CreatedAtDate =_bl.Clock,
+            CreatedAtDate = _bl.Clock,
             RequiredEffortTime = boTask.RequiredEffortTime,
             Complexity = (DO.AgentExperience?)boTask.Complexity,
             StartDate = null,
@@ -237,7 +236,7 @@ internal class TaskImplementation : ITask
             throw new BO.BlWrongInputException("Id is not valid");
         if (string.IsNullOrEmpty(boTask.Alias))
             throw new BO.BlWrongInputException("Task's alias must have a value");
-        if(boTask.Complexity is null || boTask.Complexity is AgentExperience.None)
+        if (boTask.Complexity is null || boTask.Complexity is AgentExperience.None)
             throw new BO.BlWrongInputException("Task's complexity must be declared");
     }
     /// <summary>
@@ -318,7 +317,50 @@ internal class TaskImplementation : ITask
         };
     }
     /// <summary>
-    /// 
+    /// Craete a scheduled start date for a certain task
+    /// </summary>
+    /// <param name="task"></param>
+    private void CreateScheduledStartDate(BO.Task task)
+    {
+        //Get finish dates of previous tasks
+        var FinishDates = _dal.Dependency.ReadAll(t => t.DependentTask == task.Id)
+                                     .Select(t => _dal.Task.Read(t.Id))
+                                     .Where(t => t is not null)
+                                     .Select(t => t.ScheduledDate + t.RequiredEffortTime);
+        DateTime? ScheduledStartDate = null;
+        //Set scheduled start date as the maximal finish date of the previous tasks,
+        //or as the project start date if the tasks has no previuos tasks
+        if (FinishDates.Any())
+            ScheduledStartDate = FinishDates.Max();
+        else
+            ScheduledStartDate = _dal.StartProjectDate;
+
+        BO.Task botask = Read(task.Id)!;
+
+        DO.Task newDoTask = new DO.Task()
+        {
+            Id = botask.Id!,
+            Alias = botask.Alias!,
+            Description = botask.Description!,
+            CreatedAtDate = botask.CreatedAtDate,
+            RequiredEffortTime = botask.RequiredEffortTime,
+            Complexity = (DO.AgentExperience?)botask.Complexity,
+            StartDate = null,
+            DeadlineDate = null,
+            CompleteDate = null,
+            Deliverables = botask.Deliverables,
+            Remarks = botask.Remarks,
+            AgentId = null,
+
+            ScheduledDate = ScheduledStartDate
+        };
+
+        _dal.Task.Update(newDoTask);
+    }
+
+
+    /// <summary>
+    ///
     /// </summary>
     /// <param name="task"></param>
     /// <returns></returns>
@@ -336,7 +378,11 @@ internal class TaskImplementation : ITask
         else
             throw new BlWrongDateException("Task's dates are impossible");
     }
-
+    /// <summary>
+    /// Convert a DO.task to BO.TaslInList
+    /// </summary>
+    /// <param name="task">DO.task</param>
+    /// <returns>A BO.TaskInList</returns>
     public TaskInList ConvertTaskToTaskInList(DO.Task task)
     {
         return new BO.TaskInList()
@@ -348,7 +394,15 @@ internal class TaskImplementation : ITask
             Complexity = (BO.AgentExperience?)task.Complexity,
         };
     }
-
+    /// <summary>
+    /// Adds a dependency between two tasks
+    /// </summary>
+    /// <param name="taskId">Id of the current task</param>
+    /// <param name="depId">Id of the dependent task</param>
+    /// <returns>The new dependency as T</returns>
+    /// <exception cref="BO.BlDoesNotExistException">The id given doesn't belong to any task</exception>
+    /// <exception cref="BO.BlWrongInputException">The two id's are identical</exception>
+    /// <exception cref="BO.BlAllreadyExistsException">The dependency between the two tasks allready exists</exception>
     TaskInList ITask.AddDependency(int taskId, int depId)
     {
         DO.Task? depTask = _dal.Task.Read(depId);
@@ -358,19 +412,23 @@ internal class TaskImplementation : ITask
         if (taskId == depId)
             throw new BO.BlWrongInputException("A task can't depend on itself");
 
-        IEnumerable<TaskInList> dependencies=GetDependenciesList(taskId).Where(t=>t.Id==depId);
-        if(dependencies.Any())
+        IEnumerable<TaskInList> dependencies = GetDependenciesList(taskId).Where(t => t.Id == depId);
+        if (dependencies.Any())
             throw new BO.BlAllreadyExistsException("This dependency allready exists");
 
         _dal.Dependency.Create(new DO.Dependency(0, taskId, depId));
         DO.Task task = _dal.Task.Read(taskId)!;
         return ConvertTaskToTaskInList(task);
     }
-
-    void ITask.RemoveDependency(int taskId,int depId)
+    /// <summary>
+    /// Deletes a dependency from a task's dependency
+    /// </summary>
+    /// <param name="taskId">Id of the current task</param>
+    /// <param name="depId">Id of the dependent task</param>
+    void ITask.RemoveDependency(int taskId, int depId)
     {
-      var dependency=_dal.Dependency.Read(d=>d.DependentTask==taskId && d.DependsOnTask==depId);
+        var dependency = _dal.Dependency.Read(d => d.DependentTask == taskId && d.DependsOnTask == depId);
         if (dependency is not null)
-            _dal.Dependency.Delete(dependency.Id);  
+            _dal.Dependency.Delete(dependency.Id);
     }
 }
