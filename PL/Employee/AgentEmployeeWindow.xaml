@@ -9,7 +9,7 @@
         DataContext="{Binding CurrentEmployee, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/mainwindowbackround.jpg"/>
+            <ImageBrush ImageSource="/managerWindowBackround.jpg"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -17,18 +17,19 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="22*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="CurrentTask.Id:" Grid.Row="0" Width="258" Height="54" FontSize="30" />
-        <Label Content="CurrentTask.Alias:" Grid.Row="1"  Width="294" Height="61" FontSize="30"/>
-        <Button Content="Current Task details" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Height="115" Width="250" Click="btnTaskDetails_Click" FontSize="25"/>
-        <Button Content="Available Tasks" Grid.Row="2" Grid.Column="0" Height="115" Width="250" Click="btnAvailableTasks_Click"/>
-       
+        <Label Content="CurrentTask.Id:" Grid.Row="0" Width="258" Height="54" FontSize="30" Margin="71,45,71,46" />
+        <Label Content="CurrentTask.Alias:" Grid.Row="1"  Width="294" Height="61" FontSize="30" Margin="53,42,53,41"/>
+        <Button Content="Current Task details" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Height="115" Width="250" Click="btnTaskDetails_Click" FontSize="25" Margin="75,144,27,0" Grid.RowSpan="2"/>
+        <Button Content="Available Tasks" Grid.Row="2" Grid.Column="0" Height="115" Width="250" Click="btnAvailableTasks_Click" Margin="75,15,75,15"/>
+
         <TextBox Grid.Row="0" Grid.Column="1"
          Text="{Binding CurrentEmployee.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
          HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Height="18"/>
-        
+
         <TextBox Grid.Row="1" Grid.Column="1"
         Text="{Binding CurrentEmployee.CurrentTask.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
         HorizontalAlignment="Left" Margin="50,20,0,0"  VerticalAlignment="Top" Width="140" Height="17" TextWrapping="Wrap"/>

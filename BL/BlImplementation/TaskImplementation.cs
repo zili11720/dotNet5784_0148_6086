@@ -253,7 +253,7 @@ internal class TaskImplementation : ITask
 
         if (_bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime)
         {
-            if (updatedTask.StartDate != taskToUpdate!.StartDate)
+            if (updatedTask.StartDate is not null)
                 throw new BO.BlProjectStageException("Can't update start on current project stage");
             if (updatedTask.CompleteDate is not null)
                 throw new BO.BlProjectStageException("Can't update complete date on current project stage");

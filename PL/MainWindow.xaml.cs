@@ -67,13 +67,25 @@ public partial class MainWindow : Window
         CurrentTime = s_bl.updateDay();
     }
 
-    private void btnAddHour_Clock(object sender, System.Windows.Controls.ContextMenuEventArgs e)
+    private void btnAddYear_Click(object sender, RoutedEventArgs e)
+    {
+        CurrentTime = s_bl.updateYear();
+    }
+
+    private void btnAddHour_Clock(object sender, RoutedEventArgs e)
     {
         CurrentTime = s_bl.updateHour();
     }
 
-    private void btnAddYear_Click(object sender, RoutedEventArgs e)
+    private void btnAutomaticSchedule_Click(object sender, RoutedEventArgs e)
     {
-        CurrentTime = s_bl.updateYear();
+        try
+        {
+            s_bl.Task.CreateAutomaticSchedule();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Worng input", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }
