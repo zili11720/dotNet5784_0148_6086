@@ -276,11 +276,11 @@ internal class TaskImplementation : ITask
     /// </summary>
     /// <exception cref="BO.BlProjectStageException">Can't assign start date for tasks on the current project stage</exception>
     public void CreateAutomaticSchedule()
-    {
-       
-        if (_bl.GetProjectStatus() != BO.ProjectStatus.ScheduleTime)
+    {  
+        if (_bl.GetProjectStatus() == BO.ProjectStatus.PlanningTime)
             throw new BO.BlProjectStageException("Can't update a start date for the tasks before the project start date is decided");
-
+        if (_bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
+            throw new BO.BlProjectStageException("Can't update a start date for the tasks after the project has lunched");
         foreach (DO.Task doTask in _dal.Task.ReadAll())
         {
             BO.Task botask = Read(doTask.Id)!;
@@ -295,16 +295,10 @@ internal class TaskImplementation : ITask
     {
         if (boTask.ScheduledDate is not null)
             return;
-        //If the task has no previous tasks
-        if (GetDependenciesList(boTask.Id) is null)
-        {
-            boTask.ScheduledDate = _dal.StartProjectDate;
-            Update(boTask);
-            return;
-        }
         IEnumerable<BO.Task> dependentTasks = _dal.Dependency.ReadAll(t => t.DependentTask == boTask.Id)
                                        .Select(t => Read(t.DependsOnTask))
                                        .Where(t => t is not null && t.ScheduledDate is null).Select(t => t)!;
+        
         //If all previous tasks have scheduled start dates
         if (!dependentTasks.Any())
         {
@@ -325,15 +319,24 @@ internal class TaskImplementation : ITask
     /// <param name="botask">The task that needs a scheduled date</param>
     private void CreateScheduledStartDate(BO.Task botask)
     {
+        //If the task has no previous tasks
+        if (!GetDependenciesList(botask.Id).Any())
+        {
+            botask.ScheduledDate = _dal.StartProjectDate;
+            botask.EstimatedCompleteDate = botask.ScheduledDate + botask.RequiredEffortTime;
+            Update(botask);
+            return;
+        }
         //Get finish dates of previous tasks
-        var FinishDates = _dal.Dependency.ReadAll(t => t.DependentTask == botask.Id)
-                                     .Select(t => _dal.Task.Read(t.Id))
+        //var finishDates = dependenciesList.Select(t=>Read(t.Id)).Select(t=>t.EstimatedCompleteDate);
+        var finishDates = _dal.Dependency.ReadAll(t => t.DependentTask == botask.Id)
+                                     .Select(t => _dal.Task.Read(t.DependsOnTask))
                                      .Where(t => t is not null)
-                                     .Select(t => t.ScheduledDate + t.RequiredEffortTime);
+                                     .Select(t => t!.ScheduledDate + t.RequiredEffortTime);
         //Set scheduled start date as the maximal finish date of the previous tasks
-        DateTime? ScheduledStartDate = FinishDates.Max();
-       
+        DateTime? ScheduledStartDate = finishDates.Max();
         botask.ScheduledDate = ScheduledStartDate;
+        botask.EstimatedCompleteDate = botask.ScheduledDate + botask.RequiredEffortTime;
         Update(botask);
     }
 
