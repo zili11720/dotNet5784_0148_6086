@@ -37,11 +37,8 @@ internal class Bl : IBl
     /// Set the project with a start date according to the manager input
     /// </summary>
     /// <exception cref="FormatException"></exception>
-    void IBl.SetProjectStartDate()
+    void IBl.SetProjectStartDate(DateTime? _startDate)
     {
-        Console.WriteLine("Enter project start date:");
-        if (!DateTime.TryParse(Console.ReadLine(), out DateTime _startDate))
-            throw new FormatException("Wrong input");
         _dal.StartProjectDate = _startDate;
     }
     /// <summary>

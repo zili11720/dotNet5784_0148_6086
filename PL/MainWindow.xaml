@@ -39,8 +39,11 @@
         <!--Reset data button-->
         <Button Content="Reset Data" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="btnReset_Click" />
          <!--Project start date-->
-        <Label Content="Add Project Start Date" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"/>
-        <TextBox  Grid.Row="4"  Grid.Column="0" HorizontalAlignment="center" VerticalAlignment="Top"  Width="150" Height="30" />
+        <Label Content="Project Start Date:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"/>
+        <DatePicker Text="{Binding ProjectStartDate, Mode=OneWay}"
+            Grid.Row="4"  Grid.Column="0" HorizontalAlignment="center" VerticalAlignment="Top"  Width="150" Height="30" />
+        <Button Content="set" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Center" Click="btnSetProjectStartDate_Click"/>
+        <!--Clock-->
         <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="center"
         Text="{Binding CurrentTime, StringFormat='{}{0:dd/MM/yyyy}'}"  Width="150" FontSize="25" FontWeight="Bold" />
          <!--Reset clock button-->

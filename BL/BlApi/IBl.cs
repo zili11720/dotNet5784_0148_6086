@@ -8,7 +8,7 @@ public interface IBl
     IAgent Agent { get; }
     ITask Task { get; }
     IUser User { get; }
-    void SetProjectStartDate();
+    void SetProjectStartDate(DateTime? _startDate);
     void ResetData();
     void InitializeData();
     BO.ProjectStatus GetProjectStatus();

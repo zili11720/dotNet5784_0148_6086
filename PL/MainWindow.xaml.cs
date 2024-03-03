@@ -15,13 +15,23 @@ public partial class MainWindow : Window
     //public User User { get; }
     public DateTime CurrentTime
     {
-        get { return (DateTime)GetValue(CurrentTimePropert); }
-        set { SetValue(CurrentTimePropert, value); }
+        get { return (DateTime)GetValue(CurrentTimeProperty); }
+        set { SetValue(CurrentTimeProperty, value); }
     }
 
     // Using a DependencyProperty as the backing store for CurrentUser.This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty CurrentTimePropert =
+    public static readonly DependencyProperty CurrentTimeProperty =
         DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(null));
+
+    public DateTime ProjectStartDate
+    {
+        get { return (DateTime)GetValue(ProjectStartDateProperty); }
+        set { SetValue(ProjectStartDateProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for CurrentUser.This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty ProjectStartDateProperty =
+        DependencyProperty.Register("ProjectStartDate", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(null));
     public MainWindow()
     {
         CurrentTime = s_bl.Clock;
@@ -81,7 +91,30 @@ public partial class MainWindow : Window
     {
         try
         {
-            s_bl.Task.CreateAutomaticSchedule();
+            string message = "Are you sure you want to create a schedule?" +
+                "after the schedule is set you won't be able to add/earase tasks or agents";
+            string title = "Automatic schedule";
+            MessageBoxButton buttons = MessageBoxButton.YesNo;
+            MessageBoxResult result = MessageBox.Show(message, title, buttons);
+            if (result == MessageBoxResult.Yes)
+                s_bl.Task.CreateAutomaticSchedule();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Worng input", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void btnSetProjectStartDate_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            string message = "Are you sure you want set the project start date?";
+            string title = "Project start date";
+            MessageBoxButton buttons = MessageBoxButton.YesNo;
+            MessageBoxResult result = MessageBox.Show(message, title, buttons);
+            if (result == MessageBoxResult.Yes)
+                s_bl.SetProjectStartDate(ProjectStartDate);///לא מתעכןן
         }
         catch (Exception ex)
         {
