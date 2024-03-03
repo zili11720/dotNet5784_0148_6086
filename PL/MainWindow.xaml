@@ -36,7 +36,7 @@
     </Window.Resources>
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/mainwindowbackround.jpg" Opacity="0.7"/>
+            <ImageBrush ImageSource="/managerWindowBackround.jpg" Opacity="0.7"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

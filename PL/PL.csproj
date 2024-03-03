@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="mainwindowbackround.jpg" />
+    <None Remove="managerWindowBackround.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="mainwindowbackround.jpg" />
+    <Resource Include="managerWindowBackround.jpg" />
   </ItemGroup>
 
 </Project>
