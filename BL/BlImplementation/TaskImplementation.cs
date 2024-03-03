@@ -112,7 +112,7 @@ internal class TaskImplementation : ITask
             ScheduledDate = doTask.ScheduledDate,
             StartDate = doTask.StartDate,
             RequiredEffortTime = doTask.RequiredEffortTime,
-            EstimatedCompleteDate = null,
+            EstimatedCompleteDate = doTask.ScheduledDate+doTask.RequiredEffortTime,
             DeadlineDate = doTask.DeadlineDate,
             CompleteDate = doTask.CompleteDate,
             Deliverables = doTask.Deliverables,
@@ -238,6 +238,8 @@ internal class TaskImplementation : ITask
             throw new BO.BlWrongInputException("Task's complexity must be declared");
         if (boTask.RequiredEffortTime is null)
             throw new BO.BlWrongInputException("Task's required effort time must have a value");
+        if (boTask.StartDate is not null && boTask.StartDate<boTask.ScheduledDate)
+            throw new BO.BlWrongInputException("Task's start date can't be earlier than the scheduled date");
     }
     /// <summary>
     /// Check if the update of certain fields is possible according to the current project status and other parameters
@@ -249,26 +251,33 @@ internal class TaskImplementation : ITask
     {
         BO.Task? taskToUpdate = Read(updatedTask.Id);
 
-        if (_bl.GetProjectStatus() == BO.ProjectStatus.PlanningTime)
+        if (_bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime)
         {
-            if (updatedTask.ScheduledDate is not null || updatedTask.TaskAgent is not null)
-                throw new BO.BlProjectStageException("Can't update start date or assign an agent on current project stage");
+            if (updatedTask.StartDate != taskToUpdate!.StartDate)
+                throw new BO.BlProjectStageException("Can't update start on current project stage");
+            if (updatedTask.CompleteDate is not null)
+                throw new BO.BlProjectStageException("Can't update complete date on current project stage");
+            if (updatedTask.TaskAgent is not null)
+                throw new BO.BlProjectStageException("Can't assign an agent for a task on current project stage");
         }
-        if (_bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
+        if (_bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
         {
             if (updatedTask.RequiredEffortTime != taskToUpdate!.RequiredEffortTime)
                 throw new BO.BlProjectStageException("Duration time required for a task can't be changed on current project stage");
         }
-        if (_bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime)
+        if (_bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
         {
-            if (updatedTask.TaskAgent is not null)
-                throw new BO.BlProjectStageException("Can't assign an agent for a task on current project stage");
+           
             if (taskToUpdate!.TaskAgent is not null)
             {
                 DO.Agent? agentOfTask = _dal.Agent.Read(taskToUpdate!.TaskAgent.Id);
                 if ((BO.AgentExperience)updatedTask.Complexity! > (BO.AgentExperience)agentOfTask!.Specialty!)
                     throw new BO.BlWrongAgentForTaskException("Agent specialty can't be lower than task comlexity");
             }
+            if(updatedTask.Complexity > taskToUpdate!.Complexity)
+                throw new BO.BlProjectStageException("Task's complexity can't be raised on current project stage");
+            if (updatedTask.CompleteDate is not null && updatedTask.StartDate is null)
+                throw new BO.BlProjectStageException("Task's complete date can't be declared before the task has started");
         }
     }
     /// <summary>
