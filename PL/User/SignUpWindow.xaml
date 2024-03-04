@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.User"
         mc:Ignorable="d"
         Title="SignUpWindow"  Height="250" Width="400"
-      DataContext="{Binding NewUser, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+      DataContext="{Binding  RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.Background>
             <StaticResource ResourceKey="BlueGrayLinearBrushKey"/>

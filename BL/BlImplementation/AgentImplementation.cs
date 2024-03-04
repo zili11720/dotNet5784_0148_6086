@@ -21,8 +21,10 @@ internal class AgentImplementation : IAgent
     /// <exception cref="BO.BlAlreadyExistsException">new id isn't unique</exception>
     public int Create(BO.Agent boAgent)
     {
+        if (_bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
+            throw new BO.BlProjectStageException("Can't add an agent after the project has started");
         CheckValidation(boAgent);
-
+       
         try
         {
             DO.Agent newDoAgent = new DO.Agent(boAgent.Id, boAgent.Email, boAgent.Cost, boAgent.Name, (DO.AgentExperience?)boAgent.Specialty);
@@ -43,6 +45,8 @@ internal class AgentImplementation : IAgent
     /// <exception cref="BO.BlDoesNotExistException">The agent with the given id doesn't exist</exception>
     public void Delete(int id)
     {
+        if (_bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
+            throw new BO.BlProjectStageException("Can't delete an agent after the project has started");
         try
         {
             DO.Agent? doAgent = _dal.Agent.Read(id);
@@ -189,14 +193,6 @@ internal class AgentImplementation : IAgent
                where doTask.AgentId == agentId
                orderby doTask.Id descending
                select _bl.Task.ConvertTaskToTaskInList(doTask);
-               //select new BO.TaskInList
-               //{
-               //    Id = doTask.Id,
-               //    Alias = doTask.Alias,
-               //    Description = doTask.Description,
-               //    Status = _task.CalcStatus(doTask),
-               //    Complexity = (BO.AgentExperience?)doTask.Complexity
-               //};
     }
 
     public void Clear()
@@ -237,22 +233,13 @@ internal class AgentImplementation : IAgent
     {
         BO.Agent? boagent = Read(agentId);
 
-        var complexityTasks = _dal.Task.ReadAll().GroupBy(t => (int)t.Complexity!);
-        var tasks = complexityTasks.FirstOrDefault(t => t.Key <= (int)boagent!.Specialty!);
+        //var complexityTasks = _dal.Task.ReadAll().GroupBy(t => (int)t.Complexity!);
+        var tasks = _dal.Task.ReadAll(t => (DO.AgentExperience)t.Complexity! <= (DO.AgentExperience)boagent!.Specialty!);
         if (tasks is null)
             throw new BO.BlDoesNotExistException("No available tasks for this agent's level");
         IEnumerable<TaskInList> availableTasks = tasks.Where(t => t is not null)
                                                       .Where(t => t.AgentId is null)
                                                       .Select(t=>_bl.Task.ConvertTaskToTaskInList(t));
-                                                      //.Select(t => new BO.TaskInList()
-                                                      //{
-                                                      //    Id = t.Id,
-                                                      //    Alias = t.Alias,
-                                                      //    Description = t.Description,
-                                                      //    Status = _task.CalcStatus(t),
-                                                      //    Complexity = (BO.AgentExperience?)t.Complexity
-                                                      //});
-
         if (availableTasks is null)
             throw new BO.BlDoesNotExistException("No available tasks for this agent");
         return availableTasks;

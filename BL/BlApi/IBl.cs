@@ -9,6 +9,7 @@ public interface IBl
     ITask Task { get; }
     IUser User { get; }
     void SetProjectStartDate(DateTime? _startDate);
+    DateTime? GetProjectStartDate();
     void ResetData();
     void InitializeData();
     BO.ProjectStatus GetProjectStatus();
@@ -16,7 +17,7 @@ public interface IBl
     DateTime Clock { get; }
     DateTime updateYear();
     DateTime updateDay();
-    DateTime updateHour();
+    DateTime updateMonth();
     DateTime ResetClock();
     #endregion
 

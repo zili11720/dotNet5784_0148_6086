@@ -82,7 +82,7 @@ internal class Program
                         Console.WriteLine(s_bl.GetProjectStatus());
                         break;
                     case 4:
-                        s_bl.SetProjectStartDate();
+                        s_bl.SetProjectStartDate(DateTime.Now);
                         break;
                     case 0:
                         return;

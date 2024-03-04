@@ -11,6 +11,7 @@
         <local:ConvertIdToIsEnabledReversed x:Key="ConverIdToIsEnabledReversedKey"/>
         <local:ConvertTaskStatusToColor x:Key="ConvertTaskStatusToColorKey"/>
         <local:ConvertBoolToVisibility x:Key="ConvertBoolToVisibilityKey"/>
+        <local:ConvertBoolToString x:Key="ConvertBoolToStringKey"/>
         <LinearGradientBrush x:Key="BlueGrayLinearBrushKey"
             EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF060606"/>
@@ -71,6 +72,13 @@
                     </Setter>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+        <Style 
+            TargetType="DatePicker">
+            <Setter Property="Language"
+             Value="en-GB"/>
+            <Setter Property="BorderBrush"
+             Value="{x:Null}"/>
         </Style>
     </Application.Resources>
 </Application>

@@ -11,35 +11,57 @@ public partial class SignUpWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-    public BO.User NewUser
+    public int UserId
     {
-        get { return (BO.User)GetValue(NewUserProperty); }
-        set { SetValue(NewUserProperty, value); }
+        get { return (int)GetValue(UserIdProperty); }
+        set { SetValue(UserIdProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for CurrentUser.This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty NewUserProperty =
-        DependencyProperty.Register("NewUser", typeof(BO.User), typeof(SignUpWindow), new PropertyMetadata(null));
+    // Using a DependencyProperty as the backing store for UserId.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty UserIdProperty =
+        DependencyProperty.Register("UserId", typeof(int), typeof(SignUpWindow), new PropertyMetadata(0));
+
+
+    public string UserName
+    {
+        get { return (string)GetValue(UserNameProperty); }
+        set { SetValue(UserNameProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for UserName.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty UserNameProperty =
+        DependencyProperty.Register("UserName", typeof(string), typeof(SignUpWindow), new PropertyMetadata(null));
+
+
+
     public SignUpWindow()
     {
-        InitializeComponent();
-        NewUser=new BO.User();
+        InitializeComponent();  
     }
 
     string? password = null;
 
     private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
     {
-        if (sender is PasswordBox passwordBox)
-        {
-            password = passwordBox.Password;
-        }
+        password = (sender as PasswordBox)?.Password;
     }
     private void btnCreateAccount_Click(object sender, RoutedEventArgs e)
     {
-        if (s_bl.Agent.ReadAll().Any(a => a.Id == NewUser.UserId) is false)
-            MessageBox.Show("Could not find an agent with the given id","worng input" ,MessageBoxButton.OK, MessageBoxImage.Error);
-        NewUser.Password = password;
-        s_bl.User.Create(NewUser);
+        try
+        {
+            if (s_bl.Agent.ReadAll().Any(a => a.Id == UserId) is false)
+                MessageBox.Show("Could not find an agent with the given id", "worng input", MessageBoxButton.OK, MessageBoxImage.Error);
+            if (s_bl.User.Read(UserId) is not null)
+                MessageBox.Show("This agent allready has a user", "worng input", MessageBoxButton.OK, MessageBoxImage.Error);
+            BO.User newUser = new() { UserId = UserId, UserName = UserName, Password = password };
+            s_bl.User.Create(newUser);
+            MessageBox.Show("User was successfuly updated", "success", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
     }
 }

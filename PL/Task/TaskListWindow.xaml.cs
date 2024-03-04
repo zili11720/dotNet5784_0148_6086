@@ -28,8 +28,8 @@ public partial class TaskListWindow : Window
 
     public TaskListWindow(bool _isManager=true,int employeeId = 0)
     {
-        InitializeComponent();
         isManager= _isManager;
+        InitializeComponent();
         if (isManager)
             TaskList = s_bl.Task.ReadAll().ToObservableCollection();
         else
@@ -60,7 +60,7 @@ public partial class TaskListWindow : Window
     private void cbTaskStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         TaskList = (status == BO.TaskStatus.Unscheduled) ?
-       s_bl?.Task.ReadAll()!.ToObservableCollection() : s_bl?.Task.ReadAll(item => item.Status == status && item.Complexity == complexity)!.ToObservableCollection();
+       s_bl?.Task.ReadAll()!.ToObservableCollection() : s_bl?.Task.ReadAll(item => item.Status == status &&  item.Complexity == complexity)!.ToObservableCollection();
     }
     private void btnAddNewTask_Click(object sender, RoutedEventArgs e)
     {

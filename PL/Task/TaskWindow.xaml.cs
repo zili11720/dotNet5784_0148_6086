@@ -57,7 +57,7 @@ public partial class TaskWindow : Window
                 Deliverables="",
                 Remarks="",
                 Complexity = null,
-                TaskAgent=null,
+                TaskAgent = new() {},
                 DependenciesList=null,
             };
         }
@@ -74,6 +74,7 @@ public partial class TaskWindow : Window
         {
             if (s_bl.Task.ReadAll().Any(a => a.Id == CurrentTask.Id) is true)
             {
+                int id = CurrentTask.TaskAgent.Id;
                 s_bl.Task.Update(CurrentTask);
                 if(_AddOrUpdate is not null)
                     _AddOrUpdate(CurrentTask.Id, true);

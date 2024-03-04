@@ -23,23 +23,27 @@ public partial class MainWindow : Window
     public static readonly DependencyProperty CurrentTimeProperty =
         DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(null));
 
-    public DateTime ProjectStartDate
+
+
+    public DateTime? ProjectStartDate
     {
-        get { return (DateTime)GetValue(ProjectStartDateProperty); }
+        get { return (DateTime?)GetValue(ProjectStartDateProperty); }
         set { SetValue(ProjectStartDateProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for CurrentUser.This enables animation, styling, binding, etc...
+    // Using a DependencyProperty as the backing store for ProjectStartDate.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty ProjectStartDateProperty =
-        DependencyProperty.Register("ProjectStartDate", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(null));
+        DependencyProperty.Register("ProjectStartDate", typeof(DateTime?), typeof(MainWindow), new PropertyMetadata(null));
+
     public MainWindow()
     {
         CurrentTime = s_bl.Clock;
+        ProjectStartDate = (DateTime)s_bl.GetProjectStartDate()!;
         InitializeComponent();
     }
     private void btnAgents_Click(object sender, RoutedEventArgs e)
     {
-        //new AgentEmployeeWindow(293821292).Show();
+        //new AgentEmployeeWindow(203441715).Show();
         new AgentListWindow().Show();
     }
     private void btnTasks_Click(object sender, RoutedEventArgs e)
@@ -77,14 +81,14 @@ public partial class MainWindow : Window
         CurrentTime = s_bl.updateDay();
     }
 
+    private void btnAddMonth_Click(object sender, RoutedEventArgs e)
+    {
+        CurrentTime = s_bl.updateMonth();
+    } 
+
     private void btnAddYear_Click(object sender, RoutedEventArgs e)
     {
         CurrentTime = s_bl.updateYear();
-    }
-
-    private void btnAddHour_Clock(object sender, RoutedEventArgs e)
-    {
-        CurrentTime = s_bl.updateHour();
     }
 
     private void btnAutomaticSchedule_Click(object sender, RoutedEventArgs e)
@@ -114,11 +118,12 @@ public partial class MainWindow : Window
             MessageBoxButton buttons = MessageBoxButton.YesNo;
             MessageBoxResult result = MessageBox.Show(message, title, buttons);
             if (result == MessageBoxResult.Yes)
-                s_bl.SetProjectStartDate(ProjectStartDate);///לא מתעכןן
+                s_bl.SetProjectStartDate(ProjectStartDate);
         }
         catch (Exception ex)
         {
             MessageBox.Show(ex.Message, "Worng input", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
+
 }

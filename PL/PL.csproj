@@ -25,4 +25,8 @@
     <Resource Include="managerWindowBackround.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Gant\" />
+  </ItemGroup>
+
 </Project>

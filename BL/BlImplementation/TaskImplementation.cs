@@ -144,7 +144,7 @@ internal class TaskImplementation : ITask
         {
             CheckValidation(boTask);
             IsUpdatePossible(boTask);
-
+            
             DO.Task newDoTask = new DO.Task()
             {
                 Id = boTask.Id,

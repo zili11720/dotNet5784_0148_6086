@@ -17,10 +17,6 @@ internal class Bl : IBl
     private static DateTime s_Clock = DateTime.Now.Date;
     public DateTime Clock { get { return s_Clock.Date; } private set { s_Clock = value; } }
 
-
-    //public static DateTime? StartProjectDate { get; set; } = null;//Start date of the project
-    // public static DateTime? EndProjectDate { get; set; } = null;//End date of the project
-
     //// <summary>
     ///Returns the current status of the project:Planning time/Schedule time/Execution time
     /// </summary>
@@ -36,10 +32,16 @@ internal class Bl : IBl
     /// <summary>
     /// Set the project with a start date according to the manager input
     /// </summary>
-    /// <exception cref="FormatException"></exception>
     void IBl.SetProjectStartDate(DateTime? _startDate)
     {
         _dal.StartProjectDate = _startDate;
+    }
+    /// <summary>
+    /// Returns the project start date
+    /// </summary>
+    DateTime? IBl.GetProjectStartDate()
+    {
+        return _dal.StartProjectDate;
     }
     /// <summary>
     /// Reset the data of the project. Erase all agents,tasks,dependencies and project start date
@@ -76,9 +78,9 @@ internal class Bl : IBl
         return Clock = Clock.AddDays(1);
     }
 
-    public DateTime updateHour()
+    public DateTime updateMonth()
     {
-        return Clock = Clock.AddHours(1);
+        return Clock = Clock.AddMonths(1);
     }
 
     public DateTime ResetClock()

@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <!--Internal, Upper Grid-->
         <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto" 
-              Visibility="{Binding Path=isManager,Converter={StaticResource ConvertBoolToVisibilityKey}, Mode=OneTime}">
+              Visibility="{Binding Path=isManager,Converter={StaticResource ConvertBoolToVisibilityKey}, Mode=TwoWay}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*"/>
@@ -51,16 +51,16 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <!-- Button Column -->
-                <DataGridTemplateColumn Header="Actions" Width="*" Visibility="{Binding Path=isManager,Converter={StaticResource ConvertBoolToVisibilityKey}, Mode=OneTime}">
+                <DataGridTemplateColumn Header="Actions" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete Task" Click="btnDeleteTask_Click" HorizontalAlignment="Center" Height="20" Width="80" Command="{Binding btnDeleteTask_Click}" CommandParameter="{Binding}"/>
+                            <Button Content="{Binding Path=isManager,Converter={StaticResource ConvertBoolToStringKey}, Mode=TwoWay}" Click="btnDeleteTask_Click" HorizontalAlignment="Center" Height="20" Width="80" Command="{Binding btnDeleteTask_Click}" CommandParameter="{Binding}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="btnAddNewTask_Click"
-                Visibility="{Binding Path=isManager,Converter={StaticResource ConvertBoolToVisibilityKey}, Mode=OneTime}"/>
+                Visibility="{Binding Path=isManager,Converter={StaticResource ConvertBoolToVisibilityKey}, Mode=TwoWay}"/>
     </Grid>
 </Window>

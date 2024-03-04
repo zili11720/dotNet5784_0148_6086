@@ -70,8 +70,7 @@
           Text="{Binding TaskAgent.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
           HorizontalAlignment="Center" VerticalAlignment="Top" Width="140" Height="18"
             IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToIsEnabledReversedKey}}"></TextBox>
-          <!--HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="17" Background="White"/>-->
-
+         
             <Label Content="Assigned Agent Name:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="left"   VerticalAlignment="Center" Height="30" Width="179"/>
             <TextBox Grid.Row="6" Grid.Column="1" 
           Text="{Binding TaskAgent.Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
@@ -79,19 +78,10 @@
           HorizontalAlignment="Center"  VerticalAlignment="Top" Width="140" Height="18" />
 
             <Label Content="Create At Date:" Grid.Row="7" Grid.Column="0" HorizontalAlignment="left"  VerticalAlignment="Top" Height="30" Width="149"/>
-            <DatePicker Grid.Row="7" Grid.Column="1" 
+            <DatePicker  Grid.Row="7" Grid.Column="1" 
          Text="{Binding CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
          IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToIsEnabledKey}}"
          HorizontalAlignment="Center"  VerticalAlignment="Top" Width="140" Height="30" />
-
-            <!--IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToIsEnabledReversedKey}}"
-          HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>-->
-
-            <!--<Label Content="Create At Date:" Grid.Row="7" Grid.Column="0" HorizontalAlignment="left"   VerticalAlignment="Top" Height="30" Width="149"/>
-            <DatePicker Grid.Row="7" Grid.Column="1" 
-         Text="{Binding CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
-         HorizontalAlignment="Center"  VerticalAlignment="Top" Width="140" Height="30" />-->
-
 
             <Label Content="Scheduled Date:" Grid.Row="8" Grid.Column="0" HorizontalAlignment="left"  VerticalAlignment="Top" Height="30" Width="149"/>
             <DatePicker Grid.Row="8" Grid.Column="1" 
@@ -116,16 +106,8 @@
          IsEnabled="False"
          HorizontalAlignment="Center" VerticalAlignment="Top" Width="140" Height="30" />
 
-            <!--<Label Content="Complete Date:" Grid.Row="12" Grid.Column="0" HorizontalAlignment="left"   VerticalAlignment="Top" Height="30" Width="149"/>
-            <TextBox Grid.Row="12" Grid.Column="1" 
-         Text="{Binding CompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
-         HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" />
-
-            --><!--Text="{Binding EstimatedCompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-         HorizontalAlignment="Left" Margin="50,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="18" Background="White" BorderBrush="#FFF1F1F1"/>-->
-
             <Label Content="Complete Date:" Grid.Row="12" Grid.Column="0" HorizontalAlignment="left"   VerticalAlignment="Top" Height="30" Width="149"/>
-            <DatePicker Grid.Row="12" Grid.Column="1" 
+            <DatePicker  Grid.Row="12" Grid.Column="1" 
          Text="{Binding CompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
          IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToIsEnabledReversedKey}}"
          HorizontalAlignment="Center"  VerticalAlignment="Top" Width="140" Height="30" />
