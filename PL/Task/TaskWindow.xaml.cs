@@ -57,7 +57,7 @@ public partial class TaskWindow : Window
                 Deliverables="",
                 Remarks="",
                 Complexity = null,
-                TaskAgent = new() {},
+                TaskAgent = new() {Id=0, Name=""},
                 DependenciesList=null,
             };
         }
@@ -74,10 +74,12 @@ public partial class TaskWindow : Window
         {
             if (s_bl.Task.ReadAll().Any(a => a.Id == CurrentTask.Id) is true)
             {
-                int id = CurrentTask.TaskAgent.Id;
+                int id;
+                if(CurrentTask.TaskAgent is not null)
+                  id = CurrentTask.TaskAgent.Id;   ///
                 s_bl.Task.Update(CurrentTask);
                 if(_AddOrUpdate is not null)
-                    _AddOrUpdate(CurrentTask.Id, true);
+                  _AddOrUpdate(CurrentTask.Id, true);
                 MessageBox.Show("Task was successfuly updated", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }

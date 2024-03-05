@@ -1,0 +1,26 @@
+﻿<Window x:Class="PL.Gantt.GanttWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Gantt"
+        mc:Ignorable="d"
+    DataContext="{Binding RelativeSource={RelativeSource self}}"
+    Title="GanttWindow" Height="450" Width="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Panel containing buttons and date picker -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+            <Button x:Name="buttonPrevious" Content="&lt;" Width="150" Margin="5"/>
+            <Button x:Name="buttonNext" Content="&gt;" Width="150" Margin="5"/>
+            <DatePicker x:Name="dateTimePicker" SelectedDateChanged="dateTimePicker_SelectedDateChanged" Width="200" Margin="5"/>
+        </StackPanel>
+
+        <ContentControl Grid.Row="1" Content="{Binding GanttControl}"></ContentControl>
+    </Grid>
+
+</Window>

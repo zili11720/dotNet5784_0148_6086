@@ -34,6 +34,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BlTest\BlTest.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{F4A5DE16-565A-4D5E-8096-748759F850AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGantt", "NGantt\nGantt\nGantt.csproj", "{CCC54F28-5D20-4AB3-A1A8-C62CD2DA3AE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,10 @@ Global
 		{F4A5DE16-565A-4D5E-8096-748759F850AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4A5DE16-565A-4D5E-8096-748759F850AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4A5DE16-565A-4D5E-8096-748759F850AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCC54F28-5D20-4AB3-A1A8-C62CD2DA3AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCC54F28-5D20-4AB3-A1A8-C62CD2DA3AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCC54F28-5D20-4AB3-A1A8-C62CD2DA3AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCC54F28-5D20-4AB3-A1A8-C62CD2DA3AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

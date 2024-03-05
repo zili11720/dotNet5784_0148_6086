@@ -27,27 +27,27 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Welcome" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Bottom" FontSize="45"  Foreground="Black"  Grid.RowSpan="2" /> 
+        <Label Content="Welcome" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Bottom" FontSize="45"    Grid.RowSpan="2" /> 
         <!--A Botton for all agent's content-->
-        <Button Content="Handle Agents" Grid.Row="0"  Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="20" Click="btnAgents_Click" />
+        <Button Content="Handle Agents" Grid.Row="0"  Grid.Column="2"  Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="20" Click="btnAgents_Click" />
         <!--A Botton for all task's content-->
-        <Button Content="Handle Tasks" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Click="btnTasks_Click" FontSize="20" />
+        <Button Content="Handle Tasks" Grid.Row="1" Grid.Column="2" Foreground="White" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Click="btnTasks_Click" FontSize="20" />
          <!--Automatic schedule button-->
-        <Button Content="Create Automatic Schedule" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Click="btnAutomaticSchedule_Click" />
+        <Button Content="Create Automatic Schedule" Grid.Row="2" Grid.Column="2" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Click="btnAutomaticSchedule_Click" />
         <!--A button for Initialization-->
-        <Button Content="Initialize Data" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Click="btnInitialize_Click"/>
+        <Button Content="Initialize Data" Grid.Row="9" Grid.Column="0" Foreground="White" HorizontalAlignment="Right"  VerticalAlignment="Top" Click="btnInitialize_Click"/>
         <!--Reset data button-->
-        <Button Content="Reset Data" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="btnReset_Click" />
+        <Button Content="Reset Data" Grid.Row="9" Grid.Column="0" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="btnReset_Click" />
          <!--Project start date-->
-        <Label Content="Project Start Date:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"/>
+        <Label Content="Project Start Date:" Grid.Row="3" Grid.Column="0" Foreground="White" HorizontalAlignment="Center"/>
         <DatePicker  Text="{Binding ProjectStartDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
          Grid.Row="4"  Grid.Column="0" HorizontalAlignment="center" VerticalAlignment="Top"  Width="150" Height="30" />
-        <Button Content="set" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Center" Click="btnSetProjectStartDate_Click"/>
+        <Button Content="set" Grid.Row="4" Grid.Column="0" Foreground="White"  VerticalAlignment="Center" Click="btnSetProjectStartDate_Click" FontSize="15" HorizontalAlignment="Right"/>
         <!--Clock-->
-        <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="center"
+        <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="center" Foreground="White"
         Text="{Binding CurrentTime, StringFormat='{}{0:dd/MM/yyyy}'}"  Width="150" FontSize="25" FontWeight="Bold" />
          <!--Reset clock button-->
-        <Button Content="Reset" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontSize="10" Click="btnResetClock_Click"/>
+        <Button Content="Reset" Grid.Row="6" Grid.Column="1" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10" Click="btnResetClock_Click"/>
          <!--change time buttons-->
         <Grid Grid.Row="5" Grid.Column="1">
        <Grid.RowDefinitions>
@@ -59,19 +59,19 @@
          <ColumnDefinition Width="*"/>
          <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
-       <Label Content="Add day" Grid.Row="3" Grid.Column="0" Foreground="Black" HorizontalAlignment="Right" FontSize="12"/>
+       <Label Content="Add day" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" FontSize="12"/>
        <Button Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="btnAddDay_Click"  Grid.RowSpan="1">
-         <Polygon Points="15,10 30,30 0,30" Fill="Black"/>
+         <Polygon Points="15,10 30,30 0,30" Fill="White"/>
       </Button>
             
-      <Label Content="Add month" Grid.Row="1" Grid.Column="1" Foreground="Black" HorizontalAlignment="center" FontSize="12" />
+      <Label Content="Add month" Grid.Row="1" Grid.Column="1"  HorizontalAlignment="center" FontSize="12" />
             <Button  Grid.Row="0" Grid.Column="1" HorizontalAlignment="center" VerticalAlignment="Top" Grid.RowSpan="1"  Click="btnAddMonth_Click" >
-         <Polygon Points="15,10 30,30 0,30" Fill="Black"/>
+                <Polygon Points="15,10 30,30 0,30" Fill="White"/>
       </Button>
             
-      <Label Content="Add year" Grid.Row="3" Grid.Column="2" Foreground="Black"  HorizontalAlignment="Left" FontSize="12" />
+      <Label Content="Add year" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" FontSize="12" />
             <Button Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="1" Click="btnAddYear_Click">
-         <Polygon Points="15,10 30,30 0,30" Fill="Black"/>
+                <Polygon Points="15,10 30,30 0,30" Fill="White"/>
       </Button>
         </Grid>
       </Grid>

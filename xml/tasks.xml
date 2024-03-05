@@ -81,22 +81,6 @@
     <AgentId xsi:nil="true" />
   </Task>
   <Task>
-    <Id>8</Id>
-    <Alias>Security Cameras control</Alias>
-    <Description>Hack security Cameras in the criminal's house</Description>
-    <CreatedAtDate>2024-03-04T21:52:49.4611087+02:00</CreatedAtDate>
-    <RequiredEffortTime>P10D</RequiredEffortTime>
-    <IsMilestone>false</IsMilestone>
-    <Complexity>Hacker</Complexity>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-04-04T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables>Security Cameras control</Deliverables>
-    <Remarks>Hack to the street security cameras to surround the whole area</Remarks>
-    <AgentId xsi:nil="true" />
-  </Task>
-  <Task>
     <Id>9</Id>
     <Alias>Find witnesses</Alias>
     <Description>Find optional witnesses in order to get more evidences</Description>
@@ -126,22 +110,6 @@
     <CompleteDate xsi:nil="true" />
     <Deliverables>Testimony of a first witness</Deliverables>
     <Remarks>Check witnesses record before investigation </Remarks>
-    <AgentId xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>11</Id>
-    <Alias>witness2</Alias>
-    <Description>Investigate second witness</Description>
-    <CreatedAtDate>2024-03-04T21:52:49.565937+02:00</CreatedAtDate>
-    <RequiredEffortTime>P10D</RequiredEffortTime>
-    <IsMilestone>false</IsMilestone>
-    <Complexity>Investigator</Complexity>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-04-04T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables>Testimony of a second witness</Deliverables>
-    <Remarks>Check witnesses record before investigation</Remarks>
     <AgentId xsi:nil="true" />
   </Task>
   <Task>
@@ -445,6 +413,38 @@
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
     <Deliverables>Testimony of a third witness</Deliverables>
+    <Remarks>Check witnesses record before investigation</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>8</Id>
+    <Alias>Security Cameras control</Alias>
+    <Description>Hack security Cameras in the criminal's house</Description>
+    <CreatedAtDate>2024-03-04T00:00:00</CreatedAtDate>
+    <RequiredEffortTime>P10D</RequiredEffortTime>
+    <IsMilestone>false</IsMilestone>
+    <Complexity>Hacker</Complexity>
+    <StartDate>2024-04-25T00:00:00</StartDate>
+    <ScheduledDate>2024-04-04T00:00:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Security Cameras control</Deliverables>
+    <Remarks>Hack to the street security cameras to surround the whole area</Remarks>
+    <AgentId xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>11</Id>
+    <Alias>witness2</Alias>
+    <Description>Investigate second witness</Description>
+    <CreatedAtDate>2024-03-04T00:00:00</CreatedAtDate>
+    <RequiredEffortTime>P10D</RequiredEffortTime>
+    <IsMilestone>false</IsMilestone>
+    <Complexity>Investigator</Complexity>
+    <StartDate>2024-04-12T00:00:00</StartDate>
+    <ScheduledDate>2024-04-04T00:00:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Testimony of a second witness</Deliverables>
     <Remarks>Check witnesses record before investigation</Remarks>
     <AgentId xsi:nil="true" />
   </Task>

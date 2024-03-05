@@ -61,6 +61,7 @@ internal class TaskImplementation : ITask
 
         }
     }
+
     /// <summary>
     /// Delete the task with the id given
     /// </summary>
@@ -87,6 +88,7 @@ internal class TaskImplementation : ITask
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", ex);
         }
     }
+
     /// <summary>
     /// Returns logic task based on the matching dal task with the id given
     /// </summary>
@@ -96,23 +98,28 @@ internal class TaskImplementation : ITask
     public BO.Task? Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(id);
+
         if (doTask == null)
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
 
-        DO.Agent? doAgent = _dal.Agent.Read(agent => agent.Id == doTask!.AgentId);
+        return doToBoTask(doTask);
+    }
 
+    private Task doToBoTask(DO.Task doTask)
+    {
+        var doAgent = _dal.Agent.Read(agent => agent.Id == doTask!.AgentId);
         return new BO.Task()
         {
-            Id = id,
+            Id = doTask.Id,
             Alias = doTask!.Alias,
             Description = doTask.Description,
             Status = CalcStatus(doTask),
-            DependenciesList = GetDependenciesList(id).ToList(),
+            DependenciesList = GetDependenciesList(doTask.Id).ToList(),
             CreatedAtDate = doTask.CreatedAtDate,
             ScheduledDate = doTask.ScheduledDate,
             StartDate = doTask.StartDate,
             RequiredEffortTime = doTask.RequiredEffortTime,
-            EstimatedCompleteDate = doTask.ScheduledDate+doTask.RequiredEffortTime,
+            EstimatedCompleteDate = doTask.ScheduledDate + doTask.RequiredEffortTime,
             DeadlineDate = doTask.DeadlineDate,
             CompleteDate = doTask.CompleteDate,
             Deliverables = doTask.Deliverables,
@@ -121,6 +128,7 @@ internal class TaskImplementation : ITask
             Complexity = (BO.AgentExperience?)doTask.Complexity,
         };
     }
+
     /// <summary>
     /// Returns all the tasks/the tasks that answer to a given condition
     /// </summary>
@@ -144,7 +152,7 @@ internal class TaskImplementation : ITask
         {
             CheckValidation(boTask);
             IsUpdatePossible(boTask);
-            
+
             DO.Task newDoTask = new DO.Task()
             {
                 Id = boTask.Id,
@@ -238,7 +246,7 @@ internal class TaskImplementation : ITask
             throw new BO.BlWrongInputException("Task's complexity must be declared");
         if (boTask.RequiredEffortTime is null)
             throw new BO.BlWrongInputException("Task's required effort time must have a value");
-        if (boTask.StartDate is not null && boTask.StartDate<boTask.ScheduledDate)
+        if (boTask.StartDate is not null && boTask.StartDate < boTask.ScheduledDate)
             throw new BO.BlWrongInputException("Task's start date can't be earlier than the scheduled date");
     }
     /// <summary>
@@ -259,6 +267,8 @@ internal class TaskImplementation : ITask
                 throw new BO.BlProjectStageException("Can't update complete date on current project stage");
             if (updatedTask.TaskAgent is not null)
                 throw new BO.BlProjectStageException("Can't assign an agent for a task on current project stage");
+            if (updatedTask.StartDate is not null && updatedTask.TaskAgent is null)
+                throw new BO.BlProjectStageException("The start date can't be updated because no agent is performing the task");
         }
         if (_bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
         {
@@ -267,14 +277,14 @@ internal class TaskImplementation : ITask
         }
         if (_bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
         {
-           
+
             if (taskToUpdate!.TaskAgent is not null)
             {
                 DO.Agent? agentOfTask = _dal.Agent.Read(taskToUpdate!.TaskAgent.Id);
                 if ((BO.AgentExperience)updatedTask.Complexity! > (BO.AgentExperience)agentOfTask!.Specialty!)
                     throw new BO.BlWrongAgentForTaskException("Agent specialty can't be lower than task comlexity");
             }
-            if(updatedTask.Complexity > taskToUpdate!.Complexity)
+            if (updatedTask.Complexity > taskToUpdate!.Complexity)
                 throw new BO.BlProjectStageException("Task's complexity can't be raised on current project stage");
             if (updatedTask.CompleteDate is not null && updatedTask.StartDate is null)
                 throw new BO.BlProjectStageException("Task's complete date can't be declared before the task has started");
@@ -285,7 +295,7 @@ internal class TaskImplementation : ITask
     /// </summary>
     /// <exception cref="BO.BlProjectStageException">Can't assign start date for tasks on the current project stage</exception>
     public void CreateAutomaticSchedule()
-    {  
+    {
         if (_bl.GetProjectStatus() == BO.ProjectStatus.PlanningTime)
             throw new BO.BlProjectStageException("Can't update a start date for the tasks before the project start date is decided");
         if (_bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
@@ -307,7 +317,7 @@ internal class TaskImplementation : ITask
         IEnumerable<BO.Task> dependentTasks = _dal.Dependency.ReadAll(t => t.DependentTask == boTask.Id)
                                        .Select(t => Read(t.DependsOnTask))
                                        .Where(t => t is not null && t.ScheduledDate is null).Select(t => t)!;
-        
+
         //If all previous tasks have scheduled start dates
         if (!dependentTasks.Any())
         {
@@ -385,6 +395,23 @@ internal class TaskImplementation : ITask
         };
     }
     /// <summary>
+    /// check if the dependencies create a circle
+    /// </summary>
+    /// <param name="dependsTask"></param>
+    /// <param name="dependOnTask"></param>
+    /// <param name="dependencies"></param>
+    /// <returns></returns>
+    private bool isThereCircle(int dependsTask, int dependOnTask, IEnumerable<DO.Dependency> dependencies)
+    {
+        if (dependsTask == dependOnTask)
+            return true;
+
+        foreach (var dependncy in dependencies.Where(dependncy => dependncy.DependentTask == dependOnTask))
+            return isThereCircle(dependsTask, dependncy.DependentTask, dependencies);
+
+        return false;
+    }
+    /// <summary>
     /// Adds a dependency between two tasks
     /// </summary>
     /// <param name="taskId">Id of the current task</param>
@@ -405,20 +432,27 @@ internal class TaskImplementation : ITask
         IEnumerable<TaskInList> dependencies = GetDependenciesList(taskId).Where(t => t.Id == depId);
         if (dependencies.Any())
             throw new BO.BlAllreadyExistsException("This dependency allready exists");
-
+        if (isThereCircle(taskId, depId, _dal.Dependency.ReadAll()))
+            throw new BO.BlWrongInputException("This dependency create a circle");
         _dal.Dependency.Create(new DO.Dependency(0, taskId, depId));
         DO.Task task = _dal.Task.Read(taskId)!;
         return ConvertTaskToTaskInList(task);
     }
+
+
     /// <summary>
     /// Deletes a dependency from a task's dependency
     /// </summary>
     /// <param name="taskId">Id of the current task</param>
     /// <param name="depId">Id of the dependent task</param>
-    void ITask.RemoveDependency(int taskId, int depId)
+    public void RemoveDependency(int taskId, int depId)
     {
         var dependency = _dal.Dependency.Read(d => d.DependentTask == taskId && d.DependsOnTask == depId);
         if (dependency is not null)
             _dal.Dependency.Delete(dependency.Id);
     }
+
+    public IEnumerable<Task> ReadAllTasks() =>
+   _dal.Task.ReadAll().Select(task => doToBoTask(task));
+
 }

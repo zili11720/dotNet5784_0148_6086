@@ -19,14 +19,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+    <ProjectReference Include="..\NGantt\nGantt\nGantt.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="managerWindowBackround.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Gant\" />
   </ItemGroup>
 
 </Project>

@@ -19,4 +19,5 @@ public interface ITask
     void RemoveDependency(int taskId,int depId);
     BO.TaskStatus CalcStatus(DO.Task task);
     TaskInList ConvertTaskToTaskInList(DO.Task task);
+    IEnumerable<BO.Task> ReadAllTasks();
 }
