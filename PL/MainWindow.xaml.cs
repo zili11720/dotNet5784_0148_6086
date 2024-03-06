@@ -1,5 +1,6 @@
 ﻿using PL.Agent;
 using PL.Employee;
+using PL.Gantt;
 using PL.Task;
 using System.Windows;
 
@@ -38,7 +39,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         CurrentTime = s_bl.Clock;
-        ProjectStartDate = (DateTime)s_bl.GetProjectStartDate()!;
+        ProjectStartDate = (DateTime?)s_bl.GetProjectStartDate()!;
         InitializeComponent();
     }
     private void btnAgents_Click(object sender, RoutedEventArgs e)
@@ -123,7 +124,12 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             MessageBox.Show(ex.Message, "Worng input", MessageBoxButton.OK, MessageBoxImage.Error);
+            ProjectStartDate=s_bl.GetProjectStartDate();///לסדר את הבבינג
         }
     }
 
+    private void btnWatchGantt_Click(object sender, RoutedEventArgs e)
+    {
+        new GanttWindow().Show();
+    }
 }

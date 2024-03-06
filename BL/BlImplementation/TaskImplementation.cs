@@ -248,6 +248,10 @@ internal class TaskImplementation : ITask
             throw new BO.BlWrongInputException("Task's required effort time must have a value");
         if (boTask.StartDate is not null && boTask.StartDate < boTask.ScheduledDate)
             throw new BO.BlWrongInputException("Task's start date can't be earlier than the scheduled date");
+        if (boTask.StartDate is not null && boTask.CompleteDate is not null && boTask.StartDate > boTask.CompleteDate)
+            throw new BO.BlWrongInputException("Task's complete date can't be earlier than the start date");
+        if (boTask.StartDate is not null && boTask.EstimatedCompleteDate is not null && boTask.StartDate > boTask.EstimatedCompleteDate)
+            throw new BO.BlWrongInputException("Task's complete date can't be earlier than the start date");
     }
     /// <summary>
     /// Check if the update of certain fields is possible according to the current project status and other parameters
@@ -267,9 +271,9 @@ internal class TaskImplementation : ITask
                 throw new BO.BlProjectStageException("Can't update complete date on current project stage");
             if (updatedTask.TaskAgent is not null)
                 throw new BO.BlProjectStageException("Can't assign an agent for a task on current project stage");
-            if (updatedTask.StartDate is not null && updatedTask.TaskAgent is null)
-                throw new BO.BlProjectStageException("The start date can't be updated because no agent is performing the task");
         }
+        if (updatedTask.StartDate is not null && updatedTask.TaskAgent.Id == 0)
+            throw new BO.BlProjectStageException("The start date can't be updated because no agent is performing the task");
         if (_bl.GetProjectStatus() != BO.ProjectStatus.PlanningTime)
         {
             if (updatedTask.RequiredEffortTime != taskToUpdate!.RequiredEffortTime)
@@ -278,9 +282,9 @@ internal class TaskImplementation : ITask
         if (_bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
         {
 
-            if (taskToUpdate!.TaskAgent is not null)
+            if (updatedTask.TaskAgent is not null && updatedTask!.TaskAgent.Id!=0)
             {
-                DO.Agent? agentOfTask = _dal.Agent.Read(taskToUpdate!.TaskAgent.Id);
+                DO.Agent? agentOfTask = _dal.Agent.Read(updatedTask!.TaskAgent.Id);
                 if ((BO.AgentExperience)updatedTask.Complexity! > (BO.AgentExperience)agentOfTask!.Specialty!)
                     throw new BO.BlWrongAgentForTaskException("Agent specialty can't be lower than task comlexity");
             }
@@ -422,6 +426,8 @@ internal class TaskImplementation : ITask
     /// <exception cref="BO.BlAllreadyExistsException">The dependency between the two tasks allready exists</exception>
     TaskInList ITask.AddDependency(int taskId, int depId)
     {
+        if (_bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
+            throw new BO.BlProjectStageException("Can't add dependencies for a task after the project has lunched");
         DO.Task? depTask = _dal.Task.Read(depId);
         if (depTask is null)
             throw new BO.BlDoesNotExistException($"Task with ID={depId} does Not exist");
@@ -432,8 +438,8 @@ internal class TaskImplementation : ITask
         IEnumerable<TaskInList> dependencies = GetDependenciesList(taskId).Where(t => t.Id == depId);
         if (dependencies.Any())
             throw new BO.BlAllreadyExistsException("This dependency allready exists");
-        if (isThereCircle(taskId, depId, _dal.Dependency.ReadAll()))
-            throw new BO.BlWrongInputException("This dependency create a circle");
+        //if (isThereCircle(taskId, depId, _dal.Dependency.ReadAll()))////לבדוקקקק
+        //    throw new BO.BlWrongInputException("This dependency create a circle");
         _dal.Dependency.Create(new DO.Dependency(0, taskId, depId));
         DO.Task task = _dal.Task.Read(taskId)!;
         return ConvertTaskToTaskInList(task);
@@ -447,6 +453,8 @@ internal class TaskImplementation : ITask
     /// <param name="depId">Id of the dependent task</param>
     public void RemoveDependency(int taskId, int depId)
     {
+        if (_bl.GetProjectStatus() == BO.ProjectStatus.ExecutionTime)
+            throw new BO.BlProjectStageException("Can't remove dependencies from a task after the project has lunched");
         var dependency = _dal.Dependency.Read(d => d.DependentTask == taskId && d.DependsOnTask == depId);
         if (dependency is not null)
             _dal.Dependency.Delete(dependency.Id);

@@ -20,7 +20,7 @@
             <DatePicker x:Name="dateTimePicker" SelectedDateChanged="dateTimePicker_SelectedDateChanged" Width="200" Margin="5"/>
         </StackPanel>
 
-        <ContentControl Grid.Row="1" Content="{Binding GanttControl}"></ContentControl>
+        <ContentControl Grid.Row="1" Width="400" Height="400" Content="{Binding GanttControl}"></ContentControl>
     </Grid>
 
 </Window>

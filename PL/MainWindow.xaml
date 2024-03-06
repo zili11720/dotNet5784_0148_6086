@@ -45,10 +45,11 @@
         <Button Content="set" Grid.Row="4" Grid.Column="0" Foreground="White"  VerticalAlignment="Center" Click="btnSetProjectStartDate_Click" FontSize="15" HorizontalAlignment="Right"/>
         <!--Clock-->
         <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="center" Foreground="White"
-        Text="{Binding CurrentTime, StringFormat='{}{0:dd/MM/yyyy}'}"  Width="150" FontSize="25" FontWeight="Bold" />
+        Text="{Binding CurrentTime, StringFormat='{}{0:dd/MM/yyyy}' }"  Width="150" FontSize="25" FontWeight="Bold" />
          <!--Reset clock button-->
         <Button Content="Reset" Grid.Row="6" Grid.Column="1" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10" Click="btnResetClock_Click"/>
          <!--change time buttons-->
+        <Button Content="Gantt" Grid.Row="7" Grid.Column="1" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10" Click="btnWatchGantt_Click" />
         <Grid Grid.Row="5" Grid.Column="1">
        <Grid.RowDefinitions>
          <RowDefinition Height="*"/>

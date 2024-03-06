@@ -36,7 +36,6 @@ public partial class TaskWindow : Window
 
     public TaskWindow(int TaskId=0, Action<int, bool>? AddOrUpdate = null)
     {
-        InitializeComponent();
         _AddOrUpdate = AddOrUpdate!;
         try
         {
@@ -57,9 +56,16 @@ public partial class TaskWindow : Window
                 Deliverables="",
                 Remarks="",
                 Complexity = null,
-                TaskAgent = new() {Id=0, Name=""},
+                //TaskAgent =null, //new BO.AgentInTask() {Id=0, Name=""},
                 DependenciesList=null,
             };
+            if (TaskId is 0 || CurrentTask.TaskAgent is null)
+                CurrentTask.TaskAgent = new();
+            else
+            {
+                if(CurrentTask.TaskAgent is not  null)
+                  CurrentTask.TaskAgent = new() { Id = CurrentTask.TaskAgent.Id, Name = CurrentTask.TaskAgent.Name };
+            }
         }
         catch (BO.BlDoesNotExistException ex)
         {
@@ -67,6 +73,7 @@ public partial class TaskWindow : Window
             MessageBox.Show(ex.Message, "Could not find a task with the a given id", MessageBoxButton.OK, MessageBoxImage.Error);
             this.Close();
         }
+        InitializeComponent();
     }
     private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
     {
@@ -74,9 +81,6 @@ public partial class TaskWindow : Window
         {
             if (s_bl.Task.ReadAll().Any(a => a.Id == CurrentTask.Id) is true)
             {
-                int id;
-                if(CurrentTask.TaskAgent is not null)
-                  id = CurrentTask.TaskAgent.Id;   ///
                 s_bl.Task.Update(CurrentTask);
                 if(_AddOrUpdate is not null)
                   _AddOrUpdate(CurrentTask.Id, true);

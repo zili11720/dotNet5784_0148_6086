@@ -34,6 +34,8 @@ internal class Bl : IBl
     /// </summary>
     void IBl.SetProjectStartDate(DateTime? _startDate)
     {
+        if(GetProjectStatus()== BO.ProjectStatus.ExecutionTime)
+            throw new BO.BlProjectStageException("Can't change the project start date after the schedule has been set");
         _dal.StartProjectDate = _startDate;
     }
     /// <summary>

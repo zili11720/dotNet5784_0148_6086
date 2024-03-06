@@ -30,6 +30,19 @@ public partial class AgentEmployeeWindow : Window
     public static readonly DependencyProperty CurrentEmployeeProperty =
         DependencyProperty.Register("CurrentEmployee", typeof(BO.Agent), typeof(AgentEmployeeWindow), new PropertyMetadata(null));
 
+
+    //public User User { get; }
+    public DateTime CurrentTime
+    {
+        get { return (DateTime)GetValue(CurrentTimeProperty); }
+        set { SetValue(CurrentTimeProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for CurrentUser.This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty CurrentTimeProperty =
+        DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(null));
+
+
     private void btnTaskDetails_Click(object sender, RoutedEventArgs e)
     {
         if(CurrentEmployee.CurrentTask is null|| CurrentEmployee.CurrentTask.Id == 0)
@@ -41,6 +54,26 @@ public partial class AgentEmployeeWindow : Window
     private void btnAvailableTasks_Click(object sender, RoutedEventArgs e)
     {
         new TaskListWindow(false,CurrentEmployee.Id).Show();
+    }
+
+    private void btnResetClock_Click(object sender, RoutedEventArgs e)
+    {
+        CurrentTime = s_bl.ResetClock();
+    }
+
+    private void btnAddDay_Click(object sender, RoutedEventArgs e)
+    {
+        CurrentTime = s_bl.updateDay();
+    }
+
+    private void btnAddMonth_Click(object sender, RoutedEventArgs e)
+    {
+        CurrentTime = s_bl.updateMonth();
+    }
+
+    private void btnAddYear_Click(object sender, RoutedEventArgs e)
+    {
+        CurrentTime = s_bl.updateYear();
     }
 }
 
