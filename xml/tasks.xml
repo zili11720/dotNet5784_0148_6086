@@ -305,54 +305,6 @@
     <AgentId xsi:nil="true" />
   </Task>
   <Task>
-    <Id>19</Id>
-    <Alias>daily schedule report</Alias>
-    <Description>Make a report about the daily schedule of the criminal</Description>
-    <CreatedAtDate>2024-03-07T02:27:20.1607606+02:00</CreatedAtDate>
-    <RequiredEffortTime>P10D</RequiredEffortTime>
-    <IsMilestone>false</IsMilestone>
-    <Complexity>Field_agent</Complexity>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-05-13T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables>Full documanted report on the criminal's daily schedule</Deliverables>
-    <Remarks>No remarks</Remarks>
-    <AgentId xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>22</Id>
-    <Alias>Equipment inspection</Alias>
-    <Description>Check the functionality of the equipment needed to the final mission</Description>
-    <CreatedAtDate>2024-03-07T02:27:20.208928+02:00</CreatedAtDate>
-    <RequiredEffortTime>P10D</RequiredEffortTime>
-    <IsMilestone>false</IsMilestone>
-    <Complexity>Field_agent</Complexity>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-14T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables>A list of needed equipment/repair</Deliverables>
-    <Remarks>No remarks</Remarks>
-    <AgentId xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>23</Id>
-    <Alias>Complete equipment deficiencies</Alias>
-    <Description>Buy/fix equipment as needed</Description>
-    <CreatedAtDate>2024-03-07T02:27:20.2304524+02:00</CreatedAtDate>
-    <RequiredEffortTime>P10D</RequiredEffortTime>
-    <IsMilestone>false</IsMilestone>
-    <Complexity>Field_agent</Complexity>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-24T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables>Full functioning equipment</Deliverables>
-    <Remarks>No remarks</Remarks>
-    <AgentId xsi:nil="true" />
-  </Task>
-  <Task>
     <Id>21</Id>
     <Alias>Staff meeting</Alias>
     <Description>Have a staff meeting about your finding and plan the final act</Description>
@@ -445,6 +397,54 @@
     <DeadlineDate xsi:nil="true" />
     <CompleteDate>2024-05-22T00:00:00</CompleteDate>
     <Deliverables>implanted chip in the criminal's phone</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId>354191975</AgentId>
+  </Task>
+  <Task>
+    <Id>23</Id>
+    <Alias>Complete equipment deficiencies</Alias>
+    <Description>Buy/fix equipment as needed</Description>
+    <CreatedAtDate>2024-03-07T00:00:00</CreatedAtDate>
+    <RequiredEffortTime>P10D</RequiredEffortTime>
+    <IsMilestone>false</IsMilestone>
+    <Complexity>Field_agent</Complexity>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate>2024-03-24T00:00:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Full functioning equipment</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId>354191975</AgentId>
+  </Task>
+  <Task>
+    <Id>22</Id>
+    <Alias>Equipment inspection</Alias>
+    <Description>Check the functionality of the equipment needed to the final mission</Description>
+    <CreatedAtDate>2024-03-07T00:00:00</CreatedAtDate>
+    <RequiredEffortTime>P10D</RequiredEffortTime>
+    <IsMilestone>false</IsMilestone>
+    <Complexity>Field_agent</Complexity>
+    <StartDate>2024-03-18T00:00:00</StartDate>
+    <ScheduledDate>2024-03-14T00:00:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate>2024-03-21T00:00:00</CompleteDate>
+    <Deliverables>A list of needed equipment/repair</Deliverables>
+    <Remarks>No remarks</Remarks>
+    <AgentId>354191975</AgentId>
+  </Task>
+  <Task>
+    <Id>19</Id>
+    <Alias>daily schedule report</Alias>
+    <Description>Make a report about the daily schedule of the criminal</Description>
+    <CreatedAtDate>2024-03-07T00:00:00</CreatedAtDate>
+    <RequiredEffortTime>P10D</RequiredEffortTime>
+    <IsMilestone>false</IsMilestone>
+    <Complexity>Field_agent</Complexity>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate>2024-05-13T00:00:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables>Full documanted report on the criminal's daily schedule</Deliverables>
     <Remarks>No remarks</Remarks>
     <AgentId>354191975</AgentId>
   </Task>

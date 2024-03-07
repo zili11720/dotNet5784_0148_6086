@@ -56,7 +56,6 @@ public partial class TaskWindow : Window
                 Deliverables="",
                 Remarks="",
                 Complexity = null,
-                //TaskAgent =null, //new BO.AgentInTask() {Id=0, Name=""},
                 DependenciesList=null,
             };
             if (TaskId is 0 || CurrentTask.TaskAgent is null)

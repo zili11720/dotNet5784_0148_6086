@@ -177,7 +177,7 @@ internal class TaskImplementation : ITask
         }
     }
     /// <summary>
-    /// Updates a task's planned start date
+    /// Updates a task's planned start date menually
     /// </summary>
     /// <param name="taskId">Id of the task to update</param>
     /// <param name="start">The wanted start date</param>
@@ -293,6 +293,8 @@ internal class TaskImplementation : ITask
             if (updatedTask.CompleteDate is not null && updatedTask.StartDate is null)
                 throw new BO.BlProjectStageException("Task's complete date can't be declared before the task has started");
         }
+        if (updatedTask.TaskAgent is not null && updatedTask.TaskAgent.Id!=0)
+            throw new BO.BlProjectStageException("This agent is allready working on a task right now");
     }
     /// <summary>
     /// Create start date for all the tasks automaticaly

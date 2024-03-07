@@ -89,7 +89,7 @@ internal class AgentImplementation : IAgent
             throw new BO.BlDoesNotExistException($"An agent with ID={id} does not exist");
 
         //Find the current task of the agent
-        DO.Task? doTask = _dal.Task.Read(task => task.AgentId == id && _bl.Task.CalcStatus(task) == BO.TaskStatus.OnTrack/*StartDate < DateTime.Now && task.CompleteDate > DateTime.Now*/);
+        DO.Task? doTask = _dal.Task.Read(task => task.AgentId == id);
 
         BO.Agent boAgent = new BO.Agent()
         {
