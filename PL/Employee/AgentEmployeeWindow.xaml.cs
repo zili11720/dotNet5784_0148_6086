@@ -1,6 +1,7 @@
 ﻿
 using PL.Agent;
 using PL.Task;
+using System.ComponentModel;
 using System.Windows;
 
 namespace PL.Employee;
@@ -55,9 +56,7 @@ public partial class AgentEmployeeWindow : Window
         new TaskListWindow(false,CurrentEmployee.Id).Show();
     }
 
-    private void EnploeeyWindowActivated(object sender, EventArgs e)
-    {
-        CurrentEmployee = s_bl.Agent.Read(employeeId)!;
-    }
+    
 }
+
 

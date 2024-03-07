@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Employee"
         mc:Ignorable="d"
         Title="AgentEmployeeWindow" Height="450" Width="800"
-        DataContext="{Binding  RelativeSource={RelativeSource Self}}" Activated="EnploeeyWindowActivated">
+        DataContext="{Binding  RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/managerWindowBackround.jpg"/>
@@ -26,7 +26,7 @@
 
          Text="{Binding CurrentTime, StringFormat='{}{0:dd/MM/yyyy}' }"  Width="150" FontSize="25" FontWeight="Bold" />
 
-        <Label Content="Hello," Grid.Row="0" Width="130" Height="60" FontSize="45" HorizontalAlignment="Left"  />
+        <Label Content="Hello," Grid.Row="0" Width="130" Height="60" FontSize="40" HorizontalAlignment="Left"  />
         <TextBox Grid.Row="0" Grid.Column="0" 
          Text="{Binding CurrentEmployee.Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  Foreground="White" IsEnabled="False"
          HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="40"  Width="250" Height="60" Background="{x:Null}" BorderBrush="{x:Null}"/>

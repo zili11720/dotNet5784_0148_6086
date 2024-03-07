@@ -287,7 +287,7 @@ internal class TaskImplementation : ITask
                 BO.Agent? agentOfTask = _bl.Agent.Read(updatedTask!.TaskAgent.Id);
                 if ((BO.AgentExperience)updatedTask.Complexity! > (BO.AgentExperience)agentOfTask!.Specialty!)
                     throw new BO.BlWrongAgentForTaskException("Agent specialty can't be lower than task comlexity");
-                if (updatedTask.TaskAgent != taskToUpdate.TaskAgent && agentOfTask.CurrentTask is not null && agentOfTask.CurrentTask.Id!=0)
+                if (taskToUpdate.TaskAgent is not null && updatedTask.TaskAgent.Id != taskToUpdate.TaskAgent.Id && agentOfTask.CurrentTask is not null && agentOfTask.CurrentTask.Id!=0)
                     throw new BO.BlProjectStageException("This agent is allready working on a task right now");
             }
             if (updatedTask.Complexity > taskToUpdate!.Complexity)

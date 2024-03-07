@@ -99,6 +99,8 @@ public partial class TaskListWindow : Window
     {
         try
         {
+            if(isManager is false)
+                MessageBox.Show("Could not find a task with the a given id","invalid action", MessageBoxButton.OK, MessageBoxImage.Error);
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the task?", "warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (MessageBoxResult.Yes == result)
             {
