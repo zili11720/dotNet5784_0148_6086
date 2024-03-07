@@ -50,7 +50,7 @@ internal class UserImplementation : IUser
     {
         DO.User? doUser = _dal.User.Read(id);
         if (doUser is null)
-            throw new BO.BlDoesNotExistException($"A user with id {id} does not exist");
+            return null; // throw new BO.BlDoesNotExistException($"A user with id {id} does not exist");
         BO.User boUser = new BO.User()
         {
             UserId = doUser.UserId,

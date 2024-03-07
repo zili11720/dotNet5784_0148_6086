@@ -16,6 +16,7 @@ public partial class AgentEmployeeWindow : Window
     {
         CurrentTime = s_bl.Clock;
         CurrentEmployee = s_bl.Agent.Read(_agentId)!;
+        employeeId = _agentId;
         InitializeComponent();
     }
 
@@ -38,7 +39,7 @@ public partial class AgentEmployeeWindow : Window
 
     // Using a DependencyProperty as the backing store for CurrentUser.This enables animation, styling, binding, etc...
     public static readonly DependencyProperty CurrentTimeProperty =
-        DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(null));
+        DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(AgentEmployeeWindow), new PropertyMetadata(null));
 
 
     private void btnTaskDetails_Click(object sender, RoutedEventArgs e)
@@ -54,5 +55,9 @@ public partial class AgentEmployeeWindow : Window
         new TaskListWindow(false,CurrentEmployee.Id).Show();
     }
 
+    private void EnploeeyWindowActivated(object sender, EventArgs e)
+    {
+        CurrentEmployee = s_bl.Agent.Read(employeeId)!;
+    }
 }
 

@@ -17,8 +17,8 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Dependencies" Height="40" VerticalAlignment="Center" Margin="174,0,174,0" FontStyle="Italic" FontWeight="Bold" FontSize="20" />
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Path=DependencyList, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False" Margin="0,0,0,36" Grid.RowSpan="2">
+        <Label Content="Dependencies" Height="40" VerticalAlignment="Center" FontSize="20" />
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Path=DependencyList, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False" Grid.RowSpan="2">
             <DataGrid.Background>
                 <StaticResource ResourceKey="BlueGrayLinearBrushKey"/>
             </DataGrid.Background>
@@ -45,9 +45,16 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Enter a task id to add a dependency:"  Grid.Row="2" Margin="11,1,199,0"></Label>
-        <TextBox Grid.Row="2" Margin="301,9,139,10" RenderTransformOrigin="0.475,3.373" Text="{Binding NewDependencyId, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Add" Grid.Row="2" Margin="387,10,49,10" Click="btnAddDependency_Click" >
-        </Button>
+        <Grid Grid.Row="2" >
+          <Grid.ColumnDefinitions>
+             <ColumnDefinition Width="2*"/>
+             <ColumnDefinition Width="*"/>
+             <ColumnDefinition Width="*"/>
+         </Grid.ColumnDefinitions>
+               <Label Content="Enter a task id to add a dependency:"  Grid.Column="0" ></Label>
+               <TextBox   Grid.Column="1" Width="60" Height="20" Text="{Binding NewDependencyId, UpdateSourceTrigger=PropertyChanged}"/>
+               <Button Content="Add" Grid.Column="2" HorizontalAlignment="Left" FontSize="14" Click="btnAddDependency_Click" >
+            </Button>
+        </Grid>
     </Grid>
 </Window>

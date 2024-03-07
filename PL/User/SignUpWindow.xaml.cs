@@ -45,6 +45,7 @@ public partial class SignUpWindow : Window
     {
         password = (sender as PasswordBox)?.Password;
     }
+
     private void btnCreateAccount_Click(object sender, RoutedEventArgs e)
     {
         try

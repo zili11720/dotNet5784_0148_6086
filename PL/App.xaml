@@ -11,7 +11,6 @@
         <local:ConvertIdToIsEnabledReversed x:Key="ConverIdToIsEnabledReversedKey"/>
         <local:ConvertTaskStatusToColor x:Key="ConvertTaskStatusToColorKey"/>
         <local:ConvertBoolToVisibility x:Key="ConvertBoolToVisibilityKey"/>
-        <local:ConvertBoolToString x:Key="ConvertBoolToStringKey"/>
         <LinearGradientBrush x:Key="BlueGrayLinearBrushKey"
             EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF060606"/>

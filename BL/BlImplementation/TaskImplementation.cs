@@ -284,17 +284,17 @@ internal class TaskImplementation : ITask
 
             if (updatedTask.TaskAgent is not null && updatedTask!.TaskAgent.Id!=0)
             {
-                DO.Agent? agentOfTask = _dal.Agent.Read(updatedTask!.TaskAgent.Id);
+                BO.Agent? agentOfTask = _bl.Agent.Read(updatedTask!.TaskAgent.Id);
                 if ((BO.AgentExperience)updatedTask.Complexity! > (BO.AgentExperience)agentOfTask!.Specialty!)
                     throw new BO.BlWrongAgentForTaskException("Agent specialty can't be lower than task comlexity");
+                if (updatedTask.TaskAgent != taskToUpdate.TaskAgent && agentOfTask.CurrentTask is not null && agentOfTask.CurrentTask.Id!=0)
+                    throw new BO.BlProjectStageException("This agent is allready working on a task right now");
             }
             if (updatedTask.Complexity > taskToUpdate!.Complexity)
                 throw new BO.BlProjectStageException("Task's complexity can't be raised on current project stage");
             if (updatedTask.CompleteDate is not null && updatedTask.StartDate is null)
                 throw new BO.BlProjectStageException("Task's complete date can't be declared before the task has started");
         }
-        if (updatedTask.TaskAgent is not null && updatedTask.TaskAgent.Id!=0)
-            throw new BO.BlProjectStageException("This agent is allready working on a task right now");
     }
     /// <summary>
     /// Create start date for all the tasks automaticaly

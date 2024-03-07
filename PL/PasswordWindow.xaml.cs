@@ -23,32 +23,9 @@ public partial class PasswordWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-
-
-
-
-
-
-
-    //public BO.User? CurrentUser
-    //{
-    //    get { return (BO.User?)GetValue(CurrentUserProperty); }
-    //    set { SetValue(CurrentUserProperty, value); }
-    //}
-
-    //// Using a DependencyProperty as the backing store for CurrentUser.  This enables animation, styling, binding, etc...
-    //public static readonly DependencyProperty CurrentUserProperty =
-    //    DependencyProperty.Register("CurrentUser", typeof(BO.User), typeof(PasswordWindow), new PropertyMetadata(null));
-
-
-
-
-
-
     public PasswordWindow()
     {
-        InitializeComponent();
-        //CurrentUser = new BO.User() { UserId = 0, UserName = "", Password = "", IsManager = false }; 
+        InitializeComponent(); 
     }
 
     string? password = null;
@@ -66,12 +43,11 @@ public partial class PasswordWindow : Window
 
 
 
-
+    
     private void btnLogIn_Click(object sender, RoutedEventArgs e)
     {
         try
         { 
-                    //string? str = CurrentUser.UserName;
             BO.User CurrentUser = s_bl.User.Read(UserName);
             if (CurrentUser.Password != password)
             {
@@ -92,11 +68,13 @@ public partial class PasswordWindow : Window
         }
     }
 
+    //Create new account
     private void btnSingUp_Click(object sender, RoutedEventArgs e)
     {
         new SignUpWindow().Show();
     }
 
+    //
     private void PasswordChanged_LostFocus(object sender, RoutedEventArgs e)
     {
         password = (sender as PasswordBox)?.Password;

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Employee"
         mc:Ignorable="d"
         Title="AgentEmployeeWindow" Height="450" Width="800"
-        DataContext="{Binding CurrentEmployee, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+        DataContext="{Binding  RelativeSource={RelativeSource Self}}" Activated="EnploeeyWindowActivated">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/managerWindowBackround.jpg"/>
@@ -21,10 +21,15 @@
             <ColumnDefinition Width="25*"/>
             <ColumnDefinition Width="22*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Hello," Grid.Row="0" Width="130" Height="60" FontSize="45" />
-        <TextBox Grid.Row="0" Grid.Column="0"
-         Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" FontSize="30" Foreground="White"
-         HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Height="30" Background="{x:Null}"/>
+        <!--Clock-->
+        <TextBlock Grid.Row="0" Grid.Column="2"  Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+
+         Text="{Binding CurrentTime, StringFormat='{}{0:dd/MM/yyyy}' }"  Width="150" FontSize="25" FontWeight="Bold" />
+
+        <Label Content="Hello," Grid.Row="0" Width="130" Height="60" FontSize="45" HorizontalAlignment="Left"  />
+        <TextBox Grid.Row="0" Grid.Column="0" 
+         Text="{Binding CurrentEmployee.Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  Foreground="White" IsEnabled="False"
+         HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="40"  Width="250" Height="60" Background="{x:Null}" BorderBrush="{x:Null}"/>
         
         <Label Content="CurrentTask.Id:" Grid.Row="1" Width="200" Height="40" FontSize="25" />
         <Label Content="CurrentTask.Alias:" Grid.Row="2"  Width="230" Height="40" FontSize="25" />
@@ -32,14 +37,12 @@
         <Button Content="Available Tasks" Grid.Row="3" Grid.Column="0" Height="60" Width="200" Click="btnAvailableTasks_Click" FontSize="25" Foreground="White"/>
 
         <TextBox Grid.Row="1" Grid.Column="2"
-         Text="{Binding CurrentTask.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-         HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Height="30"/>
+         Text="{Binding CurrentEmployee.CurrentTask.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+         HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Height="30" IsEnabled="False"/>
 
         <TextBox Grid.Row="2" Grid.Column="1"
-        Text="{Binding CurrentTask.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-        HorizontalAlignment="Left"   VerticalAlignment="Center" Width="140" Height="30"/>
-  <!--Clock-->
-  <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="center" Foreground="White"
-  Text="{Binding CurrentTime, StringFormat='{}{0:dd/MM/yyyy}' }"  Width="150" FontSize="25" FontWeight="Bold" />
+        Text="{Binding CurrentEmployee.CurrentTask.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+        HorizontalAlignment="Left"   VerticalAlignment="Center" Width="140" Height="30" IsEnabled="False"/>
+        
     </Grid>
 </Window>

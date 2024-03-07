@@ -54,7 +54,7 @@
                 <DataGridTemplateColumn Header="Actions" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="{Binding Path=isManager,Converter={StaticResource ConvertBoolToStringKey}, Mode=TwoWay}" Click="btnDeleteTask_Click" HorizontalAlignment="Center" Height="20" Width="80" Command="{Binding btnDeleteTask_Click}" CommandParameter="{Binding}"/>
+                            <Button Content="Delete" Click="btnDeleteTask_Click" HorizontalAlignment="Center" Height="20" Width="80" Visibility="{Binding Path=isManager,Converter={StaticResource ConvertBoolToVisibilityKey}, Mode=TwoWay}" Command="{Binding btnDeleteTask_Click}" CommandParameter="{Binding}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
