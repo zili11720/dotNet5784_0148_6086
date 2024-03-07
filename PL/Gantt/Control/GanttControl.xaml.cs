@@ -1,21 +1,12 @@
-﻿using nGantt;
-using nGantt.GanttChart;
-using nGantt.PeriodSplitter;
-using System;
-using System.Collections.Generic;
+﻿using nGantt.PeriodSplitter;
+using PL.Gantt;
+using PL.Gantt.GanttChart;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+#nullable disable
 
 namespace PL;
 
@@ -31,20 +22,32 @@ public partial class GanttControl : UserControl
         Multiple
     }
 
-    private GanttChartData ganttChartData = new GanttChartData();///
-    private TimeLine gridLineTimeLine;
     private double selectionStartX;
-    private ObservableCollection<TimeLine> gridLineTimeLines = new ObservableCollection<TimeLine>();
+    public bool AllowUserSelection { get; set; }
+
     public event EventHandler SelectedItemChanged;
     public event EventHandler<PeriodEventArgs> GanttRowAreaSelected;
 
     public delegate string PeriodNameFormatter(Period period);
-    public delegate Brush BackgroundFormatter(TimeLineItem timeLineItem);
+    public delegate Brush BackgroundFormatter(TimeLineItem timeLineItem, System.Windows.Media.Color color);
 
+    private ObservableCollection<TimeLine> gridLineTimeLines = new ObservableCollection<TimeLine>();
     public ObservableCollection<ContextMenuItem> GanttTaskContextMenuItems { get; set; }
     public ObservableCollection<SelectionContextMenuItem> SelectionContextMenuItems { get; set; }
     public ObservableCollection<TimeLine> GridLineTimeLine { get { return gridLineTimeLines; } }
+    public ObservableCollection<TimeLine> TimeLines { get; private set; }
+
+    private GanttChartData ganttChartData = new GanttChartData();///
+
+    private TimeLine gridLineTimeLine;
+    public GanttChartData GanttData => ganttChartData;
+    public Period SelectionPeriod { get; private set; }
     public SelectionMode TaskSelectionMode { get; set; }
+
+    private System.Windows.Media.Color[] _colors;
+
+    private readonly Random _randomColors = new();
+
     public List<GanttTask> SelectedItems
     {
         get
@@ -63,32 +66,25 @@ public partial class GanttControl : UserControl
         }
     }
 
-
-
-    public GanttChartData GanttData
-    {
-        get { return (GanttChartData)GetValue(GanttDataProperty); }
-        set { SetValue(GanttDataProperty, value); }
-    }
-
-    // Using a DependencyProperty as the backing store for GanttData.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty GanttDataProperty =
-        DependencyProperty.Register("GanttData", typeof(GanttChartData), typeof(GanttControl));
-
-
-
-    public ObservableCollection<TimeLine> TimeLines { get; private set; }
-    public bool AllowUserSelection { get; set; }
-    public Period SelectionPeriod { get; private set; }
     public GanttControl()
     {
+        initColors();
         InitializeComponent();
+    }
+
+    private void initColors()
+    {
+        _colors = typeof(Colors)
+            .GetProperties()
+            .Select(property => (System.Windows.Media.Color)property
+            .GetValue(null)!)
+            .ToArray();
     }
 
     public void Initialize(DateTime minDate, DateTime maxDate)
     {
-        this.ganttChartData.MinDate = minDate;
-        this.ganttChartData.MaxDate = maxDate;
+        ganttChartData.MinDate = minDate;
+        ganttChartData.MaxDate = maxDate;
     }
 
     public void AddGanttTask(GanttRow row, GanttTask task)
@@ -190,8 +186,10 @@ public partial class GanttControl : UserControl
         if (!ganttChartData.TimeLines.Contains(timeline))
             throw new Exception("Invalid timeline");
 
+        var color = _colors[_randomColors.Next(_colors.Length)];
+
         foreach (var item in timeline.Items)
-            item.BackgroundColor = backgroundFormatter(item);
+            item.BackgroundColor = backgroundFormatter(item, color);
 
         gridLineTimeLines.Clear();
         gridLineTimeLines.Add(timeline);
@@ -206,7 +204,7 @@ public partial class GanttControl : UserControl
             return;
 
         // TODO:: Set visibillity to hidden for all selectionRectangles
-        var canvas = ((Canvas)UIHelper.FindVisualParent<Grid>(((DependencyObject)sender)).FindName("selectionCanvas"));
+        var canvas = ((Canvas)UIHelper.FindVisualParent<Grid>(((DependencyObject)sender))!.FindName("selectionCanvas"));
         Border selectionRectangle = (Border)canvas.FindName("selectionRectangle");
         selectionStartX = e.GetPosition(canvas).X;
         selectionRectangle.Margin = new Thickness(selectionStartX, 0, 0, 5);
@@ -223,7 +221,7 @@ public partial class GanttControl : UserControl
 
     private void ChangeSelectionRectangleSize(object sender, MouseEventArgs e)
     {
-        var canvas = ((Canvas)UIHelper.FindVisualParent<Grid>(((DependencyObject)sender)).FindName("selectionCanvas"));
+        var canvas = ((Canvas)UIHelper.FindVisualParent<Grid>(((DependencyObject)sender))!.FindName("selectionCanvas"));
         Border selectionRectangle = (Border)canvas.FindName("selectionRectangle");
         if (selectionRectangle.IsEnabled)
         {
@@ -257,7 +255,7 @@ public partial class GanttControl : UserControl
 
     private void StopSelection(object sender, MouseEventArgs e)
     {
-        var canvas = ((Canvas)UIHelper.FindVisualParent<Grid>(((DependencyObject)sender)).FindName("selectionCanvas"));
+        var canvas = ((Canvas)UIHelper.FindVisualParent<Grid>(((DependencyObject)sender))!.FindName("selectionCanvas"));
         Border selectionRectangle = (Border)canvas.FindName("selectionRectangle");
 
         if (selectionRectangle.IsEnabled)

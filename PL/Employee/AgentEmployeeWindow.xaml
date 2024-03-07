@@ -23,50 +23,23 @@
         </Grid.ColumnDefinitions>
         <Label Content="Hello," Grid.Row="0" Width="130" Height="60" FontSize="45" />
         <TextBox Grid.Row="0" Grid.Column="0"
-         Text="{Binding CurrentEmployee.Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+         Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" FontSize="30" Foreground="White"
          HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Height="30" Background="{x:Null}"/>
+        
         <Label Content="CurrentTask.Id:" Grid.Row="1" Width="200" Height="40" FontSize="25" />
         <Label Content="CurrentTask.Alias:" Grid.Row="2"  Width="230" Height="40" FontSize="25" />
         <Button Content="Current Task details" Grid.Row="3" Grid.Column="1" Height="60" Width="240" Click="btnTaskDetails_Click" FontSize="25" Foreground="White"/>
         <Button Content="Available Tasks" Grid.Row="3" Grid.Column="0" Height="60" Width="200" Click="btnAvailableTasks_Click" FontSize="25" Foreground="White"/>
 
         <TextBox Grid.Row="1" Grid.Column="2"
-         Text="{Binding CurrentEmployee.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+         Text="{Binding CurrentTask.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
          HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Height="30"/>
 
         <TextBox Grid.Row="2" Grid.Column="1"
-        Text="{Binding CurrentEmployee.CurrentTask.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+        Text="{Binding CurrentTask.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
         HorizontalAlignment="Left"   VerticalAlignment="Center" Width="140" Height="30"/>
   <!--Clock-->
-  <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="center" Foreground="White"
+  <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="center" Foreground="White"
   Text="{Binding CurrentTime, StringFormat='{}{0:dd/MM/yyyy}' }"  Width="150" FontSize="25" FontWeight="Bold" />
-   <!--Reset clock button-->
-  <Button Content="Reset" Grid.Row="6" Grid.Column="1" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10" Click="btnResetClock_Click"/>
-   <!--change time buttons-->
-  <Grid Grid.Row="5" Grid.Column="1">
- <Grid.RowDefinitions>
-   <RowDefinition Height="*"/>
-   <RowDefinition Height="1.1*"/>
-</Grid.RowDefinitions>
-  <Grid.ColumnDefinitions>
-   <ColumnDefinition Width="*"/>
-   <ColumnDefinition Width="*"/>
-   <ColumnDefinition Width="*"/>
-</Grid.ColumnDefinitions>
- <Label Content="Add day" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" FontSize="12"/>
- <Button Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="btnAddDay_Click"  Grid.RowSpan="1">
-   <Polygon Points="15,10 30,30 0,30" Fill="White"/>
-</Button>
-      
-<Label Content="Add month" Grid.Row="1" Grid.Column="1"  HorizontalAlignment="center" FontSize="12" />
-      <Button  Grid.Row="0" Grid.Column="1" HorizontalAlignment="center" VerticalAlignment="Top" Grid.RowSpan="1"  Click="btnAddMonth_Click" >
-          <Polygon Points="15,10 30,30 0,30" Fill="White"/>
-</Button>
-      
-<Label Content="Add year" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" FontSize="12" />
-      <Button Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="1" Click="btnAddYear_Click">
-          <Polygon Points="15,10 30,30 0,30" Fill="White"/>
-         </Button>
-        </Grid>
     </Grid>
 </Window>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 
-namespace nGantt.GanttChart
+namespace PL.Gantt.GanttChart
 {
     public class GanttTask : DependencyObject
     {
@@ -31,7 +31,7 @@ namespace nGantt.GanttChart
             get { return (bool)GetValue(IsEnabledProperty); }
             set { SetValue(IsEnabledProperty, value); }
         }
-        
+
         public bool IsSelected
         {
             get { return (bool)GetValue(IsSelectedProperty); }
@@ -40,7 +40,7 @@ namespace nGantt.GanttChart
 
         public double PercentageCompleted
         {
-            get 
+            get
             {
                 return 1 - percentageCompleted;
             }
@@ -53,7 +53,7 @@ namespace nGantt.GanttChart
         {
             get
             {
-                return String.Format("{0}%", Math.Round(percentageCompleted * 100, 0));
+                return string.Format("{0}%", Math.Round(percentageCompleted * 100, 0));
             }
         }
 

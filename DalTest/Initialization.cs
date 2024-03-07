@@ -197,7 +197,10 @@ public static class Initialization
         {
             1,2,2,2,2,2,1,2,3,3,3,3,3,3,3,1,3,1,1,1,3,1,1,1,3,1,2,3
         };
-
+        int[] _requiredEffortTime =
+        {
+           2,2,3,2,3,2,7,10,3,3,3,5,4,10,5,2,3,2,2,4,3,3,2,5,7,6,3,2
+        };
         for (int i = 0; i < 28; i++)
         {
             //A range of a month between the currrent date and the day of the begining of the project 

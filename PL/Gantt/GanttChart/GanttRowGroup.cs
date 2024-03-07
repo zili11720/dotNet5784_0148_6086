@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 
-namespace nGantt.GanttChart
+namespace PL.Gantt.GanttChart
 {
     public class GanttRowGroup
     {

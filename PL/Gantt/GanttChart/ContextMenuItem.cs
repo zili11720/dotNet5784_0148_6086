@@ -1,7 +1,6 @@
 ﻿using System.Windows.Input;
-using nGantt.PeriodSplitter;
 
-namespace nGantt.GanttChart
+namespace PL.Gantt.GanttChart
 {
     public delegate void ContextMenuItemClick(GanttTask ganttTask);
 
@@ -10,7 +9,7 @@ namespace nGantt.GanttChart
         public ContextMenuItem(ContextMenuItemClick contextMenuItemClick, string name)
         {
             ContextMenuItemClickCommand = new DelegateCommand<GanttTask>(x => contextMenuItemClick(x));
-            this.Name = name;
+            Name = name;
         }
 
         public string Name { get; set; }

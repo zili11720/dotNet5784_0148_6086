@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace nGantt.GanttChart;
+namespace PL.Gantt.GanttChart;
 
 public class ExpandableGanttRowGroup : HeaderedGanttRowGroup
 {

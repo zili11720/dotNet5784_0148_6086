@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Media;
 
-namespace nGantt.GanttChart
+namespace PL.Gantt.GanttChart
 {
-    public class TimeLineItem 
+    public class TimeLineItem
     {
         public TimeLineItem()
         {

@@ -5,9 +5,9 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows;
 
-namespace nGantt.GanttChart
+namespace PL.Gantt.GanttChart
 {
-    public class GanttRowPanel : Panel 
+    public class GanttRowPanel : Panel
     {
         public static readonly DependencyProperty StartDateProperty =
            DependencyProperty.RegisterAttached("StartDate", typeof(DateTime), typeof(GanttRowPanel), new FrameworkPropertyMetadata(DateTime.MinValue, FrameworkPropertyMetadataOptions.AffectsParentArrange));
@@ -91,9 +91,9 @@ namespace nGantt.GanttChart
                 offset = 0;
 
             }
-            
+
             double range = (MaxDate - MinDate).Ticks;
-            if ((offset + width) > range * pixelsPerTick)
+            if (offset + width > range * pixelsPerTick)
                 width = range * pixelsPerTick - offset;
 
             child.Arrange(new Rect(offset, 0, width, elementHeight));

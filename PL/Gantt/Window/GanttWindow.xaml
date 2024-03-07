@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Gantt"
         mc:Ignorable="d"
     DataContext="{Binding RelativeSource={RelativeSource self}}"
-    Title="GanttWindow" Height="450" Width="800">
+    Title="GanttWindow" Height="450" Width="800" WindowStartupLocation="CenterOwner">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -17,10 +17,10 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
             <Button x:Name="buttonPrevious" Content="&lt;" Width="150" Margin="5"/>
             <Button x:Name="buttonNext" Content="&gt;" Width="150" Margin="5"/>
-            <DatePicker x:Name="dateTimePicker" SelectedDateChanged="dateTimePicker_SelectedDateChanged" Width="200" Margin="5"/>
+            <DatePicker x:Name="dateTimePicker" SelectedDate="{Binding SelectedDate}" SelectedDateChanged="dateTimePicker_SelectedDateChanged" Width="200" Margin="5"/>
         </StackPanel>
 
-        <ContentControl Grid.Row="1" Width="400" Height="400" Content="{Binding GanttControl}"></ContentControl>
+        <ContentControl Grid.Row="1" Content="{Binding GanttControl}"></ContentControl>
     </Grid>
 
 </Window>
