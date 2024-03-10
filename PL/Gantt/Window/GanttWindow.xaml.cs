@@ -59,7 +59,7 @@ public partial class GanttWindow : Window
         initBackgroundWorker();
        
         /*Tasks.Min(t => t.ScheduledDate)*/
-        ;
+        
 
         // Set selection -mode
         GanttControl.TaskSelectionMode = GanttControl.SelectionMode.Single;
@@ -148,7 +148,7 @@ public partial class GanttWindow : Window
 
     private Brush DetermineBackground(TimeLineItem timeLineItem, Color color = default)
     {
-        if (timeLineItem.End.Date.DayOfWeek == DayOfWeek.Saturday || timeLineItem.End.Date.DayOfWeek == DayOfWeek.Sunday)
+        if (timeLineItem.End.Date.DayOfWeek == DayOfWeek.Saturday || timeLineItem.End.Date.DayOfWeek == DayOfWeek.Friday)
             return new SolidColorBrush(Colors.LightBlue);
         else
             return new SolidColorBrush(color);

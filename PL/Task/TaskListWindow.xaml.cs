@@ -99,15 +99,18 @@ public partial class TaskListWindow : Window
     {
         try
         {
-            if(isManager is false)
-                MessageBox.Show("Could not find a task with the a given id","invalid action", MessageBoxButton.OK, MessageBoxImage.Error);
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the task?", "warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (MessageBoxResult.Yes == result)
+            if (isManager is false)
+                MessageBox.Show("Onle a manager can delete tasks", "invalid action", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
             {
-                BO.TaskInList? task = (sender as Button)!.CommandParameter as BO.TaskInList;
-                s_bl.Task.Delete(task!.Id);
-                TaskList.Remove(task);
-                MessageBox.Show("The task was deleted successfuly", "Well done!", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the task?", "warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (MessageBoxResult.Yes == result)
+                {
+                    BO.TaskInList? task = (sender as Button)!.CommandParameter as BO.TaskInList;
+                    s_bl.Task.Delete(task!.Id);
+                    TaskList.Remove(task);
+                    MessageBox.Show("The task was deleted successfuly", "Well done!", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
         }
         catch (Exception ex)

@@ -12,6 +12,9 @@ namespace PL.Gantt.GanttChart
         public DateTime End { get; set; }
         public string Name { get; set; }
         public Visibility TaskProgressVisibility { get; set; }
+
+        //public Foreground color { get; set; }
+
         private double percentageCompleted;
 
         public GanttTask()

@@ -130,6 +130,9 @@ public partial class MainWindow : Window
 
     private void btnWatchGantt_Click(object sender, RoutedEventArgs e)
     {
-        new GanttWindow().Show();
+        if(s_bl.GetProjectStatus()!= BO.ProjectStatus.ExecutionTime)
+            MessageBox.Show("To craete a gantt please set a schedule for the project", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        else
+          new GanttWindow().Show();
     }
 }

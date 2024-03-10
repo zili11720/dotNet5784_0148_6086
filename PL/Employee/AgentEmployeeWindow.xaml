@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Employee"
         mc:Ignorable="d"
         Title="AgentEmployeeWindow" Height="450" Width="800"
-        DataContext="{Binding  RelativeSource={RelativeSource Self}}">
+        DataContext="{Binding  RelativeSource={RelativeSource Self}}" Activated="EmployeeWindow_Activated" >
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/managerWindowBackround.jpg"/>

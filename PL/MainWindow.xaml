@@ -42,7 +42,7 @@
         <Label Content="Project Start Date:" Grid.Row="3" Grid.Column="0" Foreground="White" HorizontalAlignment="Center"/>
         <DatePicker  Text="{Binding ProjectStartDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
          Grid.Row="4"  Grid.Column="0" HorizontalAlignment="center" VerticalAlignment="Top"  Width="150" Height="30" />
-        <Button Content="set" Grid.Row="4" Grid.Column="0" Foreground="White"  VerticalAlignment="Center" Click="btnSetProjectStartDate_Click" FontSize="15" HorizontalAlignment="Right"/>
+        <Button Content="set" Grid.Row="4" Grid.Column="0" Foreground="White"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="btnSetProjectStartDate_Click" />
         <!--Clock-->
         <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="center" Foreground="White"
         Text="{Binding CurrentTime, StringFormat='{}{0:dd/MM/yyyy}' }"  Width="150" FontSize="25" FontWeight="Bold" />

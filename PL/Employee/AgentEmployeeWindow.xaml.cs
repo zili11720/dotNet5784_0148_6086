@@ -56,7 +56,10 @@ public partial class AgentEmployeeWindow : Window
         new TaskListWindow(false,CurrentEmployee.Id).Show();
     }
 
-    
+    private void EmployeeWindow_Activated(object sender, EventArgs e)
+    {
+        CurrentEmployee = s_bl.Agent.Read(employeeId)!;
+    }
 }
 
 

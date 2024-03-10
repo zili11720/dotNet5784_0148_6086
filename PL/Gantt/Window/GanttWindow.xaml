@@ -14,9 +14,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!-- Panel containing buttons and date picker -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
-            <Button x:Name="buttonPrevious" Content="&lt;" Width="150" Margin="5"/>
-            <Button x:Name="buttonNext" Content="&gt;" Width="150" Margin="5"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <!--<Button x:Name="buttonPrevious" Content="&lt;" Width="150" Margin="5"/>-->
+            <!--<Button x:Name="buttonNext" Content="&gt;" Width="150" Margin="5"/>-->
             <DatePicker x:Name="dateTimePicker" SelectedDate="{Binding SelectedDate}" SelectedDateChanged="dateTimePicker_SelectedDateChanged" Width="200" Margin="5"/>
         </StackPanel>
 
