@@ -15,6 +15,7 @@ namespace PL;
 /// </summary>
 public partial class GanttControl : UserControl
 {
+    BO.TaskStatus status = BO.TaskStatus.Scheduled;
     public enum SelectionMode
     {
         None,

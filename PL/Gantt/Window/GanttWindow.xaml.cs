@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
+using System.Xml.Schema;
 #nullable disable
 
 namespace PL.Gantt;
@@ -153,7 +155,6 @@ public partial class GanttWindow : Window
         else
             return new SolidColorBrush(color);
     }
-
     private void _gridLinesTimelineBackgroundTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
     {
         // Set the timeline to atatch gridlines to
@@ -177,30 +178,6 @@ public partial class GanttWindow : Window
         // Create and data
         // var rowgroup1 = GanttControl.CreateGanttRowGroup("Tasks");
         setTasksOnGantt();
-
-
-
-        // Create and data
-        //var rowgroup1 = GanttControl.CreateGanttRowGroup("HeaderdGanttRowGroup");
-        //var row1 = GanttControl.CreateGanttRow(rowgroup1, "GanttRow 1");
-        //GanttControl.AddGanttTask(row1, new GanttTask() { Start = DateTime.Parse("2024-02-01"), End = DateTime.Parse("2024-03-01"), Name = "GanttRow 1:GanttTask 1", TaskProgressVisibility = System.Windows.Visibility.Hidden });
-        //GanttControl.AddGanttTask(row1, new GanttTask() { Start = DateTime.Parse("2024-03-05"), End = DateTime.Parse("2024-05-01"), Name = "GanttRow 1:GanttTask 2" });
-        //GanttControl.AddGanttTask(row1, new GanttTask() { Start = DateTime.Parse("2024-06-01"), End = DateTime.Parse("2024-06-15"), Name = "GanttRow 1:GanttTask 3" });
-
-        //var rowgroup2 = GanttControl.CreateGanttRowGroup("ExpandableGanttRowGroup", true);
-        //var row2 = GanttControl.CreateGanttRow(rowgroup2, "GanttRow 2");
-        //var row3 = GanttControl.CreateGanttRow(rowgroup2, "GanttRow 3");
-        //GanttControl.AddGanttTask(row2, new GanttTask() { Start = DateTime.Parse("2024-02-10"), End = DateTime.Parse("2024-03-10"), Name = "GanttRow 2:GanttTask 1" });
-        //GanttControl.AddGanttTask(row2, new GanttTask() { Start = DateTime.Parse("2024-03-25"), End = DateTime.Parse("2024-05-10"), Name = "GanttRow 2:GanttTask 2" });
-        //GanttControl.AddGanttTask(row2, new GanttTask() { Start = DateTime.Parse("2024-06-10"), End = DateTime.Parse("2024-09-15"), Name = "GanttRow 2:GanttTask 3", PercentageCompleted = 0.375 });
-        //GanttControl.AddGanttTask(row3, new GanttTask() { Start = DateTime.Parse("2024-01-07"), End = DateTime.Parse("2024-09-15"), Name = "GanttRow 3:GanttTask 1", PercentageCompleted = 0.5 });
-
-        //var rowgroup3 = GanttControl.CreateGanttRowGroup();
-        //var row4 = GanttControl.CreateGanttRow(rowgroup3, "GanttRow 4");
-        //GanttControl.AddGanttTask(row4, new GanttTask() { Start = DateTime.Parse("2024-02-14"), End = DateTime.Parse("2024-02-27"), Name = "GanttRow 4:GanttTask 1", PercentageCompleted = 1 });
-        //GanttControl.AddGanttTask(row4, new GanttTask() { Start = DateTime.Parse("2024-04-8"), End = DateTime.Parse("2024-09-19"), Name = "GanttRow 4:GanttTask 2" });
-
-
     }
 
     private void setTasksOnGantt()
@@ -237,7 +214,7 @@ public partial class GanttWindow : Window
             Start = task.ScheduledDate!.Value,
             End = task.EstimatedCompleteDate!.Value,
             Name = task.Alias!,
-            TaskProgressVisibility = Visibility.Visible
+            TaskProgressVisibility = Visibility.Visible,
         };
     }
 
