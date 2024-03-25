@@ -20,4 +20,6 @@ public interface ITask
     BO.TaskStatus CalcStatus(DO.Task task);
     TaskInList ConvertTaskToTaskInList(DO.Task task);
     IEnumerable<BO.Task> ReadAllTasks();
+
+    IEnumerable<BO.GanttRow> GetDetailsForGattRow(Func<BO.GanttRow, bool>? filter = null);
 }

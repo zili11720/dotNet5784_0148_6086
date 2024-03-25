@@ -311,6 +311,11 @@ internal class TaskImplementation : ITask
             BO.Task botask = Read(doTask.Id)!;
             RecursiveAutomaticSchedule(botask);
         };
+        foreach (DO.Task doTask in _dal.Task.ReadAll())
+        {
+            BO.Task botask = Read(doTask.Id)!;
+            RecursiveAutomaticSchedule(botask);
+        };
     }
     /// <summary>
     /// Recursive function for creation of start dates
@@ -335,6 +340,7 @@ internal class TaskImplementation : ITask
         {
             RecursiveAutomaticSchedule(task);
         }
+        
 
 
     }
@@ -373,14 +379,16 @@ internal class TaskImplementation : ITask
     /// <exception cref="BlWrongDateException"></exception>
     public TaskStatus CalcStatus(DO.Task task)
     {
+        if (task.ScheduledDate + task.RequiredEffortTime < _bl.Clock && task.CompleteDate == null)
+            return TaskStatus.Delayed;
+        if (task.CompleteDate is not null)
+            return TaskStatus.Done;
         if (task.ScheduledDate == null)
             return TaskStatus.Unscheduled;
         if (task.ScheduledDate != null && task.StartDate < _bl.Clock || task.StartDate == null)
             return TaskStatus.Scheduled;
-        if (task.StartDate >= _bl.Clock && task.CompleteDate < _bl.Clock || task.CompleteDate == null)
+        if (task.StartDate != null && task.StartDate >= _bl.Clock && task.CompleteDate < _bl.Clock || task.CompleteDate == null)
             return TaskStatus.OnTrack;
-        if (task.CompleteDate >= _bl.Clock)
-            return TaskStatus.Done;
         else
             throw new BlWrongDateException("Task's dates are impossible");
     }
@@ -413,7 +421,7 @@ internal class TaskImplementation : ITask
             return true;
 
         foreach (var dependncy in dependencies.Where(dependncy => dependncy.DependentTask == dependOnTask))
-            return isThereCircle(dependsTask, dependncy.DependentTask, dependencies);
+            return isThereCircle(dependsTask,dependncy.DependentTask, dependencies);
 
         return false;
     }
@@ -440,7 +448,7 @@ internal class TaskImplementation : ITask
         IEnumerable<TaskInList> dependencies = GetDependenciesList(taskId).Where(t => t.Id == depId);
         if (dependencies.Any())
             throw new BO.BlAllreadyExistsException("This dependency allready exists");
-        //if (isThereCircle(taskId, depId, _dal.Dependency.ReadAll()))////לבדוקקקק
+        //if (isThereCircle(taskId, depId, _dal.Dependency.ReadAll()))
         //    throw new BO.BlWrongInputException("This dependency create a circle");
         _dal.Dependency.Create(new DO.Dependency(0, taskId, depId));
         DO.Task task = _dal.Task.Read(taskId)!;
@@ -464,5 +472,35 @@ internal class TaskImplementation : ITask
 
     public IEnumerable<Task> ReadAllTasks() =>
    _dal.Task.ReadAll().Select(task => doToBoTask(task));
+
+    public IEnumerable<BO.GanttRow> GetDetailsForGattRow(Func<BO.GanttRow, bool>? filter = null)
+    {
+        return (from task in ReadAll()
+                let t = _dal.Task.Read(task.Id)
+                let start = (int)(t.ScheduledDate - _bl.GetProjectStartDate()).Value.TotalDays
+                select new BO.GanttRow()
+                {
+                    ID = task.Id,
+                    Name = task.Alias,
+                    TasksDays = (int)t.RequiredEffortTime.Value.TotalDays * 16,
+                    StartOffset = start * 16,
+                    EndOffset = (int)(start + t.RequiredEffortTime.Value.TotalDays) * 16,
+                    Dependencies = StringDependencies(task.Id),
+                    Status = CalcStatus(t),
+                }).ToList().OrderBy(x => x.ID);
+    }
+
+    private string StringDependencies(int id)
+    {
+        var depTasks = _dal.Dependency.ReadAll(x => x.DependentTask == id)
+                                    .Where(dependency => dependency.DependentTask == id)
+                                    .Select(dependency => dependency.DependsOnTask.ToString() + " ");
+        string dep = "";
+        foreach (string tmp in depTasks)
+        {
+            dep += tmp.ToString();
+        }
+        return dep;
+    }
 
 }

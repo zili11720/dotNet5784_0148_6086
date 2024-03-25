@@ -80,6 +80,8 @@ class ConvertTaskStatusToColor : IValueConverter
                 return Brushes.BlueViolet;
             case BO.TaskStatus.Done:
                 return Brushes.Green;
+            case BO.TaskStatus.Delayed:
+                return Brushes.Red;
             default:
                 return Brushes.White;
         }

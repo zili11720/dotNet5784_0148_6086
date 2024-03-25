@@ -199,7 +199,7 @@ public static class Initialization
         };
         int[] _requiredEffortTime =
         {
-           2,2,3,2,3,2,7,10,3,3,3,5,4,10,5,2,3,2,2,4,3,3,2,5,7,6,3,2
+           2,5,3,4,5,2,8,10,3,8,3,5,4,7,5,4,3,2,4,4,3,7,6,6,7,6,3,4
         };
         for (int i = 0; i < 28; i++)
         {
@@ -210,7 +210,7 @@ public static class Initialization
             DateTime? _createAtDate = DateTime.Now;
 
 
-            Task newTask = new(0, _aliasses[i], _descriptions[i], _createAtDate, TimeSpan.FromDays(10), false, (AgentExperience)_complexity[i], null, null, null, null, _deliverables[i], _remarks[i], null);
+            Task newTask = new(0, _aliasses[i], _descriptions[i], _createAtDate, TimeSpan.FromDays(_requiredEffortTime[i]), false, (AgentExperience)_complexity[i], null, null, null, null, _deliverables[i], _remarks[i], null);
             s_dal!.Task.Create(newTask);
         }
     }

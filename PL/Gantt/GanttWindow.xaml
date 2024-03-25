@@ -1,0 +1,57 @@
+﻿<Window x:Class="PL.Gantt.GanttWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Gantt"
+        mc:Ignorable="d"
+        Title="GanttWindow" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+    <Window.Resources>
+        <!-- Colors for thr status of the tasks -->
+        <SolidColorBrush x:Key="DoneTaskColor" Color="Green"/>
+        <SolidColorBrush x:Key="OnTrackTaskColor" Color="BlueViolet"/>
+        <SolidColorBrush x:Key="DelayedTaskColor" Color="Red"/>
+    </Window.Resources>
+    <Grid>
+        <ListView ItemsSource = "{Binding TaskOfGantt}" HorizontalContentAlignment="Stretch">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding ID}" Width="100"/>
+                    <GridViewColumn Header = "Alias" DisplayMemberBinding="{Binding Name}" Width="100"/>
+                    <GridViewColumn Header = "Dependencies" DisplayMemberBinding="{Binding Dependencies}"/>
+
+                    <GridViewColumn Header = "Gantt Chart" Width="850">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate >
+                                <StackPanel Orientation = "Horizontal" Width="850">
+                                    <Rectangle
+                                               IsEnabled = "False"
+                                               Width="{Binding StartOffset}"
+                                               Height="20"
+                                               Fill="White"/>
+                                    <!-- Dynamic Color Rectangle -->
+                                    <Rectangle
+                                               Width = "{Binding TasksDays}"
+                                               Height="20"
+                                               Fill="{Binding Status, Converter={StaticResource ConvertTaskStatusToColorKey}}"/>
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <!-- Legend -->
+        <StackPanel Orientation = "Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <TextBlock Text = "Legend: " Margin="5"/>
+            <Border Background = "Green" Width="20" Height="20" Margin="5"/>
+            <TextBlock Text = "Completed" Margin="0,5,5,5"/>
+            <Border Background = "BlueViolet" Width="20" Height="20" Margin="5"/>
+            <TextBlock Text = "OnTrack" Margin="0,5,5,5"/>
+            <Border Background = "Red" Width="20" Height="20" Margin="5"/>
+            <TextBlock Text = "Delayed" Margin="0,5,5,5"/>
+        </StackPanel>
+    </Grid>
+</Window>

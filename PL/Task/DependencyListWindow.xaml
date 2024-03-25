@@ -38,7 +38,7 @@
                 <DataGridTemplateColumn Header="Actions" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete dependency" Click="btnDeleteDependency_Click"
+                            <Button Content="Delete" Click="btnDeleteDependency_Click"
                             Command="{Binding btnDeleteDependency_Click}" CommandParameter="{Binding}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -51,7 +51,7 @@
              <ColumnDefinition Width="*"/>
              <ColumnDefinition Width="*"/>
          </Grid.ColumnDefinitions>
-               <Label Content="Enter a task id to add a dependency:"  Grid.Column="0" ></Label>
+               <Label Content="Enter a task id to add a dependency:"  Grid.Column="0" Grid.ColumnSpan="2" ></Label>
                <TextBox   Grid.Column="1" Width="60" Height="20" Text="{Binding NewDependencyId, UpdateSourceTrigger=PropertyChanged}"/>
                <Button Content="Add" Grid.Column="2" HorizontalAlignment="Left" FontSize="14" Click="btnAddDependency_Click" >
             </Button>

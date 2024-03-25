@@ -68,7 +68,6 @@ public partial class DependencyListWindow : Window
 
     private void btnAddDependency_Click(object sender, RoutedEventArgs e)
     {
-        // לבדוק מה נסגר עם התז בהוספה המיידית
         try
         {
             int newId = NewDependencyId; // Get the new dependency ID from the bound property
