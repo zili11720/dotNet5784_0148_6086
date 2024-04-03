@@ -45,14 +45,16 @@ public partial class AgentEmployeeWindow : Window
 
     private void btnTaskDetails_Click(object sender, RoutedEventArgs e)
     {
+        //If this agent isn't working on any task right now
         if(CurrentEmployee.CurrentTask is null|| CurrentEmployee.CurrentTask.Id == 0)
             MessageBox.Show("your'e not working on any task right now! please choose a new task","Error", MessageBoxButton.OK, MessageBoxImage.Information);
-        else
+        else//Open new TaskWindow with current task details
           new TaskWindow(CurrentEmployee.CurrentTask!.Id).Show();
     }
 
     private void btnAvailableTasks_Click(object sender, RoutedEventArgs e)
     {
+        //List of the available tasks for an agent
         new TaskListWindow(false,CurrentEmployee.Id).Show();
     }
 

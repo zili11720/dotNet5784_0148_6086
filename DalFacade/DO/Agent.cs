@@ -1,5 +1,4 @@
 ﻿
-
 namespace DO;
 /// <summary>
 /// A secret agent entity represents an agent with all its props

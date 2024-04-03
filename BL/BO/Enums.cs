@@ -12,7 +12,7 @@ public enum AgentExperience
 /// </summary>
 public enum TaskStatus
 {
-    Unscheduled, Scheduled, OnTrack, Done, Delayed
+    Unscheduled, Scheduled, OnTrack, Done, Delayed ,None
 };
 /// <summary>
 /// An enum that represents the project's status

@@ -30,7 +30,7 @@ public static class Initialization
 
         string[] agentsNames =
         {
-        "Eli Choen","Alex Cooper", "James Bond", "Jone Alon","Cris Klark"
+        "Eli Cohen","Alex Cooper", "James Bond", "Jone Alon","Cris Klark"
         };
         string[] agentsEmail =
         {

@@ -1,5 +1,6 @@
 ﻿using PL.Employee;
 using PL.User;
+using PL.Manager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,5 +80,10 @@ public partial class PasswordWindow : Window
     {
         password = (sender as PasswordBox)?.Password;
     }
+
+    //private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+    //{
+
+    //}
 }
 

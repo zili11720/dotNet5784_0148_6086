@@ -1,19 +1,8 @@
-﻿using BO;
-using PL.Tools;
-using System;
-using System.Collections.Generic;
+﻿using PL.Tools;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PL.Task;
 
@@ -26,17 +15,15 @@ public partial class TaskListWindow : Window
 
     public bool isManager { get; set; } = true;
 
-    public TaskListWindow(bool _isManager=true,int employeeId = 0)
+    public TaskListWindow(bool _isManager = true, int employeeId = 0)
     {
-        isManager= _isManager;
+        isManager = _isManager;
         InitializeComponent();
         if (isManager)
             TaskList = s_bl.Task.ReadAll().ToObservableCollection();
         else
             TaskList = s_bl.Agent.AvailableTasks(employeeId).ToObservableCollection();
     }
-
-
 
     public ObservableCollection<BO.TaskInList> TaskList
     {
@@ -48,36 +35,41 @@ public partial class TaskListWindow : Window
     public static readonly DependencyProperty TaskListProperty =
         DependencyProperty.Register("TaskList", typeof(ObservableCollection<BO.TaskInList>), typeof(TaskListWindow), new PropertyMetadata(null));
 
-    public BO.AgentExperience complexity { get; set; } = BO.AgentExperience.None;
+    public BO.AgentExperience complexity { get; set; } = BO.AgentExperience.None;//A variable for complexity combo box
 
     private void cbTaskComplexity_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         TaskList = (complexity == BO.AgentExperience.None) ?
-        s_bl?.Task.ReadAll()!.ToObservableCollection(): s_bl?.Task.ReadAll(item => item.Status == status && item.Complexity == complexity)!.ToObservableCollection();
+        s_bl?.Task.ReadAll()!.ToObservableCollection() : s_bl?.Task.ReadAll(item => item.Status == status && item.Complexity == complexity)!.ToObservableCollection()!;
     }
-    public BO.TaskStatus status { get; set; } = BO.TaskStatus.Unscheduled;
+    public BO.TaskStatus status { get; set; } = BO.TaskStatus.None;//A variable for status combo box
 
     private void cbTaskStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        TaskList = (status == BO.TaskStatus.Unscheduled) ?
-       s_bl?.Task.ReadAll()!.ToObservableCollection(): s_bl?.Task.ReadAll(item => item.Status == status &&  item.Complexity == complexity)!.ToObservableCollection();
+        TaskList = (status == BO.TaskStatus.None) ?
+       s_bl?.Task.ReadAll()!.ToObservableCollection() : s_bl?.Task.ReadAll(item => item.Status == status && item.Complexity == complexity)!.ToObservableCollection();
     }
     private void btnAddNewTask_Click(object sender, RoutedEventArgs e)
     {
-        new TaskWindow(0,AddOrUpdate).ShowDialog();
+        new TaskWindow(0, AddOrUpdate).ShowDialog();
     }
 
     private void dgUpdateTask_DoubleClick(object sender, MouseButtonEventArgs e)
     {
-        BO.TaskInList? taskInList=(sender as DataGrid)?.SelectedItem as BO.TaskInList;
-        if(taskInList is not null) 
+        BO.TaskInList? taskInList = (sender as DataGrid)?.SelectedItem as BO.TaskInList;
+        if (taskInList is not null)
         {
-            new TaskWindow(taskInList.Id,AddOrUpdate).ShowDialog();
+            new TaskWindow(taskInList.Id, AddOrUpdate).ShowDialog();
         }
 
     }
 
-    private void AddOrUpdate(int Id,bool _updated)
+    /// <summary>
+    /// Update taskList according to the action done
+    /// </summary>
+    /// <param name="Id">Id of the task added/updated</param>
+    /// <param name="_updated">A boolien variable that indicates wether a task was updated/added</param>
+    private void AddOrUpdate(int Id, bool _updated)
     {
         BO.TaskInList taskInList = new BO.TaskInList()
         {
@@ -87,10 +79,10 @@ public partial class TaskListWindow : Window
             Status = s_bl.Task.Read(Id)!.Status,
             Complexity = (BO.AgentExperience?)complexity
         };
-        if(_updated) 
+        if (_updated)//case update
         {
-            var oldTask=TaskList.FirstOrDefault(item => item.Id==Id);
-            TaskList.Remove(oldTask!);
+            var oldTask = TaskList.FirstOrDefault(item => item.Id == Id);
+            TaskList.Remove(oldTask!);//Remove old task before adding the updated version
         }
         TaskList.Add(taskInList);
     }
@@ -118,5 +110,5 @@ public partial class TaskListWindow : Window
             MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
-   
+
 }

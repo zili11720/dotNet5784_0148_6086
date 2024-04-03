@@ -4,7 +4,7 @@ using PL.Gantt;
 using PL.Task;
 using System.Windows;
 
-namespace PL;
+namespace PL.Manager;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -74,7 +74,7 @@ public partial class MainWindow : Window
 
     private void btnResetClock_Click(object sender, RoutedEventArgs e)
     {
-       CurrentTime=s_bl.ResetClock();
+        CurrentTime = s_bl.ResetClock();
     }
 
     private void btnAddDay_Click(object sender, RoutedEventArgs e)
@@ -85,7 +85,7 @@ public partial class MainWindow : Window
     private void btnAddMonth_Click(object sender, RoutedEventArgs e)
     {
         CurrentTime = s_bl.updateMonth();
-    } 
+    }
 
     private void btnAddYear_Click(object sender, RoutedEventArgs e)
     {
@@ -124,15 +124,16 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             MessageBox.Show(ex.Message, "Worng input", MessageBoxButton.OK, MessageBoxImage.Error);
-            ProjectStartDate=s_bl.GetProjectStartDate();///לסדר את הבבינג
+            ProjectStartDate = s_bl.GetProjectStartDate();///לסדר את הבבינג
         }
     }
 
     private void btnWatchGantt_Click(object sender, RoutedEventArgs e)
     {
-        if(s_bl.GetProjectStatus()!= BO.ProjectStatus.ExecutionTime)
+        if (s_bl.GetProjectStatus() != BO.ProjectStatus.ExecutionTime)
             MessageBox.Show("To craete a gantt please set a schedule for the project", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         else
-          new GanttWindow().Show();
+            new GanttWindow().Show();
     }
 }
+

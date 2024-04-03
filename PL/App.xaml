@@ -18,6 +18,7 @@
             <GradientStop Color="#FF787F8E" Offset="0.506"/>
             <GradientStop Color="#FF2D5171"/>
         </LinearGradientBrush>
+        <!--Implicit styles for different attributes-->
         <Style
             TargetType="Label">
             <Setter Property="FontSize"

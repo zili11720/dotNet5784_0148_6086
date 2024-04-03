@@ -24,7 +24,7 @@ public partial class AgentWindow : Window
     public AgentWindow(Action<int,bool> AddOrUpdate,int AgentId = 0/*default Id of the agent*/)
     {
         InitializeComponent();
-        _AddOrUpdate = AddOrUpdate;
+        _AddOrUpdate = AddOrUpdate;//A variable to indicates whether we update or add an agent
         try
         {
             //Fetch the agent with the given id or create a new one with defult values if the id does not exist
@@ -42,14 +42,14 @@ public partial class AgentWindow : Window
     {
         try
         {
-            if (s_bl.Agent.ReadAll().Any(a => a.Id == CurrentAgent.Id) is true)
+            if (s_bl.Agent.ReadAll().Any(a => a.Id == CurrentAgent.Id) is true)//case update
             {
                 s_bl.Agent.Update(CurrentAgent);
                 _AddOrUpdate(CurrentAgent.Id, true);
                 MessageBox.Show("Agent was successfuly updated", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
-            else
+            else//case add
             {
                 s_bl.Agent.Create(CurrentAgent);
                 _AddOrUpdate(CurrentAgent.Id, false);

@@ -27,7 +27,7 @@ public partial class AgentListWindow : Window
 
     public static readonly DependencyProperty AgentListProperty =
         DependencyProperty.Register("AgentList", typeof(IEnumerable<BO.AgentInList>), typeof(AgentListWindow), new PropertyMetadata(null));
-    public BO.AgentExperience Experience { get; set; } = BO.AgentExperience.None;
+    public BO.AgentExperience Experience { get; set; } = BO.AgentExperience.None;//A variable for experience combo box
 
 
     private void cbAgentExperience_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -56,12 +56,12 @@ public partial class AgentListWindow : Window
             Id = Id,
             Name = s_bl.Agent.Read(Id)!.Name,
             Specialty = (BO.AgentExperience?)s_bl.Agent.Read(Id)!.Specialty,
-            CurrentTask = null//s_bl.Agent.Read(Id).CurrentTask
+            CurrentTask = null
         };
-        if (_updated)
+        if (_updated)//Case update
         {
-            var oldTask = AgentList.FirstOrDefault(item => item.Id == Id);
-            AgentList.Remove(oldTask!);
+            var oldAgent = AgentList.FirstOrDefault(item => item.Id == Id);
+            AgentList.Remove(oldAgent!);//Remove old agent before adding the updated version
         }
         AgentList.Add(agentInList);
     }

@@ -42,7 +42,7 @@ public partial class TaskWindow : Window
             //Fetch the task with the given id or create a new one with defult values
             CurrentTask = (TaskId is not 0 ) ? s_bl.Task.Read(TaskId)! : new BO.Task()
             { 
-                //id=next running number
+                //id is the next running number
                 Alias = "",
                 Description="",
                 Status=BO.TaskStatus.Unscheduled ,
