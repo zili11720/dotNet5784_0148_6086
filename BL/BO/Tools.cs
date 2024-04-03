@@ -7,6 +7,7 @@ namespace BO;
 /// </summary>
 static internal class Tools
 {
+    //ToString override using reflection
     internal static string ToStringProperty<T>(this T t)
     {
         var type = t!.GetType();

@@ -13,7 +13,6 @@ public partial class MainWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-    //public User User { get; }
     public DateTime CurrentTime
     {
         get { return (DateTime)GetValue(CurrentTimeProperty); }
@@ -59,7 +58,10 @@ public partial class MainWindow : Window
         MessageBoxButton buttons = MessageBoxButton.YesNo;
         MessageBoxResult result = MessageBox.Show(message, title, buttons);
         if (result == MessageBoxResult.Yes)
+        {
             s_bl.InitializeData();
+            ProjectStartDate = null;
+        }
     }
 
     private void btnReset_Click(object sender, RoutedEventArgs e)

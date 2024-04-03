@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="carnival-mask-silhouette.png" />
     <None Remove="managerWindowBackround.jpg" />
   </ItemGroup>
 
@@ -23,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="carnival-mask-silhouette.png" />
     <Resource Include="managerWindowBackround.jpg" />
   </ItemGroup>
 

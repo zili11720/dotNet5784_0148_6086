@@ -8,10 +8,7 @@ internal class TaskImplementation : ITask
 
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
-    // static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-
     private readonly IBl _bl;
-
     internal TaskImplementation(IBl bl) => _bl = bl;//Dependency injection
 
 
@@ -424,6 +421,10 @@ internal class TaskImplementation : ITask
             return isThereCircle(dependsTask,dependncy.DependentTask, dependencies);
 
         return false;
+
+
+        //if (isThereCircle(taskId, depId, _dal.Dependency.ReadAll()))
+        //    throw new BO.BlWrongInputException("This dependency create a circle");
     }
     /// <summary>
     /// Adds a dependency between two tasks
@@ -448,8 +449,6 @@ internal class TaskImplementation : ITask
         IEnumerable<TaskInList> dependencies = GetDependenciesList(taskId).Where(t => t.Id == depId);
         if (dependencies.Any())
             throw new BO.BlAllreadyExistsException("This dependency allready exists");
-        //if (isThereCircle(taskId, depId, _dal.Dependency.ReadAll()))
-        //    throw new BO.BlWrongInputException("This dependency create a circle");
         _dal.Dependency.Create(new DO.Dependency(0, taskId, depId));
         DO.Task task = _dal.Task.Read(taskId)!;
         return ConvertTaskToTaskInList(task);

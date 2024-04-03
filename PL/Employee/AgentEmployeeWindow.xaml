@@ -22,15 +22,15 @@
             <ColumnDefinition Width="22*"/>
         </Grid.ColumnDefinitions>
         <!--Clock-->
-        <TextBlock Grid.Row="0" Grid.Column="2"  Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+        <TextBlock Grid.Row="0" Grid.Column="1"  Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left"
 
-         Text="{Binding CurrentTime, StringFormat='{}{0:dd/MM/yyyy}' }"  Width="150" FontSize="25" FontWeight="Bold" />
+         Text="{Binding CurrentTime, StringFormat='{}{0:dd/MM/yyyy}' }"  Width="150" FontSize="20" FontWeight="Bold" Margin="133,28,0,0" />
 
-        <Label Content="Hello," Grid.Row="0" Width="130" Height="60" FontSize="40" HorizontalAlignment="Left"  />
+        <Label Content="Hello," Grid.Row="0" Width="130" Height="60" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Center"  />
         <TextBox Grid.Row="0" Grid.Column="0" 
          Text="{Binding CurrentEmployee.Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  Foreground="White" IsEnabled="False"
-         HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="40"  Width="250" Height="60" Background="{x:Null}" BorderBrush="{x:Null}"/>
-        
+         HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="40"  Width="250" Height="55" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,46,108" Grid.RowSpan="2"/>
+
         <Label Content="CurrentTask.Id:" Grid.Row="1" Width="200" Height="40" FontSize="25" />
         <Label Content="CurrentTask.Alias:" Grid.Row="2"  Width="230" Height="40" FontSize="25" />
         <Button Content="Current Task details" Grid.Row="3" Grid.Column="1" Height="60" Width="240" Click="btnTaskDetails_Click" FontSize="25" Foreground="White"/>
@@ -43,6 +43,6 @@
         <TextBox Grid.Row="2" Grid.Column="1"
         Text="{Binding CurrentEmployee.CurrentTask.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
         HorizontalAlignment="Left"   VerticalAlignment="Center" Width="140" Height="30" IsEnabled="False"/>
-        
+
     </Grid>
 </Window>
