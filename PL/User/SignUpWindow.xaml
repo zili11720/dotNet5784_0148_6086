@@ -30,13 +30,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Id:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"/>
-            <TextBox Grid.Row="0"  Grid.Column="2" Background="#333333"  HorizontalAlignment="Center" Height="20" Width="100"
+            <TextBox Grid.Row="0"  Grid.Column="2" Background="#333333"  Foreground="White" HorizontalAlignment="Center" Height="20" Width="100"
                      Text="{Binding UserId, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"/>
             <Label Content="User Name:" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
-            <TextBox Grid.Row="1"  Grid.Column="2" Background="#333333"  HorizontalAlignment="Center" Height="20" Width="100"
+            <TextBox Grid.Row="1"  Grid.Column="2" Background="#333333"  Foreground="White" HorizontalAlignment="Center" Height="20" Width="100"
                      Text="{Binding UserName, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"/>
             <Label Content="Password:" Grid.Row="2" Grid.Column="1"/>
-            <PasswordBox Grid.Row="2"  Grid.Column="2" Background="#333333"  HorizontalAlignment="Center" Height="20" Width="100" PasswordChanged="PasswordBox_PasswordChanged" />
+            <PasswordBox Grid.Row="2"  Grid.Column="2" Background="#333333"  Foreground="White" HorizontalAlignment="Center" Height="20" Width="100" PasswordChanged="PasswordBox_PasswordChanged" />
                      
         </Grid>
         <Button Content="Create Account" Grid.Row="2" Background="{x:Null}" Foreground="#FF100F0F" HorizontalAlignment="Center" Width="100"  Height="20" Click="btnCreateAccount_Click"/>
